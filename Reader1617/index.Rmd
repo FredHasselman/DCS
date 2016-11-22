@@ -1,0 +1,154 @@
+--- 
+title: "Dynamics of Complex Systems"
+author: "Fred Hasselman & Maarten Wijnants"
+date: "`r Sys.Date()`"
+knit: "bookdown::render_book"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+# documentclass: book
+# bibliography: [book.bib, packages.bib]
+# biblio-style: apalike
+# link-citations: yes
+# colorlinks: yes
+# lot: yes
+# lof: yes
+# fontsize: 12pt
+# monofont: "Source Code Pro"
+# monofontoptions: "Scale=0.7"
+# site: bookdown::bookdown_site
+# output: bookdown::gitbook
+description: "Course Guide Dynamics of Complex Systems"
+url: 'http\://fredhasselman.com/htmlHost/DCS1617/'
+github-repo: FredHasselman/DCS/Reader1617
+cover-image: images/foundations.png
+---
+
+
+# **Course guide** 
+
+```{r setup, include=FALSE}
+
+```
+
+
+```{r fig.align='center', fig.cap= 'From [Grip on Complexity](http://www.nwo.nl/en/about-nwo/media/publications/ew/paper-grip-on-complexity.html)', echo=FALSE, include=identical(knitr:::pandoc_to(), 'html')}
+knitr::include_graphics('images/foundations.png', dpi = NA)
+```
+
+
+
+This course discusses research methods and analysis techniques that allow for the study of human behaviour from a complex systems perspective. Complexity research transcends the boundaries  the classical scientific disciplines in terms of explanatory goals (e.g. causal-mechanistic) and is a hot topic in physics, mathematics, biology, economy and psychology.    
+
+The main focus in the cognitive behavioural sciences is a description and explanation of behaviour based on interaction dominant dynamics: Many processes interact on many different (temporal and spatial) scales and observable behaviour emerges out of those interactions through a process of self-organization or soft-assembly. Contrary to what the term might suggest, complexity research is often about finding simple models that are able to simulate a wide range of complex behaviour.   
+
+This approach differs fundamentally from the more classical approaches where behaviour is caused by a system of many hidden (cognitive) components which interact in sequence as in a machine (component dominant dynamics). The most important difference is how 'change', and hence the time-evolution of a system, is studied.   
+
+The main focus of the course will be 'hands-on' data-analysis in `R`, or, in `Matlab` if student is already familiar with the scritping language.
+
+Topics include: Analysis of fractal geometry (i.e. pink noise) in time series (Standardized Dispersion Analysis, Power Spectral Density Analysis, Detrended Fluctuation Analysis); Nonlinear and chaotic time series analysis (Phase Space Reconstruction, (Cross) Recurrence Quantification Analysis, Entropy Estimation); Growth Curve models; Potential Theory; and Catastrophe Theory (Cusp model), Complex Network Analysis.
+
+## Learning objectives
+
+Students who followed this course will be able to critically evaluate whether their scientific inquiries can benefit from adopting theories, models, methods and analyses that were developed to study the dynamics of complex systems. The student will be able to understand in more detail the basics of formal theory evaluation, and be able to recognize, interpret and deduce theoretical accounts of human behaviour that are based on component-dominant versus interaction-dominant ontology.   
+
+Students will be able to use the basic mathematical models and analyses that allow study of complex interaction-dominant behaviour. Students who finish the course will be able to conduct analyses in `Excel`, `SPSS`, and `R` or `Matlab` and  interpret the results from basic (non-)linear time series methods. At the end of this course, students have reached a level of understanding that allows them to find relevant scientific sources and understand and follow up on new developments in the complex systems approach to behavioural science.
+
+### Goals Summary {-}
+
+* Read and understand papers that use a complex systems approach to study human behaviour. 
+* Simulate the basic dynamical models.
+* Perform the basic analyses. 
+
+
+## Teaching methods
+
+Each meeting starts with a *lecture session* addressing the mathematical background and practical application of a particular aspect of a model, or analysis technique. During the *assignment session*, students will get hands-on experience with applying the models or analysis techniques discussed during the lecture session by completing assignments provided on blackboard for each session. 
+
+
+### Preparation {-}
+
+To prepare for each lecture students read a contemporary research paper or watch a videolecture (e.g., [TED](http://www.ted.com)) featuring complexity theory and its application on a topic in behavioural science that will be discussed in the subsequent lecture. Students are required to formulate questions about each paper, and to initiate a discussion with their fellow-students on Blackboard.
+
+Before each lecture, students should:
+
+* Read (parts of) a scientific article, or watch a videolecture featuring a complex systems perspective and/or methodology.
+* Ask (or answer) a question about what they have read / seen in the appropriate discussion forum on Blackboard.
+    + The answers students provide will be discussed during the lecture.
+
+## Literature
+
+The following is part of the literature for this course:
+
+* Lecture slides.
+* Articles and book chapters listed in the `Literature` folder on Blackboard for each session.
+* In addition, at the secretariat of PWO (5th floor, Spinoza building) selected chapters from the book "Dynamical Psychology" by Jay Friedenberg are available. It is not necessary to own the book to complete this course, but if you can find a copy, it may help to structure all the information provided during the course.
+
+*Note:* The literature for each session on Blackboard is provided for reference, to fascilitate looking up a topic when it is needed to complete the weekly assignments or the take-home exam. 
+
+
+```{r setup2, message=FALSE, warning=FALSE, include=FALSE}
+knitr::opts_chunk$set(
+	message = FALSE,
+	warning = FALSE,
+	include = FALSE
+)
+require(devtools)
+source_url("https://raw.githubusercontent.com/FredHasselman/DCS/master/functionLib/nlRtsa_SOURCE.R")
+#source('nlRtsa_SOURCE.R')
+library(plyr)
+library(dplyr)
+library(tidyr)
+library(png)
+library(readxl)
+library(rio)
+library(lattice)
+library(htmlTable)
+library(htmlwidgets)
+library(lubridate)
+library(DT)
+tt <- read_excel("timetable_1617.xlsx")
+tt <- tt[!is.na(tt$Lecture),]
+id <- is.na(tt$`Guest lecture`)
+tt$`Guest lecture`[id] <- ""
+tt$Date <- ymd(tt$Date)
+tt <- select(tt, -c(6,7,10))
+```   
+
+## Schedule
+
+The dates and locations can be found below. All lectures are on Tuesday from `10.45` to `12.30`. The practical sessions take place on Wednesday from `15.45` to `17.30`.
+
+`r knitr::kable(tt, caption="Times and Places 2016-2017", booktabs = TRUE)`
+
+
+<!-- DT::datatable(tt) -->
+
+
+## Examination
+    
+The evaluation of achievement of study goals takes two forms:
+
+* **Participation** - The ability to formulate a question about an advanced topic is a first step towards understanding, answering a question that was posted by a peer is a second step. Questions and answers will not be graded, there will be a check to see if a student participated in all sessions.
+* **Final Assignment** - This take-home assignment will be provided at the end of the course. It will consist of a series of practical assignments and at least one essay question to test theoretical knowledge. The submission deadline is two weeks after the last lecture. 
+
+### Grading {-}
+
+The take home exam will be graded as a regular exam. A student passes the course if the exam grade is higher than 5.5 AND if the student participated in the discussion on Blackboard each session.
+
+### Submitting the assignment {-}
+
+The take-home exam must be submitted by sending them by email to both `f.hasselman@pwo.ru.nl` AND `m.wijnants@pwo.ru.nl` no later than **February 1st**.    
+
+
+## We use `R`! 
+
+This text was transformed to `HTML`, `PDF` en `ePUB` using `bookdown`[@R-bookdown] in [**RStudio**](https://www.rstudio.com), the graphical user interface of the statistical language [**R**](https://www.r-project.org) [@R-base]. `bookdown` makes use of the `R` version of [markdown](https://en.wikipedia.org/wiki/Markdown) called [Rmarkdown](http://rmarkdown.rstudio.com) [@R-rmarkdown], together with [knitr](http://yihui.name/knitr/) [@R-knitr] and [pandoc](http://pandoc.org). 
+
+We'll use some web applications made in [Shiny](http://shiny.rstudio.com) [@R-shiny] 
+
+Other `R` packages used are: `DT` [@R-DT], `htmlTable` [@R-htmlTable], `plyr` [@R-plyr], `dplyr` [@R-dplyr],`tidyr` [@R-tidyr], `png` [@R-png], `rio` [@R-rio].
+

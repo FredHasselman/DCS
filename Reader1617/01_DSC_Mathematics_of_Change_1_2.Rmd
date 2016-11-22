@@ -1,0 +1,346 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# (PART) Assignments {-} 
+
+# Mathematics of Change I {#moc1ass}
+
+In this assignment you will build two (relatively) simple one-dimensional maps. We start with the *Linear Map* and then proceed to the slightly more complicated *Logistic Map* (aka *Quadratic map*). If you are experienced in `R` or `Matlab` you can try to code the models using the hints in section \@ref(moc1R), otherwise, continue below with your favourite spreadsheet software (e.g., Excel, Numbers, GoogleSheets). 
+
+## The Linear Map
+
+Equation \@ref(eq:linmap) is the ordinary difference equation (ODE) discussed in the lecture (see lecture notes \@ref(Lecture-1)) is called the *Linear Map*:
+
+\begin{equation}
+Y_{t+1} = Y_{t=0} + r*Y_t
+(\#eq:linmap)
+\end{equation}
+
+In these excersises you will simulate *time series* produced by the change process in equation \ref@(eq:linmap) for different parameter settings of the growth-rate parameter $r$ (the *control parameter*) and the initial conditions $Y_0$. This is different from a statistical analysis in which parameters are estimated from a data set. The goal of the assignments is to get a feeling for what a dynamical model is, and how it is different from a linear statistical regression model like GLM.
+
+### The Linear Map in a Spreadsheet
+
+Before you begin, be sure to check the following settings: 
+
+* Open a Microsoft Excel worksheet, a [Google sheet](https://www.google.com/docs/about/), or other spreadsheet.
+* Check whether the spreadsheet uses a 'decimal-comma' ($0,05$) or 'decimal-point' ($0.05$) notation. 
+    + The numbers given in the assignments of this course all use a 'decimal-point' notation.
+* Check if the `$` symbol fixes rows and columns when it used in a formula in your preferred spreadsheet program. 
+    + This is the default setting in Microsoft Excel and Google. If you use one of those programs you are all set, otherwise you will have to replace the `$` used in the assignments with the one used by your software.
+
+
+* Type `r` in cell `A5`. This is the *control parameter*. It receives the value $1.08$ in cell`B5`.
+* Type $Y_0$ in cell `A6`. This is the *initial value*. It receives the value $0.1$ in cell `B6`.   
+* Use the output level ($Y_t$) of every step as the input to calculate the next level ($Y_{t+1}$).   
+    + Rows in the spreadsheet will represent the values of the process at different moments in time.
+* Put the initial value ($Y_0$) in cell `A10`. This cell marks time $t=0$.
+    + To get it right, type: `=$B$6`. The `=` means that (in principle) there is a 'calculation' going on (a function is applied). The `$` determines that column (`$B`) as well as the row (`$6`) keep the same value (i.e., constant) for each time step.
+* Enter the **Linear Map** as a function in each cell. Type `=$B$5*A10` in cell `A11`.
+    + This means that the value of cell `A11` (i.e. $Y_{t=1}$) will be calculated by multiplying the value of cell `B5` (parameter `r`) with the value of cell `A10` (previous value, here: $Y_{t=0}$). If everything is all right, cell `A11` now shows the value $0.108$.
+* Repeat this step for cell `A12`.
+    + Remember what it is you are doing! You are calculating $Y_{t=2}$ now (i.e. the next step), which is determined by $Y_{t=1}$ (i.e., the previous step) and the parameter `r`.
+* Now repeat this simple iterative step for `100` further steps. Instead of typing everything over and over again, copy-paste the whole thing.Most spreadsheet programs will automatically adjust the formula by advancing each row or column number that aren't fixed by `$`.
+    + Copy cell `A12` all the way from `A13` to `A110` (keep the `SHIFT` button pressed to select all cells).    
+    
+```You have just simulated a time series based on a theoretical change process!```
+    
+### Visualizing the time series
+
+#. Select cells `A10` to `A110` Create a line graph (`Insert`, 2D-line, Scatter). This will show you the graph. (There are other
+ways to do this, by the way, which work just as well.) You can play with the setting to make the best suitable view, like rescaling the axes.
+
+#. If you change the values in cells B5 and B6 you will see an immediate change in the graph. To study the model???s behaviour, try the following growth parameters:
+    + $a = -1.08$
+    + $a = 1,08$
+    + $a = 1$
+    + $a = -1$
+#. Change the initial value $Y_0$ in cell `B6` to $10$. Subsequently give the growth parameter in cell `B5` the following values $0.95$ and $???0.95$.
+
+## The Logistic Map in a spreadsheet
+
+The Logistic Map takes the following functional form: 
+
+\begin{equation}
+Y_{t+1} = r*Y_t*(1-Y_t)
+(\#eq:logmap)
+\end{equation}
+
+To get started, copy the spreadsheet from the previous assignment to a new sheet. The parameters are the same as for the Linear Map, there has to be an initial value $Y_{t=0}$ (no longer explicit as a constant in equation \@ref(eq:logmap)) and the control parameter $r$. What will have to change is 
+
+* Start with the following values for control parameter $r$:
+    + $r = 1.9$
+    + $Y_0 = 0.01$ (in `A6`).
+* Take good notice of what is constant (parameter $r$), so for which the `$` must be used, and what must change on every iterative step (variable $Y_t$).
+
+
+### Visualizing the time series and explore its behaviour
+
+* Create the time series graphs as for the Linear Map. 
+
+To study the behavior of the Logistic Map you can start playing around with the values for the parameters and the initial values in cells `B5` and `B6`. 
+
+* Be sure to try the following settings for $r$:
+    + $r = 0.9$
+    + $r = 1.9$
+    + $r = 2.9$
+    + $r = 3.3$
+    + $r = 3.52$
+    + $r = 3.9$
+
+* Set $r$ at $4.0$:
+    + Repeat the iterative process from `A10` to `A310` (300 steps)
+    + Now copy `A10:A310` to `B9:B309` (i.e., move it one cell to the right, and one cell up)
+    + Select both columns (`A10` to `B309`!) and make a scatter-plot
+
+### The return plot
+
+The plot you just produced is a so called **return plot**, in which you have plotted $Y_{t+1}$ against $Y_t$. 
+
+* Can you explain the pattern you see (a 'parabola') by looking closely at the functional form of the Logistic Map? (hint: it's also called **Quadratic Map**)
+    + Look at what happens in the return plot when you change the value of the parameter $r$ (in `A5`).
+    + What do you expect the return plot of the Linear Map will look like? Try it!
+    
+The meaning and use of this plot was discussed in the next session
+
+
+## Using `R` or `Matlab` to do the exercises. {#moc1R}
+
+The best (and easiest) way to simulate these simple models is to create a function which takes as input the parameters ($Y_0$, $r$) and a variable indicating the length of the time series.
+
+For example for the Linear Map:
+```{r, eval=FALSE, include=TRUE, tidy=FALSE}
+# In R
+linearMap <- function(Y0 = 0, r = 1, N = 100){
+    
+    # Initialize Y as an NA vector of size N with as first entry Y0
+    Y <- c(Y0, rep(NA,N-1))
+    
+    for(i in 1:N){
+        
+    Y[i+1] <- # Implement the function here
+        
+    }
+    
+    return(Y)
+}
+
+
+# In Matlab
+function linearMap(Y0,r,N)
+ # Implement the function here
+end
+```
+
+Creating the time series graphs and the return plot should be easy if the function `linearMap` returns the time series. Both `R` and `Matlab` have a `plot()` function you can call.^[Both `R` and `Matlab` have specialized objects to represent timeseries, and functions and packages for timeseries analysis. They are especially convenient for plotting time and date information on the X-axis. See Solutions: [Mathematics of Change I](#moc1Rsol)]
+
+
+# Mathematics of Change II {#moc2ass}
+
+In this assignment we will build a more sophisticated growth modeland look at its properties. The model will be the growth model by Van Geert (1991 etc.) as discussed in the book chapter you read. If your are experienced in `R` or `Matlab` you can try to code the models following the hints in section \@ref(moc1R).
+
+
+### The growth model by Van Geert (1991) 
+
+The growth model by Van Geert has the following form: 
+
+\begin{equation}
+L_{t+1} = L_t * (1 + r - r * \frac{L_t}{K})
+(\#eq:vanG)
+\end{equation}
+
+Note the similarities to Equation \@ref(eq:logmap), the (stylized) logistic map.
+
+
+## The growth model in a spreadsheet
+
+Before you begin, be sure to check the following settings (same as first asignment): 
+
+* Open a Microsoft Excel worksheet or a [Google sheet](https://www.google.com/docs/about/)
+* Check whether the spreadsheet uses a 'decimal-comma' ($0,05$) or 'decimal-point' ($0.05$) notation. 
+    + The numbers given in the assignments of this course all use a 'decimal-point' notation.
+* Check if the `$` symbol fixes rows and columns when it used in a formula in your preferred spreadsheet program. 
+    + This is the default setting in Microsoft Excel and Google Sheets. If you use one of those programs you are all set.
+
+
+To build it repeat some of the steps you performed in assignment \@ref(moc1ass) on a new worksheet. 
+
+* Define the appropriate constants ($r$ in `A5`, $L_0$ in `A6`) and prepare the necessary things you need for building an iterative process. 
+* In particular, add the other parameter that appears in Van Geert???s model:
+    + Type $K$ in cell `A7`. This is the *carrying capacity*. It receives the value $1$ in cell `B7`.
+* Start with the following values:
+    + $r = 1.2$
+    + $L_0 = 0.01$
+
+Take good notice of what is constant (parameters $r$ and $K$), for which the `$` must be used, and what must change on every iterative step (variable $L_t$). Take about $100$ steps.
+
+* Create the graphs
+* You can start playing with the values for the parameters and the initial values in cells `B5`, `B6` and `B7`. To study this model???s behavior, be sure to try the following growth parameters:
+    + $r = 1.2$
+    + $r = 2.2$
+    + $r = 2.5$
+    + $r = 2.7$
+    + $r = 2.9$
+    
+* For the carrying capacity $K$ (cell `B7`) you can try the following values:
+    + $K = 1.5$
+    + $K = 0.5$. (Leave $r = 2.9$. Mind the value on the vertical axis!)
+    
+* Changes in the values of $K$ have an effect on the height of the graph. The pattern itself also changes a bit. Can you explain why this is so?
+
+
+## Conditional growth: Jumps and Stages 
+
+### Auto-conditional jumps {-}
+
+Suppose we want to model that the growth rate $r$ increases after a certain amount has been learned. In general, this is a very common phenomenon, for instance: when becoming proficient at a skill, growth (in proficiency) is at first slow, but then all of a sudden there can be a jump to the appropriate (and sustained) level of proficiency.
+
+* Take the model you just built as a starting point with $r = 0.1$ (`B5`)
+    + Type $0.5$ in `C5`. This will be the new parameter value for $r$. 
+    + Build your new model in column `B` (leave the original in `A`).
+    
+*  Suppose we want our parameter to change when a growth level of $0.2$ is reached. We???ll need an `IF` statement which looks something like this: `IF` $L > 0.2$ then use the parameter value in `C5`, otherwise use the parameter value in `B5`. 
+    + Excel has a built in `IF` function (may be `ALS` in Dutch). 
+    + In the first cell in which calculations should start, press $=$ and then from the formula list choose the `IF` function, or just type it. 
+    + Try to figure out what you have to do. In the Logical_test box you should state something which expresses $L > 0.2$.
+    + The other fields tell Excel what to do when this statement is `TRUE` (then use parameter value in `C5`) or when it is `FALSE` (then use paramter value in `B5`).
+    + __Note:__ the word *value* might be misleading; you can also input new statements.
+* Make a graph in which the old and the new conditional models are represented by lines.
+    + Try changing the value of $r$ in `C5` into: $1, 2, 2.8, 2.9, 3$. 
+
+### Auto-conditional stages {-}
+
+Another conditional change we might want to explore is that when a certain growth level is reached the carrying capacity K increases, reflecting that new resources have become available to support further growth.
+
+* Now we want $K$ to change, so type $1$ in `B7`, $2$ in `C7`.
+* Build your model in column C. Follow the same steps as above, but now make sure that when $L > 0.99$, $K$ changes to the value in `C7`. Keep $r = 0.2$ (`B5`).
+
+* If all goes well you should see two stages when you create a graph of the timeseries in column `C`. Change $K$ in `C7` to other values.
+    + Try to also change the growth rate r after reaching $L > 0.99$ by referring to `C5`. Start with a value of $0.3$ in `C5`. Set $K$ in `C7` to $2$ again. 
+    + Also try $1, 2.1, 2.5, 2.6, 3$.
+
+### Connected growers {-}
+
+You can now easly model coupled growth processes, in which the values in one series serve as the trigger for for parameter changes in the other process. Try to recreate the Figure of the connected growers printed in the chapter by Van Geert.
+
+#### Demonstrations of dynamic modeling using spreadsheets
+
+See the website by [Paul Van Geert](http://www.paulvangeert.nl/research.htm), scroll down to see models of:
+
+* Learning and Teaching
+* Behaviour Modification
+* Connected Growers
+* Interaction during Play
+
+
+## Iterating 2D Maps and Flows
+
+In this assignment we will look at a 2D coupled dynamical system: **the Predator-Prey model** (aka [Lotka-Volterra equations](https://en.wikipedia.org/wiki/Lotka???Volterra_equations)). If your are experienced in `R` or `Matlab` you can try to code the models following the instructions at the end of this assignment.   
+
+## Predator-prey model 
+
+The dynamical system is given by the following set of first-order differential equations, one represents changes in a population of predators, (e.g., **F**oxes: $f_F(R_t,F_t)$ ), the other represents changes in a population of prey, (e.g., **R**abbits: $f_R(R_t,F_t)$ ).
+
+
+\begin{align}
+\frac{dR}{dt}&=(a-b*F)*R \\
+\\
+\frac{dF}{dt}&=(c*R-d)*F
+(\#eq:lv)
+\end{align}
+
+
+This is not a *difference* equation but a *differential* equation, which means building this system is not as straightforward as was the case in the previous assignments. Simulation requires a numerical method to 'solve' this differential equation for time, which means we need a method to approach, or estimate continuous time in discrete time. Below you will receive a speed course in one of the simplest numerical procedures for integrating differential equations, the [Euler method](https://en.wikipedia.org/wiki/Euler_method).    
+ 
+### Euler Method
+
+A general differential equation is given by:
+
+\begin{equation}
+\frac{dx}{dt} = f(x)
+(\#eq:diff)
+\end{equation}
+
+Read it as saying: "_a change in $x$ over a change in time is a function of $x$ itself_". This can be approximated by considering the change to be over some constant, small time step $\Delta$:
+
+\begin{equation}
+\frac{(x_{t+1} ??? x_t)}{\Delta} = f(x_t)
+(\#eq:Euler)
+\end{equation}
+
+
+After rearranging the terms a more familiar form reveals itself:
+
+\begin{align}
+x_{t+1} ??? x_t &= f(x_t) * \Delta \\
+x_{t+1} &= f(x_t) * \Delta + x_t
+(\#eq:Euler2)
+\end{align}
+
+
+This looks like an ordinary iterative process, $\Delta$ the *time constant* determines the size of time step taken at every successive iteration. For a 2D system with variables **R** and **F** on would write:
+
+
+\begin{align}
+R_{t+1} &= f_R(R_t,Ft) * \Delta + R_t \\
+F_{t+1} &= f_F(R_t,F_t) * \Delta + F_t
+(\#eq:EulerRF)
+\end{align}
+
+
+### Coupled System in a spreadsheet
+
+Implement the model in a spreadsheet by substituting $f_R(R_t,Ft)$ and $f_F(R_t,F_t)$ by the differential equations for Foxes and Rabbits given above.
+
+* Start with $a = d = 1$ and $b = c = 2$ and the initial conditions $R_0 = 0.1$ and $F_0 = 0.1$. Use a time constant of $0.01$ and make at least $1000$ iterations.
+* Visualize the dynamics of the system by plotting:
+    + $F$ against $R$ (i.e., the state space)
+    + $R$ and $F$ against time (i.e., the timeseries) in one plot.
+* Starting from the initial predator and prey population represented by the point $(R, F) = (0.1, 0.1)$, how do the populations evolve over time?
+* Try to get a grip on the role of the time constant by increasing and decreasing it slightly (e.g. $\Delta = 0.015$) for fixed parameter values. (You might have to add some more iterations to complete the plot). What happens to the plot? 
+    + Hint: Remember that $\Delta$ is not a fundamental part of the dynamics, but that it is only introduced by the numerical integration (i.e., the approximation) of the differential equation. It should not change the dynamics of the system, but it has an effect nonetheless.
+    
+    
+## The Competetive Lottka-Volterra Equations
+
+The coupled predator-prey dynamics in the previous assignment are not a very realistic model of an actual ecological system. Both equations are exponential growth functions, but **R**abbits for example, also have to eat! One way to increase realism is to consider coupled logistic growth by introducing a carrying capacity.   
+
+* Follow the link to the [Wiki page](https://en.wikipedia.org/wiki/Competitive_Lotka???Volterra_equations) and try to model the system!
+
+
+> This is what *interaction dynamics* refers to, modeling mutual dependiencies using the `if ... then` conditional rules isn't really about interaction, or coupling between processes.
+
+
+# Basic Timeseries Analysis {#bta}
+
+You can use the command below to install all the packages we will use during the entire course on you private computer.
+```{r, eval=FALSE, include=FALSE}
+install.packages(c("devtools", "rio", "plyr", "dplyr", "tidyr", "Matrix", 
+                   "ggplot2", "lattice", "latticeExtra", "grid", "gridExtra", "rgl",
+                   "fractal",  "nonlinearTseries",  "crqa", 
+                   "signal", "sapa", "ifultools", "pracma", 
+                   "nlme", "lme4", "lmerTest",
+                   "igrpah","qgrap","graphicalVAR","bootGraph","IsingSampler","IsingFit"),
+                 dependencies = TRUE)
+```
+
+There is also a function library you need to `source`, the most recent version is on Github, use the `devtools` library to get it.
+
+```{r, eval=FALSE, include=FALSE}
+library(devtools)
+source_url("https://raw.githubusercontent.com/FredHasselman/DCS/master/functionLib/nlRtsa_SOURCE.R")
+
+```
+
+# Fluctuation and Disperion analyses I {#fda1}
+
+# Fluctuation and Disperion analyses II {#fda2}
+
+# Phase Space Reconstruction and RQA {#RQA} 
+
+# Categorical and Cross-RQA (CRQA) {#CRQA}
+
+# Potential and Catasrophe Models {#cusp}
+
+# Complex Networks {#nets}
