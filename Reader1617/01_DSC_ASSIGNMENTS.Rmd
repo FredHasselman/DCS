@@ -520,11 +520,15 @@ Don’t worry; we’ll cover the interpretation over the next two weeks in furth
 
 ## EXTRA: Creating fractals from random processes
 
+Below are examples of so-called Iterated Function Systems, copy the code and run it in `R` (`Matlab` scripts are here)
+
 Try to understand what is going on in the two examples below.
     - How does the structure come about? We are drawing random numbers!
     - What's the difference between the Siepinsky Gasket and the Fern?
 
-```{r siepinsky, echo=TRUE}
+### A Triangle
+
+```{r siepinsky, echo=TRUE, include=TRUE, eval=FALSE}
 # Sierpinski Gasket using Iterated Function Systems
 #
 # RM-course Advanced Data Analysis
@@ -566,8 +570,11 @@ for(i in 1:20000){      # This takes some time: 20.000 iterations
 } # for ...
 ```
 
-```{r siepinsky, echo=TRUE}
-# Sierpinski Gasket using Iterated Function Systems
+
+### A Fern
+
+```{r fern, echo=TRUE, eval=FALSE, include=TRUE}
+# Barnsley's Fern using Iterated Function Systems
 #
 # RM-course Advanced Data Analysis
 # Module Dynamical and Nonlinear Data analysis and Modeling 
@@ -583,7 +590,7 @@ y = 0
 # Emppty plot
 plot(x,y, pch=".", xlim=c(-3,3), ylim=c(0,12))
 
-for(i in 1:20000){      # This takes some time: 20.000 iterations
+for(i in 1:50000){      # This takes some time: 20.000 iterations
   
     coor=runif(1)       # coor becomes a random number between 0 and 1 drawn from the uniform distribution
     
@@ -613,6 +620,16 @@ for(i in 1:20000){      # This takes some time: 20.000 iterations
     
 } # for ...
 ```
+
+### The fractal / chaos game
+
+These [Iterated Function Systems](https://en.wikipedia.org/wiki/Iterated_function_system) also go by the name of 'the fractal game' and are used in computer science, the gaming industry, graphic design, etc.
+
+This Wikipedia page on [Barnsley's fern](https://en.wikipedia.org/wiki/Barnsley_fern) has some good info on the topic. At the end they display *Mutant varieties*. Try to implement them!
+
+
+You can by now probably guess that the these simple rules can be described as constraints on the degrees of freedom of the system. Like with the models of growth we simulated, the rules of the fractal game can be made dependent on other processes or events. A great example are the so-called [fractal flames](https://en.wikipedia.org/wiki/Fractal_flame) implemented in a screen-saver called [*electric sheep*](http://www.electricsheep.org), which combines genetic algorithms, distributed computind and user input ("likes") to create intruiging visual patterns on your computer screen.^[Use at your own risk! You will find yourself silently staring at the screen for longer periods of time.]
+
 
 # Fluctuation and Disperion analyses I {#fda1}
 
