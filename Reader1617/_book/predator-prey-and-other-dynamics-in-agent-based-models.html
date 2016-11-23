@@ -33,8 +33,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="moc1ass.html">
-<link rel="next" href="the-logistic-map-in-a-spreadsheet.html">
+<link rel="prev" href="the-competetive-lottka-volterra-equations.html">
+<link rel="next" href="bta.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -165,75 +165,23 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="the-linear-map" class="section level2">
-<h2><span class="header-section-number">2.1</span> The Linear Map</h2>
-<p>Equation <a href="the-linear-map.html#eq:linmap">(2.1)</a> is the ordinary difference equation (ODE) discussed in the lecture (see lecture notes <a href="#Lecture-1"><strong>??</strong></a>) is called the <em>Linear Map</em>:</p>
-<span class="math display" id="eq:linmap">\[\begin{equation}
-Y_{t+1} = Y_{t=0} + r*Y_t
-\tag{2.1}
-\end{equation}\]</span>
-<p>In these excersises you will simulate <em>time series</em> produced by the change process in equation @(eq:linmap) for different parameter settings of the growth-rate parameter <span class="math inline">\(r\)</span> (the <em>control parameter</em>) and the initial conditions <span class="math inline">\(Y_0\)</span>. This is different from a statistical analysis in which parameters are estimated from a data set. The goal of the assignments is to get a feeling for what a dynamical model is, and how it is different from a linear statistical regression model like GLM.</p>
-<div id="the-linear-map-in-a-spreadsheet" class="section level3">
-<h3><span class="header-section-number">2.1.1</span> The Linear Map in a Spreadsheet</h3>
-<p>Before you begin, be sure to check the following settings:</p>
+<div id="predator-prey-and-other-dynamics-in-agent-based-models" class="section level2">
+<h2><span class="header-section-number">3.6</span> Predator-Prey (and other) dynamics in Agent Based Models</h2>
+<p>Agent-Based models are an expansion of the idea of “connected growers” that includes a spatial location of the things that is subject to change over time.</p>
+<p>Have a look at some of the <a href="http://ccl.northwestern.edu/netlogo/">NETlogo</a> demo’s:</p>
 <ul>
-<li>Open a Microsoft Excel worksheet, a <a href="https://www.google.com/docs/about/">Google sheet</a>, or other spreadsheet.</li>
-<li>Check whether the spreadsheet uses a ‘decimal-comma’ (<span class="math inline">\(0,05\)</span>) or ‘decimal-point’ (<span class="math inline">\(0.05\)</span>) notation.
-<ul>
-<li>The numbers given in the assignments of this course all use a ‘decimal-point’ notation.</li>
-</ul></li>
-<li>Check if the <code>$</code> symbol fixes rows and columns when it used in a formula in your preferred spreadsheet program.
-<ul>
-<li>This is the default setting in Microsoft Excel and Google. If you use one of those programs you are all set, otherwise you will have to replace the <code>$</code> used in the assignments with the one used by your software.</li>
-</ul></li>
-<li>Type <code>r</code> in cell <code>A5</code>. This is the <em>control parameter</em>. It receives the value <span class="math inline">\(1.08\)</span> in cell<code>B5</code>.</li>
-<li>Type <span class="math inline">\(Y_0\)</span> in cell <code>A6</code>. This is the <em>initial value</em>. It receives the value <span class="math inline">\(0.1\)</span> in cell <code>B6</code>.<br />
-</li>
-<li>Use the output level (<span class="math inline">\(Y_t\)</span>) of every step as the input to calculate the next level (<span class="math inline">\(Y_{t+1}\)</span>).
-<ul>
-<li>Rows in the spreadsheet will represent the values of the process at different moments in time.</li>
-</ul></li>
-<li>Put the initial value (<span class="math inline">\(Y_0\)</span>) in cell <code>A10</code>. This cell marks time <span class="math inline">\(t=0\)</span>.
-<ul>
-<li>To get it right, type: <code>=$B$6</code>. The <code>=</code> means that (in principle) there is a ‘calculation’ going on (a function is applied). The <code>$</code> determines that column (<code>$B</code>) as well as the row (<code>$6</code>) keep the same value (i.e., constant) for each time step.</li>
-</ul></li>
-<li>Enter the <strong>Linear Map</strong> as a function in each cell. Type <code>=$B$5*A10</code> in cell <code>A11</code>.
-<ul>
-<li>This means that the value of cell <code>A11</code> (i.e. <span class="math inline">\(Y_{t=1}\)</span>) will be calculated by multiplying the value of cell <code>B5</code> (parameter <code>r</code>) with the value of cell <code>A10</code> (previous value, here: <span class="math inline">\(Y_{t=0}\)</span>). If everything is all right, cell <code>A11</code> now shows the value <span class="math inline">\(0.108\)</span>.</li>
-</ul></li>
-<li>Repeat this step for cell <code>A12</code>.
-<ul>
-<li>Remember what it is you are doing! You are calculating <span class="math inline">\(Y_{t=2}\)</span> now (i.e. the next step), which is determined by <span class="math inline">\(Y_{t=1}\)</span> (i.e., the previous step) and the parameter <code>r</code>.</li>
-</ul></li>
-<li>Now repeat this simple iterative step for <code>100</code> further steps. Instead of typing everything over and over again, copy-paste the whole thing.Most spreadsheet programs will automatically adjust the formula by advancing each row or column number that aren’t fixed by <code>$</code>.
-<ul>
-<li>Copy cell <code>A12</code> all the way from <code>A13</code> to <code>A110</code> (keep the <code>SHIFT</code> button pressed to select all cells).</li>
-</ul></li>
+<li><a href="http://www.netlogoweb.org/launch#http://www.netlogoweb.org/assets/modelslib/Sample%20Models/Biology/Rabbits%20Grass%20Weeds.nlogo">Rabbits Weeds Grass</a></li>
+<li><a href="http://www.netlogoweb.org/launch#http://www.netlogoweb.org/assets/modelslib/Sample%20Models/Biology/Wolf%20Sheep%20Predation.nlogo">Wolf Sheep Grass</a></li>
 </ul>
-<p><code>You have just simulated a time series based on a theoretical change process!</code></p>
 </div>
-<div id="visualizing-the-time-series" class="section level3">
-<h3><span class="header-section-number">2.1.2</span> Visualizing the time series</h3>
-<ol>
-<li><p>Select cells <code>A10</code> to <code>A110</code> Create a line graph (<code>Insert</code>, 2D-line, Scatter). This will show you the graph. (There are other ways to do this, by the way, which work just as well.) You can play with the setting to make the best suitable view, like rescaling the axes.</p></li>
-<li>If you change the values in cells B5 and B6 you will see an immediate change in the graph. To study the model???s behaviour, try the following growth parameters:
-<ul>
-<li><span class="math inline">\(a = -1.08\)</span></li>
-<li><span class="math inline">\(a = 1,08\)</span></li>
-<li><span class="math inline">\(a = 1\)</span></li>
-<li><span class="math inline">\(a = -1\)</span></li>
-</ul></li>
-<li><p>Change the initial value <span class="math inline">\(Y_0\)</span> in cell <code>B6</code> to <span class="math inline">\(10\)</span>. Subsequently give the growth parameter in cell <code>B5</code> the following values <span class="math inline">\(0.95\)</span> and <span class="math inline">\(???0.95\)</span>.</p></li>
-</ol>
-</div>
-</div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="moc1ass.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="the-logistic-map-in-a-spreadsheet.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="the-competetive-lottka-volterra-equations.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="bta.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>

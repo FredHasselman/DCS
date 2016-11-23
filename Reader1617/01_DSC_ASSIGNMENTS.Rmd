@@ -312,10 +312,21 @@ The coupled predator-prey dynamics in the previous assignment are not a very rea
 > This is what *interaction dynamics* refers to, modeling mutual dependiencies using the `if ... then` conditional rules isn't really about interaction, or coupling between processes.
 
 
+## Predator-Prey (and other) dynamics in Agent Based Models
+
+Agent-Based models are an expansion of the idea of "connected growers" that includes a spatial location  of the things that is subject to change over time.
+
+Have a look at some of the [NETlogo](http://ccl.northwestern.edu/netlogo/) demo's:
+
+* [Rabbits Weeds Grass](http://www.netlogoweb.org/launch#http://www.netlogoweb.org/assets/modelslib/Sample%20Models/Biology/Rabbits%20Grass%20Weeds.nlogo)
+* [Wolf Sheep Grass](http://www.netlogoweb.org/launch#http://www.netlogoweb.org/assets/modelslib/Sample%20Models/Biology/Wolf%20Sheep%20Predation.nlogo)
+
+
+
 # Basic Timeseries Analysis {#bta}
 
-You can use the command below to install all the packages we will use during the entire course on you private computer.
-```{r, eval=FALSE, include=FALSE}
+You can use the command below to install all the packages we will use during the entire course on you private computer. This might take too long on a university PC, just select the packages you need for the assignment.
+```{r, eval=FALSE, include=TRUE}
 install.packages(c("devtools", "rio", "plyr", "dplyr", "tidyr", "Matrix", 
                    "ggplot2", "lattice", "latticeExtra", "grid", "gridExtra", "rgl",
                    "fractal",  "nonlinearTseries",  "crqa", 
@@ -327,11 +338,42 @@ install.packages(c("devtools", "rio", "plyr", "dplyr", "tidyr", "Matrix",
 
 There is also a function library you need to `source`, the most recent version is on Github, use the `devtools` library to get it.
 
-```{r, eval=FALSE, include=FALSE}
+```{r, eval=FALSE, include=TRUE}
 library(devtools)
 source_url("https://raw.githubusercontent.com/FredHasselman/DCS/master/functionLib/nlRtsa_SOURCE.R")
 
 ```
+
+
+## Time series models in SPSS (17 and higher). 
+
+1. Download the file [series.sav]() from blackboard. It contains three time series `TS_1`, `TS_2` and `TS_3`. As a first step look at the mean and the standard deviation (`Analyze` >> `Descriptives`).  Suppose these were time series from three subjects in an experiment, what would you conclude based on the means and SD’s?  
+
+2. Let’s visualize these data. Go to `Forecasting` >> `Time Series` >> `Sequence Charts`. Check the box One chart per variable and move all the variables to Variables. Are they really the same?  
+
+3. Let’s look at the `ACF` and `PCF`. Go to Go to `Analyze` >> `Forecasting` >> `Autocorrelations`. Enter all the variables and make sure both *Autocorrelations* (ACF) and *Partial autocorrelations* (PACF) boxes are checked. Click `Options`, and change the `Maximum Number of Lags` to `30`. Use this table to characterize the time series:  
+
+
+|                    SHAPE                | INDICATED MODEL |
+|-----------------------------------------|-------------------------------------------------------------------------------------------------|
+|       Exponential, decaying to zero     | Autoregressive model. Use the partial autocorrelation plot to identify the order of the autoregressive model|
+| Alternating positive and negative, decaying to zero  | Autoregressive model. Use the partial autocorrelation plot to help identify the order.|
+| One or more spikes, rest are essentially zero | Moving average model, order identified by where plot becomes zero. |
+| Decay, starting after a few lags | Mixed autoregressive and moving average model.|
+All zero or close to zero  | Data is essentially random.|
+| High values at fixed intervals | Include seasonal autoregressive term. |
+| No decay to zero  | Series is not stationary. |
+
+
+4. You should have identified just one time series with autocorrelations: `TS_2`. Try to fit an `ARIMA(p,0,q)` model on this time series. Go to `Analyze` >> `Forecasting` >> `Create Model`, and at `Method` (Expert modeler) choose `ARIMA`. Look back at the `PACF` to identify which order (p) you need (last lag value at which the correlation is still significant). This lag value should go in the Autocorrelation p box. Start with a Moving Average q of one. The time series variable TS_2 is the Dependent. You can check the statistical significance of the parameters in the output under Statistics, by checking the box Parameter Estimates. This value for p is probably too high, because not all AR parameters are significant. Run ARIMA again and decrease the number of AR parameters by leaving out the non-significant ones.  
+
+5. By default SPSS saves the predicted values and 95% confidence limits (check the data file). We can now check how well the prediction is: Go to Graphs -> Legacy Dialogs -> Line. Select Multiple and Summaries of Separate Variables. Now enter TS_2, Fit_X, LCL_X and UCL_X in Lines Represent. X should be the number of the last (best) model you fitted, probably 2. Enter TIME as the Category Axis.  
+
+6. In the simulation part of this course we have learned a very simple way to explore the dynamics of a system: The return plot. The time series is plotted against itself shifted by 1 step in time. Create return plots (use a Scatterplot) for the three time series. Tip: You can easily create a ‘t+1’ version of the time series by using the LAG function in a COMPUTE statement. For instance: COMPUTE TS_1_lag1 = LAG(TS_1). Are your conclusions about the time series the same when based on these return plots? 
+
+
+
+
 
 # Fluctuation and Disperion analyses I {#fda1}
 

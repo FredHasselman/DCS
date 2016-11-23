@@ -33,8 +33,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="moc1ass.html">
-<link rel="next" href="the-logistic-map-in-a-spreadsheet.html">
+<link rel="prev" href="bta.html">
+<link rel="next" href="fda1.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -165,75 +165,69 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="the-linear-map" class="section level2">
-<h2><span class="header-section-number">2.1</span> The Linear Map</h2>
-<p>Equation <a href="the-linear-map.html#eq:linmap">(2.1)</a> is the ordinary difference equation (ODE) discussed in the lecture (see lecture notes <a href="#Lecture-1"><strong>??</strong></a>) is called the <em>Linear Map</em>:</p>
-<span class="math display" id="eq:linmap">\[\begin{equation}
-Y_{t+1} = Y_{t=0} + r*Y_t
-\tag{2.1}
-\end{equation}\]</span>
-<p>In these excersises you will simulate <em>time series</em> produced by the change process in equation @(eq:linmap) for different parameter settings of the growth-rate parameter <span class="math inline">\(r\)</span> (the <em>control parameter</em>) and the initial conditions <span class="math inline">\(Y_0\)</span>. This is different from a statistical analysis in which parameters are estimated from a data set. The goal of the assignments is to get a feeling for what a dynamical model is, and how it is different from a linear statistical regression model like GLM.</p>
-<div id="the-linear-map-in-a-spreadsheet" class="section level3">
-<h3><span class="header-section-number">2.1.1</span> The Linear Map in a Spreadsheet</h3>
-<p>Before you begin, be sure to check the following settings:</p>
-<ul>
-<li>Open a Microsoft Excel worksheet, a <a href="https://www.google.com/docs/about/">Google sheet</a>, or other spreadsheet.</li>
-<li>Check whether the spreadsheet uses a ‘decimal-comma’ (<span class="math inline">\(0,05\)</span>) or ‘decimal-point’ (<span class="math inline">\(0.05\)</span>) notation.
-<ul>
-<li>The numbers given in the assignments of this course all use a ‘decimal-point’ notation.</li>
-</ul></li>
-<li>Check if the <code>$</code> symbol fixes rows and columns when it used in a formula in your preferred spreadsheet program.
-<ul>
-<li>This is the default setting in Microsoft Excel and Google. If you use one of those programs you are all set, otherwise you will have to replace the <code>$</code> used in the assignments with the one used by your software.</li>
-</ul></li>
-<li>Type <code>r</code> in cell <code>A5</code>. This is the <em>control parameter</em>. It receives the value <span class="math inline">\(1.08\)</span> in cell<code>B5</code>.</li>
-<li>Type <span class="math inline">\(Y_0\)</span> in cell <code>A6</code>. This is the <em>initial value</em>. It receives the value <span class="math inline">\(0.1\)</span> in cell <code>B6</code>.<br />
-</li>
-<li>Use the output level (<span class="math inline">\(Y_t\)</span>) of every step as the input to calculate the next level (<span class="math inline">\(Y_{t+1}\)</span>).
-<ul>
-<li>Rows in the spreadsheet will represent the values of the process at different moments in time.</li>
-</ul></li>
-<li>Put the initial value (<span class="math inline">\(Y_0\)</span>) in cell <code>A10</code>. This cell marks time <span class="math inline">\(t=0\)</span>.
-<ul>
-<li>To get it right, type: <code>=$B$6</code>. The <code>=</code> means that (in principle) there is a ‘calculation’ going on (a function is applied). The <code>$</code> determines that column (<code>$B</code>) as well as the row (<code>$6</code>) keep the same value (i.e., constant) for each time step.</li>
-</ul></li>
-<li>Enter the <strong>Linear Map</strong> as a function in each cell. Type <code>=$B$5*A10</code> in cell <code>A11</code>.
-<ul>
-<li>This means that the value of cell <code>A11</code> (i.e. <span class="math inline">\(Y_{t=1}\)</span>) will be calculated by multiplying the value of cell <code>B5</code> (parameter <code>r</code>) with the value of cell <code>A10</code> (previous value, here: <span class="math inline">\(Y_{t=0}\)</span>). If everything is all right, cell <code>A11</code> now shows the value <span class="math inline">\(0.108\)</span>.</li>
-</ul></li>
-<li>Repeat this step for cell <code>A12</code>.
-<ul>
-<li>Remember what it is you are doing! You are calculating <span class="math inline">\(Y_{t=2}\)</span> now (i.e. the next step), which is determined by <span class="math inline">\(Y_{t=1}\)</span> (i.e., the previous step) and the parameter <code>r</code>.</li>
-</ul></li>
-<li>Now repeat this simple iterative step for <code>100</code> further steps. Instead of typing everything over and over again, copy-paste the whole thing.Most spreadsheet programs will automatically adjust the formula by advancing each row or column number that aren’t fixed by <code>$</code>.
-<ul>
-<li>Copy cell <code>A12</code> all the way from <code>A13</code> to <code>A110</code> (keep the <code>SHIFT</code> button pressed to select all cells).</li>
-</ul></li>
-</ul>
-<p><code>You have just simulated a time series based on a theoretical change process!</code></p>
-</div>
-<div id="visualizing-the-time-series" class="section level3">
-<h3><span class="header-section-number">2.1.2</span> Visualizing the time series</h3>
-<ol>
-<li><p>Select cells <code>A10</code> to <code>A110</code> Create a line graph (<code>Insert</code>, 2D-line, Scatter). This will show you the graph. (There are other ways to do this, by the way, which work just as well.) You can play with the setting to make the best suitable view, like rescaling the axes.</p></li>
-<li>If you change the values in cells B5 and B6 you will see an immediate change in the graph. To study the model???s behaviour, try the following growth parameters:
-<ul>
-<li><span class="math inline">\(a = -1.08\)</span></li>
-<li><span class="math inline">\(a = 1,08\)</span></li>
-<li><span class="math inline">\(a = 1\)</span></li>
-<li><span class="math inline">\(a = -1\)</span></li>
-</ul></li>
-<li><p>Change the initial value <span class="math inline">\(Y_0\)</span> in cell <code>B6</code> to <span class="math inline">\(10\)</span>. Subsequently give the growth parameter in cell <code>B5</code> the following values <span class="math inline">\(0.95\)</span> and <span class="math inline">\(???0.95\)</span>.</p></li>
+<div id="time-series-models-in-spss-17-and-higher." class="section level2">
+<h2><span class="header-section-number">4.1</span> Time series models in SPSS (17 and higher).</h2>
+<ol style="list-style-type: decimal">
+<li><p>Download the file <a href="">series.sav</a> from blackboard. It contains three time series <code>TS_1</code>, <code>TS_2</code> and <code>TS_3</code>. As a first step look at the mean and the standard deviation (<code>Analyze</code> &gt;&gt; <code>Descriptives</code>). Suppose these were time series from three subjects in an experiment, what would you conclude based on the means and SD’s?</p></li>
+<li><p>Let’s visualize these data. Go to <code>Forecasting</code> &gt;&gt; <code>Time Series</code> &gt;&gt; <code>Sequence Charts</code>. Check the box One chart per variable and move all the variables to Variables. Are they really the same?</p></li>
+<li><p>Let’s look at the <code>ACF</code> and <code>PCF</code>. Go to Go to <code>Analyze</code> &gt;&gt; <code>Forecasting</code> &gt;&gt; <code>Autocorrelations</code>. Enter all the variables and make sure both <em>Autocorrelations</em> (ACF) and <em>Partial autocorrelations</em> (PACF) boxes are checked. Click <code>Options</code>, and change the <code>Maximum Number of Lags</code> to <code>30</code>. Use this table to characterize the time series:</p></li>
+</ol>
+<table>
+<colgroup>
+<col width="30%" />
+<col width="70%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>SHAPE</th>
+<th>INDICATED MODEL</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Exponential, decaying to zero</td>
+<td>Autoregressive model. Use the partial autocorrelation plot to identify the order of the autoregressive model</td>
+</tr>
+<tr class="even">
+<td>Alternating positive and negative, decaying to zero</td>
+<td>Autoregressive model. Use the partial autocorrelation plot to help identify the order.</td>
+</tr>
+<tr class="odd">
+<td>One or more spikes, rest are essentially zero</td>
+<td>Moving average model, order identified by where plot becomes zero.</td>
+</tr>
+<tr class="even">
+<td>Decay, starting after a few lags</td>
+<td>Mixed autoregressive and moving average model.</td>
+</tr>
+<tr class="odd">
+<td>All zero or close to zero</td>
+<td>Data is essentially random.</td>
+</tr>
+<tr class="even">
+<td>High values at fixed intervals</td>
+<td>Include seasonal autoregressive term.</td>
+</tr>
+<tr class="odd">
+<td>No decay to zero</td>
+<td>Series is not stationary.</td>
+</tr>
+</tbody>
+</table>
+<ol start="4" style="list-style-type: decimal">
+<li><p>You should have identified just one time series with autocorrelations: <code>TS_2</code>. Try to fit an <code>ARIMA(p,0,q)</code> model on this time series. Go to <code>Analyze</code> &gt;&gt; <code>Forecasting</code> &gt;&gt; <code>Create Model</code>, and at <code>Method</code> (Expert modeler) choose <code>ARIMA</code>. Look back at the <code>PACF</code> to identify which order (p) you need (last lag value at which the correlation is still significant). This lag value should go in the Autocorrelation p box. Start with a Moving Average q of one. The time series variable TS_2 is the Dependent. You can check the statistical significance of the parameters in the output under Statistics, by checking the box Parameter Estimates. This value for p is probably too high, because not all AR parameters are significant. Run ARIMA again and decrease the number of AR parameters by leaving out the non-significant ones.</p></li>
+<li><p>By default SPSS saves the predicted values and 95% confidence limits (check the data file). We can now check how well the prediction is: Go to Graphs -&gt; Legacy Dialogs -&gt; Line. Select Multiple and Summaries of Separate Variables. Now enter TS_2, Fit_X, LCL_X and UCL_X in Lines Represent. X should be the number of the last (best) model you fitted, probably 2. Enter TIME as the Category Axis.</p></li>
+<li><p>In the simulation part of this course we have learned a very simple way to explore the dynamics of a system: The return plot. The time series is plotted against itself shifted by 1 step in time. Create return plots (use a Scatterplot) for the three time series. Tip: You can easily create a ‘t+1’ version of the time series by using the LAG function in a COMPUTE statement. For instance: COMPUTE TS_1_lag1 = LAG(TS_1). Are your conclusions about the time series the same when based on these return plots?</p></li>
 </ol>
 </div>
-</div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="moc1ass.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="the-logistic-map-in-a-spreadsheet.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="bta.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="fda1.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
