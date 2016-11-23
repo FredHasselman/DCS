@@ -26,7 +26,7 @@
 <meta name="author" content="Fred Hasselman &amp; Maarten Wijnants">
 
 
-<meta name="date" content="2016-11-14">
+<meta name="date" content="2016-11-23">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -145,8 +145,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.4.2" data-path="predator-prey-model.html"><a href="predator-prey-model.html#coupled-system-in-a-spreadsheet"><i class="fa fa-check"></i><b>3.4.2</b> Coupled System in a spreadsheet</a></li>
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="the-competetive-lottka-volterra-equations.html"><a href="the-competetive-lottka-volterra-equations.html"><i class="fa fa-check"></i><b>3.5</b> The Competetive Lottka-Volterra Equations</a></li>
+<li class="chapter" data-level="3.6" data-path="predator-prey-and-other-dynamics-in-agent-based-models.html"><a href="predator-prey-and-other-dynamics-in-agent-based-models.html"><i class="fa fa-check"></i><b>3.6</b> Predator-Prey (and other) dynamics in Agent Based Models</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="bta.html"><a href="bta.html"><i class="fa fa-check"></i><b>4</b> Basic Timeseries Analysis</a></li>
+<li class="chapter" data-level="4" data-path="bta.html"><a href="bta.html"><i class="fa fa-check"></i><b>4</b> Basic Timeseries Analysis</a><ul>
+<li class="chapter" data-level="4.1" data-path="time-series-models-in-spss-17-and-higher-.html"><a href="time-series-models-in-spss-17-and-higher-.html"><i class="fa fa-check"></i><b>4.1</b> Time series models in SPSS (17 and higher).</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="time-series-models-in-spss-17-and-higher-.html"><a href="time-series-models-in-spss-17-and-higher-.html#assignments-in-r-or-matlab"><i class="fa fa-check"></i><b>4.1.1</b> Assignments in <code>R</code> or <code>Matlab</code></a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="heartbeat-dynamics.html"><a href="heartbeat-dynamics.html"><i class="fa fa-check"></i><b>4.2</b> Heartbeat dynamics</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="heartbeat-dynamics.html"><a href="heartbeat-dynamics.html#the-recordings"><i class="fa fa-check"></i><b>4.2.1</b> The recordings</a></li>
+<li class="chapter" data-level="4.2.2" data-path="heartbeat-dynamics.html"><a href="heartbeat-dynamics.html#first-inspection"><i class="fa fa-check"></i><b>4.2.2</b> First inspection</a></li>
+<li class="chapter" data-level="4.2.3" data-path="heartbeat-dynamics.html"><a href="heartbeat-dynamics.html#what-do-we-know-now-that-we-didnt-knew-before"><i class="fa fa-check"></i><b>4.2.3</b> What do we know now, that we didn’t knew before?</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="5" data-path="fda1.html"><a href="fda1.html"><i class="fa fa-check"></i><b>5</b> Fluctuation and Disperion analyses I</a></li>
 <li class="chapter" data-level="6" data-path="fda2.html"><a href="fda2.html"><i class="fa fa-check"></i><b>6</b> Fluctuation and Disperion analyses II</a></li>
 <li class="chapter" data-level="7" data-path="RQA.html"><a href="RQA.html"><i class="fa fa-check"></i><b>7</b> Phase Space Reconstruction and RQA</a></li>
@@ -160,7 +170,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="modeling-change-processes-in-1d.html#no-its-a-time-series"><strong>No! … It’s a time series!</strong></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="lecture-2.html"><a href="lecture-2.html"><i class="fa fa-check"></i>Lecture 2</a></li>
+<li class="chapter" data-level="" data-path="lecture-2.html"><a href="lecture-2.html"><i class="fa fa-check"></i>Lecture 2</a><ul>
+<li class="chapter" data-level="10.1" data-path="numerical-integration.html"><a href="numerical-integration.html"><i class="fa fa-check"></i><b>10.1</b> Numerical integration</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="numerical-integration.html"><a href="numerical-integration.html#eulers-method-and-more"><i class="fa fa-check"></i><b>10.1.1</b> Euler’s method and more…</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="lecture-3.html"><a href="lecture-3.html"><i class="fa fa-check"></i>Lecture 3</a></li>
 <li class="chapter" data-level="" data-path="lecture-4.html"><a href="lecture-4.html"><i class="fa fa-check"></i>Lecture 4</a></li>
 <li class="chapter" data-level="" data-path="lecture-5.html"><a href="lecture-5.html"><i class="fa fa-check"></i>Lecture 5</a></li>
@@ -236,25 +250,25 @@ Y_{t+1} = Y_{t=0} + a*Y_t
 <div id="its-a-line-its-a-plane" class="section level3 unnumbered">
 <h3><strong>It’s a line! It’s a plane!</strong></h3>
 <p>The formula resembles the equation of a line. There is a constant value <span class="math inline">\(Y_{0}\)</span> which is added to a proportion of the value of <span class="math inline">\(Y\)</span> at time <span class="math inline">\(t\)</span>, given by parameter <span class="math inline">\(a\)</span>. This is equivalent to the slope of a line. However, in a <span class="math inline">\((X,Y)\)</span> plane there are two ‘spatial’ (metric) dimensions representing the values two variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> can take on (see figure).</p>
-<p><img src="DCS1617_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="DCS1617_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>The best fitting straight line would be called a statistical model of the linear relationship between the observed values of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. It can be obtained by fitting a General Linear Model (GLM) to the data. If <span class="math inline">\(X\)</span> were to represent repeated measurements the multivariate GLM for repeated measures would have to be fitted to the data. This can be very problematic, because statistical models rely on <a href="https://en.wikipedia.org/wiki/Ergodic_theory">Ergodic theory</a>:</p>
 <blockquote>
-<p>“… it is the study of the long term average behavior of systems evolving in time.”<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a></p>
+<p>“… it is the study of the long term average behavior of systems evolving in time.”<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a></p>
 </blockquote>
 <p>need to assume independence of measurements within and between subjects. These assumptions can be translated to certain conditions that must hold for the model to be valid, known as <em>Compound Symmetry</em> and <em>Sphericity</em>:</p>
 <blockquote>
-<p>The compound symmetry assumption requires that the variances (pooled within-group) and covariances (across subjects) of the different repeated measures are homogeneous (identical). This is a sufficient condition for the univariate F test for repeated measures to be valid (i.e., for the reported F values to actually follow the F distribution). However, it is not a necessary condition. The sphericity assumption is a necessary and sufficient condition for the F test to be valid; it states that the within-subject “model” consists of independent (orthogonal) components. The nature of these assumptions, and the effects of violations are usually not well-described in ANOVA textbooks;<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a></p>
+<p>The compound symmetry assumption requires that the variances (pooled within-group) and covariances (across subjects) of the different repeated measures are homogeneous (identical). This is a sufficient condition for the univariate F test for repeated measures to be valid (i.e., for the reported F values to actually follow the F distribution). However, it is not a necessary condition. The sphericity assumption is a necessary and sufficient condition for the F test to be valid; it states that the within-subject “model” consists of independent (orthogonal) components. The nature of these assumptions, and the effects of violations are usually not well-described in ANOVA textbooks;<a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a></p>
 </blockquote>
 <p>As you can read in the quoted text above, these conditions must hold in order to be able to identify unique independent components as the sources of variation of <span class="math inline">\(Y\)</span> over time within a subject. This is the a clear example of:</p>
 <blockquote>
-<p>It is the theory that decides what we may observe<a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a></p>
+<p>It is the theory that decides what we may observe<a href="#fn5" class="footnoteRef" id="fnref5"><sup>5</sup></a></p>
 </blockquote>
 <p>If you choose to use GLM repeated measures to model change over time, you will only be able to infer independent components that are responsible for the time-evolution of <span class="math inline">\(Y\)</span>. As is hinted in the last sentence of the quote, the validity of such inferences is not a common topic of discussion statistics textbooks.</p>
 </div>
 <div id="no-its-a-time-series" class="section level3 unnumbered">
 <h3><strong>No! … It’s a time series!</strong></h3>
 <p>The important difference between a regular 2-dimensional Euclidean plane and the space in which we model change processes is that the <span class="math inline">\(X\)</span>-axis represents the physical dimension <strong>time</strong>. In the case of the Linear Map we have a 1D space with one ‘spatial’ dimension <span class="math inline">\(Y\)</span> and a time dimension <span class="math inline">\(t\)</span>. This is called <a href="https://en.wikipedia.org/wiki/Time_series">time series</a> if <span class="math inline">\(Y\)</span> is sampled as a continuous process, or a trial series if the time between subsequent observations is not relevant, just the fact that there was a temporal order (for example, a series of response latencies to trials in a psychological experiment in the order in which they were presented to the subject).</p>
-<p>Time behaves different from a spatial dimension in that it is directional (time cannot be reversed), it cannot take on negative values, and, unless one is dealing with a truly random process, there will be a temporal correlation across one or more values of <span class="math inline">\(Y\)</span> seperated by an amount of time. In the linear difference equation this occurs because each value one step in the future is calculated based on the current value. If the values of <span class="math inline">\(Y\)</span> represent an observable of a dynamical system, the system can be said to have a history, or a memory. Ergodic systems do not have a history or a memory that extends across more than one time step. This is very convenient, because one can calculate the expected value of a system observable given infinite time, by making use of of the laws of probabilities of random events (or random fields). This means: The average of an observable of an Ergodic system measured across infinite time (its entire history, the <strong>time-average</strong>), will be the be the same value as the average of this observable measured at one instance in time, but in an infinite amount of systems of the same kind (the population, the <strong>spatial average</strong>).<a href="#fn5" class="footnoteRef" id="fnref5"><sup>5</sup></a></p>
+<p>Time behaves different from a spatial dimension in that it is directional (time cannot be reversed), it cannot take on negative values, and, unless one is dealing with a truly random process, there will be a temporal correlation across one or more values of <span class="math inline">\(Y\)</span> seperated by an amount of time. In the linear difference equation this occurs because each value one step in the future is calculated based on the current value. If the values of <span class="math inline">\(Y\)</span> represent an observable of a dynamical system, the system can be said to have a history, or a memory. Ergodic systems do not have a history or a memory that extends across more than one time step. This is very convenient, because one can calculate the expected value of a system observable given infinite time, by making use of of the laws of probabilities of random events (or random fields). This means: The average of an observable of an Ergodic system measured across infinite time (its entire history, the <strong>time-average</strong>), will be the be the same value as the average of this observable measured at one instance in time, but in an infinite amount of systems of the same kind (the population, the <strong>spatial average</strong>).<a href="#fn6" class="footnoteRef" id="fnref6"><sup>6</sup></a></p>
 <p>The simple linear difference equation will have a form of *perfect memory’ across the smallest time scale (i.e., the increment of 1, <span class="math inline">\(t+1\)</span>). This ‘memory’ concerns a correlation of 1 between values at adjacent time points (a short range temporal correlation, SRC), because the change from <span class="math inline">\(Y_t\)</span> to <span class="math inline">\(Y_{t+1}\)</span> is exactly equal to <span class="math inline">\(a * Y_t\)</span> at each iteration step. This is the meaning of deterministic, not that each value of <span class="math inline">\(Y\)</span> is the same, but that the value of <span class="math inline">\(Y\)</span> now can be perfectly explained form the value of <span class="math inline">\(Y\)</span> one moment in the past.</p>
 <p>Summarising, the most profound difference is not the fact that the equation of linear change is a deterministic model and the GLM is a probabilistic model with parameters fitted from data, this is something we can (and will) do for <span class="math inline">\(a\)</span> as well. The profound difference between the models is the role given to the passage of time:</p>
 <ul>
@@ -266,11 +280,11 @@ Y_{t+1} = Y_{t=0} + a*Y_t
 <!-- </div> -->
 <div class="footnotes">
 <hr />
-<ol start="2">
-<li id="fn2"><p>See Dajani &amp; Dirksin (2008, p. 5, <a href="http://www.staff.science.uu.nl/~kraai101/lecturenotes2009.pdf">“A simple introduction to Ergodic Theory”</a>)<a href="modeling-change-processes-in-1d.html#fnref2">↩</a></p></li>
-<li id="fn3"><p><a href="https://www.statsoft.com/Textbook/ANOVA-MANOVA#sphericity">Retreived from www.statsoft.com</a><a href="modeling-change-processes-in-1d.html#fnref3">↩</a></p></li>
-<li id="fn4"><p>Einstein as quoted by Heisenberg.<a href="modeling-change-processes-in-1d.html#fnref4">↩</a></p></li>
-<li id="fn5"><p>In other words: If you throw 1 die 100 times in a row, the average of the 100 numbers is the <strong>time-average</strong> of one of the observables of die-throwing systems. If this system is ergodic, then its <strong>time-average</strong> is expected to be similar to the average of the numbers that turn up if you throw 100 dice all at the same instance of time. The dice layed out on the table represent a spatial sample, a snapshot frozen in time, of the possible states the system can be in. Taking the average would be the <strong>spatial average</strong> this observable of die-throwing systems. This ergodic condiciotn is often implicitly assumed in Behavioural Science when studies claim to study change by taking different samples of individuals (snapshots of system states) and comparing if they are the same.<a href="modeling-change-processes-in-1d.html#fnref5">↩</a></p></li>
+<ol start="3">
+<li id="fn3"><p>See Dajani &amp; Dirksin (2008, p. 5, <a href="http://www.staff.science.uu.nl/~kraai101/lecturenotes2009.pdf">“A simple introduction to Ergodic Theory”</a>)<a href="modeling-change-processes-in-1d.html#fnref3">↩</a></p></li>
+<li id="fn4"><p><a href="https://www.statsoft.com/Textbook/ANOVA-MANOVA#sphericity">Retreived from www.statsoft.com</a><a href="modeling-change-processes-in-1d.html#fnref4">↩</a></p></li>
+<li id="fn5"><p>Einstein as quoted by Heisenberg.<a href="modeling-change-processes-in-1d.html#fnref5">↩</a></p></li>
+<li id="fn6"><p>In other words: If you throw 1 die 100 times in a row, the average of the 100 numbers is the <strong>time-average</strong> of one of the observables of die-throwing systems. If this system is ergodic, then its <strong>time-average</strong> is expected to be similar to the average of the numbers that turn up if you throw 100 dice all at the same instance of time. The dice layed out on the table represent a spatial sample, a snapshot frozen in time, of the possible states the system can be in. Taking the average would be the <strong>spatial average</strong> this observable of die-throwing systems. This ergodic condiciotn is often implicitly assumed in Behavioural Science when studies claim to study change by taking different samples of individuals (snapshots of system states) and comparing if they are the same.<a href="modeling-change-processes-in-1d.html#fnref6">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -309,7 +323,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["DCS1617.pdf"],
+"download": null,
 "toc": {
 "collapse": "subsection",
 "scroll_highlight": true,

@@ -351,7 +351,10 @@ source_url("https://raw.githubusercontent.com/FredHasselman/DCS/master/functionL
 
 2. Let’s visualize these data. Go to `Forecasting` >> `Time Series` >> `Sequence Charts`. Check the box One chart per variable and move all the variables to Variables. Are they really the same?  
 
-3. Let’s look at the `ACF` and `PCF`. Go to Go to `Analyze` >> `Forecasting` >> `Autocorrelations`. Enter all the variables and make sure both *Autocorrelations* (ACF) and *Partial autocorrelations* (PACF) boxes are checked. Click `Options`, and change the `Maximum Number of Lags` to `30`. Use this table to characterize the time series:  
+3. Let’s look at the `ACF` and `PCF`. 
+   - Go to `Analyze` >> `Forecasting` >> `Autocorrelations`. 
+   - Enter all the variables and make sure both *Autocorrelations* (ACF) and *Partial autocorrelations* (PACF) boxes are checked. Click `Options`, and change the `Maximum Number of Lags` to `30`. 
+   - Use the table to characterize the time series:  
 
 
 |                    SHAPE                | INDICATED MODEL |
@@ -365,7 +368,9 @@ All zero or close to zero  | Data is essentially random.|
 | No decay to zero  | Series is not stationary. |
 
 
-4. You should have identified just one time series with autocorrelations: `TS_2`. Try to fit an `ARIMA(p,0,q)` model on this time series. Go to `Analyze` >> `Forecasting` >> `Create Model`, and at `Method` (Expert modeler) choose `ARIMA`. Look back at the `PACF` to identify which order (`p`) you need (last lag value at which the correlation is still significant). This lag value should go in the Autocorrelation `p` box. 
+4. You should have identified just one time series with autocorrelations: `TS_2`. Try to fit an `ARIMA(p,0,q)` model on this time series. 
+    - Go to `Analyze` >> `Forecasting` >> `Create Model`, and at `Method` (Expert modeler) choose `ARIMA`. 
+    - Look back at the `PACF` to identify which order (`p`) you need (last lag value at which the correlation is still significant). This lag value should go in the Autocorrelation p box. 
     - Start with a Moving Average `q` of one. The time series variable `TS_2` is the `Dependent`. 
     - You can check the statistical significance of the parameters in the output under `Statistics`, by checking the box `Parameter Estimates`. 
     - This value for `p` is probably too high, because not all AR parameters are significant. 
@@ -380,10 +385,15 @@ COMPUTE TS_1_lag1 = LAG(TS_1)
 ``` 
     - Are your conclusions about the time series the same when based on these return plots? 
 
+### Assignments in `R` or `Matlab`
+
+You can use the function `arima()`, `acf()` and `pacf()` in `R` (`Matlab` has functions that go by slightly different names, check the Help files). 
+
+There are many extensions to these linear models, check the [`CRAN Task View` on `Time Series Analysis`](https://cran.r-project.org/web/views/TimeSeries.html) to learn more (e.g. about package `zoo` and `forecast`).
 
 ## Heartbeat dynamics
 Download three different time series of heartbeat intervals (HBI) [here](https://github.com/FredHasselman/DCS/tree/master/assignmentData/RelativeRoughness). If you use `R` and have package `rio` installed you can run this code and the load the data into a `data.frame` directly from `Github`. 
-```{r, echo=TRUE, eval=FALSE}
+```{r, echo=TRUE, eval=FALSE, include=TRUE}
 library(rio)
 TS1 <- import("https://github.com/FredHasselman/DCS/raw/master/assignmentData/RelativeRoughness/TS1.xlsx", col_names=FALSE)
 TS2 <- import("https://github.com/FredHasselman/DCS/raw/master/assignmentData/RelativeRoughness/TS2.xlsx", col_names=FALSE)
@@ -398,10 +408,9 @@ colnames(TS3) <- "TS3"
 ```
 
 ### The recordings
-
 These HBI’s were constructed from the R-R intervals in electrocardiogram (ECG) recordings, as defined in Figure \@ref(fig:RRf1). 
 
-```{r RRf1, fig.cap="Definition of Heart Beat Periods.", fig.align='center',echo=FALSE}
+```{r RRf1, fig.cap="Definition of Heart Beat Periods.", fig.align='center',echo=FALSE, include=TRUE}
 knitr::include_graphics('images/RRfig1.png')
 ```
 
@@ -433,7 +442,7 @@ The numerator in the formula stands for the `lag 1` autocovariance of the HBI ti
 
 *	Compare your (intuitive) visual inspection with these preliminary dynamic quantifications, and find out where each of the HIB series are positions on the ‘colorful spectrum of noises’ (i.e., line them up with Figure \@ref(fig:RRf3)).
 
-```{r RRf3, fig.cap="Coloured Noise versus Relative Roughness", fig.align='center',echo=FALSE}
+```{r RRf3, fig.cap="Coloured Noise versus Relative Roughness", fig.align='center',echo=FALSE, include=TRUE}
 knitr::include_graphics('images/RRfig3.png')
 ```
 
