@@ -34,7 +34,7 @@
   
   
 <link rel="prev" href="bta.html">
-<link rel="next" href="fda1.html">
+<link rel="next" href="heartbeat-dynamics.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -135,6 +135,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="4" data-path="bta.html"><a href="bta.html"><i class="fa fa-check"></i><b>4</b> Basic Timeseries Analysis</a><ul>
 <li class="chapter" data-level="4.1" data-path="time-series-models-in-spss-17-and-higher-.html"><a href="time-series-models-in-spss-17-and-higher-.html"><i class="fa fa-check"></i><b>4.1</b> Time series models in SPSS (17 and higher).</a></li>
+<li class="chapter" data-level="4.2" data-path="heartbeat-dynamics.html"><a href="heartbeat-dynamics.html"><i class="fa fa-check"></i><b>4.2</b> Heartbeat dynamics</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="heartbeat-dynamics.html"><a href="heartbeat-dynamics.html#the-recordings"><i class="fa fa-check"></i><b>4.2.1</b> The recordings</a></li>
+<li class="chapter" data-level="4.2.2" data-path="heartbeat-dynamics.html"><a href="heartbeat-dynamics.html#first-inspection"><i class="fa fa-check"></i><b>4.2.2</b> First inspection</a></li>
+<li class="chapter" data-level="4.2.3" data-path="heartbeat-dynamics.html"><a href="heartbeat-dynamics.html#what-do-we-know-now-that-we-didnt-knew-before"><i class="fa fa-check"></i><b>4.2.3</b> What do we know now, that we didn’t knew before?</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="fda1.html"><a href="fda1.html"><i class="fa fa-check"></i><b>5</b> Fluctuation and Disperion analyses I</a></li>
 <li class="chapter" data-level="6" data-path="fda2.html"><a href="fda2.html"><i class="fa fa-check"></i><b>6</b> Fluctuation and Disperion analyses II</a></li>
@@ -168,7 +173,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="time-series-models-in-spss-17-and-higher." class="section level2">
 <h2><span class="header-section-number">4.1</span> Time series models in SPSS (17 and higher).</h2>
 <ol style="list-style-type: decimal">
-<li><p>Download the file <a href="">series.sav</a> from blackboard. It contains three time series <code>TS_1</code>, <code>TS_2</code> and <code>TS_3</code>. As a first step look at the mean and the standard deviation (<code>Analyze</code> &gt;&gt; <code>Descriptives</code>). Suppose these were time series from three subjects in an experiment, what would you conclude based on the means and SD’s?</p></li>
+<li><p>Download the file <a href="https://github.com/FredHasselman/DCS/blob/master/assignmentData/series.sav"><code>series.sav</code></a> from blackboard. It contains three time series <code>TS_1</code>, <code>TS_2</code> and <code>TS_3</code>. As a first step look at the mean and the standard deviation (<code>Analyze</code> &gt;&gt; <code>Descriptives</code>). Suppose these were time series from three subjects in an experiment, what would you conclude based on the means and SD’s?</p></li>
 <li><p>Let’s visualize these data. Go to <code>Forecasting</code> &gt;&gt; <code>Time Series</code> &gt;&gt; <code>Sequence Charts</code>. Check the box One chart per variable and move all the variables to Variables. Are they really the same?</p></li>
 <li><p>Let’s look at the <code>ACF</code> and <code>PCF</code>. Go to Go to <code>Analyze</code> &gt;&gt; <code>Forecasting</code> &gt;&gt; <code>Autocorrelations</code>. Enter all the variables and make sure both <em>Autocorrelations</em> (ACF) and <em>Partial autocorrelations</em> (PACF) boxes are checked. Click <code>Options</code>, and change the <code>Maximum Number of Lags</code> to <code>30</code>. Use this table to characterize the time series:</p></li>
 </ol>
@@ -220,14 +225,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><p>In the simulation part of this course we have learned a very simple way to explore the dynamics of a system: The return plot. The time series is plotted against itself shifted by 1 step in time. Create return plots (use a Scatterplot) for the three time series. Tip: You can easily create a ‘t+1’ version of the time series by using the LAG function in a COMPUTE statement. For instance: COMPUTE TS_1_lag1 = LAG(TS_1). Are your conclusions about the time series the same when based on these return plots?</p></li>
 </ol>
 </div>
-<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
 <a href="bta.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="fda1.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="heartbeat-dynamics.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>

@@ -347,7 +347,7 @@ source_url("https://raw.githubusercontent.com/FredHasselman/DCS/master/functionL
 
 ## Time series models in SPSS (17 and higher). 
 
-1. Download the file [series.sav]() from blackboard. It contains three time series `TS_1`, `TS_2` and `TS_3`. As a first step look at the mean and the standard deviation (`Analyze` >> `Descriptives`).  Suppose these were time series from three subjects in an experiment, what would you conclude based on the means and SD’s?  
+1. Download the file [`series.sav`](https://github.com/FredHasselman/DCS/blob/master/assignmentData/series.sav) from blackboard. It contains three time series `TS_1`, `TS_2` and `TS_3`. As a first step look at the mean and the standard deviation (`Analyze` >> `Descriptives`).  Suppose these were time series from three subjects in an experiment, what would you conclude based on the means and SD’s?  
 
 2. Let’s visualize these data. Go to `Forecasting` >> `Time Series` >> `Sequence Charts`. Check the box One chart per variable and move all the variables to Variables. Are they really the same?  
 
@@ -372,7 +372,61 @@ All zero or close to zero  | Data is essentially random.|
 6. In the simulation part of this course we have learned a very simple way to explore the dynamics of a system: The return plot. The time series is plotted against itself shifted by 1 step in time. Create return plots (use a Scatterplot) for the three time series. Tip: You can easily create a ‘t+1’ version of the time series by using the LAG function in a COMPUTE statement. For instance: COMPUTE TS_1_lag1 = LAG(TS_1). Are your conclusions about the time series the same when based on these return plots? 
 
 
+## Heartbeat dynamics
+Download three different time series of heartbeat intervals (HBI). These HBI’s were constructed from the R-R intervals in electrocardiogram (ECG) recordings, as defined in Figure \@ref(fig:RRf1). 
 
+```{r RRf1, fig.cap="Definition of Heart Beat Periods.", fig.align='center',echo=FALSE}
+knitr::include_graphics('images/RRfig1.png')
+```
+
+### The recordings
+
+One HBI series is a sample from a male adult, 62 years old (called *Jimmy*). Approximately two years before the recording, the subject has had a coronary artery bypass, as advised by his physician following a diagnosis of congestive heart failure. *Jimmy* used antiarrhythmic medicines at the time of measurement.
+
+Another HBI series is a sample from a healthy male adult, 21 years old (called *Tommy*). This subject never reported any cardiac complaint. Tommy was playing the piano during the recording.
+
+A third supposed HBI series is fictitious, and was never recorded from a human subject (let’s call this counterfeit *Dummy*). 
+Your challenge
+
+The assignment is to scrutinise the data and find out which time series belongs to *Jimmy*, *Tommy*, and *Dummy* respectively. ^[The HBI intervals were truncated (not rounded) to a multiple of 10 ms (e.g., an interval of 0.457s is represented as 0.450s), and to 750 data points each. The means and standard deviations among the HBI series are approximately equidistant, which might complicate your challenge.]
+
+
+### First inspection
+The chances that you are an experienced cardiologist are slim. We therefore suggest you precede your detective work as follows:
+
+*	Construct a graphical representation of the time series, and inspect their dynamics visually. 
+
+* Write down your first guesses about which time series belongs to which subject. Take your time for this visual inspection (i.e., which one looks more like a line than a plane, which one looks more 'smooth' than 'rough'). 
+
+*	Next, explore some measures of central tendency and dispersion, etc.
+
+*	Third, compute the Relative Roughness for each time series, use Equation \@ref(eq:RR)
+
+\begin{equation}
+RR = 2\left[1−\frac{\gamma_1(x_i)}{Var(x_i)}\right]
+(\#eq:RR)
+\end{equation}
+
+The numerator in the formula stands for the `lag 1` autocovariance of the HBI time series $x_i$. The denominator stands for the (global) variance of $x_i$. Most statistics packages can calculate these variances, `R` and `Matlab` have built in functions. Alternatively, you can create the formula yourself.
+
+*	Compare your (intuitive) visual inspection with these preliminary dynamic quantifications, and find out where each of the HIB series are positions on the ‘colorful spectrum of noises’ (i.e., line them up with Figure \@ref(RRf3)).
+
+```{r RRf3, fig.cap="Coloured Noise versus Relative Roughness", fig.align='center',echo=FALSE}
+knitr::include_graphics('images/RRfig3.png')
+```
+
+
+
+### What do we know now, that we didn’t knew before?
+Any updates on Jimmy’s, Tommy’s and Dummy’s health? You may start to wonder about the 'meaning' of these dynamics, and not find immediate answers. 
+
+Don’t worry; we’ll cover the interpretation over the next two weeks in further depth. Let’s focus the dynamics just a little further for now. It might give you some clues.
+
+* Use the `randperm` function (in `Matlab` or in package  [`pracma`](http://www.inside-r.org/packages/cran/pracma) in `R`) to randomize the temporal ordering of the HBI series.
+* Visualize the resulting time series to check whether they were randomized successfully
+* Next estimate the Relative Roughness of the randomized series. Did the estimates change compared to your previous outcomes (if so, why)?
+
+* Now suppose you would repeat what you did the previous, but instead of using shuffle you would integrate the fictitious HBI series (i.e., normalize, then use `x=cumsum(x))`. You can look up `cumsum` in `R` or `Matlab`’s Help documentation). Would you get an estimate of Relative Roughness that is approximately comparable with what you got in another HBI series? If so, why?
 
 
 # Fluctuation and Disperion analyses I {#fda1}
