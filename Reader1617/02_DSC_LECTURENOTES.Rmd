@@ -83,53 +83,64 @@ Summarising, the most profound difference is not the fact that the equation of l
 
 # Lecture 2 {-}
 
-## Numerical integration 
+## Numerical integration {-}
 
 In order to 'solve' a differential equation for continuous time using a method of numerical integration, one could code it like in the spreadsheet assignment below. For `R` and `Matlab` there are so-called *solvers* available, functions that will do the integration for you. For `R` look at the [Examples in package `deSolve`](http://desolve.r-forge.r-project.org).
 
 
-### Euler's method and more...
+### Euler's method and more... {-}
 
 The result of applying a method of numerical integration is called a **numerical solution** of the differential equation. The **analytical solution** is the equation which will give you a value of $Y$ for any point in time, given an initial value $Y_0$. Systems which have an analytical solution can be used to test the accuracy of **numerical solutions**.
 
+
+#### Analytical solution {-}
 Remember that the analytical solution for the logistic equation is:
 
 $$
-\frac{K}{1 + \left(\frac{K}{Y_0 - 1}\right) * e^{-r*t} }
+Y(t)  =  \frac{K}{1 + \left(\frac{K}{Y_{0} - 1}\right) * e^{-r*t} }
 $$
 
-We have the function `growth.ac()` and could easily adapt all the functions to use Euler's method.   
-Below is a comparison of the analytic solution with Euler's method.
-```{r}
-# Parameter settings
-d <- 1
-N <- 100
-r <- .1
-k <- 1
-Y0 <- 0.01
+If we want to know the growth level $Y_t$ at $t=10$, with $Y_0=.0001$, $r=1.1$ and $K=4$, we can just `fill it in`:
+```{r, echo=TRUE, include=TRUE}
+# Define a function for the solution
+logSol <- function(Y0, r, K, t){K/(1+(K/Y0-1)*exp(-r*t))}
 
-Y <- as.numeric(c(Y0, rep(NA,N-1)))
+# Call the function
+logSol(Y0=.0001, r=1.1, K=4, t=10)
 
-# Numerical integration of the logistic differential equation
-Y.euler1 <- ts( sapply(seq_along(Y), function(t) Y[[t+1]] <<- (r * Y[t] * (k - Y[t])) * d + Y[t] )) 
-Y.euler2 <- ts( sapply(seq_along(Y), function(t) Y[[t+1]] <<- (r * Y[t] * (k - Y[t])) * (d+.1) + Y[t] )) 
+```
 
-## analytical solution
-Y.analytic <- ts( k / (1 + (k / Y0 - 1) * exp(-r*(time(Y.euler1)))) )
+We can pas a vector of timepoints to create the exact solution, the same we would get if we were to iterate the differential/difference equation.
+```{r, echo=TRUE, include=TRUE}
+# Plot from t=1 to t=100
+plot(logSol(Y0=.0001, r=1.1, K=4, t=seq(1,20)), type = "b", 
+     ylab = expression(Y[t]), xlab = "t")
+# Plot t=10 in red
+points(10,logSol(Y0=.0001, r=1.1, K=4, t=10), col="red", pch=16)
+```
 
-ts.plot(Y.analytic, Y.euler1, Y.euler2,
-        gpars = list(xlab = "time (a.u.)",
-                     ylab = expression(Y(t)),
-                     main = expression(paste("Analytic vs. Numerical:",Y[t+1]==Y[t]*(1 + r - r*Y[t]))),
-                     lwd = rep(2,3),
-                     lty = c(1:3),
-                     col = c("darkred","darkblue","darkgreen")
-                     )
-        )
-legend(50, 0.4, c("Analytic",
-                 "Euler: delta = 1.0", 
-                 "Euler: delta = 1.1"),
-       lwd = rep(2,3), lty = c(1:3), col = c("darkred","darkblue","darkgreen"), merge = TRUE)
+#### Numerical solution (discrete) {-}
+
+If we would iterate the differential equation ...
+
+$$
+\frac{dY}{dt} = Y_t * (1 + r - r * \frac{Y_t}{K})
+$$
+
+... as if it were a difference equation, that is, *not* simulating continuous time.
+
+```{r, echo=TRUE, include=TRUE}
+logIter <-  function(Y0,r,K,t){
+  N <- length(t)
+  Y <- as.numeric(c(Y0, rep(NA,N-2)))
+  sapply(seq_along(Y), function(t){ Y[[t+1]] <<- Y[t] * (1 + r - r * Y[t] / K)})
+  }
+
+# Plot from t=1 to t=100
+plot(logIter(Y0=.0001, r=1.1, K=4, t=seq(1,20)), type = "b", 
+     ylab = expression(Y[t]), xlab = "t")
+# Plot t=10 in red
+points(10,logSol(Y0=.0001, r=1.1, K=4, t=10), col="red", pch=16)
 ```
 
 

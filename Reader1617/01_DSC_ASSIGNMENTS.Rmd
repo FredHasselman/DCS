@@ -265,7 +265,7 @@ A general differential equation is given by:
 Read it as saying: "_a change in $x$ over a change in time is a function of $x$ itself_". This can be approximated by considering the change to be over some constant, small time step $\Delta$:
 
 \begin{equation}
-\frac{(x_{t+1} ??? x_t)}{\Delta} = f(x_t)
+\frac{(x_{t+1} = x_t)}{\Delta} = f(x_t)
 (\#eq:Euler)
 \end{equation}
 
@@ -273,7 +273,7 @@ Read it as saying: "_a change in $x$ over a change in time is a function of $x$ 
 After rearranging the terms a more familiar form reveals itself:
 
 \begin{align}
-x_{t+1} ??? x_t &= f(x_t) * \Delta \\
+x_{t+1} &= x_t &= f(x_t) * \Delta \\
 x_{t+1} &= f(x_t) * \Delta + x_t
 (\#eq:Euler2)
 \end{align}
@@ -347,14 +347,14 @@ source_url("https://raw.githubusercontent.com/FredHasselman/DCS/master/functionL
 
 ## Time series models in SPSS (17 and higher). 
 
-1. Download the file [`series.sav`](https://github.com/FredHasselman/DCS/blob/master/assignmentData/series.sav) from blackboard. It contains three time series `TS_1`, `TS_2` and `TS_3`. As a first step look at the mean and the standard deviation (`Analyze` >> `Descriptives`).  Suppose these were time series from three subjects in an experiment, what would you conclude based on the means and SD’s?  
+1. Download the file [`series.sav`](https://github.com/FredHasselman/DCS/blob/master/assignmentData/BasicTSA_arma/series.sav) from blackboard. It contains three time series `TS_1`, `TS_2` and `TS_3`. As a first step look at the mean and the standard deviation (`Analyze` >> `Descriptives`).  Suppose these were time series from three subjects in an experiment, what would you conclude based on the means and SD’s?  
 
 2. Let’s visualize these data. Go to `Forecasting` >> `Time Series` >> `Sequence Charts`. Check the box One chart per variable and move all the variables to Variables. Are they really the same?  
 
-3. Let’s look at the `ACF` and `PCF`. 
-   - Go to `Analyze` >> `Forecasting` >> `Autocorrelations`. 
-   - Enter all the variables and make sure both *Autocorrelations* (ACF) and *Partial autocorrelations* (PACF) boxes are checked. Click `Options`, and change the `Maximum Number of Lags` to `30`. 
-   - Use the table to characterize the time series:  
+3. Let’s look at the `ACF` and `PCF`
+    * Go to `Analyze` >> `Forecasting` >> `Autocorrelations`. 
+    * Enter all the variables and make sure both *Autocorrelations* (ACF) and *Partial autocorrelations* (PACF) boxes are checked. Click `Options`, and change the `Maximum Number of Lags` to `30`. 
+    * Use the table to characterize the time series:  
 
 
 |                    SHAPE                | INDICATED MODEL |
@@ -387,7 +387,13 @@ COMPUTE TS_1_lag1 = LAG(TS_1)
 
 ### Assignments in `R` or `Matlab`
 
+If you have package `rio` installed in `R`, you can load the data directly into the environment.
+```{r}
+series <- import("https://github.com/FredHasselman/DCS/raw/master/assignmentData/BasicTSA_arma/series.sav")
+```
+
 You can use the function `arima()`, `acf()` and `pacf()` in `R` (`Matlab` has functions that go by slightly different names, check the Help files). 
+
 
 There are many extensions to these linear models, check the [`CRAN Task View` on `Time Series Analysis`](https://cran.r-project.org/web/views/TimeSeries.html) to learn more (e.g. about package `zoo` and `forecast`).
 
@@ -395,9 +401,9 @@ There are many extensions to these linear models, check the [`CRAN Task View` on
 Download three different time series of heartbeat intervals (HBI) [here](https://github.com/FredHasselman/DCS/tree/master/assignmentData/RelativeRoughness). If you use `R` and have package `rio` installed you can run this code and the load the data into a `data.frame` directly from `Github`. 
 ```{r, echo=TRUE, eval=FALSE, include=TRUE}
 library(rio)
-TS1 <- import("https://github.com/FredHasselman/DCS/raw/master/assignmentData/RelativeRoughness/TS1.xlsx", col_names=FALSE)
-TS2 <- import("https://github.com/FredHasselman/DCS/raw/master/assignmentData/RelativeRoughness/TS2.xlsx", col_names=FALSE)
-TS3 <- import("https://github.com/FredHasselman/DCS/raw/master/assignmentData/RelativeRoughness/TS3.xlsx", col_names=FALSE)
+TS1 <- rio::import("https://github.com/FredHasselman/DCS/raw/master/assignmentData/RelativeRoughness/TS1.xlsx", col_names=FALSE)
+TS2 <- rio::import("https://github.com/FredHasselman/DCS/raw/master/assignmentData/RelativeRoughness/TS2.xlsx", col_names=FALSE)
+TS3 <- rio::import("https://github.com/FredHasselman/DCS/raw/master/assignmentData/RelativeRoughness/TS3.xlsx", col_names=FALSE)
 ```
 
 The Excel files did not have any column names, so let's create them in the `data.frame`

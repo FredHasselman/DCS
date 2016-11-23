@@ -232,15 +232,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="time-series-models-in-spss-17-and-higher." class="section level2">
 <h2><span class="header-section-number">4.1</span> Time series models in SPSS (17 and higher).</h2>
 <ol style="list-style-type: decimal">
-<li><p>Download the file <a href="https://github.com/FredHasselman/DCS/blob/master/assignmentData/series.sav"><code>series.sav</code></a> from blackboard. It contains three time series <code>TS_1</code>, <code>TS_2</code> and <code>TS_3</code>. As a first step look at the mean and the standard deviation (<code>Analyze</code> &gt;&gt; <code>Descriptives</code>). Suppose these were time series from three subjects in an experiment, what would you conclude based on the means and SD’s?</p></li>
+<li><p>Download the file <a href="https://github.com/FredHasselman/DCS/blob/master/assignmentData/BasicTSA_arma/series.sav"><code>series.sav</code></a> from blackboard. It contains three time series <code>TS_1</code>, <code>TS_2</code> and <code>TS_3</code>. As a first step look at the mean and the standard deviation (<code>Analyze</code> &gt;&gt; <code>Descriptives</code>). Suppose these were time series from three subjects in an experiment, what would you conclude based on the means and SD’s?</p></li>
 <li><p>Let’s visualize these data. Go to <code>Forecasting</code> &gt;&gt; <code>Time Series</code> &gt;&gt; <code>Sequence Charts</code>. Check the box One chart per variable and move all the variables to Variables. Are they really the same?</p></li>
-<li>Let’s look at the <code>ACF</code> and <code>PCF</code>.</li>
-</ol>
+<li>Let’s look at the <code>ACF</code> and <code>PCF</code>
 <ul>
 <li>Go to <code>Analyze</code> &gt;&gt; <code>Forecasting</code> &gt;&gt; <code>Autocorrelations</code>.</li>
 <li>Enter all the variables and make sure both <em>Autocorrelations</em> (ACF) and <em>Partial autocorrelations</em> (PACF) boxes are checked. Click <code>Options</code>, and change the <code>Maximum Number of Lags</code> to <code>30</code>.</li>
 <li>Use the table to characterize the time series:</li>
-</ul>
+</ul></li>
+</ol>
 <table>
 <colgroup>
 <col width="30%" />
@@ -303,6 +303,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ol>
 <div id="assignments-in-r-or-matlab" class="section level3">
 <h3><span class="header-section-number">4.1.1</span> Assignments in <code>R</code> or <code>Matlab</code></h3>
+<p>If you have package <code>rio</code> installed in <code>R</code>, you can load the data directly into the environment.</p>
 <p>You can use the function <code>arima()</code>, <code>acf()</code> and <code>pacf()</code> in <code>R</code> (<code>Matlab</code> has functions that go by slightly different names, check the Help files).</p>
 <p>There are many extensions to these linear models, check the <a href="https://cran.r-project.org/web/views/TimeSeries.html"><code>CRAN Task View</code> on <code>Time Series Analysis</code></a> to learn more (e.g. about package <code>zoo</code> and <code>forecast</code>).</p>
 </div>

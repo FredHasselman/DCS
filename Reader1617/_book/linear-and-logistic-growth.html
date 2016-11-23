@@ -321,10 +321,10 @@ Y &lt;-<span class="st"> </span><span class="kw">growth.ac</span>(<span class="d
 
 <span class="co"># stats::plot.ts</span>
 <span class="kw">plot</span>(<span class="kw">growth.ac</span>(<span class="dt">r =</span> -.<span class="dv">9</span>), <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">main =</span> <span class="st">&quot;stats::plot.ts&quot;</span>)</code></pre></div>
-<p><img src="DCS1617_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p><img src="DCS1617_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># lattice::xyplot.ts</span>
 <span class="kw">xyplot</span>(<span class="kw">growth.ac</span>(<span class="dt">r =</span> -.<span class="dv">9</span>), <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">main =</span> <span class="st">&quot;lattice::xyplot.ts&quot;</span>)</code></pre></div>
-<p><img src="DCS1617_files/figure-html/unnamed-chunk-13-2.png" width="672" /></p>
+<p><img src="DCS1617_files/figure-html/unnamed-chunk-14-2.png" width="672" /></p>
 </div>
 <div id="plotting-multiple-time-series-in-one-figure" class="section level4 unnumbered">
 <h4>Plotting multiple time series in one figure</h4>
@@ -338,7 +338,7 @@ Y &lt;-<span class="st"> </span><span class="kw">growth.ac</span>(<span class="d
 <span class="kw">title</span>(<span class="dt">main =</span> <span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;Unrestricted Growth: &quot;</span>,Y[t<span class="dv">+1</span>]==r*Y[t])), 
       <span class="dt">ylab =</span> <span class="st">&quot;|  r = -0.8  |  r = 1  |  r = 0.9  |&quot;</span>, 
       <span class="dt">xlab =</span> <span class="st">&quot;time (a.u.)&quot;</span>)</code></pre></div>
-<p><img src="DCS1617_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p><img src="DCS1617_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <p>Plot multiple timeseries in one graph with <code>ts.plot()</code> in <code>package::graphics</code>. This function can handle multiple <code>ts</code> objects as arguments.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># graphics::ts.plot</span>
 <span class="kw">ts.plot</span>(<span class="kw">growth.ac</span>(<span class="dt">r =</span> <span class="fl">0.9</span>), 
@@ -353,7 +353,7 @@ Y &lt;-<span class="st"> </span><span class="kw">growth.ac</span>(<span class="d
                      )
         )
 <span class="kw">legend</span>(<span class="dv">70</span>, -<span class="fl">0.015</span>, <span class="kw">c</span>(<span class="st">&quot;r = 0.9&quot;</span>,<span class="st">&quot;r = 1.0&quot;</span>, <span class="st">&quot;r = -0.8&quot;</span>), <span class="dt">lwd =</span> <span class="kw">rep</span>(<span class="dv">2</span>,<span class="dv">3</span>), <span class="dt">lty =</span> <span class="kw">c</span>(<span class="dv">1</span>:<span class="dv">3</span>), <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;darkred&quot;</span>,<span class="st">&quot;darkblue&quot;</span>,<span class="st">&quot;darkgreen&quot;</span>), <span class="dt">merge =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<p><img src="DCS1617_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p><img src="DCS1617_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <p>Use <code>xyplot()</code> in <code>package::lattice</code> to create a plot with panels. The easiest way to do this is to create a dataset in so-called “long” format. This means the variable to plot is in 1 column and other variables indicate different levels, or conditions under which the variable was observed or simulated.</p>
 <p>Function <code>ldply()</code> is used to generate <span class="math inline">\(Y\)</span> for three different settings of <span class="math inline">\(r\)</span>. The values of <span class="math inline">\(r\)</span> are passed as a <strong>l</strong>ist and after a function is applied the result is returned as a <strong>d</strong>ataframe.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(plyr)          <span class="co"># Needed for function ldply()</span>
@@ -364,7 +364,7 @@ data &lt;-<span class="st"> </span><span class="kw">ldply</span>(<span class="kw
                                                           <span class="dt">r    =</span> <span class="kw">paste0</span>(<span class="st">&quot;r = &quot;</span>, r)))
 <span class="co"># Plot using the formula interface</span>
 <span class="kw">xyplot</span>(Y ~<span class="st"> </span>time |<span class="st"> </span>r, <span class="dt">data =</span> data, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">main =</span> <span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;Unrestricted Growth: &quot;</span>,Y[t<span class="dv">+1</span>]==r*Y[t])))</code></pre></div>
-<p><img src="DCS1617_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p><img src="DCS1617_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <p>One can also have different panels represent different growth functions.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create a long format dataframe for combinations of `type` and `r`</span>
 param &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">driving  =</span> <span class="fl">1.1</span>,
@@ -380,7 +380,7 @@ data &lt;-<span class="st"> </span><span class="kw">ldply</span>(<span class="kw
 <span class="co"># Plot using the formula interface</span>
 <span class="kw">xyplot</span>(Y ~<span class="st"> </span>time |<span class="st"> </span><span class="kw">factor</span>(type), <span class="dt">data =</span> data, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">scales =</span> <span class="kw">c</span>(<span class="dt">relation =</span> <span class="st">&quot;free&quot;</span>),
        <span class="dt">main =</span> <span class="st">&quot;Four Autocatalytic Growth Models&quot;</span>)</code></pre></div>
-<p><img src="DCS1617_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p><img src="DCS1617_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 </div>
 <div id="the-return-plot-1" class="section level4 unnumbered">
 <h4>The return plot</h4>
@@ -398,13 +398,13 @@ op &lt;-<span class="st"> </span><span class="kw">par</span>(<span class="dt">mf
      <span class="dt">main =</span> <span class="kw">expression</span>(<span class="kw">paste</span>(Y[t<span class="dv">+1</span>]==r*Y[t])))
 <span class="kw">plot</span>(<span class="kw">lag</span>(Y2), Y2, <span class="dt">xy.labels =</span> <span class="ot">FALSE</span>, <span class="dt">pch =</span> <span class="st">&quot;.&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="dt">xlab =</span> <span class="st">&quot;Y(t)&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Y(t+1)&quot;</span>,
      <span class="dt">main =</span> <span class="kw">expression</span>(<span class="kw">paste</span>(Y[t<span class="dv">+1</span>]==r*Y[t]*(<span class="dv">1</span>-Y[t]))))</code></pre></div>
-<p><img src="DCS1617_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p><img src="DCS1617_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(op)</code></pre></div>
 <p>Use <code>l_ply()</code> from <code>package::plyr</code> to create return plots with different lags. The <strong>l_</strong> before <strong>ply</strong> means the function will take a <strong>l</strong>ist as input to a function, but it will not expect any data to be returned, for example in the case of a function that is used to plot something.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Explore different lags</span>
 op &lt;-<span class="st"> </span><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="dt">pty =</span> <span class="st">&quot;s&quot;</span>)
 <span class="kw">l_ply</span>(<span class="dv">1</span>:<span class="dv">4</span>, function(l) <span class="kw">plot</span>(<span class="kw">lag</span>(Y2, <span class="dt">n =</span> l), Y2, <span class="dt">xy.labels =</span> <span class="ot">FALSE</span>, <span class="dt">pch =</span> <span class="st">&quot;.&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="dt">xlab =</span> <span class="st">&quot;Y(t)&quot;</span>, <span class="dt">ylab =</span> <span class="kw">paste0</span>(<span class="st">&quot;Y(t+&quot;</span>,l,<span class="st">&quot;)&quot;</span>), <span class="dt">cex =</span> .<span class="dv">8</span>))</code></pre></div>
-<p><img src="DCS1617_files/figure-html/unnamed-chunk-19-1.png" width="672" /><img src="DCS1617_files/figure-html/unnamed-chunk-19-2.png" width="672" /></p>
+<p><img src="DCS1617_files/figure-html/unnamed-chunk-20-1.png" width="672" /><img src="DCS1617_files/figure-html/unnamed-chunk-20-2.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(op)</code></pre></div>
 </div>
 </div>
