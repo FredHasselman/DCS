@@ -322,30 +322,63 @@ Have a look at some of the [NETlogo](http://ccl.northwestern.edu/netlogo/) demo'
 * [Wolf Sheep Grass](http://www.netlogoweb.org/launch#http://www.netlogoweb.org/assets/modelslib/Sample%20Models/Biology/Wolf%20Sheep%20Predation.nlogo)
 
 
-
 # Basic Timeseries Analysis {#bta}
 
-You can use the command below to install all the packages we will use during the entire course on you private computer. This might take too long on a university PC, just select the packages you need for the assignment.
-```{r, eval=FALSE, include=TRUE}
-install.packages(c("devtools", "rio", "plyr", "dplyr", "tidyr", "Matrix", 
-                   "ggplot2", "lattice", "latticeExtra", "grid", "gridExtra", "rgl",
-                   "fractal",  "nonlinearTseries",  "crqa", 
-                   "signal", "sapa", "ifultools", "pracma", 
-                   "nlme", "lme4", "lmerTest",
-                   "igrpah","qgrap","graphicalVAR","bootGraph","IsingSampler","IsingFit"),
-                 dependencies = TRUE)
+Most of the basic timeseries analyses can be performed in `SPSS`, because many of you will be familiar with the software we present the first assignments mainly as `SPSS` instructions, but you can go ahead an try your preferred environment for (statistical) computing (see comments about [using `R` and `Matlab`](#bTSAinR))
+
+
+## Time series analysis in SPSS (17 and higher). 
+
+### Nonlinear Growth curves in SPSS
+
+ * Open the file [Growthregression.sav](https://github.com/FredHasselman/DCS/blob/master/assignmentData/BasicTSA_nonlinreg/GrowthRegression.sav), it contains two variables: `Time` and `Y(t)`. 
+
+This is data from an iteration of the logistic growth differential equation you are familiar with by now, but let’s pretend it’s data from one subject measured on 100 occasions.
+
+1. Plot Y(t) against Time Recognize the shape?
+2. To get the growth parameter we’ll try to fit the solution of the logistic flow with SPSS nonlinear regression
+     - Select nonlinear… from the `Analysis` >> `Regression` menu.
+     - Here we can build the solution equation. We need three parameters:
+            a. **Yzero**, the initial condition.
+            b. *K*, the carrying capacity.
+            c. *r*, the growth rate.
+    - Fill these in where it says `parameters` give all parameters a starting value of  $0.01$
+
+4.	Take a good look at the analytic solution of the (stilized) logistic flow:
+
+$$
+Y(t)  =  \frac{K * Y_0}{Y_0 + \left(K-Y_{0}\right) * e^{(-K*r*t)} }
+$$
+
+Tr to build this equation, the function fo $e$ is called `EXP` in `SPSS` (`Function Group` >> `Arithmetic`)
+Group terms by using parentheses as shown in the equation.
+
+5. If you think you have built the model correctly, click on `Save` choose `predicted values`. Then paste your syntax and run it!
+    - Check the estimated parameter values.
+    - Check $R^2$!!!
+
+6. Plot a line graph of both the original data and the predicted values. (Smile)
+
+7. A polynomial fishing expedition:
+     - Create time-varying covariates of $Y(t)$:
 ```
-
-There is also a function library you need to `source`, the most recent version is on Github, use the `devtools` library to get it.
-
-```{r, eval=FALSE, include=TRUE}
-library(devtools)
-source_url("https://raw.githubusercontent.com/FredHasselman/DCS/master/functionLib/nlRtsa_SOURCE.R")
-
+COMPUTE T1=Yt * Time.
+COMPUTE T2=Yt * (Time ** 2). 
+COMPUTE T3=Yt * (Time ** 3). 
+COMPUTE T4=Yt * (Time ** 4). 
+EXECUTE.
 ```
+    - Use these variables as predictors of $Y(t)$ in a regular linear regression analysis. This is called a *polynomial regression*: Fitting combinations of curves of different shapes on the data.
+    -  Before you run the analysis: Click `Save` Choose `Predicted Values: Unstandardized`
+
+8. Look at $R^2$. This is also almost 1. Which model is better? Think about this: Based o the results o the linear regression what can yo tell about the *growth rate*, the *carrying capacity* or the *initial condition*?
+
+9.	Create a line graph of $Y(t)$, plot the predicted values of the nonlinear regression and the unstandardized predicted values of the linear polynomial regression against `time` in one figure.
+
+10. Now you can see that the shape is approximated by the polynomials, but it is not quite the same. Is this really a model of a growth process as we could encounter it in nature?
 
 
-## Time series models in SPSS (17 and higher). 
+### Correlation functions and AR-MA models
 
 1. Download the file [`series.sav`](https://github.com/FredHasselman/DCS/blob/master/assignmentData/BasicTSA_arma/series.sav) from blackboard. It contains three time series `TS_1`, `TS_2` and `TS_3`. As a first step look at the mean and the standard deviation (`Analyze` >> `Descriptives`).  Suppose these were time series from three subjects in an experiment, what would you conclude based on the means and SD’s?  
 
@@ -383,19 +416,40 @@ All zero or close to zero  | Data is essentially random.|
 ```
 COMPUTE TS_1_lag1 = LAG(TS_1)
 ``` 
-    - Are your conclusions about the time series the same when based on these return plots? 
+    - Are your conclusions about the time series the same as in 3. after interpreting these return plots? 
 
-### Assignments in `R` or `Matlab`
+## Notes on TSA in `R` and `Matlab` {#bTSAinR}
 
-If you have package `rio` installed in `R`, you can load the data directly into the environment.
-```{r}
+If you use `R` the command below will install all the packages we will use during the entire course on you private computer. This might take too long on a university PC, just install the packages you need for an assignment each session.
+```{r, eval=FALSE, include=TRUE}
+install.packages(c("devtools", "rio", "plyr", "dplyr", "tidyr", "Matrix", 
+                   "ggplot2", "lattice", "latticeExtra", "grid", "gridExtra", "rgl",
+                   "fractal",  "nonlinearTseries",  "crqa", 
+                   "signal", "sapa", "ifultools", "pracma", 
+                   "nlme", "lme4", "lmerTest",
+                   "igrpah","qgrap","graphicalVAR","bootGraph","IsingSampler","IsingFit"),
+                 dependencies = TRUE)
+```
+
+There is also a function library you need to `source`, the most recent version is on Github, use the `devtools` library to source the latest online version, or just [follow the link](https://raw.githubusercontent.com/FredHasselman/DCS/master/functionLib/nlRtsa_SOURCE.R), save as an `.R` file from your browser and open it in `R` and source it.
+
+```{r, eval=FALSE, include=TRUE}
+library(devtools)
+source_url("https://raw.githubusercontent.com/FredHasselman/DCS/master/functionLib/nlRtsa_SOURCE.R")
+
+```
+
+### Importing data in `R`
+
+If you have package `rio` installed in `R`, you can load the data directly into the local environment.
+```{r, include=TRUE, eval=FALSE}
 series <- import("https://github.com/FredHasselman/DCS/raw/master/assignmentData/BasicTSA_arma/series.sav")
 ```
 
-You can use the function `arima()`, `acf()` and `pacf()` in `R` (`Matlab` has functions that go by slightly different names, check the Help files). 
-
+You can use the function `arima()`, `acf()` and `pacf()` in `R` (`Matlab` has functions that go by slightly different names, check the Matlab Help pages). 
 
 There are many extensions to these linear models, check the [`CRAN Task View` on `Time Series Analysis`](https://cran.r-project.org/web/views/TimeSeries.html) to learn more (e.g. about package `zoo` and `forecast`).
+
 
 ## Heartbeat dynamics
 Download three different time series of heartbeat intervals (HBI) [here](https://github.com/FredHasselman/DCS/tree/master/assignmentData/RelativeRoughness). If you use `R` and have package `rio` installed you can run this code and the load the data into a `data.frame` directly from `Github`. 
@@ -464,6 +518,101 @@ Don’t worry; we’ll cover the interpretation over the next two weeks in furth
 
 * Now suppose you would repeat what you did the previous, but instead of using shuffle you would integrate the fictitious HBI series (i.e., normalize, then use `x=cumsum(x))`. You can look up `cumsum` in `R` or `Matlab`’s Help documentation). Would you get an estimate of Relative Roughness that is approximately comparable with what you got in another HBI series? If so, why?
 
+## EXTRA: Creating fractals from random processes
+
+Try to understand what is going on in the two examples below.
+    - How does the structure come about? We are drawing random numbers!
+    - What's the difference between the Siepinsky Gasket and the Fern?
+
+```{r siepinsky, echo=TRUE}
+# Sierpinski Gasket using Iterated Function Systems
+#
+# RM-course Advanced Data Analysis
+# Module Dynamical and Nonlinear Data analysis and Modeling 
+# 
+# May 2008
+# Fred Hasselman & Ralf Cox
+
+require(dplyr)
+
+x = 0                  # Starting points
+y = 0
+
+# Emppty plot
+plot(x,y, xlim=c(0,2), ylim=c(0,1))
+
+for(i in 1:20000){      # This takes some time: 20.000 iterations
+  
+    coor=runif(1)       # coor becomes a random number between 0 and 1 drawn from the uniform distribution
+    
+    # Equal chances (33%) to perform one of these 3 transformations of x and y
+    if(coor<=0.33){     
+        x=0.5*x
+        y=0.5*y
+        points(x,y,pch=".", col="green") #plot these points in green
+    }
+
+    if(between(coor,0.33,0.66)){
+        x=0.5*x+0.5
+        y=0.5*y+0.5
+        points(x,y, pch=".", col="blue") # plot these points in blue
+    }
+
+    if(coor>0.66){
+        x=0.5*x+1
+        y=0.5*y
+        points(x,y, pch=".", col="red") #plot these points in red
+    }
+} # for ...
+```
+
+```{r siepinsky, echo=TRUE}
+# Sierpinski Gasket using Iterated Function Systems
+#
+# RM-course Advanced Data Analysis
+# Module Dynamical and Nonlinear Data analysis and Modeling 
+# 
+# May 2008
+# Fred Hasselman & Ralf Cox
+
+require(dplyr)
+
+x = 0                  # Starting points
+y = 0
+
+# Emppty plot
+plot(x,y, pch=".", xlim=c(-3,3), ylim=c(0,12))
+
+for(i in 1:20000){      # This takes some time: 20.000 iterations
+  
+    coor=runif(1)       # coor becomes a random number between 0 and 1 drawn from the uniform distribution
+    
+    if(coor<=0.01){                  #This transformation 1% of the time
+        x=0
+        y=0.16*y
+        points(x,y, pch=".", col="darkgreen") 
+    }
+    
+    if(between(coor,0.01,0.08)){   #This transformation 7% of the time
+        x=0.2*x-0.26*y
+        y=0.23*x+0.22*y+1.6
+        points(x,y, pch=".", col="darkolivegreen") 
+    }
+    
+    if(between(coor,0.08,0.15)){   #This transformation 7% of the time
+        x=-0.15*x+0.28*y
+        y=0.26*x+0.24*y+0.44
+       points(x,y, pch=".", col="palegreen")
+    }
+    
+    if(coor>0.15){      #This transformation 85% of the time
+        x=-0.85*x+0.04*y
+        y=-0.04*x+0.85*y+1.6 
+        points(x,y, pch=".", col="springgreen")
+    }
+    
+} # for ...
+```
 
 # Fluctuation and Disperion analyses I {#fda1}
 
