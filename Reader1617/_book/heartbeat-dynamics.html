@@ -172,28 +172,39 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="heartbeat-dynamics" class="section level2">
 <h2><span class="header-section-number">4.2</span> Heartbeat dynamics</h2>
-<p>Download three different time series of heartbeat intervals (HBI). These HBI’s were constructed from the R-R intervals in electrocardiogram (ECG) recordings, as defined in Figure <a href="heartbeat-dynamics.html#fig:RRf1">4.1</a>.</p>
+<p>Download three different time series of heartbeat intervals (HBI) <a href="https://github.com/FredHasselman/DCS/tree/master/assignmentData/RelativeRoughness">here</a>. If you use <code>R</code> and have package <code>rio</code> installed you can run this code and the load the data into a <code>data.frame</code> directly from <code>Github</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(rio)
+TS1 &lt;-<span class="st"> </span><span class="kw">import</span>(<span class="st">&quot;https://github.com/FredHasselman/DCS/raw/master/assignmentData/RelativeRoughness/TS1.xlsx&quot;</span>, <span class="dt">col_names=</span><span class="ot">FALSE</span>)
+TS2 &lt;-<span class="st"> </span><span class="kw">import</span>(<span class="st">&quot;https://github.com/FredHasselman/DCS/raw/master/assignmentData/RelativeRoughness/TS2.xlsx&quot;</span>, <span class="dt">col_names=</span><span class="ot">FALSE</span>)
+TS3 &lt;-<span class="st"> </span><span class="kw">import</span>(<span class="st">&quot;https://github.com/FredHasselman/DCS/raw/master/assignmentData/RelativeRoughness/TS3.xlsx&quot;</span>, <span class="dt">col_names=</span><span class="ot">FALSE</span>)</code></pre></div>
+<p>The Excel files did not have any column names, so let’s create them in the <code>data.frame</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colnames</span>(TS1) &lt;-<span class="st"> &quot;TS1&quot;</span>
+<span class="kw">colnames</span>(TS2) &lt;-<span class="st"> &quot;TS2&quot;</span>
+<span class="kw">colnames</span>(TS3) &lt;-<span class="st"> &quot;TS3&quot;</span></code></pre></div>
+<div id="the-recordings" class="section level3">
+<h3><span class="header-section-number">4.2.1</span> The recordings</h3>
+<p>These HBI’s were constructed from the R-R intervals in electrocardiogram (ECG) recordings, as defined in Figure <a href="heartbeat-dynamics.html#fig:RRf1">4.1</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:RRf1"></span>
 <img src="images/RRfig1.png" alt="Definition of Heart Beat Periods." width="431" />
 <p class="caption">
 Figure 4.1: Definition of Heart Beat Periods.
 </p>
 </div>
-<div id="the-recordings" class="section level3">
-<h3><span class="header-section-number">4.2.1</span> The recordings</h3>
-<p>One HBI series is a sample from a male adult, 62 years old (called <em>Jimmy</em>). Approximately two years before the recording, the subject has had a coronary artery bypass, as advised by his physician following a diagnosis of congestive heart failure. <em>Jimmy</em> used antiarrhythmic medicines at the time of measurement.</p>
-<p>Another HBI series is a sample from a healthy male adult, 21 years old (called <em>Tommy</em>). This subject never reported any cardiac complaint. Tommy was playing the piano during the recording.</p>
-<p>A third supposed HBI series is fictitious, and was never recorded from a human subject (let’s call this counterfeit <em>Dummy</em>). Your challenge</p>
+<ul>
+<li><p>One HBI series is a sample from a male adult, 62 years old (called <em>Jimmy</em>). Approximately two years before the recording, the subject has had a coronary artery bypass, as advised by his physician following a diagnosis of congestive heart failure. <em>Jimmy</em> used antiarrhythmic medicines at the time of measurement.</p></li>
+<li><p>Another HBI series is a sample from a healthy male adult, 21 years old (called <em>Tommy</em>). This subject never reported any cardiac complaint. Tommy was playing the piano during the recording.</p></li>
+<li><p>A third supposed HBI series is fictitious, and was never recorded from a human subject (let’s call this counterfeit <em>Dummy</em>). Your challenge</p></li>
+</ul>
 <p>The assignment is to scrutinise the data and find out which time series belongs to <em>Jimmy</em>, <em>Tommy</em>, and <em>Dummy</em> respectively.<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a></p>
 </div>
 <div id="first-inspection" class="section level3">
 <h3><span class="header-section-number">4.2.2</span> First inspection</h3>
 <p>The chances that you are an experienced cardiologist are slim. We therefore suggest you precede your detective work as follows:</p>
 <ul>
-<li><p>Construct a graphical representation of the time series, and inspect their dynamics visually.</p></li>
-<li><p>Write down your first guesses about which time series belongs to which subject. Take your time for this visual inspection (i.e., which one looks more like a line than a plane, which one looks more ‘smooth’ than ‘rough’).</p></li>
-<li><p>Next, explore some measures of central tendency and dispersion, etc.</p></li>
-<li><p>Third, compute the Relative Roughness for each time series, use Equation <a href="heartbeat-dynamics.html#eq:RR">(4.1)</a></p></li>
+<li>Construct a graphical representation of the time series, and inspect their dynamics visually (use the code examples provided in the <a href="#moc1Rsol">solutions to previous sessions</a> to plot your time series).</li>
+<li>Write down your first guesses about which time series belongs to which subject. Take your time for this visual inspection (i.e., which one looks more like a line than a plane, which one looks more ‘smooth’ than ‘rough’).</li>
+<li>Next, explore some measures of central tendency and dispersion, etc.</li>
+<li>Third, compute the Relative Roughness for each time series, use Equation <a href="heartbeat-dynamics.html#eq:RR">(4.1)</a></li>
 </ul>
 <span class="math display" id="eq:RR">\[\begin{equation}
 RR = 2\left[1−\frac{\gamma_1(x_i)}{Var(x_i)}\right]
@@ -201,7 +212,7 @@ RR = 2\left[1−\frac{\gamma_1(x_i)}{Var(x_i)}\right]
 \end{equation}\]</span>
 <p>The numerator in the formula stands for the <code>lag 1</code> autocovariance of the HBI time series <span class="math inline">\(x_i\)</span>. The denominator stands for the (global) variance of <span class="math inline">\(x_i\)</span>. Most statistics packages can calculate these variances, <code>R</code> and <code>Matlab</code> have built in functions. Alternatively, you can create the formula yourself.</p>
 <ul>
-<li>Compare your (intuitive) visual inspection with these preliminary dynamic quantifications, and find out where each of the HIB series are positions on the ‘colorful spectrum of noises’ (i.e., line them up with Figure <a href="#RRf3"><strong>??</strong></a>).</li>
+<li>Compare your (intuitive) visual inspection with these preliminary dynamic quantifications, and find out where each of the HIB series are positions on the ‘colorful spectrum of noises’ (i.e., line them up with Figure <a href="heartbeat-dynamics.html#fig:RRf3">4.2</a>).</li>
 </ul>
 <div class="figure" style="text-align: center"><span id="fig:RRf3"></span>
 <img src="images/RRfig3.png" alt="Coloured Noise versus Relative Roughness" width="396" />

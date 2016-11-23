@@ -365,27 +365,52 @@ All zero or close to zero  | Data is essentially random.|
 | No decay to zero  | Series is not stationary. |
 
 
-4. You should have identified just one time series with autocorrelations: `TS_2`. Try to fit an `ARIMA(p,0,q)` model on this time series. Go to `Analyze` >> `Forecasting` >> `Create Model`, and at `Method` (Expert modeler) choose `ARIMA`. Look back at the `PACF` to identify which order (p) you need (last lag value at which the correlation is still significant). This lag value should go in the Autocorrelation p box. Start with a Moving Average q of one. The time series variable TS_2 is the Dependent. You can check the statistical significance of the parameters in the output under Statistics, by checking the box Parameter Estimates. This value for p is probably too high, because not all AR parameters are significant. Run ARIMA again and decrease the number of AR parameters by leaving out the non-significant ones.  
+4. You should have identified just one time series with autocorrelations: `TS_2`. Try to fit an `ARIMA(p,0,q)` model on this time series. Go to `Analyze` >> `Forecasting` >> `Create Model`, and at `Method` (Expert modeler) choose `ARIMA`. Look back at the `PACF` to identify which order (`p`) you need (last lag value at which the correlation is still significant). This lag value should go in the Autocorrelation `p` box. 
+    - Start with a Moving Average `q` of one. The time series variable `TS_2` is the `Dependent`. 
+    - You can check the statistical significance of the parameters in the output under `Statistics`, by checking the box `Parameter Estimates`. 
+    - This value for `p` is probably too high, because not all AR parameters are significant. 
+    - Run ARIMA again and decrease the number of AR parameters by leaving out the non-significant ones.  
 
-5. By default SPSS saves the predicted values and 95% confidence limits (check the data file). We can now check how well the prediction is: Go to Graphs -> Legacy Dialogs -> Line. Select Multiple and Summaries of Separate Variables. Now enter TS_2, Fit_X, LCL_X and UCL_X in Lines Represent. X should be the number of the last (best) model you fitted, probably 2. Enter TIME as the Category Axis.  
+5. By default `SPSS` saves the predicted values and 95% confidence limits (check the data file). We can now check how well the prediction is: Go to `Graphs` >> `Legacy Dialogs` >> `Line.` Select `Multiple` and `Summaries of Separate Variables`. Now enter `TS_2`, `Fit_X`, `LCL_X` and `UCL_X` in `Lines Represent`. `X` should be the number of the last (best) model you fitted, probably 2. Enter `TIME` as the `Category Axis`.  
 
-6. In the simulation part of this course we have learned a very simple way to explore the dynamics of a system: The return plot. The time series is plotted against itself shifted by 1 step in time. Create return plots (use a Scatterplot) for the three time series. Tip: You can easily create a ‘t+1’ version of the time series by using the LAG function in a COMPUTE statement. For instance: COMPUTE TS_1_lag1 = LAG(TS_1). Are your conclusions about the time series the same when based on these return plots? 
+6. In the simulation part of this course we have learned a very simple way to explore the dynamics of a system: The return plot. The time series is plotted against itself shifted by 1 step in time. 
+    - Create return plots (use a Scatterplot) for the three time series. Tip: You can easily create a `t+1` version of the time series by using the LAG function in a `COMPUTE` statement. For instance: 
+```
+COMPUTE TS_1_lag1 = LAG(TS_1)
+``` 
+    - Are your conclusions about the time series the same when based on these return plots? 
 
 
 ## Heartbeat dynamics
-Download three different time series of heartbeat intervals (HBI). These HBI’s were constructed from the R-R intervals in electrocardiogram (ECG) recordings, as defined in Figure \@ref(fig:RRf1). 
+Download three different time series of heartbeat intervals (HBI) [here](https://github.com/FredHasselman/DCS/tree/master/assignmentData/RelativeRoughness). If you use `R` and have package `rio` installed you can run this code and the load the data into a `data.frame` directly from `Github`. 
+```{r, echo=TRUE, eval=FALSE}
+library(rio)
+TS1 <- import("https://github.com/FredHasselman/DCS/raw/master/assignmentData/RelativeRoughness/TS1.xlsx", col_names=FALSE)
+TS2 <- import("https://github.com/FredHasselman/DCS/raw/master/assignmentData/RelativeRoughness/TS2.xlsx", col_names=FALSE)
+TS3 <- import("https://github.com/FredHasselman/DCS/raw/master/assignmentData/RelativeRoughness/TS3.xlsx", col_names=FALSE)
+```
+
+The Excel files did not have any column names, so let's create them in the `data.frame`
+```{r, eval=FALSE}
+colnames(TS1) <- "TS1"
+colnames(TS2) <- "TS2"
+colnames(TS3) <- "TS3"
+```
+
+### The recordings
+
+These HBI’s were constructed from the R-R intervals in electrocardiogram (ECG) recordings, as defined in Figure \@ref(fig:RRf1). 
 
 ```{r RRf1, fig.cap="Definition of Heart Beat Periods.", fig.align='center',echo=FALSE}
 knitr::include_graphics('images/RRfig1.png')
 ```
 
-### The recordings
 
-One HBI series is a sample from a male adult, 62 years old (called *Jimmy*). Approximately two years before the recording, the subject has had a coronary artery bypass, as advised by his physician following a diagnosis of congestive heart failure. *Jimmy* used antiarrhythmic medicines at the time of measurement.
+ * One HBI series is a sample from a male adult, 62 years old (called *Jimmy*). Approximately two years before the recording, the subject has had a coronary artery bypass, as advised by his physician following a diagnosis of congestive heart failure. *Jimmy* used antiarrhythmic medicines at the time of measurement.
 
-Another HBI series is a sample from a healthy male adult, 21 years old (called *Tommy*). This subject never reported any cardiac complaint. Tommy was playing the piano during the recording.
+ * Another HBI series is a sample from a healthy male adult, 21 years old (called *Tommy*). This subject never reported any cardiac complaint. Tommy was playing the piano during the recording.
 
-A third supposed HBI series is fictitious, and was never recorded from a human subject (let’s call this counterfeit *Dummy*). 
+ * A third supposed HBI series is fictitious, and was never recorded from a human subject (let’s call this counterfeit *Dummy*). 
 Your challenge
 
 The assignment is to scrutinise the data and find out which time series belongs to *Jimmy*, *Tommy*, and *Dummy* respectively. ^[The HBI intervals were truncated (not rounded) to a multiple of 10 ms (e.g., an interval of 0.457s is represented as 0.450s), and to 750 data points each. The means and standard deviations among the HBI series are approximately equidistant, which might complicate your challenge.]
@@ -394,12 +419,9 @@ The assignment is to scrutinise the data and find out which time series belongs 
 ### First inspection
 The chances that you are an experienced cardiologist are slim. We therefore suggest you precede your detective work as follows:
 
-*	Construct a graphical representation of the time series, and inspect their dynamics visually. 
-
+*	Construct a graphical representation of the time series, and inspect their dynamics visually (use the code examples provided in the [solutions to previous sessions](#moc1Rsol) to plot your time series). 
 * Write down your first guesses about which time series belongs to which subject. Take your time for this visual inspection (i.e., which one looks more like a line than a plane, which one looks more 'smooth' than 'rough'). 
-
 *	Next, explore some measures of central tendency and dispersion, etc.
-
 *	Third, compute the Relative Roughness for each time series, use Equation \@ref(eq:RR)
 
 \begin{equation}
@@ -409,12 +431,11 @@ RR = 2\left[1−\frac{\gamma_1(x_i)}{Var(x_i)}\right]
 
 The numerator in the formula stands for the `lag 1` autocovariance of the HBI time series $x_i$. The denominator stands for the (global) variance of $x_i$. Most statistics packages can calculate these variances, `R` and `Matlab` have built in functions. Alternatively, you can create the formula yourself.
 
-*	Compare your (intuitive) visual inspection with these preliminary dynamic quantifications, and find out where each of the HIB series are positions on the ‘colorful spectrum of noises’ (i.e., line them up with Figure \@ref(RRf3)).
+*	Compare your (intuitive) visual inspection with these preliminary dynamic quantifications, and find out where each of the HIB series are positions on the ‘colorful spectrum of noises’ (i.e., line them up with Figure \@ref(fig:RRf3)).
 
 ```{r RRf3, fig.cap="Coloured Noise versus Relative Roughness", fig.align='center',echo=FALSE}
 knitr::include_graphics('images/RRfig3.png')
 ```
-
 
 
 ### What do we know now, that we didn’t knew before?

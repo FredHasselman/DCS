@@ -220,9 +220,20 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </tbody>
 </table>
 <ol start="4" style="list-style-type: decimal">
-<li><p>You should have identified just one time series with autocorrelations: <code>TS_2</code>. Try to fit an <code>ARIMA(p,0,q)</code> model on this time series. Go to <code>Analyze</code> &gt;&gt; <code>Forecasting</code> &gt;&gt; <code>Create Model</code>, and at <code>Method</code> (Expert modeler) choose <code>ARIMA</code>. Look back at the <code>PACF</code> to identify which order (p) you need (last lag value at which the correlation is still significant). This lag value should go in the Autocorrelation p box. Start with a Moving Average q of one. The time series variable TS_2 is the Dependent. You can check the statistical significance of the parameters in the output under Statistics, by checking the box Parameter Estimates. This value for p is probably too high, because not all AR parameters are significant. Run ARIMA again and decrease the number of AR parameters by leaving out the non-significant ones.</p></li>
-<li><p>By default SPSS saves the predicted values and 95% confidence limits (check the data file). We can now check how well the prediction is: Go to Graphs -&gt; Legacy Dialogs -&gt; Line. Select Multiple and Summaries of Separate Variables. Now enter TS_2, Fit_X, LCL_X and UCL_X in Lines Represent. X should be the number of the last (best) model you fitted, probably 2. Enter TIME as the Category Axis.</p></li>
-<li><p>In the simulation part of this course we have learned a very simple way to explore the dynamics of a system: The return plot. The time series is plotted against itself shifted by 1 step in time. Create return plots (use a Scatterplot) for the three time series. Tip: You can easily create a ‘t+1’ version of the time series by using the LAG function in a COMPUTE statement. For instance: COMPUTE TS_1_lag1 = LAG(TS_1). Are your conclusions about the time series the same when based on these return plots?</p></li>
+<li>You should have identified just one time series with autocorrelations: <code>TS_2</code>. Try to fit an <code>ARIMA(p,0,q)</code> model on this time series. Go to <code>Analyze</code> &gt;&gt; <code>Forecasting</code> &gt;&gt; <code>Create Model</code>, and at <code>Method</code> (Expert modeler) choose <code>ARIMA</code>. Look back at the <code>PACF</code> to identify which order (<code>p</code>) you need (last lag value at which the correlation is still significant). This lag value should go in the Autocorrelation <code>p</code> box.
+<ul>
+<li>Start with a Moving Average <code>q</code> of one. The time series variable <code>TS_2</code> is the <code>Dependent</code>.</li>
+<li>You can check the statistical significance of the parameters in the output under <code>Statistics</code>, by checking the box <code>Parameter Estimates</code>.</li>
+<li>This value for <code>p</code> is probably too high, because not all AR parameters are significant.</li>
+<li>Run ARIMA again and decrease the number of AR parameters by leaving out the non-significant ones.</li>
+</ul></li>
+<li><p>By default <code>SPSS</code> saves the predicted values and 95% confidence limits (check the data file). We can now check how well the prediction is: Go to <code>Graphs</code> &gt;&gt; <code>Legacy Dialogs</code> &gt;&gt; <code>Line.</code> Select <code>Multiple</code> and <code>Summaries of Separate Variables</code>. Now enter <code>TS_2</code>, <code>Fit_X</code>, <code>LCL_X</code> and <code>UCL_X</code> in <code>Lines Represent</code>. <code>X</code> should be the number of the last (best) model you fitted, probably 2. Enter <code>TIME</code> as the <code>Category Axis</code>.</p></li>
+<li>In the simulation part of this course we have learned a very simple way to explore the dynamics of a system: The return plot. The time series is plotted against itself shifted by 1 step in time.
+<ul>
+<li><p>Create return plots (use a Scatterplot) for the three time series. Tip: You can easily create a <code>t+1</code> version of the time series by using the LAG function in a <code>COMPUTE</code> statement. For instance:</p>
+<pre><code>COMPUTE TS_1_lag1 = LAG(TS_1)</code></pre></li>
+<li><p>Are your conclusions about the time series the same when based on these return plots?</p></li>
+</ul></li>
 </ol>
 </div>
             </section>
