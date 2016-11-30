@@ -509,7 +509,14 @@ xyplot(R ~ F, pch = 16)
 
 # **Basic Timeseries Analysis** {#btasol}
 
+
+
 # **Fluctuation and Disperion analyses I** {#fda1sol}
+
+
+## Fractal Geometry: Estimating Self-Affinity and Dimension of Time Series
+
+
 
 # **Fluctuation and Disperion analyses II** {#fda1so2}
 

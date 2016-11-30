@@ -471,7 +471,8 @@ Other \texttt{R} packages used are: \texttt{DT} \citep{R-DT},
 \part{Assignments}\label{part-assignments}
 \addcontentsline{toc}{chapter}{(PART) Assignments}
 
-\chapter{Mathematics of Change I}\label{moc1ass}
+\chapter{\texorpdfstring{\textbf{Mathematics of Change
+I}}{Mathematics of Change I}}\label{moc1ass}
 
 In this assignment you will build two (relatively) simple
 one-dimensional maps. We start with the \emph{Linear Map} and then
@@ -788,7 +789,8 @@ call.\footnote{Both \texttt{R} and \texttt{Matlab} have specialized
   and date information on the X-axis. See Solutions:
   \protect\hyperlink{moc1Rsol}{Mathematics of Change I}}
 
-\chapter{Mathematics of Change II}\label{moc2ass}
+\chapter{\texorpdfstring{\textbf{Mathematics of Change
+II}}{Mathematics of Change II}}\label{moc2ass}
 
 In this assignment we will build a more sophisticated growth modeland
 look at its properties. The model will be the growth model by Van Geert
@@ -1042,7 +1044,8 @@ Van Geert}, scroll down to see models of:
   Interaction during Play
 \end{itemize}
 
-\section{Iterating 2D Maps and Flows}\label{iterating-2d-maps-and-flows}
+\section{\texorpdfstring{\textbf{Iterating 2D Maps and
+Flows}}{Iterating 2D Maps and Flows}}\label{iterating-2d-maps-and-flows}
 
 In this assignment we will look at a 2D coupled dynamical system:
 \textbf{the Predator-Prey model} (aka
@@ -1156,8 +1159,8 @@ given above.
   \end{itemize}
 \end{itemize}
 
-\section{The Competetive Lottka-Volterra
-Equations}\label{the-competetive-lottka-volterra-equations}
+\section{\texorpdfstring{\textbf{The Competetive Lottka-Volterra
+Equations}}{The Competetive Lottka-Volterra Equations}}\label{the-competetive-lottka-volterra-equations}
 
 The coupled predator-prey dynamics in the previous assignment are not a
 very realistic model of an actual ecological system. Both equations are
@@ -1179,8 +1182,9 @@ dependiencies using the \texttt{if\ ...\ then} conditional rules isn't
 really about interaction, or coupling between processes.
 \end{quote}
 
-\section{Predator-Prey (and other) dynamics in Agent Based
-Models}\label{predator-prey-and-other-dynamics-in-agent-based-models}
+\section{\texorpdfstring{\textbf{Predator-Prey (and other) dynamics as
+Agent Based
+Models}}{Predator-Prey (and other) dynamics as Agent Based Models}}\label{predator-prey-and-other-dynamics-as-agent-based-models}
 
 Agent-Based models are an expansion of the idea of ``connected growers''
 that includes a spatial location of the things that is subject to change
@@ -1199,7 +1203,8 @@ Have a look at some of the
   Sheep Grass}
 \end{itemize}
 
-\chapter{Basic Timeseries Analysis}\label{bta}
+\chapter{\texorpdfstring{\textbf{Basic Timeseries Analysis
+\{\#bta\}}}{Basic Timeseries Analysis \{\#bta\}}}\label{basic-timeseries-analysis-bta}
 
 Most of the basic timeseries analyses can be performed in \texttt{SPSS},
 because many of you will be familiar with the software we present the
@@ -1208,8 +1213,8 @@ ahead an try your preferred environment for (statistical) computing (see
 comments about \protect\hyperlink{bTSAinR}{using \texttt{R} and
 \texttt{Matlab}})
 
-\section{Time series analysis in SPSS (17 and
-higher).}\label{time-series-analysis-in-spss-17-and-higher.}
+\section{\texorpdfstring{\textbf{Time series analysis in SPSS (17 and
+higher)}}{Time series analysis in SPSS (17 and higher)}}\label{time-series-analysis-in-spss-17-and-higher}
 
 \subsection{Nonlinear Growth curves in
 SPSS}\label{nonlinear-growth-curves-in-spss}
@@ -1510,6 +1515,24 @@ the link}, save as an \texttt{.R} file from your browser and open it in
 If you have package \texttt{rio} installed in \texttt{R}, you can load
 the data directly into the local environment.
 
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Follow the link, e.g.~for
+  \href{https://github.com/FredHasselman/DCS/blob/master/assignmentData/BasicTSA_arma/series.sav}{\texttt{series.sav}}.
+\item
+  On the Github page, find a button marked \textbf{Download} (or
+  \textbf{Raw} for textfiles).
+\item
+  Copy the \texttt{url} associated with the \textbf{Download} button on
+  Github (right-clik).
+\item
+  The copied path should contain the word `raw' somewhere in the url.
+\item
+  Call \texttt{import(url)}:
+\end{enumerate}
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{series <-}\StringTok{ }\KeywordTok{import}\NormalTok{(}\StringTok{"https://github.com/FredHasselman/DCS/raw/master/assignmentData/BasicTSA_arma/series.sav"}\NormalTok{)}
@@ -1518,7 +1541,9 @@ the data directly into the local environment.
 
 You can use the function \texttt{arima()}, \texttt{acf()} and
 \texttt{pacf()} in \texttt{R} (\texttt{Matlab} has functions that go by
-slightly different names, check the Matlab Help pages).
+slightly different names, check the
+\href{https://nl.mathworks.com/help/econ/autocorr.html}{Matlab Help
+pages}).
 
 There are many extensions to these linear models, check the
 \href{https://cran.r-project.org/web/views/TimeSeries.html}{\texttt{CRAN\ Task\ View}
@@ -1750,27 +1775,27 @@ difference between the Siepinsky Gasket and the Fern?
     \NormalTok{coor=}\KeywordTok{runif}\NormalTok{(}\DecValTok{1}\NormalTok{)       }\CommentTok{# coor becomes a random number between 0 and 1 drawn from the uniform distribution}
     
     \NormalTok{if(coor<=}\FloatTok{0.01}\NormalTok{)\{                  }\CommentTok{#This transformation 1% of the time}
-        \NormalTok{x=}\DecValTok{0}
-        \NormalTok{y=}\FloatTok{0.16}\NormalTok{*y}
-        \KeywordTok{points}\NormalTok{(x,y, }\DataTypeTok{pch=}\StringTok{"."}\NormalTok{, }\DataTypeTok{col=}\StringTok{"darkgreen"}\NormalTok{) }
+        \NormalTok{x =}\StringTok{ }\DecValTok{0}
+        \NormalTok{y =}\StringTok{ }\FloatTok{0.16} \NormalTok{*}\StringTok{ }\NormalTok{y}
+        \KeywordTok{points}\NormalTok{(x,y, }\DataTypeTok{pch=}\StringTok{"."}\NormalTok{, }\DataTypeTok{col=}\StringTok{"green3"}\NormalTok{) }
     \NormalTok{\}}
     
-    \NormalTok{if(}\KeywordTok{between}\NormalTok{(coor,}\FloatTok{0.01}\NormalTok{,}\FloatTok{0.08}\NormalTok{))\{   }\CommentTok{#This transformation 7% of the time}
-        \NormalTok{x=}\FloatTok{0.2}\NormalTok{*x}\FloatTok{-0.26}\NormalTok{*y}
-        \NormalTok{y=}\FloatTok{0.23}\NormalTok{*x}\FloatTok{+0.22}\NormalTok{*y}\FloatTok{+1.6}
-        \KeywordTok{points}\NormalTok{(x,y, }\DataTypeTok{pch=}\StringTok{"."}\NormalTok{, }\DataTypeTok{col=}\StringTok{"darkolivegreen"}\NormalTok{) }
+    \NormalTok{if(}\KeywordTok{between}\NormalTok{(coor,}\FloatTok{0.01}\NormalTok{, }\FloatTok{0.08}\NormalTok{))\{   }\CommentTok{#This transformation 7% of the time}
+        \NormalTok{x =}\StringTok{ }\FloatTok{0.20} \NormalTok{*}\StringTok{ }\NormalTok{x -}\StringTok{ }\FloatTok{0.26} \NormalTok{*}\StringTok{ }\NormalTok{y}
+        \NormalTok{y =}\StringTok{ }\FloatTok{0.23} \NormalTok{*}\StringTok{ }\NormalTok{x +}\StringTok{ }\FloatTok{0.22} \NormalTok{*}\StringTok{ }\NormalTok{y +}\StringTok{ }\FloatTok{1.6}
+        \KeywordTok{points}\NormalTok{(x,y, }\DataTypeTok{pch=}\StringTok{"."}\NormalTok{, }\DataTypeTok{col=}\StringTok{"green2"}\NormalTok{) }
     \NormalTok{\}}
     
     \NormalTok{if(}\KeywordTok{between}\NormalTok{(coor,}\FloatTok{0.08}\NormalTok{,}\FloatTok{0.15}\NormalTok{))\{   }\CommentTok{#This transformation 7% of the time}
-        \NormalTok{x=-}\FloatTok{0.15}\NormalTok{*x}\FloatTok{+0.28}\NormalTok{*y}
-        \NormalTok{y=}\FloatTok{0.26}\NormalTok{*x}\FloatTok{+0.24}\NormalTok{*y}\FloatTok{+0.44}
-       \KeywordTok{points}\NormalTok{(x,y, }\DataTypeTok{pch=}\StringTok{"."}\NormalTok{, }\DataTypeTok{col=}\StringTok{"palegreen"}\NormalTok{)}
+        \NormalTok{x =}\StringTok{ }\NormalTok{-}\FloatTok{0.15} \NormalTok{*}\StringTok{ }\NormalTok{x +}\StringTok{ }\FloatTok{0.28} \NormalTok{*}\StringTok{ }\NormalTok{y}
+        \NormalTok{y =}\StringTok{  }\FloatTok{0.26} \NormalTok{*}\StringTok{ }\NormalTok{x +}\StringTok{ }\FloatTok{0.24} \NormalTok{*}\StringTok{ }\NormalTok{y +}\StringTok{ }\FloatTok{0.44}
+       \KeywordTok{points}\NormalTok{(x,y, }\DataTypeTok{pch=}\StringTok{"."}\NormalTok{, }\DataTypeTok{col=}\StringTok{"springgreen3"}\NormalTok{)}
     \NormalTok{\}}
     
     \NormalTok{if(coor>}\FloatTok{0.15}\NormalTok{)\{      }\CommentTok{#This transformation 85% of the time}
-        \NormalTok{x=-}\FloatTok{0.85}\NormalTok{*x}\FloatTok{+0.04}\NormalTok{*y}
-        \NormalTok{y=-}\FloatTok{0.04}\NormalTok{*x}\FloatTok{+0.85}\NormalTok{*y}\FloatTok{+1.6} 
-        \KeywordTok{points}\NormalTok{(x,y, }\DataTypeTok{pch=}\StringTok{"."}\NormalTok{, }\DataTypeTok{col=}\StringTok{"springgreen"}\NormalTok{)}
+        \NormalTok{x =}\StringTok{  }\FloatTok{0.85} \NormalTok{*}\StringTok{ }\NormalTok{x +}\StringTok{ }\FloatTok{0.04} \NormalTok{*}\StringTok{ }\NormalTok{y}
+        \NormalTok{y=}\StringTok{  }\NormalTok{-}\FloatTok{0.04} \NormalTok{*}\StringTok{ }\NormalTok{x +}\StringTok{ }\FloatTok{0.85} \NormalTok{*}\StringTok{ }\NormalTok{y +}\StringTok{ }\FloatTok{1.6} 
+        \KeywordTok{points}\NormalTok{(x,y, }\DataTypeTok{pch=}\StringTok{"."}\NormalTok{, }\DataTypeTok{col=}\StringTok{"springgreen2"}\NormalTok{)}
     \NormalTok{\}}
     
 \NormalTok{\} }\CommentTok{# for ...}

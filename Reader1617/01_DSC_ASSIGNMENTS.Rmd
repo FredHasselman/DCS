@@ -5,7 +5,7 @@ output:
 ---
 # (PART) Assignments {-} 
 
-# Mathematics of Change I {#moc1ass}
+# **Mathematics of Change I** {#moc1ass}
 
 In this assignment you will build two (relatively) simple one-dimensional maps. We start with the *Linear Map* and then proceed to the slightly more complicated *Logistic Map* (aka *Quadratic map*). If you are experienced in `R` or `Matlab` you can try to code the models using the hints in section \@ref(moc1R), otherwise, continue below with your favourite spreadsheet software (e.g., Excel, Numbers, GoogleSheets). 
 
@@ -136,7 +136,7 @@ end
 Creating the time series graphs and the return plot should be easy if the function `linearMap` returns the time series. Both `R` and `Matlab` have a `plot()` function you can call.^[Both `R` and `Matlab` have specialized objects to represent timeseries, and functions and packages for timeseries analysis. They are especially convenient for plotting time and date information on the X-axis. See Solutions: [Mathematics of Change I](#moc1Rsol)]
 
 
-# Mathematics of Change II {#moc2ass}
+# **Mathematics of Change II** {#moc2ass}
 
 In this assignment we will build a more sophisticated growth modeland look at its properties. The model will be the growth model by Van Geert (1991 etc.) as discussed in the book chapter you read. If your are experienced in `R` or `Matlab` you can try to code the models following the hints in section \@ref(moc1R).
 
@@ -234,7 +234,7 @@ See the website by [Paul Van Geert](http://www.paulvangeert.nl/research.htm), sc
 * Interaction during Play
 
 
-## Iterating 2D Maps and Flows
+## **Iterating 2D Maps and Flows**
 
 In this assignment we will look at a 2D coupled dynamical system: **the Predator-Prey model** (aka [Lotka-Volterra equations](https://en.wikipedia.org/wiki/Lotka???Volterra_equations)). If your are experienced in `R` or `Matlab` you can try to code the models following the instructions at the end of this assignment.   
 
@@ -302,7 +302,7 @@ Implement the model in a spreadsheet by substituting $f_R(R_t,Ft)$ and $f_F(R_t,
     + Hint: Remember that $\Delta$ is not a fundamental part of the dynamics, but that it is only introduced by the numerical integration (i.e., the approximation) of the differential equation. It should not change the dynamics of the system, but it has an effect nonetheless.
     
     
-## The Competetive Lottka-Volterra Equations
+## **The Competetive Lottka-Volterra Equations**
 
 The coupled predator-prey dynamics in the previous assignment are not a very realistic model of an actual ecological system. Both equations are exponential growth functions, but **R**abbits for example, also have to eat! One way to increase realism is to consider coupled logistic growth by introducing a carrying capacity.   
 
@@ -312,7 +312,7 @@ The coupled predator-prey dynamics in the previous assignment are not a very rea
 > This is what *interaction dynamics* refers to, modeling mutual dependiencies using the `if ... then` conditional rules isn't really about interaction, or coupling between processes.
 
 
-## Predator-Prey (and other) dynamics in Agent Based Models
+## **Predator-Prey (and other) dynamics as Agent Based Models**
 
 Agent-Based models are an expansion of the idea of "connected growers" that includes a spatial location  of the things that is subject to change over time.
 
@@ -322,12 +322,12 @@ Have a look at some of the [NETlogo](http://ccl.northwestern.edu/netlogo/) demo'
 * [Wolf Sheep Grass](http://www.netlogoweb.org/launch#http://www.netlogoweb.org/assets/modelslib/Sample%20Models/Biology/Wolf%20Sheep%20Predation.nlogo)
 
 
-# Basic Timeseries Analysis {#bta}
+# **Basic Timeseries Analysis {#bta}**
 
 Most of the basic timeseries analyses can be performed in `SPSS`, because many of you will be familiar with the software we present the first assignments mainly as `SPSS` instructions, but you can go ahead an try your preferred environment for (statistical) computing (see comments about [using `R` and `Matlab`](#bTSAinR))
 
 
-## Time series analysis in SPSS (17 and higher). 
+## **Time series analysis in SPSS (17 and higher)** 
 
 ### Nonlinear Growth curves in SPSS
 
@@ -442,11 +442,17 @@ source_url("https://raw.githubusercontent.com/FredHasselman/DCS/master/functionL
 ### Importing data in `R`
 
 If you have package `rio` installed in `R`, you can load the data directly into the local environment.
+
+1. Follow the link, e.g. for [`series.sav`](https://github.com/FredHasselman/DCS/blob/master/assignmentData/BasicTSA_arma/series.sav).
+2. On the Github page, find a button marked **Download** (or **Raw** for textfiles).
+3. Copy the `url` associated with the **Download**  button on Github (right-clik).
+4. The copied path should contain the word 'raw' somewhere in the url.
+5. Call `import(url)`:
 ```{r, include=TRUE, eval=FALSE}
 series <- import("https://github.com/FredHasselman/DCS/raw/master/assignmentData/BasicTSA_arma/series.sav")
 ```
 
-You can use the function `arima()`, `acf()` and `pacf()` in `R` (`Matlab` has functions that go by slightly different names, check the Matlab Help pages). 
+You can use the function `arima()`, `acf()` and `pacf()` in `R` (`Matlab` has functions that go by slightly different names, check the [Matlab Help pages](https://nl.mathworks.com/help/econ/autocorr.html)). 
 
 There are many extensions to these linear models, check the [`CRAN Task View` on `Time Series Analysis`](https://cran.r-project.org/web/views/TimeSeries.html) to learn more (e.g. about package `zoo` and `forecast`).
 
@@ -461,7 +467,7 @@ TS3 <- rio::import("https://github.com/FredHasselman/DCS/raw/master/assignmentDa
 ```
 
 The Excel files did not have any column names, so let's create them in the `data.frame`
-```{r, eval=FALSE}
+```{r, eval=FALSE, include=TRUE}
 colnames(TS1) <- "TS1"
 colnames(TS2) <- "TS2"
 colnames(TS3) <- "TS3"
@@ -486,7 +492,7 @@ The assignment is to scrutinise the data and find out which time series belongs 
 
 
 ### First inspection
-The chances that you are an experienced cardiologist are slim. We therefore suggest you precede your detective work as follows:
+The chances that you are an experienced cardiologist are slim. We therefore suggest you proceed your detective work as follows:
 
 *	Construct a graphical representation of the time series, and inspect their dynamics visually (use the code examples provided in the [solutions to previous sessions](#moc1Rsol) to plot your time series). 
 * Write down your first guesses about which time series belongs to which subject. Take your time for this visual inspection (i.e., which one looks more like a line than a plane, which one looks more 'smooth' than 'rough'). 
@@ -595,27 +601,27 @@ for(i in 1:50000){      # This takes some time: 20.000 iterations
     coor=runif(1)       # coor becomes a random number between 0 and 1 drawn from the uniform distribution
     
     if(coor<=0.01){                  #This transformation 1% of the time
-        x=0
-        y=0.16*y
-        points(x,y, pch=".", col="darkgreen") 
+        x = 0
+        y = 0.16 * y
+        points(x,y, pch=".", col="green3") 
     }
     
-    if(between(coor,0.01,0.08)){   #This transformation 7% of the time
-        x=0.2*x-0.26*y
-        y=0.23*x+0.22*y+1.6
-        points(x,y, pch=".", col="darkolivegreen") 
+    if(between(coor,0.01, 0.08)){   #This transformation 7% of the time
+        x = 0.20 * x - 0.26 * y
+        y = 0.23 * x + 0.22 * y + 1.6
+        points(x,y, pch=".", col="green2") 
     }
     
     if(between(coor,0.08,0.15)){   #This transformation 7% of the time
-        x=-0.15*x+0.28*y
-        y=0.26*x+0.24*y+0.44
-       points(x,y, pch=".", col="palegreen")
+        x = -0.15 * x + 0.28 * y
+        y =  0.26 * x + 0.24 * y + 0.44
+       points(x,y, pch=".", col="springgreen3")
     }
     
     if(coor>0.15){      #This transformation 85% of the time
-        x=-0.85*x+0.04*y
-        y=-0.04*x+0.85*y+1.6 
-        points(x,y, pch=".", col="springgreen")
+        x =  0.85 * x + 0.04 * y
+        y=  -0.04 * x + 0.85 * y + 1.6 
+        points(x,y, pch=".", col="springgreen2")
     }
     
 } # for ...
@@ -632,6 +638,63 @@ You can by now probably guess that the these simple rules can be described as co
 
 
 # Fluctuation and Disperion analyses I {#fda1}
+
+Before you begin, look at the notes for [Lecture 4](#Lecture_4).
+
+## Assignment: The Spectral Slope
+
+We can use the power spectrum to estimate a **self-affinity parameter**, or scaling exponent.
+
+* Download `ts1.txt`, `ts2.txt`, `ts3.txt` [here](https://github.com/FredHasselman/DCS/tree/master/assignmentData/RelativeRoughness). If you use `R` and have package `rio` installed you can run this code and the load the data into a `data.frame` directly from `Github`. 
+```{r, echo=TRUE, eval=FALSE, include=TRUE}
+library(rio)
+TS1 <- rio::import("https://github.com/FredHasselman/DCS/raw/master/assignmentData/RelativeRoughness/TS1.xlsx", col_names=FALSE)
+TS2 <- rio::import("https://github.com/FredHasselman/DCS/raw/master/assignmentData/RelativeRoughness/TS2.xlsx", col_names=FALSE)
+TS3 <- rio::import("https://github.com/FredHasselman/DCS/raw/master/assignmentData/RelativeRoughness/TS3.xlsx", col_names=FALSE)
+```
+
+* Load the three time series into `R` using any of the `read` functions. **TIP** Use the function `import()` in package `rio`.
+* Plot the three time series.
+
+Now we can do some basic data preparations:
+
+* Are the lengths of the time series a power of 2? (Use `log2(length of var)` )
+* Are the data normalized? (we will not remove datapoints outside 3SD)
+    + To normalize we have to subtract the mean from each value in the time series and divide it by the standard deviation, the function `scale()` can do this for you, but you could also use `mean()` and `sd()`.
+* Plot the normalized time series.
+
+Before a spectral analysis you should remove any linear trends (it cannot deal with nonstationary signals!)
+
+* Detrend the normalized data (just the linear trend). 
+    + This can be done by the command `pracma::detrend()`. 
+    + Also try to figure out how to detrend the data using `stats::lm()` or `stats::poly()`
+* Plot the detrended data.
+
+The function `nlRtsa::fd.psd()` will perform the spectral slope fitting procedure. 
+
+* Look at the manual pages to figure out how to call it.
+    + Remember, we have already normalized and detrended the data.
+    + You can also look at the code itself by selecting the name in`R` and pressing `F2` 
+* Calculate the spectral slopes for the three normalized and detrended time series.
+    + Call with `plot = TRUE`
+    + Compare the results... What is your conclusion?
+
+## Assignment: DFA and SDA
+
+* Use the functions `fd.dfa()` and `fd.sda()` to estimate the self-affinity parameter and Dimension of the series. 
+    + Think about which data preparation steps are necessary.
+    + Compare the results between different methods.
+
+## Assignment: ACF/PACF, Relative Roughness and Sample Entropy
+
+* Also calculate the ACF, PACF, Relative Roughness (see assignment of last week) and Sample Entropy (`pracma::sample_entropy()`)
+    + Compare the results.
+
+## Assignment: Deterministic Chaos
+
+* Generate a chaotic timeseries (e.g. $r = 4$ ) of equal length as the time series used above (use the function `growth.ac( ..., type = "logistic")` in `nlRtsa`)
+* Get all the quantities for this series and compare them to the previous results.
+
 
 # Fluctuation and Disperion analyses II {#fda2}
 
