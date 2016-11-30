@@ -648,9 +648,16 @@ We can use the power spectrum to estimate a **self-affinity parameter**, or scal
 * Download `ts1.txt`, `ts2.txt`, `ts3.txt` [here](https://github.com/FredHasselman/DCS/tree/master/assignmentData/RelativeRoughness). If you use `R` and have package `rio` installed you can run this code and the load the data into a `data.frame` directly from `Github`. 
 ```{r, echo=TRUE, eval=FALSE, include=TRUE}
 library(rio)
-TS1 <- rio::import("https://github.com/FredHasselman/DCS/raw/master/assignmentData/RelativeRoughness/TS1.xlsx", col_names=FALSE)
-TS2 <- rio::import("https://github.com/FredHasselman/DCS/raw/master/assignmentData/RelativeRoughness/TS2.xlsx", col_names=FALSE)
-TS3 <- rio::import("https://github.com/FredHasselman/DCS/raw/master/assignmentData/RelativeRoughness/TS3.xlsx", col_names=FALSE)
+TS1 <- rio::import("https://raw.githubusercontent.com/FredHasselman/DCS/master/assignmentData/Fluctuation_PSDslope/ts1.txt")
+TS2 <- rio::import("https://raw.githubusercontent.com/FredHasselman/DCS/master/assignmentData/Fluctuation_PSDslope/ts2.txt")
+TS3 <- rio::import("https://raw.githubusercontent.com/FredHasselman/DCS/master/assignmentData/Fluctuation_PSDslope/ts3.txt")
+
+# These objects are now data.frames with one column named V1. 
+# If you want to change the column names
+
+colnames(TS1) <- "TS1"
+colnames(TS2) <- "TS2"
+colnames(TS3) <- "TS3"
 ```
 
 * Load the three time series into `R` using any of the `read` functions. **TIP** Use the function `import()` in package `rio`.
