@@ -788,7 +788,7 @@ There were no assignments for this Lecture.
 You can use `R` or `Matlab` to run `RQA` analyses. These assignments assume you'll use `R`. You can find a `Matlab` toolbox for `RQA` here: [CRP toolbox](http://tocsy.pik-potsdam.de/CRPtoolbox/)
 
 
-**Packages for Phase Space Reconstruction**
+**R-packages for Phase Space Reconstruction**
 
 We'll use package `fractal` and `rgl` to reconstruct some phase spaces.
 
@@ -889,7 +889,8 @@ crqaOutput <- crqa(ts1 = lx, ts2 = lx,
 
 ## Assignment: RQA of circle-tracing data
 
-
+* Analyse the circle tracing data we recorded during the lecture.
+* 
 
 
 # **Categorical and Cross-RQA (CRQA)** {#CRQA}
