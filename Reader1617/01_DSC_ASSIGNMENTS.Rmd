@@ -785,7 +785,7 @@ There were no assignments for this Lecture.
 
 # **Phase Space Reconstruction and RQA** {#RQA} 
 
-You can use `R` or `Matlab` to run `RQA` analyses. This document is based on `R`. You can find the assignments for `Matlab` on Blackboard.
+You can use `R` or `Matlab` to run `RQA` analyses. These assignments assume you'll use `R`. You can find a `Matlab` toolbox for `RQA` here: [CRP toolbox](http://tocsy.pik-potsdam.de/CRPtoolbox/)
 
 
 **Packages for Phase Space Reconstruction**
@@ -796,20 +796,23 @@ We'll use package `fractal` and `rgl` to reconstruct some phase spaces.
 
 ## Reconstruct the Lorenz attractor
 
-* Package fractal includes the 3 dimensions of the Lorenz system in the chaotic regime. 
-    + Run this code `plot3d(lorenz)` to get an interactive 3D plot ^[You'll need the [X Window System](http://www.x.org/wiki/) for interactive 3D plotting. This Linux desktop system comes installed in some way or form on most Mac and Windows systems.]
+* Package `fractal` includes the 3 dimensions of the Lorenz system in the chaotic regime. 
+    + Run this code `rgl::plot3d(lorenz)` with both packages loaded to get an interactive 3D plot ^[You'll need the [X Window System](http://www.x.org/wiki/) for interactive 3D plotting. This Linux desktop system comes installed in some way or form on most Mac and Windows systems.You can test if it is present by running `rgl::open3d()`, which will try to open an interactive plotting device]
  of this strange attractor.
 
-> NOTE: Package `fractal` and package `nonlinearTseries` use functions with similar names, do not load them together.
 
-We'll reconstruct the attractor based on just dimension `X` of the system.
+We'll reconstruct the attractor based on just dimension `X` of the system using functions from package `fractal`, be sure to look at the manual pages of these functions.
 
-* Use `lx <- lorenz[1:2048,1]` to reconstruct the phase space. 
+```{block2, samepack, type='rmdimportant'}
+Package `fractal` and package `nonlinearTseries` use functions with similar names, do not load them together.
+```
+
+* Use `lx <- lorenz[1:2048,1]` to reconstruct the phase space based on `lx`. 
     + Find an optimal embedding lag using `timeLag()`, use `method = "mutual"`.
     + Find the embedding dimension, using `FNN()`
     + Embed the timeseries using `embedSeries()`.
     + Plot the reconstructed phase space. (You'll need to use `as.matrix()` on the object created by `embedSeries()`)
-        - Use `rgl::open3d()` to open an interactive plotting device if you like.
+        - Use  `rgl::
 
 ## Reconstruct the Predator-Prey model
 
@@ -821,7 +824,9 @@ Use the same procedure as above to reconstruct the state space of the predator-p
 ## Assignment: (auto-) Recurrence Quantification Analysis
 There are several packages which can perform (C)RQA analysis, we'll use [`crqa`](https://cran.r-project.org/web/packages/crqa/index.html) because it can perform both continuous and categorical analyses. If you only have continuous data, you migh be better off using package [`nonlinearTseries`](https://cran.r-project.org/web/packages/nonlinearTseries/index.html), in this course we will only use package `crqa`.
 
-> NOTE: Package `crqa()` was designed to run categorical Cross-Recurrence Quantification Analysis (see [Coco & Dale (2014)](http://journal.frontiersin.org/Journal/10.3389/fpsyg.2014.00510/abstract) and for R code see appendices in [Coco & Dale (2013)](http://arxiv.org/abs/1310.0201)). We can trick it to run auto-RQA by providing the same timeseries for `ts1` and `ts2` and setting the parameter `side` to either `"upper"` or `"lower"`
+```{block2, crqa, type='rmdimportant'}
+ Package `crqa()` was designed to run categorical Cross-Recurrence Quantification Analysis (see [Coco & Dale (2014)](http://journal.frontiersin.org/Journal/10.3389/fpsyg.2014.00510/abstract) and for R code see appendices in [Coco & Dale (2013)](http://arxiv.org/abs/1310.0201)). We can trick it to run auto-RQA by providing the same timeseries for `ts1` and `ts2` and setting the parameter `side` to either `"upper"` or `"lower"`
+```
 
  * Perform an RQA on the reconstructed state space of the Lorenz system.
     + You'll need a radius (also called: threshold) in order to decide which points are close together (recurrent).
