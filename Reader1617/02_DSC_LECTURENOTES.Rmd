@@ -146,21 +146,40 @@ points(10,logSol(Y0=.0001, r=1.1, K=4, t=10), col="red", pch=16)
 
 # Lecture 3 {-}
 
+### New to `R`? {-}
+
+You have probably heard many people say they should invest more time and effort to learn to use the `R` software environment for statistical computing... *and they were right*. However, what they probably meant to say is: "I tried it, but it's so damned complicated, I gave up"... *and they were right*. That is, they were right to note that this is not a point and click tool designed to accommodate any user. It was built for the niche market of scientists who use statistics, but in that segment it's actually the most useful tool I have encountered so far. Now that your struggles with getting a grip on `R` are fully acknowledged in advance, let's try to avoid the 'giving up' from happening. Try to follow these steps to get started:   
+
+1. **Get `R` and add some user comfort:** Install the latest [`R` software](http://www.r-project.org) *and* install a user interface like [RStudio](http://www.rstudio.com)... *It's all free!* An R interface will make some things easier, e.g., searching and installing packages from repositories. RStudio will also add functionality, like git/svn version control, project management and more, like the tools to create html pages like this one (`knitr` and `Rmarkdown`). Another source of user comfort are the `packages`. `R` comes with some basic packages installed, but you'll soon need to fit generalised linear mixture models, or visualise social networks using graph theory and that means you'll be searching for packages that allow you to do such things. A good place to start *package hunting* are the [CRAN task view](http://cran.r-project.org/web/views/) pages.
+
+2. **Learn by running example `code`:** Copy the commands in the `code` blocks you find on this page, or any other tutorial or help files (e.g., Rob Kabacoff's [Quick R](http://www.statmethods.net)). Paste them into an `.R` script file in the script (or, source) editor. In RStudio You can run code by pressing `cmd` + `enter` when the cursor is on a single single line, or you can run multiple lines at once by selecting them first. If you get stuck remember that there are expert `R` users who probably have answered your question already when it was posted on a forum. Search for example through the Stackoverflow site for [questions tagged with `R`](http://stackoverflow.com/questions/tagged/r))
+
+3. **Examine what happens... when you tell `R` to make something happen:** `R` stores variables (anything from numeric data to functions) in an `Environment`. There are in fact many different environments, but we'll focus on the main workspace for the current `R` session. If you run the command `x <- 1+1`, a variable `x` will appear in the `Environment` with the value `2` assigned to it. Examining what happens in the `Environment` is not the same as examining the output of a statistical analysis. Output in `R` will appear in the `Console` window. Note that in a basic set-up each new `R` session starts with an empty `Environment`. If you need data in another session, you can save the entire `Environment`, or just some selected variables, to a file (`.RData`).
+
+4. **Learn about the properties of `R` objects:** Think of objects as containers designed for specific content. One way to characterize the different objects in `R` is by how picky they are about the content you can assign it. There are objects that hold `character` and `numeric` type data, a `matrix` for numeric data organised in rows and columns, a `data.frame` is a matrix that allows different data types in columns, and least picky of all is the `list` object. It can carry any other object, you can have a `list` of which item 1 is an entire `data.frame` and item 2 is just a `character` vector of the letter `R`. The most difficult thing to master is how to efficiently work with these objects, how to assign values and query contents.
+
+5. **Avoid repeating yourself:** The `R` language has some amazing properties that allow execution of many repetitive algorithmic operations using just a few lines of code at speeds up to warp 10. Naturally, you'll need to be at least half Vulcan to master these features properly and I catch myself copying code when I shouldn't on a daily basis. The first thing you will struggle with are the `apply` functions. These functions pass the contents of a `list` object to a function. Suppose we need to calculate the means of column variables in 40 different SPSS `.sav` files stored in the folder `DAT`. With the `foreign` package loaded we can execute the following commands:   
+`data <- lapply(dir("/DAT/",pattern=".sav$"),read.spss)`        
+`out  <- sapply(data,colMeans)`       
+The first command applies read.spss to all files with a `.sav` extension found in the folder `/DAT`. It creates a dataframe for each file which are all stored as elements of the list `data`. The second line applies the function `colMeans` to each element of `data` and puts the combined results in a matrix with dataset ID as columns (1-40), dataset variables as rows and the calculated column means as cells. This is just the beginning of the `R` magic, wait 'till you learn how to write functions that can create functions. 
+    
+****
+
 # Lecture 4 {-}
 
 It will become increasingly difficult to use software like Excel and SPSS. Perhaps now is a good time to switch to `R` or `Matlab`. We do have a spreadsheet example of Standardised Dispersion Anaysis. 
 
-## Using R: Install functions in `nlRtsa` {-}
+### Using R: Install functions in nlRtsa_SOURCE.R {-}
 
 First, download (from blackboard) and `source('nlRtsa_SOURCE.R')`, or source it directly from Github if you have package `devtools` installed.
-```{r}
+```{r L4.1, echo=TRUE, message=FALSE, warning=FALSE, include=TRUE}
 library(devtools)
 source_url("https://raw.githubusercontent.com/FredHasselman/DCS/master/functionLib/nlRtsa_SOURCE.R")
 ```
 
 We need packages `signal` and `pracma`
 Among `nlRtsa` functions is `in.IT()`, which will load a list of packages and install them, but only if they are not present on your system.
-```{r}
+```{r L4.2, echo=TRUE, message=FALSE, warning=FALSE, include=TRUE}
 in.IT(c("signal","pracma"))
 ```
 You can of course also use `install.packages()` or the GUI.
@@ -168,7 +187,8 @@ You can of course also use `install.packages()` or the GUI.
 ## Examples: Fast Fourier transform and Power Spectrum {-}
 
 Below is an example of a signal built from sine components (`y`) whose relative amplitudes are recovered in the powerspectrum.
-```{r}
+The amplitudes are differently scaled sinewaves which are summed or subtracted form one another.
+```{r L4.3, include=TRUE}
 # Sawtooth
 x <- seq(-3.2,3.2, length.out = 256)
 y <- 2*sin(10*x) - 1*sin(20*x) + (2/3)*sin(30*x) - (1/2)*sin(40*x) + (2/5)*sin(50*x) - (1/4)*sin(60*x)
@@ -176,8 +196,8 @@ y <- 2*sin(10*x) - 1*sin(20*x) + (2/3)*sin(30*x) - (1/2)*sin(40*x) + (2/5)*sin(5
 # Plot the sawtooth wave as constructed by the Fourier series above
 plot(x,y, xlab ='Time (a.u.)', ylab = 'Variable (a.u.)', main ='Sawtooth wave', type = "l")
 
-# Perform a Fast Fourier Transform and calculate the Power and Frequency
-Y <- fft(y)
+# Perform a Fast Fourier Transform and calculate the Power and Frequency (you don't have to know how this works)
+Y   <- fft(y)
 Pyy <- Y*Conj(Y)/256
 f <- 1000/256*(0:127)
 
@@ -185,8 +205,19 @@ f <- 1000/256*(0:127)
 plot(f[1:50],Pyy[1:50], type="b",xlab='Frequency (a.u.)', ylab ='Power (a.u.)', pch=21, bg='grey60', main = 'Power Spectrum')
 ```
 
-Now we do the same for a very noisy signal into which we insert a frequency.
-```{r}
+* The $6$ peaks with an amplitude > $0$ are the $6$ sine components used to construct the signal:   
+```{r, tidy=FALSE, include=TRUE, eval=FALSE}
++   2  *sin(10*x) 
+-   1  *sin(20*x) 
++ (2/3)*sin(30*x) 
+- (1/2)*sin(40*x) 
++ (2/5)*sin(50*x) 
+- (1/4)*sin(60*x)
+```
+
+
+Now we do the same for a very noisy signal into which we insert one dominant frequency and two smaller ones.
+```{r L4.5, include=TRUE}
 # A time vector
 t <- pracma::linspace(x1 = 0, x2 = 50, n = 256)
 # There are three sine components
@@ -206,7 +237,35 @@ f <- 1000/256*(0:127)
 plot(f[1:50],Pyy[1:50], type="b",xlab='Frequency (a.u.)', ylab='Power (a.u.)', pch=21, bg='grey60', main = 'Power Spectrum')
 ```
 
-More information about the [Fourier transform](https://en.wikipedia.org/wiki/Fourier_transform)
+* The $3$ peaks with an amplitude > $0$ are the $3$ sine components used to construct the signal to which random noise was added:   
+```{r, tidy=FALSE, include=TRUE, eval=FALSE}
++ sin(2*pi*t/.1) 
++ sin(2*pi*t/.3) 
++ sin(2*pi*t/.5)
+```
+
+More information about the [Fourier transform](https://en.wikipedia.org/wiki/Fourier_transform) and [how to use `R` functions](http://www.di.fc.ul.pt/~jpn/r/fourier/fourier.html). 
+
+## Data considerations {-}
+
+> “If you have not found the fractal pattern, you have not taken enough data” 
+> -- Machlup, 1977)
+  
+* **All analyses**:
+    + Data points: $2^n$, minimum 1024 ($2^{10}$) 
+      + Remove 3SD only if this is absolutely necessary
+
+* **Spectral analysis**: 
+    + Normalize the data (z-score transform: (X-mean(X))/SD(X)
+    + Remove linear trend if necessary (detrend)
+    + Decide number of frequencies to estimate, min. 512
+   
+* **SDA**:
+    + Normalize the data (z-score transform: (X-mean(X))/SD(X)
+   
+* **DFA**:
+    + Nothing extra, analysis integrates and detrends the signal
+
 
 # Lecture 5 {-}
 

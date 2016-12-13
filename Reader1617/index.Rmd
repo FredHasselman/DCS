@@ -31,7 +31,7 @@ cover-image: images/foundations.png
 # **Course guide** 
 
 ```{r setup, include=FALSE}
-
+knitr::opts_chunk$set(include=TRUE)
 ```
 
 
