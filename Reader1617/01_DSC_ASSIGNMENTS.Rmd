@@ -812,7 +812,7 @@ Package `fractal` and package `nonlinearTseries` use functions with similar name
     + Find the embedding dimension, using `FNN()`
     + Embed the timeseries using `embedSeries()`.
     + Plot the reconstructed phase space. (You'll need to use `as.matrix()` on the object created by `embedSeries()`)
-        - Use  `rgl::
+        - Use  `rgl::plot3d()` to plot the reconstructed space.
 
 ## Reconstruct the Predator-Prey model
 

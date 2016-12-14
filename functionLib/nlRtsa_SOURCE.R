@@ -246,12 +246,13 @@ plotRP.crqa <- function(crqaOutput){
                Titles <- list(main="Auto Recurrence Plot", X = expression(X[t]), Y = expression(Y[t]))
         )
 
-        # Thresholded or Distance matrix?
-        ifelse(length(unique(Matrix::as.vector(RP)))>2,
-               distPallette <- colorRampPalette(c("red", "white", "blue"))( length(unique(as.vector(RP)))),
-               distPallette <- colorRampPalette(c("white", "black"))(2)
-        )
+        # # Thresholded or Distance matrix?
+        # ifelse(length(unique(Matrix:::as.vector(RP)))>2,
+        #        distPallette <- colorRampPalette(c("red", "white", "blue"))( length(unique(as.vector(RP)))),
+        #        distPallette <- colorRampPalette(c("white", "black"))(2)
+        # )
 
+        distPallette <- colorRampPalette(c("white", "black"))(2)
 
         lp <- levelplot(Matrix::as.matrix(RP),
                         colorkey = FALSE, region = TRUE, col.regions = distPallette, useRaster = TRUE, aspect = nc/nr,
