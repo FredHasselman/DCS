@@ -279,7 +279,14 @@ plotRP.crqa <- function(crqaOutput){
 
 }
 
-
+plotRP.fnn <- function(FNNoutput){
+ plot(FNNoutput["combined",],type="b",pch=16, cex=2, col="grey80", ylim=c(0,100), xaxt="n",
+      xlab = "Embedding Dimension", ylab = "False Nearest Neighbours")
+ lines(FNNoutput["atol",],type="b",pch="a",col="grey30", lty=2)
+ lines(FNNoutput["rtol",],type="b",pch="r", col="grey30",lty=2)
+ Axis(side=1,at=seq_along(FNNoutput[1,]),labels = dimnames(FNNoutput)[[2]])
+ legend("topright",c("Combined","atol","rtol"), pch = c(16,97,114), lty = c(1,2,2), col = c("grey80","grey30","grey30"), pt.cex=c(2,1,1))
+}
 
 # GRAPH PLOTTING ---------------------------------------------------------------
 graph2svg <- function(TDM,pname){
