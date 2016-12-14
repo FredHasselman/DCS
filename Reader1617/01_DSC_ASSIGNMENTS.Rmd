@@ -889,8 +889,15 @@ crqaOutput <- crqa(ts1 = lx, ts2 = lx,
 
 ## Assignment: RQA of circle-tracing data
 
-* Analyse the circle tracing data we recorded during the lecture.
-* 
+* Analyse the [circle tracing data](https://github.com/FredHasselman/DCS/tree/master/assignmentData/RQA_circletrace) we recorded during the lecture.
+* Study what happens to the RQA measures if you shuffle the temporal order (see e.g. the solution to th [HRV assignments](#hrvsol)).
+* Package `fractal` contains a function `surrogate`. This will create so-called *constrained* realisations of the time series. Look at the help pages of the function, or study the *Surrogates Manual* of the [TISEAN software](http://www.mpipks-dresden.mpg.de/~tisean/Tisean_3.0.1/index.html) and create two surrogate series, one based on `phase` and one on `aaft`.
+     + Look at the RQA measures and think about which $H_0$ should probably be rejected.
+     + If you want to be more certain, you'll have to create a test (more surrogates). The [TISEAN manual](http://www.mpipks-dresden.mpg.de/~tisean/Tisean_3.0.1/docs/surropaper/node5.html#SECTION00030000000000000000) provides all the info you need to construct such a test:
+     
+     > "For a minimal significance requirement of 95\% , we thus need at least 19 or 39 surrogate time series for one- and two-sided tests, respectively. The conditions for rank based tests with more samples can be easily worked out. Using more surrogates can increase the discrimination power."
+  
+
 
 
 # **Categorical and Cross-RQA (CRQA)** {#CRQA}

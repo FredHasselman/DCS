@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1481666298 "DCS1617.tex" "DCS1617.pdf" "DCS1617" 1481666298
+["pdflatex"] 1481680827 "DCS1617.tex" "DCS1617.pdf" "DCS1617" 1481680826
   "/usr/local/texlive/2016/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/local/texlive/2016/texmf-dist/fonts/tfm/adobe/zapfding/pzdr.tfm" 1136768653 1528 f853c4d1b4e0550255e02831fdc8496f ""
   "/usr/local/texlive/2016/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm" 1246382020 916 f87d7c45f9c908e672703b83b72241a3 ""
@@ -131,12 +131,14 @@
   "/usr/local/texlive/2016/texmf-dist/web2c/texmf.cnf" 1470266149 31958 926ad82bc47ee89401cf24be7d2cbf7d ""
   "/usr/local/texlive/2016/texmf-var/web2c/xetex/xelatex.fmt" 1474163337 3543617 046c1ca9bf8c20aa79b1e516e61a94e3 ""
   "/usr/local/texlive/2016/texmf.cnf" 1463979140 577 2938757e76f31531e65cc647e3507693 ""
-  "DCS1617.aux" 1481666298 8 a94a2480d3289e625eea47cd1b285758 ""
-  "DCS1617.tex" 1481666298 197149 aa6b61cc66a98ddb73371fb8c59ca658 ""
-  "images/important.png" 1481053152 3193 f0103bb7f256dd1b4a9369e9e75f06a9 ""
+  "DCS1617.aux" 1481680761 4122 d602ab562d39ac9e408081e2847e6dc0 ""
+  "DCS1617.out" 0 -1 0 ""
+  "DCS1617.tex" 1481680826 199062 70db3b2583d1c1fe54090e6661a8b3ee ""
+  "DCS1617.toc" 0 -1 0 ""
+  "images/important.png" 1481666602 3193 f0103bb7f256dd1b4a9369e9e75f06a9 ""
   (generated)
-  "DCS1617.out"
-  "DCS1617.log"
-  "DCS1617.pdf"
   "DCS1617.toc"
+  "DCS1617.out"
+  "DCS1617.pdf"
+  "DCS1617.log"
   "DCS1617.aux"

@@ -26,7 +26,7 @@
 <meta name="author" content="Fred Hasselman &amp; Maarten Wijnants">
 
 
-<meta name="date" content="2016-12-13">
+<meta name="date" content="2016-12-14">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -279,9 +279,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="assignment-auto--recurrence-quantification-analysis" class="section level2">
 <h2><span class="header-section-number">7.3</span> Assignment: (auto-) Recurrence Quantification Analysis</h2>
 <p>There are several packages which can perform (C)RQA analysis, we’ll use <a href="https://cran.r-project.org/web/packages/crqa/index.html"><code>crqa</code></a> because it can perform both continuous and categorical analyses. If you only have continuous data, you migh be better off using package <a href="https://cran.r-project.org/web/packages/nonlinearTseries/index.html"><code>nonlinearTseries</code></a>, in this course we will only use package <code>crqa</code>.</p>
-<blockquote>
-<p>NOTE: Package <code>crqa()</code> was designed to run categorical Cross-Recurrence Quantification Analysis (see <a href="http://journal.frontiersin.org/Journal/10.3389/fpsyg.2014.00510/abstract">Coco &amp; Dale (2014)</a> and for R code see appendices in <a href="http://arxiv.org/abs/1310.0201">Coco &amp; Dale (2013)</a>). We can trick it to run auto-RQA by providing the same timeseries for <code>ts1</code> and <code>ts2</code> and setting the parameter <code>side</code> to either <code>&quot;upper&quot;</code> or <code>&quot;lower&quot;</code></p>
-</blockquote>
+
+<div class="rmdimportant">
+Package <code>crqa()</code> was designed to run categorical Cross-Recurrence Quantification Analysis (see <a href="http://journal.frontiersin.org/Journal/10.3389/fpsyg.2014.00510/abstract">Coco &amp; Dale (2014)</a> and for R code see appendices in <a href="http://arxiv.org/abs/1310.0201">Coco &amp; Dale (2013)</a>). We can trick it to run auto-RQA by providing the same timeseries for <code>ts1</code> and <code>ts2</code> and setting the parameter <code>side</code> to either <code>&quot;upper&quot;</code> or <code>&quot;lower&quot;</code>
+</div>
+<p></p>
 <ul>
 <li>Perform an RQA on the reconstructed state space of the Lorenz system.
 <ul>

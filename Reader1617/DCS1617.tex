@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2016-12-13}
+  \date{2016-12-14}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -2173,10 +2173,11 @@ There were no assignments for this Lecture.
 RQA}}{Phase Space Reconstruction and RQA}}\label{RQA}
 
 You can use \texttt{R} or \texttt{Matlab} to run \texttt{RQA} analyses.
-This document is based on \texttt{R}. You can find the assignments for
-\texttt{Matlab} on Blackboard.
+These assignments assume you'll use \texttt{R}. You can find a
+\texttt{Matlab} toolbox for \texttt{RQA} here:
+\href{http://tocsy.pik-potsdam.de/CRPtoolbox/}{CRP toolbox}
 
-\textbf{Packages for Phase Space Reconstruction}
+\textbf{R-packages for Phase Space Reconstruction}
 
 We'll use package \texttt{fractal} and \texttt{rgl} to reconstruct some
 phase spaces.
@@ -2197,33 +2198,36 @@ attractor}\label{reconstruct-the-lorenz-attractor}
 \begin{itemize}
 \tightlist
 \item
-  Package fractal includes the 3 dimensions of the Lorenz system in the
-  chaotic regime.
+  Package \texttt{fractal} includes the 3 dimensions of the Lorenz
+  system in the chaotic regime.
 
   \begin{itemize}
   \tightlist
   \item
-    Run this code \texttt{plot3d(lorenz)} to get an interactive 3D plot
-    \footnote{You'll need the \href{http://www.x.org/wiki/}{X Window
-      System} for interactive 3D plotting. This Linux desktop system
-      comes installed in some way or form on most Mac and Windows
-      systems.} of this strange attractor.
+    Run this code \texttt{rgl::plot3d(lorenz)} with both packages loaded
+    to get an interactive 3D plot \footnote{You'll need the
+      \href{http://www.x.org/wiki/}{X Window System} for interactive 3D
+      plotting. This Linux desktop system comes installed in some way or
+      form on most Mac and Windows systems.You can test if it is present
+      by running \texttt{rgl::open3d()}, which will try to open an
+      interactive plotting device} of this strange attractor.
   \end{itemize}
 \end{itemize}
 
-\begin{quote}
-NOTE: Package \texttt{fractal} and package \texttt{nonlinearTseries} use
-functions with similar names, do not load them together.
-\end{quote}
-
 We'll reconstruct the attractor based on just dimension \texttt{X} of
-the system.
+the system using functions from package \texttt{fractal}, be sure to
+look at the manual pages of these functions.
+
+\BeginKnitrBlock{rmdimportant}
+Package \texttt{fractal} and package \texttt{nonlinearTseries} use
+functions with similar names, do not load them together.
+\EndKnitrBlock{rmdimportant}
 
 \begin{itemize}
 \tightlist
 \item
   Use \texttt{lx\ \textless{}-\ lorenz{[}1:2048,1{]}} to reconstruct the
-  phase space.
+  phase space based on \texttt{lx}.
 
   \begin{itemize}
   \tightlist
@@ -2242,8 +2246,7 @@ the system.
     \begin{itemize}
     \tightlist
     \item
-      Use \texttt{rgl::open3d()} to open an interactive plotting device
-      if you like.
+      Use `rgl::
     \end{itemize}
   \end{itemize}
 \end{itemize}
@@ -2272,16 +2275,16 @@ only have continuous data, you migh be better off using package
 \href{https://cran.r-project.org/web/packages/nonlinearTseries/index.html}{\texttt{nonlinearTseries}},
 in this course we will only use package \texttt{crqa}.
 
-\begin{quote}
-NOTE: Package \texttt{crqa()} was designed to run categorical
-Cross-Recurrence Quantification Analysis (see
+\BeginKnitrBlock{rmdimportant}
+Package \texttt{crqa()} was designed to run categorical Cross-Recurrence
+Quantification Analysis (see
 \href{http://journal.frontiersin.org/Journal/10.3389/fpsyg.2014.00510/abstract}{Coco
 \& Dale (2014)} and for R code see appendices in
 \href{http://arxiv.org/abs/1310.0201}{Coco \& Dale (2013)}). We can
 trick it to run auto-RQA by providing the same timeseries for
 \texttt{ts1} and \texttt{ts2} and setting the parameter \texttt{side} to
 either \texttt{"upper"} or \texttt{"lower"}
-\end{quote}
+\EndKnitrBlock{rmdimportant}
 
 \begin{itemize}
 \tightlist
@@ -2399,6 +2402,46 @@ either \texttt{"upper"} or \texttt{"lower"}
 
 \section{Assignment: RQA of circle-tracing
 data}\label{assignment-rqa-of-circle-tracing-data}
+
+\begin{itemize}
+\tightlist
+\item
+  Analyse the
+  \href{https://github.com/FredHasselman/DCS/tree/master/assignmentData/RQA_circletrace}{circle
+  tracing data} we recorded during the lecture.
+\item
+  Study what happens to the RQA measures if you shuffle the temporal
+  order (see e.g.~the solution to th \protect\hyperlink{hrvsol}{HRV
+  assignments}).
+\item
+  Package \texttt{fractal} contains a function \texttt{surrogate}. This
+  will create so-called \emph{constrained} realisations of the time
+  series. Look at the help pages of the function, or study the
+  \emph{Surrogates Manual} of the
+  \href{http://www.mpipks-dresden.mpg.de/~tisean/Tisean_3.0.1/index.html}{TISEAN
+  software} and create two surrogate series, one based on \texttt{phase}
+  and one on \texttt{aaft}.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Look at the RQA measures and think about which \(H_0\) should
+    probably be rejected.
+  \item
+    If you want to be more certain, you'll have to create a test (more
+    surrogates). The
+    \href{http://www.mpipks-dresden.mpg.de/~tisean/Tisean_3.0.1/docs/surropaper/node5.html\#SECTION00030000000000000000}{TISEAN
+    manual} provides all the info you need to construct such a test:
+  \end{itemize}
+
+  \begin{quote}
+  ``For a minimal significance requirement of 95\% , we thus need at
+  least 19 or 39 surrogate time series for one- and two-sided tests,
+  respectively. The conditions for rank based tests with more samples
+  can be easily worked out. Using more surrogates can increase the
+  discrimination power.''
+  \end{quote}
+\end{itemize}
 
 \chapter{\texorpdfstring{\textbf{Categorical and Cross-RQA
 (CRQA)}}{Categorical and Cross-RQA (CRQA)}}\label{CRQA}

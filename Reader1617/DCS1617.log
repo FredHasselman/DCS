@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99996 (TeX Live 2016) (preloaded format=xelatex 2016.9.18)  13 DEC 2016 22:58
+This is XeTeX, Version 3.14159265-2.6-0.99996 (TeX Live 2016) (preloaded format=xelatex 2016.9.18)  14 DEC 2016 03:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1159,11 +1159,9 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 242.
 LaTeX Info: Redefining \pageref on input line 242.
 LaTeX Info: Redefining \nameref on input line 242.
+(./DCS1617.out) (./DCS1617.out)
 \@outlinefile=\write4
 \openout4 = `DCS1617.out'.
-
-
-Package hyperref Warning: Rerun to get /PageLabels entry.
 
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
@@ -1185,6 +1183,7 @@ LaTeX Font Info:    Font shape `EU1/Calibri(0)/m/n' will be
 (Font)              scaled to size 23.09265pt on input line 247.
 LaTeX Font Info:    Font shape `EU1/Calibri(0)/bx/n' will be
 (Font)              scaled to size 22.87627pt on input line 247.
+(./DCS1617.toc)
 \tf@toc=\write5
 \openout5 = `DCS1617.toc'.
 
@@ -1366,10 +1365,10 @@ File: images/important.png Graphic file (type QTm)
 l.593     \EndKnitrBlock{rmdimportant}
                                        
 Here is how much of TeX's memory you used:
- 28172 strings out of 493589
- 494091 string characters out of 6143512
- 552506 words of memory out of 5000000
- 31221 multiletter control sequences out of 15000+600000
+ 28198 strings out of 493589
+ 494430 string characters out of 6143512
+ 554147 words of memory out of 5000000
+ 31241 multiletter control sequences out of 15000+600000
  16543 words of font info for 67 fonts, out of 8000000 for 9000
  1347 hyphenation exceptions out of 8191
  53i,11n,109p,10405b,476s stack positions out of 5000i,500n,10000p,200000b,80000s

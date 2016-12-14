@@ -26,7 +26,7 @@
 <meta name="author" content="Fred Hasselman &amp; Maarten Wijnants">
 
 
-<meta name="date" content="2016-12-13">
+<meta name="date" content="2016-12-14">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -278,6 +278,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="assignment-rqa-of-circle-tracing-data" class="section level2">
 <h2><span class="header-section-number">7.4</span> Assignment: RQA of circle-tracing data</h2>
+<ul>
+<li>Analyse the <a href="https://github.com/FredHasselman/DCS/tree/master/assignmentData/RQA_circletrace">circle tracing data</a> we recorded during the lecture.</li>
+<li>Study what happens to the RQA measures if you shuffle the temporal order (see e.g. the solution to th <a href="hrvsol.html#hrvsol">HRV assignments</a>).</li>
+<li>Package <code>fractal</code> contains a function <code>surrogate</code>. This will create so-called <em>constrained</em> realisations of the time series. Look at the help pages of the function, or study the <em>Surrogates Manual</em> of the <a href="http://www.mpipks-dresden.mpg.de/~tisean/Tisean_3.0.1/index.html">TISEAN software</a> and create two surrogate series, one based on <code>phase</code> and one on <code>aaft</code>.
+<ul>
+<li>Look at the RQA measures and think about which <span class="math inline">\(H_0\)</span> should probably be rejected.</li>
+<li>If you want to be more certain, you’ll have to create a test (more surrogates). The <a href="http://www.mpipks-dresden.mpg.de/~tisean/Tisean_3.0.1/docs/surropaper/node5.html#SECTION00030000000000000000">TISEAN manual</a> provides all the info you need to construct such a test:</li>
+</ul>
+<blockquote>
+<p>“For a minimal significance requirement of 95% , we thus need at least 19 or 39 surrogate time series for one- and two-sided tests, respectively. The conditions for rank based tests with more samples can be easily worked out. Using more surrogates can increase the discrimination power.”</p>
+</blockquote></li>
+</ul>
 </div>
 <!-- </div> -->
             </section>

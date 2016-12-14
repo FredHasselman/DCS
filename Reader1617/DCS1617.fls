@@ -210,7 +210,13 @@ INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/hyperref/nameref.sty
 INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/hyperref/nameref.sty
 INPUT /usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 INPUT /usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
+INPUT DCS1617.out
+INPUT DCS1617.out
+INPUT DCS1617.out
+INPUT DCS1617.out
 OUTPUT DCS1617.out
+INPUT DCS1617.toc
+INPUT DCS1617.toc
 OUTPUT DCS1617.toc
 INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/euenc/eu1lmtt.fd
 INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/euenc/eu1lmtt.fd

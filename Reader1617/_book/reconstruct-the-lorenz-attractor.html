@@ -26,7 +26,7 @@
 <meta name="author" content="Fred Hasselman &amp; Maarten Wijnants">
 
 
-<meta name="date" content="2016-12-13">
+<meta name="date" content="2016-12-14">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -279,24 +279,26 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="reconstruct-the-lorenz-attractor" class="section level2">
 <h2><span class="header-section-number">7.1</span> Reconstruct the Lorenz attractor</h2>
 <ul>
-<li>Package fractal includes the 3 dimensions of the Lorenz system in the chaotic regime.
+<li>Package <code>fractal</code> includes the 3 dimensions of the Lorenz system in the chaotic regime.
 <ul>
-<li>Run this code <code>plot3d(lorenz)</code> to get an interactive 3D plot<a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a> of this strange attractor.</li>
+<li>Run this code <code>rgl::plot3d(lorenz)</code> with both packages loaded to get an interactive 3D plot<a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a> of this strange attractor.</li>
 </ul></li>
 </ul>
-<blockquote>
-<p>NOTE: Package <code>fractal</code> and package <code>nonlinearTseries</code> use functions with similar names, do not load them together.</p>
-</blockquote>
-<p>We’ll reconstruct the attractor based on just dimension <code>X</code> of the system.</p>
+<p>We’ll reconstruct the attractor based on just dimension <code>X</code> of the system using functions from package <code>fractal</code>, be sure to look at the manual pages of these functions.</p>
+
+<div class="rmdimportant">
+Package <code>fractal</code> and package <code>nonlinearTseries</code> use functions with similar names, do not load them together.
+</div>
+<p></p>
 <ul>
-<li>Use <code>lx &lt;- lorenz[1:2048,1]</code> to reconstruct the phase space.
+<li>Use <code>lx &lt;- lorenz[1:2048,1]</code> to reconstruct the phase space based on <code>lx</code>.
 <ul>
 <li>Find an optimal embedding lag using <code>timeLag()</code>, use <code>method = &quot;mutual&quot;</code>.</li>
 <li>Find the embedding dimension, using <code>FNN()</code></li>
 <li>Embed the timeseries using <code>embedSeries()</code>.</li>
 <li>Plot the reconstructed phase space. (You’ll need to use <code>as.matrix()</code> on the object created by <code>embedSeries()</code>)
 <ul>
-<li>Use <code>rgl::open3d()</code> to open an interactive plotting device if you like.</li>
+<li>Use `rgl::</li>
 </ul></li>
 </ul></li>
 </ul>
@@ -304,7 +306,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="footnotes">
 <hr />
 <ol start="4">
-<li id="fn4"><p>You’ll need the <a href="http://www.x.org/wiki/">X Window System</a> for interactive 3D plotting. This Linux desktop system comes installed in some way or form on most Mac and Windows systems.<a href="reconstruct-the-lorenz-attractor.html#fnref4">↩</a></p></li>
+<li id="fn4"><p>You’ll need the <a href="http://www.x.org/wiki/">X Window System</a> for interactive 3D plotting. This Linux desktop system comes installed in some way or form on most Mac and Windows systems.You can test if it is present by running <code>rgl::open3d()</code>, which will try to open an interactive plotting device<a href="reconstruct-the-lorenz-attractor.html#fnref4">↩</a></p></li>
 </ol>
 </div>
             </section>
