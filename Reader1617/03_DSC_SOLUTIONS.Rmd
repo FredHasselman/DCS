@@ -1267,12 +1267,13 @@ df <- ldply(1:99, function(s) data.frame(crqaOutput.sur.aaft[[s]][1:9]))
 
 # Add the original
 df[100,] <- data.frame(crqaOutput2[1:9])
-export(df,"crqaOutput_aaft.csv")
+export(df,"crqaOutput_aaft.csv") 
 ```
 
 Now lets compare the original RQA measures to to the surrogate measures by rank order.
 
 ```{r}
+df <- import("https://raw.githubusercontent.com/FredHasselman/DCS/master/assignmentData/RQA_circletrace/crqaOutput_aaft.csv")
 dotplot(1:100~sort(DET), data=df)
 # Our observed determinism was the largest value
 (max(df$DET)==crqaOutput2$DET)
