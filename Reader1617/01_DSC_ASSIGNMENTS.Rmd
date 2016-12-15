@@ -43,7 +43,7 @@ Besure to check [the solutions of the assigment](#moc1Rsol) which provide exampl
 
 ## The Linear Map
 
-Equation \@ref(eq:linmap) is the ordinary difference equation (ODE) discussed in the lecture (see lecture notes \@ref(Lecture-1)) is called the *Linear Map*:
+Equation \@ref(eq:linmap) is the ordinary difference equation (ODE) discussed in the lecture (see lecture notes \@ref(lecture-1)) is called the *Linear Map*:
 
 \begin{equation}
 Y_{t+1} = Y_{t=0} + r*Y_t
