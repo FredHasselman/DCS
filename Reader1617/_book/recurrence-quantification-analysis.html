@@ -26,7 +26,7 @@
 <meta name="author" content="Fred Hasselman &amp; Maarten Wijnants">
 
 
-<meta name="date" content="2016-12-15">
+<meta name="date" content="2016-12-21">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -34,7 +34,7 @@
   
   
 <link rel="prev" href="phase-space-reconstruction-of-the-predator-prey-system.html">
-<link rel="next" href="rqa-of-the-circle-tracing-task.html">
+<link rel="next" href="RQAsol.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -186,13 +186,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.5" data-path="chaos.html"><a href="chaos.html"><i class="fa fa-check"></i><b>5.5</b> Analysis of Deterministic Chaos</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="fda2.html"><a href="fda2.html"><i class="fa fa-check"></i><b>6</b> Fluctuation and Disperion analyses II</a></li>
-<li class="chapter" data-level="7" data-path="RQA.html"><a href="RQA.html"><i class="fa fa-check"></i><b>7</b> <strong>Phase Space Reconstruction and RQA</strong></a><ul>
-<li class="chapter" data-level="7.1" data-path="reconstruct-the-lorenz-attractor.html"><a href="reconstruct-the-lorenz-attractor.html"><i class="fa fa-check"></i><b>7.1</b> Reconstruct the Lorenz attractor</a></li>
+<li class="chapter" data-level="7" data-path="phase-space-reconstruction-and-rqa.html"><a href="phase-space-reconstruction-and-rqa.html"><i class="fa fa-check"></i><b>7</b> <strong>Phase Space Reconstruction and RQA</strong></a><ul>
+<li class="chapter" data-level="7.1" data-path="RQA.html"><a href="RQA.html"><i class="fa fa-check"></i><b>7.1</b> Reconstruct the Lorenz attractor</a></li>
 <li class="chapter" data-level="7.2" data-path="reconstruct-the-predator-prey-model.html"><a href="reconstruct-the-predator-prey-model.html"><i class="fa fa-check"></i><b>7.2</b> Reconstruct the Predator-Prey model</a></li>
 <li class="chapter" data-level="7.3" data-path="assignment-auto-recurrence-quantification-analysis.html"><a href="assignment-auto-recurrence-quantification-analysis.html"><i class="fa fa-check"></i><b>7.3</b> Assignment: (auto-) Recurrence Quantification Analysis</a></li>
 <li class="chapter" data-level="7.4" data-path="assignment-rqa-of-circle-tracing-data.html"><a href="assignment-rqa-of-circle-tracing-data.html"><i class="fa fa-check"></i><b>7.4</b> Assignment: RQA of circle-tracing data</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="CRQA.html"><a href="CRQA.html"><i class="fa fa-check"></i><b>8</b> <strong>Categorical and Cross-RQA (CRQA)</strong></a></li>
+<li class="chapter" data-level="8" data-path="categorical-and-cross-rqa-crqa.html"><a href="categorical-and-cross-rqa-crqa.html"><i class="fa fa-check"></i><b>8</b> <strong>Categorical and Cross-RQA (CRQA)</strong></a><ul>
+<li class="chapter" data-level="8.1" data-path="CRQA.html"><a href="CRQA.html"><i class="fa fa-check"></i><b>8.1</b> Assignment: CRQA and Diagonal Profile</a></li>
+<li class="chapter" data-level="8.2" data-path="catCRQA.html"><a href="catCRQA.html"><i class="fa fa-check"></i><b>8.2</b> Assignment: Categorical CRQA</a></li>
+</ul></li>
 <li class="chapter" data-level="9" data-path="cusp.html"><a href="cusp.html"><i class="fa fa-check"></i><b>9</b> Potential and Catasrophe Models</a></li>
 <li class="chapter" data-level="10" data-path="nets.html"><a href="nets.html"><i class="fa fa-check"></i><b>10</b> Complex Networks</a></li>
 <li class="part"><span><b>II Lecture Notes</b></span></li>
@@ -250,36 +253,41 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="D" data-path="fda1sol.html"><a href="fda1sol.html"><i class="fa fa-check"></i><b>D</b> <strong>Fluctuation and Disperion analyses I</strong></a><ul>
 <li class="chapter" data-level="D.1" data-path="psdsol.html"><a href="psdsol.html"><i class="fa fa-check"></i><b>D.1</b> Assignment: The Spectral Slope</a><ul>
-<li class="chapter" data-level="D.1.1" data-path="psdsol.html"><a href="psdsol.html#example-of-using---ply-functions"><i class="fa fa-check"></i><b>D.1.1</b> Example of using <code>--ply</code> functions</a></li>
-<li class="chapter" data-level="D.1.2" data-path="psdsol.html"><a href="psdsol.html#data-preparation"><i class="fa fa-check"></i><b>D.1.2</b> Data preparation</a></li>
-<li class="chapter" data-level="D.1.3" data-path="psdsol.html"><a href="psdsol.html#time-series-length"><i class="fa fa-check"></i><b>D.1.3</b> Time-series length</a></li>
-<li class="chapter" data-level="D.1.4" data-path="psdsol.html"><a href="psdsol.html#the-fd.psd-function"><i class="fa fa-check"></i><b>D.1.4</b> The <code>fd.psd</code> function</a></li>
+<li><a href="psdsol.html#example-of-using---ply-functions">Example of using <code>--ply</code> functions</a></li>
+<li class="chapter" data-level="" data-path="psdsol.html"><a href="psdsol.html#data-preparation"><i class="fa fa-check"></i>Data preparation</a></li>
+<li class="chapter" data-level="" data-path="psdsol.html"><a href="psdsol.html#time-series-length"><i class="fa fa-check"></i>Time-series length</a></li>
+<li><a href="psdsol.html#the-fd.psd-function">The <code>fd.psd</code> function</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="E" data-path="fda1so2.html"><a href="fda1so2.html"><i class="fa fa-check"></i><b>E</b> <strong>Fluctuation and Disperion analyses II</strong></a></li>
-<li class="chapter" data-level="F" data-path="RQAsol.html"><a href="RQAsol.html"><i class="fa fa-check"></i><b>F</b> <strong>Phase Space Reconstruction and Recurrence Quantification Analysis (RQA)</strong></a><ul>
-<li class="chapter" data-level="" data-path="phase-space-reconstruction-of-the-lorenz-attractor.html"><a href="phase-space-reconstruction-of-the-lorenz-attractor.html"><i class="fa fa-check"></i>Phase Space Reconstruction of the Lorenz Attractor</a><ul>
-<li class="chapter" data-level="" data-path="phase-space-reconstruction-of-the-lorenz-attractor.html"><a href="phase-space-reconstruction-of-the-lorenz-attractor.html#embedding-lag"><i class="fa fa-check"></i>Embedding Lag</a></li>
-<li class="chapter" data-level="" data-path="phase-space-reconstruction-of-the-lorenz-attractor.html"><a href="phase-space-reconstruction-of-the-lorenz-attractor.html#false-nearest-neighbours"><i class="fa fa-check"></i>False Nearest Neighbours</a></li>
-<li class="chapter" data-level="" data-path="phase-space-reconstruction-of-the-lorenz-attractor.html"><a href="phase-space-reconstruction-of-the-lorenz-attractor.html#plot-the-reconstructed-phase-space"><i class="fa fa-check"></i>Plot the reconstructed phase space</a></li>
+<li class="chapter" data-level="F" data-path="phase-space-reconstruction-and-recurrence-quantification-analysis-rqa.html"><a href="phase-space-reconstruction-and-recurrence-quantification-analysis-rqa.html"><i class="fa fa-check"></i><b>F</b> <strong>Phase Space Reconstruction and Recurrence Quantification Analysis (RQA)</strong></a><ul>
+<li class="chapter" data-level="F.1" data-path="PSRsol.html"><a href="PSRsol.html"><i class="fa fa-check"></i><b>F.1</b> Phase Space Reconstruction of the Lorenz Attractor</a><ul>
+<li class="chapter" data-level="" data-path="PSRsol.html"><a href="PSRsol.html#embedding-lag"><i class="fa fa-check"></i>Embedding Lag</a></li>
+<li class="chapter" data-level="" data-path="PSRsol.html"><a href="PSRsol.html#false-nearest-neighbours"><i class="fa fa-check"></i>False Nearest Neighbours</a></li>
+<li class="chapter" data-level="" data-path="PSRsol.html"><a href="PSRsol.html#plot-the-reconstructed-phase-space"><i class="fa fa-check"></i>Plot the reconstructed phase space</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="phase-space-reconstruction-of-the-predator-prey-system.html"><a href="phase-space-reconstruction-of-the-predator-prey-system.html"><i class="fa fa-check"></i>Phase Space Reconstruction of the Predator-Prey system</a><ul>
+<li class="chapter" data-level="F.2" data-path="phase-space-reconstruction-of-the-predator-prey-system.html"><a href="phase-space-reconstruction-of-the-predator-prey-system.html"><i class="fa fa-check"></i><b>F.2</b> Phase Space Reconstruction of the Predator-Prey system</a><ul>
 <li class="chapter" data-level="" data-path="phase-space-reconstruction-of-the-predator-prey-system.html"><a href="phase-space-reconstruction-of-the-predator-prey-system.html#embedding-lag-1"><i class="fa fa-check"></i>Embedding Lag</a></li>
 <li class="chapter" data-level="" data-path="phase-space-reconstruction-of-the-predator-prey-system.html"><a href="phase-space-reconstruction-of-the-predator-prey-system.html#false-nearest-neighbours-1"><i class="fa fa-check"></i>False Nearest Neighbours</a></li>
 <li class="chapter" data-level="" data-path="phase-space-reconstruction-of-the-predator-prey-system.html"><a href="phase-space-reconstruction-of-the-predator-prey-system.html#plot-the-reconstructed-phase-space-1"><i class="fa fa-check"></i>Plot the reconstructed phase space</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="G" data-path="recurrence-quantification-analysis.html"><a href="recurrence-quantification-analysis.html"><i class="fa fa-check"></i><b>G</b> <strong>Recurrence Quantification Analysis</strong></a></li>
-<li class="chapter" data-level="H" data-path="rqa-of-the-circle-tracing-task.html"><a href="rqa-of-the-circle-tracing-task.html"><i class="fa fa-check"></i><b>H</b> <strong>RQA of the Circle Tracing Task</strong></a><ul>
+<li class="chapter" data-level="G" data-path="recurrence-quantification-analysis.html"><a href="recurrence-quantification-analysis.html"><i class="fa fa-check"></i><b>G</b> <strong>Recurrence Quantification Analysis</strong></a><ul>
+<li class="chapter" data-level="G.1" data-path="RQAsol.html"><a href="RQAsol.html"><i class="fa fa-check"></i><b>G.1</b> RQA of the Lorenz system</a></li>
+<li class="chapter" data-level="G.2" data-path="rqa-of-the-circle-tracing-task.html"><a href="rqa-of-the-circle-tracing-task.html"><i class="fa fa-check"></i><b>G.2</b> RQA of the Circle Tracing Task</a><ul>
 <li class="chapter" data-level="" data-path="rqa-of-the-circle-tracing-task.html"><a href="rqa-of-the-circle-tracing-task.html#embedding-lag-2"><i class="fa fa-check"></i>Embedding lag</a></li>
 <li class="chapter" data-level="" data-path="rqa-of-the-circle-tracing-task.html"><a href="rqa-of-the-circle-tracing-task.html#false-nearest-neighbours-2"><i class="fa fa-check"></i>False Nearest Neighbours</a></li>
-<li class="chapter" data-level="H.0.1" data-path="rqa-of-the-circle-tracing-task.html"><a href="rqa-of-the-circle-tracing-task.html#run-the-rqa"><i class="fa fa-check"></i><b>H.0.1</b> Run the RQA</a></li>
+<li class="chapter" data-level="" data-path="rqa-of-the-circle-tracing-task.html"><a href="rqa-of-the-circle-tracing-task.html#run-the-rqa"><i class="fa fa-check"></i>Run the RQA</a></li>
 <li class="chapter" data-level="" data-path="rqa-of-the-circle-tracing-task.html"><a href="rqa-of-the-circle-tracing-task.html#surrogate-analysis"><i class="fa fa-check"></i>Surrogate analysis</a></li>
 <li class="chapter" data-level="" data-path="rqa-of-the-circle-tracing-task.html"><a href="rqa-of-the-circle-tracing-task.html#a-statistical-test-of-the-surrogate-hypotheses"><i class="fa fa-check"></i>A statistical test of the surrogate hypotheses</a></li>
 </ul></li>
-<li class="chapter" data-level="I" data-path="CRQAsol.html"><a href="CRQAsol.html"><i class="fa fa-check"></i><b>I</b> <strong>Categorical and Cross-RQA (CRQA)</strong></a></li>
-<li class="chapter" data-level="J" data-path="cuspsol.html"><a href="cuspsol.html"><i class="fa fa-check"></i><b>J</b> <strong>The Cusp Catasrophe Model &amp; Warning Signs</strong></a></li>
-<li class="chapter" data-level="K" data-path="netssol.html"><a href="netssol.html"><i class="fa fa-check"></i><b>K</b> <strong>Complex Networks</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="H" data-path="categorical-and-cross-rqa-crqa-1.html"><a href="categorical-and-cross-rqa-crqa-1.html"><i class="fa fa-check"></i><b>H</b> <strong>Categorical and Cross-RQA (CRQA)</strong></a><ul>
+<li class="chapter" data-level="H.1" data-path="CRQAsol.html"><a href="CRQAsol.html"><i class="fa fa-check"></i><b>H.1</b> Assignment: Cross Recurrence Quantification Analysis</a></li>
+<li class="chapter" data-level="H.2" data-path="catCRQAsol.html"><a href="catCRQAsol.html"><i class="fa fa-check"></i><b>H.2</b> Assignment: Categorical CRQA</a></li>
+</ul></li>
+<li class="chapter" data-level="I" data-path="cuspsol.html"><a href="cuspsol.html"><i class="fa fa-check"></i><b>I</b> <strong>The Cusp Catasrophe Model &amp; Warning Signs</strong></a></li>
+<li class="chapter" data-level="J" data-path="netssol.html"><a href="netssol.html"><i class="fa fa-check"></i><b>J</b> <strong>Complex Networks</strong></a></li>
 <li><a href="bibliography.html#bibliography"><strong>Bibliography</strong></a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="blank">Published with bookdown</a></li>
@@ -302,76 +310,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
             <section class="normal" id="section-">
 <div id="recurrence-quantification-analysis" class="section level1">
-<h1><span class="header-section-number">G</span> <strong>Recurrence Quantification Analysis</strong></h1>
-<ul>
-<li>Perform an RQA on the reconstructed state space of the Lorenz system.
-<ul>
-<li>You’ll need a radius (also called: threshold) in order to decide which points are close together (recurrent).
-<ul>
-<li><code>crqa</code> provides a function which will automatically select the best parametersettings: <code>optimizeParam()</code></li>
-<li>Best way to ensure you are using the same parameters in each function is to create some lists with parametersettings (check the <code>crqa</code> manual to figure out what these parameters mean):</li>
-</ul></li>
-</ul></li>
-</ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># General settings for `crqa()`</span>
-par0 &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">rescale =</span> <span class="dv">1</span>,
-             <span class="dt">normalize =</span> <span class="dv">0</span>,
-             <span class="dt">mindiagline =</span> <span class="dv">2</span>,
-             <span class="dt">minvertline =</span> <span class="dv">2</span>,
-             <span class="dt">tw =</span> <span class="dv">0</span>,
-             <span class="dt">whiteline =</span> <span class="ot">FALSE</span>,
-             <span class="dt">recpt =</span> <span class="ot">FALSE</span>,
-             <span class="dt">side =</span> <span class="st">&quot;lower&quot;</span>,
-             <span class="dt">checkl =</span> <span class="kw">list</span>(<span class="dt">do =</span> <span class="ot">FALSE</span>, <span class="dt">thrshd =</span> <span class="dv">3</span>, <span class="dt">datatype =</span> <span class="st">&quot;categorical&quot;</span>,<span class="dt">pad =</span> <span class="ot">TRUE</span>)
-             )
-
-<span class="co"># Settings for `optimizeParam()`</span>
-par &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">lgM =</span>  <span class="dv">20</span>, <span class="dt">steps =</span> <span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">1</span>),
-           <span class="dt">radiusspan =</span> <span class="dv">100</span>, <span class="dt">radiussample =</span> <span class="dv">40</span>,
-           <span class="dt">normalize =</span> par0$normalize, 
-           <span class="dt">rescale =</span> par0$rescale, 
-           <span class="dt">mindiagline =</span> par0$mindiagline, <span class="dt">minvertline =</span> par0$minvertline,
-           <span class="dt">tw =</span> par0$tw, 
-           <span class="dt">whiteline =</span> par0$whiteline, 
-           <span class="dt">recpt =</span> par0$recpt, 
-           <span class="dt">fnnpercent =</span> <span class="dv">10</span>, <span class="dt">typeami =</span> <span class="st">&quot;mindip&quot;</span>)</code></pre></div>
-<ul>
-<li>Get the optimal parameters using a radius which will give us 2%-5% recurrent points.</li>
-</ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(ans &lt;-<span class="st"> </span><span class="kw">optimizeParam</span>(<span class="dt">ts1 =</span> lxyz$X, <span class="dt">ts2 =</span> lxyz$X, <span class="dt">par =</span> par, <span class="dt">min.rec =</span> <span class="dv">2</span>, <span class="dt">max.rec =</span> <span class="dv">5</span>))</code></pre></div>
-<pre><code>$radius
-[1] 17.2439
-
-$emddim
-[1] 2
-
-$delay
-[1] 18</code></pre>
-<ul>
-<li>Run the RQA analysis using the same settings with which the parameters were found.</li>
-</ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">crqaOutput &lt;-<span class="st"> </span><span class="kw">crqa</span>(<span class="dt">ts1 =</span> lxyz$X, <span class="dt">ts2 =</span> lxyz$X,  
-                  <span class="dt">delay =</span> ans$delay, 
-                  <span class="dt">embed =</span> ans$emddim, 
-                  <span class="dt">radius =</span> ans$radius, 
-                  <span class="dt">normalize =</span> par0$normalize,
-                  <span class="dt">rescale =</span> par0$rescale, 
-                  <span class="dt">mindiagline =</span> par0$mindiagline, <span class="dt">minvertline =</span> par0$minvertline,
-                  <span class="dt">tw =</span> par0$tw, 
-                  <span class="dt">whiteline =</span> par0$whiteline, 
-                  <span class="dt">recpt =</span> par0$recpt, 
-                  <span class="dt">side =</span> par0$side, <span class="dt">checkl =</span> par0$checkl
-                  )</code></pre></div>
-<ul>
-<li>The output of <code>crqa</code> is a list with recurrence measures, the last entry is the recurrence plot. It is represented as a so-called <code>sparse-matrix</code>.
-<ul>
-<li>This representation severely decreases the amount of memory occupied by the recurrence matrix. It is basically a list of indices of cells that contain a <span class="math inline">\(1\)</span>. The <span class="math inline">\(0\)</span> do not need to be stored.</li>
-<li>In order to plot this matrix you could use <code>image()</code>, but this does not produce the recurrence plot as they are usually displayed, the y-axis needs to be flipped.</li>
-<li>We created a function which will take as input the list output of <code>crqa</code>, together with <code>lattice::levelplot</code> the recurrence matrix can be created. If you have loaded (or sourced) the <code>nlRtsa</code> package you can call <code>plotRP.crqa(crqaOutput)</code>.</li>
-</ul></li>
-</ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plotRP.crqa</span>(crqaOutput)</code></pre></div>
-<p><img src="DCS1617_files/figure-html/unnamed-chunk-76-1.png" width="672" /></p>
+<h1><span class="header-section-number">G</span> <strong>Recurrence Quantification Analysis</strong></h1> 
 </div>
             </section>
 
@@ -379,7 +318,7 @@ $delay
         </div>
       </div>
 <a href="phase-space-reconstruction-of-the-predator-prey-system.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="rqa-of-the-circle-tracing-task.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="RQAsol.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>

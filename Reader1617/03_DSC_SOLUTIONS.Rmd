@@ -836,7 +836,7 @@ colnames(TS3) <- "TS3"
 ```
 
 
-### Example of using `--ply` functions 
+### Example of using `--ply` functions {-}
 Let's try to use as few commands as possible to analyse all three timeseries.
 The easiest way to do this is to use the so-called `apply` family of functions. 
 
@@ -850,7 +850,7 @@ The first command *applies* `import` to all files with a `.sav` extension found 
 
 `R` comes with several `apply` functions installed, but an easier interface is provided by package `plyr`. When `plyr` is loaded you can use functions of the type `XYply` where `X` denotes the first letter of the input structure and `Y` the ouput structure: `l` for `list`, `d` `for 'data.frame`, `a` for `array`. So, `laply()` expects a listobject as input and will try to create an array as outout. There is also a special symbol for `Y`, the underscore `_` if no output is expected, e.g. when plotting, `l_ply`.
 
-### Data preparation
+### Data preparation {-}
 Let's prepare these series for spectral analysis.
 ```{r, message=TRUE, warning=TRUE}
 library(plyr)
@@ -872,7 +872,7 @@ TSlist.nd <- llply(TSlist.n, detrend)
 l_ply(TSlist.nd, plot.ts)
 ```
 
-### Time-series length
+### Time-series length {-}
 Another preparation concerns checking wether the length of the series is a power of 2 (or 10). This is necessary for the Fourier transfrom to run smoothly. The code below uses `log2` and `nextpow2` to figure out whether the data length is ok. 
 
 What is different from previous uses of the `XYply` functions is that we now customise the function we want to execute. The input is still a list object, each element of the list is passed as a variable `ts` to a so-called `anonymous` function, a function just denoted as `function(ts)`. The function returns a data.frame with columns `pow2`, the current power of 2 and `nextpow2` (a function of `pracma`) the next power of 2. 
@@ -886,7 +886,7 @@ ldply(TSlist.nd, function(ts) data.frame(pow2 = log2(length(ts)), nextpow2 = nex
 * Actions that could be taken are: removing datapoints from the front of the series, or, padding the series with zeroes.
 
 
-### The `fd.psd` function
+### The `fd.psd` function {-}
 The function created for spectral analysis `fd.psd()` will perform normalisation and detrending by default. It also returns information about the power spectrum and log-log fit. It's good to know about the default settings of a function, and the return values. The best place to look for them is usually the `help` documentation, or the `vignettes` that come with a package.
 
 If you select a function in `Rstudio` and press `F1` you'll get the help page, If you press `F2` can have a look at the code (if it is `exported`), or, you can call the function without parentheses `fd.psd` and the code will be printed to the Console.
@@ -913,8 +913,7 @@ outPSD <- llply(TSlist.nd, fd.psd, normalize = FALSE, dtrend = FALSE, plot=TRUE)
 
 There were no assignments for this Lecture.
 
-# **Phase Space Reconstruction and Recurrence Quantification Analysis (RQA)** {#RQAsol}
-
+# **Phase Space Reconstruction and Recurrence Quantification Analysis (RQA)** 
 
 First load some libraries .
 ```{r, message=FALSE, cache=FALSE, tidy=FALSE}
@@ -929,7 +928,9 @@ library(lattice)
 source_url("https://raw.githubusercontent.com/FredHasselman/DCS/master/functionLib/nlRtsa_SOURCE.R")
 ```
 
-## Phase Space Reconstruction of the Lorenz Attractor {-}
+## Phase Space Reconstruction of the Lorenz Attractor {#PSRsol}
+
+[| Jump to assignment |](#PSR)
 
 Instead of `rgl::plot3d` we use `plot3D::scatter3D` to display the Lorenz attractor, because the 3D interactive plot doesn't run inside this webbook.
 ```{r}
@@ -979,7 +980,7 @@ Or use `plot3D`
 plot3D::scatter3D(lxxx[, 1], lxxx[,2], lxxx[,3], pch=".", col = "black", colkey = FALSE, type = "l")
 ```
 
-## Phase Space Reconstruction of the Predator-Prey system {-}
+## Phase Space Reconstruction of the Predator-Prey system
 
 Get some iterations from the Predator-Prey system.
 ```{r, eval=TRUE}
@@ -1035,6 +1036,11 @@ plot(lRR, pch=".", col = "black", type = "l")
 ```
 
 # **Recurrence Quantification Analysis** 
+
+
+## RQA of the Lorenz system {#RQAsol}
+
+[| Jump to assignment |](#RQA)
 
 * Perform an RQA on the reconstructed state space of the Lorenz system.
     + You'll need a radius (also called: threshold) in order to decide which points are close together (recurrent).
@@ -1098,7 +1104,8 @@ crqaOutput <- crqa(ts1 = lxyz$X, ts2 = lxyz$X,
 plotRP.crqa(crqaOutput)
 ```
 
-# **RQA of the Circle Tracing Task** 
+
+## RQA of the Circle Tracing Task
 
 Get the data generated during the lecture.
 ```{r, eval=TRUE, tidy = FALSE}
@@ -1155,7 +1162,7 @@ par <- list(lgM =  100, steps = seq(1, 6, 1),
 
 The suggested embedding dimension is $3$, the delay (lag) is somewhat higher, $94$ than `r lagXc`. These different values for the embedding lag shouldn't influence the global pattern of the resuts.
 
-### Run the RQA
+### Run the RQA {-}
 
 Run RQA with the optimal parameters.
 ```{r, tidy=FALSE}
@@ -1193,6 +1200,8 @@ crqaOutput2 <- crqa(ts1 = xy$x, ts2 = xy$x,
 
 plotRP.crqa(crqaOutput2)
 ```
+
+{#RQA}
 
 ### Surrogate analysis {-}
 
@@ -1287,9 +1296,121 @@ rbind.data.frame(maxSurrogate=colwise(max)(df[1:99,]), original= df[100,])
 
 ```
 
-# **Categorical and Cross-RQA (CRQA)** {#CRQAsol}
+# **Categorical and Cross-RQA (CRQA)** 
+
+```{r, echo=FALSE}
+SOLUTION = TRUE
+```
+
+If you haven't done so already, look at the solutions to the [auto-RQA assignments](#RQAsol)
+
+## Assignment: Cross Recurrence Quantification Analysis {#CRQAsol}
+
+[| Jump to assignment |](#CRQA)
+
+1. Create two variables for CRQA analysis:
+```{r}
+y1 <- sin(1:900*2*pi/67)
+y2 <- sin(.01*(1:900*2*pi/67)^2)
+```
+
+2. You have just created two sine waves. We’ll examine if and how they are coupled in a shared phase space. As a first step plot them.
+
+
+3. Find an embedding delay (using mutual information) and an embedding dimension (if you calculate an embedding dimension using package `fractal` for each signal seperately, as a rule of thumb use the highest embedding dimension you find in further analyses).
+
+```{r, tidy=FALSE, eval=SOLUTION}
+# General settings for `crqa()`
+par0 <- list(rescale = 0,
+             normalize = 0,
+             mindiagline = 2,
+             minvertline = 2,
+             tw = 0,
+             whiteline = FALSE,
+             recpt = FALSE,
+             side = "both",
+             checkl = list(do = FALSE, thrshd = 3, datatype = "categorical",pad = TRUE)
+             )
+
+# Settings for `optimizeParam()`
+par <- list(lgM =  20, steps = seq(1, 6, 1),
+           radiusspan = 100, radiussample = 40,
+           normalize = par0$normalize, 
+           rescale = par0$rescale, 
+           mindiagline = par0$mindiagline, minvertline = par0$minvertline,
+           tw = par0$tw, 
+           whiteline = par0$whiteline, 
+           recpt = par0$recpt, 
+           fnnpercent = 10, typeami = "mindip")
+```
+
+
+4. We can now create a cross recurrence matrix. Fill in the values you decided on. You can choose a radius automatically, look in the `crqa` manual.  
+
+> Note: There is no rescaling of data, the sines were created in the same range. You can plot a matrix using `image()`. You could also check package `nonlinearTseries`. If you sourced the `nlRtsa` library, use `plotRP.crqa()`
+
+* Get the optimal parameters using a radius which will give us 2\%-5\% recurrent points.
+
+```{r, eval=SOLUTION}
+(ans <- optimizeParam(ts1 = y1, ts2 = y2, par = par, min.rec = 2, max.rec = 5))
+```
+
+5. Run the CRQA.
+
+```{r, tidy=FALSE, echo=SOLUTION, eval=SOLUTION}
+crqaOutput <- crqa(ts1 = y1, ts2 = y2,  
+                  delay = ans$delay, 
+                  embed = ans$emddim, 
+                  radius = ans$radius, 
+                  normalize = par0$normalize,
+                  rescale = par0$rescale, 
+                  mindiagline = par0$mindiagline, minvertline = par0$minvertline,
+                  tw = par0$tw, 
+                  whiteline = par0$whiteline, 
+                  recpt = par0$recpt, 
+                  side = par0$side, checkl = par0$checkl
+                  )
+```
+
+6. Can you understand what is going on? Explain the the lack of recurrent points at the beginning of the time series.
+
+```{r, echo=SOLUTION, eval=SOLUTION}
+plotRP.crqa(crqaOutput)
+```
+
+7. Examine the synchronisation under the diagonal LOS. Look in the manual of `crqa` or  [Coco & Dale (2014)](http://journal.frontiersin.org/Journal/10.3389/fpsyg.2014.00510/abstract). 
+
+8. Make a plot of the diagonal profie. How far is the peak in RR removes from 0 (Line of Synchronisation)?
+
+This is based on the timeseries (without embedding)
+```{r, echo=SOLUTION, eval=SOLUTION}
+win <- 50
+(res <-  drpdfromts(y1, y2, ws = win, datatype = 'continuous', radius = ans$radius))[2:3]
+plot(-win:win,res$profile,type = "l", lwd = 5, xlab = "Delays", ylab = "Recurrence")
+abline(v=0)
+```
+
+To get the diagonal profile from the recurrence plot, use `spdiags()`.
+```{r, echo=SOLUTION, eval=SOLUTION}
+dprofile <- spdiags(crqaOutput$RP)
+plot(-win:win,colMeans(dprofile$B[, between(dprofile$d, -win,win)]), type="l", 
+     lwd = 5, xlab = "Delays", ylab = "Recurrence")
+abline(v=0)
+```
+
+9. Perform the same steps with a shuffled version (or use surrogate analysis!) of the data of timeseries $y1$. You can use the embedding parameters you found earlier. 
+
+
+## Assignment: Categorical CRQA {#catCRQAsol}
+
+The solutions are basically in the paper by [Coco & Dale](), the purpose here is to introduce the parametersettings used for `CRQA`.
+
+[| Jump to assignment |](#catCRQA)
+
 
 # **The Cusp Catasrophe  Model & Warning Signs** {#cuspsol}
+
+
 
 # **Complex Networks** {#netssol}
 

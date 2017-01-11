@@ -26,7 +26,7 @@
 <meta name="author" content="Fred Hasselman &amp; Maarten Wijnants">
 
 
-<meta name="date" content="2016-12-15">
+<meta name="date" content="2016-12-21">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -186,13 +186,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.5" data-path="chaos.html"><a href="chaos.html"><i class="fa fa-check"></i><b>5.5</b> Analysis of Deterministic Chaos</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="fda2.html"><a href="fda2.html"><i class="fa fa-check"></i><b>6</b> Fluctuation and Disperion analyses II</a></li>
-<li class="chapter" data-level="7" data-path="RQA.html"><a href="RQA.html"><i class="fa fa-check"></i><b>7</b> <strong>Phase Space Reconstruction and RQA</strong></a><ul>
-<li class="chapter" data-level="7.1" data-path="reconstruct-the-lorenz-attractor.html"><a href="reconstruct-the-lorenz-attractor.html"><i class="fa fa-check"></i><b>7.1</b> Reconstruct the Lorenz attractor</a></li>
+<li class="chapter" data-level="7" data-path="phase-space-reconstruction-and-rqa.html"><a href="phase-space-reconstruction-and-rqa.html"><i class="fa fa-check"></i><b>7</b> <strong>Phase Space Reconstruction and RQA</strong></a><ul>
+<li class="chapter" data-level="7.1" data-path="RQA.html"><a href="RQA.html"><i class="fa fa-check"></i><b>7.1</b> Reconstruct the Lorenz attractor</a></li>
 <li class="chapter" data-level="7.2" data-path="reconstruct-the-predator-prey-model.html"><a href="reconstruct-the-predator-prey-model.html"><i class="fa fa-check"></i><b>7.2</b> Reconstruct the Predator-Prey model</a></li>
 <li class="chapter" data-level="7.3" data-path="assignment-auto-recurrence-quantification-analysis.html"><a href="assignment-auto-recurrence-quantification-analysis.html"><i class="fa fa-check"></i><b>7.3</b> Assignment: (auto-) Recurrence Quantification Analysis</a></li>
 <li class="chapter" data-level="7.4" data-path="assignment-rqa-of-circle-tracing-data.html"><a href="assignment-rqa-of-circle-tracing-data.html"><i class="fa fa-check"></i><b>7.4</b> Assignment: RQA of circle-tracing data</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="CRQA.html"><a href="CRQA.html"><i class="fa fa-check"></i><b>8</b> <strong>Categorical and Cross-RQA (CRQA)</strong></a></li>
+<li class="chapter" data-level="8" data-path="categorical-and-cross-rqa-crqa.html"><a href="categorical-and-cross-rqa-crqa.html"><i class="fa fa-check"></i><b>8</b> <strong>Categorical and Cross-RQA (CRQA)</strong></a><ul>
+<li class="chapter" data-level="8.1" data-path="CRQA.html"><a href="CRQA.html"><i class="fa fa-check"></i><b>8.1</b> Assignment: CRQA and Diagonal Profile</a></li>
+<li class="chapter" data-level="8.2" data-path="catCRQA.html"><a href="catCRQA.html"><i class="fa fa-check"></i><b>8.2</b> Assignment: Categorical CRQA</a></li>
+</ul></li>
 <li class="chapter" data-level="9" data-path="cusp.html"><a href="cusp.html"><i class="fa fa-check"></i><b>9</b> Potential and Catasrophe Models</a></li>
 <li class="chapter" data-level="10" data-path="nets.html"><a href="nets.html"><i class="fa fa-check"></i><b>10</b> Complex Networks</a></li>
 <li class="part"><span><b>II Lecture Notes</b></span></li>
@@ -250,36 +253,41 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="D" data-path="fda1sol.html"><a href="fda1sol.html"><i class="fa fa-check"></i><b>D</b> <strong>Fluctuation and Disperion analyses I</strong></a><ul>
 <li class="chapter" data-level="D.1" data-path="psdsol.html"><a href="psdsol.html"><i class="fa fa-check"></i><b>D.1</b> Assignment: The Spectral Slope</a><ul>
-<li class="chapter" data-level="D.1.1" data-path="psdsol.html"><a href="psdsol.html#example-of-using---ply-functions"><i class="fa fa-check"></i><b>D.1.1</b> Example of using <code>--ply</code> functions</a></li>
-<li class="chapter" data-level="D.1.2" data-path="psdsol.html"><a href="psdsol.html#data-preparation"><i class="fa fa-check"></i><b>D.1.2</b> Data preparation</a></li>
-<li class="chapter" data-level="D.1.3" data-path="psdsol.html"><a href="psdsol.html#time-series-length"><i class="fa fa-check"></i><b>D.1.3</b> Time-series length</a></li>
-<li class="chapter" data-level="D.1.4" data-path="psdsol.html"><a href="psdsol.html#the-fd.psd-function"><i class="fa fa-check"></i><b>D.1.4</b> The <code>fd.psd</code> function</a></li>
+<li><a href="psdsol.html#example-of-using---ply-functions">Example of using <code>--ply</code> functions</a></li>
+<li class="chapter" data-level="" data-path="psdsol.html"><a href="psdsol.html#data-preparation"><i class="fa fa-check"></i>Data preparation</a></li>
+<li class="chapter" data-level="" data-path="psdsol.html"><a href="psdsol.html#time-series-length"><i class="fa fa-check"></i>Time-series length</a></li>
+<li><a href="psdsol.html#the-fd.psd-function">The <code>fd.psd</code> function</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="E" data-path="fda1so2.html"><a href="fda1so2.html"><i class="fa fa-check"></i><b>E</b> <strong>Fluctuation and Disperion analyses II</strong></a></li>
-<li class="chapter" data-level="F" data-path="RQAsol.html"><a href="RQAsol.html"><i class="fa fa-check"></i><b>F</b> <strong>Phase Space Reconstruction and Recurrence Quantification Analysis (RQA)</strong></a><ul>
-<li class="chapter" data-level="" data-path="phase-space-reconstruction-of-the-lorenz-attractor.html"><a href="phase-space-reconstruction-of-the-lorenz-attractor.html"><i class="fa fa-check"></i>Phase Space Reconstruction of the Lorenz Attractor</a><ul>
-<li class="chapter" data-level="" data-path="phase-space-reconstruction-of-the-lorenz-attractor.html"><a href="phase-space-reconstruction-of-the-lorenz-attractor.html#embedding-lag"><i class="fa fa-check"></i>Embedding Lag</a></li>
-<li class="chapter" data-level="" data-path="phase-space-reconstruction-of-the-lorenz-attractor.html"><a href="phase-space-reconstruction-of-the-lorenz-attractor.html#false-nearest-neighbours"><i class="fa fa-check"></i>False Nearest Neighbours</a></li>
-<li class="chapter" data-level="" data-path="phase-space-reconstruction-of-the-lorenz-attractor.html"><a href="phase-space-reconstruction-of-the-lorenz-attractor.html#plot-the-reconstructed-phase-space"><i class="fa fa-check"></i>Plot the reconstructed phase space</a></li>
+<li class="chapter" data-level="F" data-path="phase-space-reconstruction-and-recurrence-quantification-analysis-rqa.html"><a href="phase-space-reconstruction-and-recurrence-quantification-analysis-rqa.html"><i class="fa fa-check"></i><b>F</b> <strong>Phase Space Reconstruction and Recurrence Quantification Analysis (RQA)</strong></a><ul>
+<li class="chapter" data-level="F.1" data-path="PSRsol.html"><a href="PSRsol.html"><i class="fa fa-check"></i><b>F.1</b> Phase Space Reconstruction of the Lorenz Attractor</a><ul>
+<li class="chapter" data-level="" data-path="PSRsol.html"><a href="PSRsol.html#embedding-lag"><i class="fa fa-check"></i>Embedding Lag</a></li>
+<li class="chapter" data-level="" data-path="PSRsol.html"><a href="PSRsol.html#false-nearest-neighbours"><i class="fa fa-check"></i>False Nearest Neighbours</a></li>
+<li class="chapter" data-level="" data-path="PSRsol.html"><a href="PSRsol.html#plot-the-reconstructed-phase-space"><i class="fa fa-check"></i>Plot the reconstructed phase space</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="phase-space-reconstruction-of-the-predator-prey-system.html"><a href="phase-space-reconstruction-of-the-predator-prey-system.html"><i class="fa fa-check"></i>Phase Space Reconstruction of the Predator-Prey system</a><ul>
+<li class="chapter" data-level="F.2" data-path="phase-space-reconstruction-of-the-predator-prey-system.html"><a href="phase-space-reconstruction-of-the-predator-prey-system.html"><i class="fa fa-check"></i><b>F.2</b> Phase Space Reconstruction of the Predator-Prey system</a><ul>
 <li class="chapter" data-level="" data-path="phase-space-reconstruction-of-the-predator-prey-system.html"><a href="phase-space-reconstruction-of-the-predator-prey-system.html#embedding-lag-1"><i class="fa fa-check"></i>Embedding Lag</a></li>
 <li class="chapter" data-level="" data-path="phase-space-reconstruction-of-the-predator-prey-system.html"><a href="phase-space-reconstruction-of-the-predator-prey-system.html#false-nearest-neighbours-1"><i class="fa fa-check"></i>False Nearest Neighbours</a></li>
 <li class="chapter" data-level="" data-path="phase-space-reconstruction-of-the-predator-prey-system.html"><a href="phase-space-reconstruction-of-the-predator-prey-system.html#plot-the-reconstructed-phase-space-1"><i class="fa fa-check"></i>Plot the reconstructed phase space</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="G" data-path="recurrence-quantification-analysis.html"><a href="recurrence-quantification-analysis.html"><i class="fa fa-check"></i><b>G</b> <strong>Recurrence Quantification Analysis</strong></a></li>
-<li class="chapter" data-level="H" data-path="rqa-of-the-circle-tracing-task.html"><a href="rqa-of-the-circle-tracing-task.html"><i class="fa fa-check"></i><b>H</b> <strong>RQA of the Circle Tracing Task</strong></a><ul>
+<li class="chapter" data-level="G" data-path="recurrence-quantification-analysis.html"><a href="recurrence-quantification-analysis.html"><i class="fa fa-check"></i><b>G</b> <strong>Recurrence Quantification Analysis</strong></a><ul>
+<li class="chapter" data-level="G.1" data-path="RQAsol.html"><a href="RQAsol.html"><i class="fa fa-check"></i><b>G.1</b> RQA of the Lorenz system</a></li>
+<li class="chapter" data-level="G.2" data-path="rqa-of-the-circle-tracing-task.html"><a href="rqa-of-the-circle-tracing-task.html"><i class="fa fa-check"></i><b>G.2</b> RQA of the Circle Tracing Task</a><ul>
 <li class="chapter" data-level="" data-path="rqa-of-the-circle-tracing-task.html"><a href="rqa-of-the-circle-tracing-task.html#embedding-lag-2"><i class="fa fa-check"></i>Embedding lag</a></li>
 <li class="chapter" data-level="" data-path="rqa-of-the-circle-tracing-task.html"><a href="rqa-of-the-circle-tracing-task.html#false-nearest-neighbours-2"><i class="fa fa-check"></i>False Nearest Neighbours</a></li>
-<li class="chapter" data-level="H.0.1" data-path="rqa-of-the-circle-tracing-task.html"><a href="rqa-of-the-circle-tracing-task.html#run-the-rqa"><i class="fa fa-check"></i><b>H.0.1</b> Run the RQA</a></li>
+<li class="chapter" data-level="" data-path="rqa-of-the-circle-tracing-task.html"><a href="rqa-of-the-circle-tracing-task.html#run-the-rqa"><i class="fa fa-check"></i>Run the RQA</a></li>
 <li class="chapter" data-level="" data-path="rqa-of-the-circle-tracing-task.html"><a href="rqa-of-the-circle-tracing-task.html#surrogate-analysis"><i class="fa fa-check"></i>Surrogate analysis</a></li>
 <li class="chapter" data-level="" data-path="rqa-of-the-circle-tracing-task.html"><a href="rqa-of-the-circle-tracing-task.html#a-statistical-test-of-the-surrogate-hypotheses"><i class="fa fa-check"></i>A statistical test of the surrogate hypotheses</a></li>
 </ul></li>
-<li class="chapter" data-level="I" data-path="CRQAsol.html"><a href="CRQAsol.html"><i class="fa fa-check"></i><b>I</b> <strong>Categorical and Cross-RQA (CRQA)</strong></a></li>
-<li class="chapter" data-level="J" data-path="cuspsol.html"><a href="cuspsol.html"><i class="fa fa-check"></i><b>J</b> <strong>The Cusp Catasrophe Model &amp; Warning Signs</strong></a></li>
-<li class="chapter" data-level="K" data-path="netssol.html"><a href="netssol.html"><i class="fa fa-check"></i><b>K</b> <strong>Complex Networks</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="H" data-path="categorical-and-cross-rqa-crqa-1.html"><a href="categorical-and-cross-rqa-crqa-1.html"><i class="fa fa-check"></i><b>H</b> <strong>Categorical and Cross-RQA (CRQA)</strong></a><ul>
+<li class="chapter" data-level="H.1" data-path="CRQAsol.html"><a href="CRQAsol.html"><i class="fa fa-check"></i><b>H.1</b> Assignment: Cross Recurrence Quantification Analysis</a></li>
+<li class="chapter" data-level="H.2" data-path="catCRQAsol.html"><a href="catCRQAsol.html"><i class="fa fa-check"></i><b>H.2</b> Assignment: Categorical CRQA</a></li>
+</ul></li>
+<li class="chapter" data-level="I" data-path="cuspsol.html"><a href="cuspsol.html"><i class="fa fa-check"></i><b>I</b> <strong>The Cusp Catasrophe Model &amp; Warning Signs</strong></a></li>
+<li class="chapter" data-level="J" data-path="netssol.html"><a href="netssol.html"><i class="fa fa-check"></i><b>J</b> <strong>Complex Networks</strong></a></li>
 <li><a href="bibliography.html#bibliography"><strong>Bibliography</strong></a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="blank">Published with bookdown</a></li>
@@ -309,8 +317,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 First, load the data and source the function library.
 </div>
 <p></p>
-<div id="example-of-using---ply-functions" class="section level3">
-<h3><span class="header-section-number">D.1.1</span> Example of using <code>--ply</code> functions</h3>
+<div id="example-of-using---ply-functions" class="section level3 unnumbered">
+<h3>Example of using <code>--ply</code> functions</h3>
 <p>Let’s try to use as few commands as possible to analyse all three timeseries. The easiest way to do this is to use the so-called <code>apply</code> family of functions.</p>
 <p>These functions pass the contents of a <code>list</code> object to a function. Suppose we need to calculate the means of column variables in 40 different SPSS <code>.sav</code> files stored in the folder <code>DAT</code>. With the <code>rio</code> package loaded we can execute the following commands:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="kw">dir</span>(<span class="st">&quot;/DAT/&quot;</span>,<span class="dt">pattern=</span><span class="st">&quot;.sav$&quot;</span>),import)       
@@ -318,30 +326,30 @@ out  &lt;-<span class="st"> </span><span class="kw">sapply</span>(data,colMeans)
 <p>The first command <em>applies</em> <code>import</code> to all files with a <code>.sav</code> extension found in the folder <code>/DAT</code>. It creates a dataframe for each file which are all stored as elements of the list object <code>data</code>. The second line applies the function <code>colMeans</code> to each element of <code>data</code> and puts the combined results in a matrix with the dataset ID as columns (1-40), dataset variables as rows and the calculated column means as cells.</p>
 <p><code>R</code> comes with several <code>apply</code> functions installed, but an easier interface is provided by package <code>plyr</code>. When <code>plyr</code> is loaded you can use functions of the type <code>XYply</code> where <code>X</code> denotes the first letter of the input structure and <code>Y</code> the ouput structure: <code>l</code> for <code>list</code>, <code>d</code> <code>for 'data.frame</code>, <code>a</code> for <code>array</code>. So, <code>laply()</code> expects a listobject as input and will try to create an array as outout. There is also a special symbol for <code>Y</code>, the underscore <code>_</code> if no output is expected, e.g. when plotting, <code>l_ply</code>.</p>
 </div>
-<div id="data-preparation" class="section level3">
-<h3><span class="header-section-number">D.1.2</span> Data preparation</h3>
+<div id="data-preparation" class="section level3 unnumbered">
+<h3>Data preparation</h3>
 <p>Let’s prepare these series for spectral analysis.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(plyr)
 TSlist &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">TS1=</span>TS1$TS1,<span class="dt">TS2=</span>TS2$TS2,<span class="dt">TS3=</span>TS3$TS3)
 
 <span class="co"># Plot raw</span>
 <span class="kw">l_ply</span>(TSlist, plot.ts)</code></pre></div>
-<p><img src="DCS1617_files/figure-html/unnamed-chunk-56-1.png" width="672" /><img src="DCS1617_files/figure-html/unnamed-chunk-56-2.png" width="672" /><img src="DCS1617_files/figure-html/unnamed-chunk-56-3.png" width="672" /></p>
+<p><img src="DCS1617_files/figure-html/unnamed-chunk-66-1.png" width="672" /><img src="DCS1617_files/figure-html/unnamed-chunk-66-2.png" width="672" /><img src="DCS1617_files/figure-html/unnamed-chunk-66-3.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Normalise</span>
 TSlist.n &lt;-<span class="st"> </span><span class="kw">llply</span>(TSlist,scale)
 
 <span class="co"># Plot normalised</span>
 <span class="kw">l_ply</span>(TSlist.n, plot.ts)</code></pre></div>
-<p><img src="DCS1617_files/figure-html/unnamed-chunk-56-4.png" width="672" /><img src="DCS1617_files/figure-html/unnamed-chunk-56-5.png" width="672" /><img src="DCS1617_files/figure-html/unnamed-chunk-56-6.png" width="672" /></p>
+<p><img src="DCS1617_files/figure-html/unnamed-chunk-66-4.png" width="672" /><img src="DCS1617_files/figure-html/unnamed-chunk-66-5.png" width="672" /><img src="DCS1617_files/figure-html/unnamed-chunk-66-6.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Detrend</span>
 TSlist.nd &lt;-<span class="st"> </span><span class="kw">llply</span>(TSlist.n, detrend)
 
 <span class="co"># Plot normalised, detrended</span>
 <span class="kw">l_ply</span>(TSlist.nd, plot.ts)</code></pre></div>
-<p><img src="DCS1617_files/figure-html/unnamed-chunk-56-7.png" width="672" /><img src="DCS1617_files/figure-html/unnamed-chunk-56-8.png" width="672" /><img src="DCS1617_files/figure-html/unnamed-chunk-56-9.png" width="672" /></p>
+<p><img src="DCS1617_files/figure-html/unnamed-chunk-66-7.png" width="672" /><img src="DCS1617_files/figure-html/unnamed-chunk-66-8.png" width="672" /><img src="DCS1617_files/figure-html/unnamed-chunk-66-9.png" width="672" /></p>
 </div>
-<div id="time-series-length" class="section level3">
-<h3><span class="header-section-number">D.1.3</span> Time-series length</h3>
+<div id="time-series-length" class="section level3 unnumbered">
+<h3>Time-series length</h3>
 <p>Another preparation concerns checking wether the length of the series is a power of 2 (or 10). This is necessary for the Fourier transfrom to run smoothly. The code below uses <code>log2</code> and <code>nextpow2</code> to figure out whether the data length is ok.</p>
 <p>What is different from previous uses of the <code>XYply</code> functions is that we now customise the function we want to execute. The input is still a list object, each element of the list is passed as a variable <code>ts</code> to a so-called <code>anonymous</code> function, a function just denoted as <code>function(ts)</code>. The function returns a data.frame with columns <code>pow2</code>, the current power of 2 and <code>nextpow2</code> (a function of <code>pracma</code>) the next power of 2.</p>
 <p>The <code>XYply</code> functions will add an <code>.id</code> variable to the output if the input is a list with named fields. Although we create 3 data frames of one row, the <code>d</code> in <code>ldply</code> indicates these frames have to be merged if possible.</p>
@@ -355,12 +363,12 @@ TSlist.nd &lt;-<span class="st"> </span><span class="kw">llply</span>(TSlist.n, 
 <li>Actions that could be taken are: removing datapoints from the front of the series, or, padding the series with zeroes.</li>
 </ul>
 </div>
-<div id="the-fd.psd-function" class="section level3">
-<h3><span class="header-section-number">D.1.4</span> The <code>fd.psd</code> function</h3>
+<div id="the-fd.psd-function" class="section level3 unnumbered">
+<h3>The <code>fd.psd</code> function</h3>
 <p>The function created for spectral analysis <code>fd.psd()</code> will perform normalisation and detrending by default. It also returns information about the power spectrum and log-log fit. It’s good to know about the default settings of a function, and the return values. The best place to look for them is usually the <code>help</code> documentation, or the <code>vignettes</code> that come with a package.</p>
 <p>If you select a function in <code>Rstudio</code> and press <code>F1</code> you’ll get the help page, If you press <code>F2</code> can have a look at the code (if it is <code>exported</code>), or, you can call the function without parentheses <code>fd.psd</code> and the code will be printed to the Console.</p>
 <p>You can also hover the cursor after you typed the name of the function to reveal the arguments and defaults:</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-58"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-68"></span>
 <img src="images/scr.png" alt="Get default values of function arguments."  />
 <p class="caption">
 Figure D.1: Get default values of function arguments.
@@ -388,15 +396,15 @@ outPSD &lt;-<span class="st"> </span><span class="kw">llply</span>(TSlist.nd, fd
 <pre><code>
 
 fd.psd: Sample rate was set to 1.</code></pre>
-<p><img src="DCS1617_files/figure-html/unnamed-chunk-60-1.png" width="672" /><img src="DCS1617_files/figure-html/unnamed-chunk-60-2.png" width="672" /></p>
+<p><img src="DCS1617_files/figure-html/unnamed-chunk-70-1.png" width="672" /><img src="DCS1617_files/figure-html/unnamed-chunk-70-2.png" width="672" /></p>
 <pre><code>
 
 fd.psd: Sample rate was set to 1.</code></pre>
-<p><img src="DCS1617_files/figure-html/unnamed-chunk-60-3.png" width="672" /><img src="DCS1617_files/figure-html/unnamed-chunk-60-4.png" width="672" /></p>
+<p><img src="DCS1617_files/figure-html/unnamed-chunk-70-3.png" width="672" /><img src="DCS1617_files/figure-html/unnamed-chunk-70-4.png" width="672" /></p>
 <pre><code>
 
 fd.psd: Sample rate was set to 1.</code></pre>
-<p><img src="DCS1617_files/figure-html/unnamed-chunk-60-5.png" width="672" /><img src="DCS1617_files/figure-html/unnamed-chunk-60-6.png" width="672" /></p>
+<p><img src="DCS1617_files/figure-html/unnamed-chunk-70-5.png" width="672" /><img src="DCS1617_files/figure-html/unnamed-chunk-70-6.png" width="672" /></p>
 </div>
 </div>
 <!-- </div> -->
