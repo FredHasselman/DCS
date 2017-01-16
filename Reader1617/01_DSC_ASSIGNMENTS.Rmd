@@ -1050,6 +1050,47 @@ abline(v=0)
 # Potential and Catastrophe Models {#cusp}
 
 
+* The nonlinear regression assignment is written for `SPSS`, but you can try to use 'R' as well. Be sure to look at the solutions of the [Basic Time Series Analysis](#bta)) assignments.
+* Using the `cusp` package 
+
+## Fitting the cusp catastrophe in `SPSS`
+
+In the file [Cusp Attitude.sav](https://github.com/FredHasselman/DCS/raw/master/assignmentData/Potential_Catastrophe/Cusp%20attitude.sav), you can find data from a (simulated) experiment. Assume the experiment tried to measure the effects of explicit predisposition and [affective conditioning](http://onlinelibrary.wiley.com/doi/10.1002/mar.4220110207/abstract) on attitudes towards Complexity Science measured in a sample of psychology students using a specially designed Implicit Attitude Test (IAT).
+
+1. Look at a Histogram of the difference score (post-pre) $dZY$. This should look quite normal (pun intended).
+   -	Perform a regular linear regression analysis predicting $dZY$ (Change in Attitude) from $\alpha$ (Predisposition). 
+   - Are you happy with the $R^2$?
+2. Look for Catastrophe Flags: Bimodality. Examine what the data look like if we split them across the conditions.
+  - Use $\beta$ (Conditioning) as a Split File Variable (`Data >> Split File`). And again, make a histogram of $dZY$.
+  - Try to describe what you see in terms of the experiment.
+  -	Turn Split File off. Make a Scatterplot of $dZY$ (x-axis) and $\alpha$ (y-axis). Here you see the bimodality flag in a more dramatic fashion. 
+   - Can you see another flag?
+3. Perhaps we should look at a cusp Catastrophe model:
+   - Go to `Analyse >> Regression >> Nonlinear` (also see [Basic Time Series Analysis](#bta)). First we need to tell SPSS which parameters we want to use, press `Parameters.` 
+    - Now you can fill in the following: 
+        + `Intercept` (Starting value $0.01$)
+        + `B1` through `B4` (Starting value $0.01$)
+        + Press `Continue` and use $dZY$ as the dependent. 
+    - Now we build the model in `Model Expression`, it should say this: 
+    ```
+    Intercept + B1 * Beta * ZY1 + B2 * Alpha + B3 * ZY1 ** 2 + B4 * ZY1 ** 3
+    ```
+    - Run! And have a look at $R^2$.
+4. The model can also be fitted with linear regression in SPSS, but we need to make some extra (nonlinear) variables using `COMPUTE`:
+
+```
+BetaZY1 = Beta*ZY1	*(Bifurcation, splitting parameter).
+ZY1_2 = ZY1 ** 2	*(ZY1 Squared).
+ZY1_3 = ZY1 ** 3	*(ZY1 Cubed).
+```
+  - Create a linear regression model with $dZY$ as dependent and $Alpha$, $BetaZY1$ and $ZY1_2$ en $ZY1_3$ as predictors. 
+  - Run! The parameter estimates should be the same.
+5. Finally try to can make a 3D-scatterplot with a smoother surface to have look at the response surface.
+  - HINT: this is a lot easier in `R` or `Matlab` perhaps you can export your `SPSS` solution.
+
+6. How to evaluate a fit? 
+   - Check the last slides of lecture 8 in which the technique is summarised. 
+   - The cusp has to outperform the `pre-post` model.
 
 
 ## The `cusp` package in `R`

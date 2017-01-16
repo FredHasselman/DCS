@@ -1165,7 +1165,7 @@ The suggested embedding dimension is $3$, the delay (lag) is somewhat higher, $9
 ### Run the RQA {-}
 
 Run RQA with the optimal parameters.
-```{r, tidy=FALSE}
+```{r, tidy=FALSE, cache=TRUE}
 crqaOutput <- crqa(ts1 = xy$x, ts2 = xy$x,  
                   delay = ansCircle$delay, 
                   embed = ansCircle$emddim, 
@@ -1184,7 +1184,7 @@ plotRP.crqa(crqaOutput)
 
 Run RQA with embedding lag `r lagXc` to check if the resulta will be very different.
 
-```{r, tidy=FALSE}
+```{r, tidy=FALSE, cache=TRUE}
 crqaOutput2 <- crqa(ts1 = xy$x, ts2 = xy$x,  
                   delay = lagXc, 
                   embed = ansCircle$emddim, 
@@ -1231,7 +1231,7 @@ xyplot(X~t | type, data=surplots, type="l")
 ```
 
 
-```{r}
+```{r, cache=TRUE}
 crqaOutput.sur <- llply(list(xy$x,rand.sur,phase.sur,aaft.sur), function(s){ 
   crqa(ts1 = s, ts2 = s,  
                   delay = lagXc, 
@@ -1254,7 +1254,7 @@ l_ply(crqaOutput.sur,plotRP.crqa)
 ### A statistical test of the surrogate hypotheses {-}
 
 The code below creates $99$ RQA analyses based on `AAFT` surrogates. This takes a while, so we saved the reults, you can download the data from GitHub. 
-```{r, eval=FALSE}
+```{r, cache=TRUE}
 crqaOutput.sur.aaft <- llply(1:99, function(s){ 
   xx <- surrogate(xy$x, method = "aaft") 
   crqa(ts1 = xx, ts2 = xx,  
@@ -1281,7 +1281,7 @@ export(df,"crqaOutput_aaft.csv")
 
 Now lets compare the original RQA measures to to the surrogate measures by rank order.
 
-```{r}
+```{r,cache=TRUE}
 df <- import("https://raw.githubusercontent.com/FredHasselman/DCS/master/assignmentData/RQA_circletrace/crqaOutput_aaft.csv")
 dotplot(1:100~sort(DET), data=df)
 # Our observed determinism was the largest value
@@ -1291,7 +1291,7 @@ dotplot(1:100~sort(DET), data=df)
 For *Determinism*, the nullhypothesis that the observed time series is a monotonic nonlinear transformation of a Gaussian process, can be rejected at $p <.01$.
 
 Here's a summary of all measures, not all of them have the highest rank:
-```{r}
+```{r,cache=TRUE}
 rbind.data.frame(maxSurrogate=colwise(max)(df[1:99,]), original= df[100,])
 
 ```
@@ -1319,7 +1319,7 @@ y2 <- sin(.01*(1:900*2*pi/67)^2)
 
 3. Find an embedding delay (using mutual information) and an embedding dimension (if you calculate an embedding dimension using package `fractal` for each signal seperately, as a rule of thumb use the highest embedding dimension you find in further analyses).
 
-```{r, tidy=FALSE, eval=SOLUTION}
+```{r, tidy=FALSE, cache=TRUE}
 # General settings for `crqa()`
 par0 <- list(rescale = 0,
              normalize = 0,
@@ -1357,7 +1357,7 @@ par <- list(lgM =  20, steps = seq(1, 6, 1),
 
 5. Run the CRQA.
 
-```{r, tidy=FALSE, echo=SOLUTION, eval=SOLUTION}
+```{r, tidy=FALSE, echo=SOLUTION, eval=SOLUTION,cache=TRUE}
 crqaOutput <- crqa(ts1 = y1, ts2 = y2,  
                   delay = ans$delay, 
                   embed = ans$emddim, 
@@ -1374,7 +1374,7 @@ crqaOutput <- crqa(ts1 = y1, ts2 = y2,
 
 6. Can you understand what is going on? Explain the the lack of recurrent points at the beginning of the time series.
 
-```{r, echo=SOLUTION, eval=SOLUTION}
+```{r, echo=SOLUTION, eval=SOLUTION,cache=TRUE}
 plotRP.crqa(crqaOutput)
 ```
 
@@ -1383,7 +1383,7 @@ plotRP.crqa(crqaOutput)
 8. Make a plot of the diagonal profie. How far is the peak in RR removes from 0 (Line of Synchronisation)?
 
 This is based on the timeseries (without embedding)
-```{r, echo=SOLUTION, eval=SOLUTION}
+```{r, echo=SOLUTION, eval=SOLUTION,cache=TRUE}
 win <- 50
 (res <-  drpdfromts(y1, y2, ws = win, datatype = 'continuous', radius = ans$radius))[2:3]
 plot(-win:win,res$profile,type = "l", lwd = 5, xlab = "Delays", ylab = "Recurrence")
@@ -1391,7 +1391,7 @@ abline(v=0)
 ```
 
 To get the diagonal profile from the recurrence plot, use `spdiags()`.
-```{r, echo=SOLUTION, eval=SOLUTION}
+```{r, echo=SOLUTION, eval=SOLUTION,cache=TRUE}
 dprofile <- spdiags(crqaOutput$RP)
 plot(-win:win,colMeans(dprofile$B[, between(dprofile$d, -win,win)]), type="l", 
      lwd = 5, xlab = "Delays", ylab = "Recurrence")
