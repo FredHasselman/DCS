@@ -38,9 +38,6 @@ If you are experienced in `R` or `Matlab` you can try to code the models using t
 Besure to check [the solutions of the assigment](#moc1Rsol) which provide examples of different ways to visualize the time series in `R`
 ```
 
-
-
-
 ## The Linear Map
 
 Equation \@ref(eq:linmap) is the ordinary difference equation (ODE) discussed in the lecture (see lecture notes \@ref(lecture-1)) is called the *Linear Map*:
@@ -1108,15 +1105,14 @@ Use this tutorial paper to fit the cusp in 'R' according to a maximum likelihood
     * Try to think of an application to psychological / behavioural science.
 
 
-# Complex Networks {#nets}
+# **Complex Networks** {#nets}
 
 To complete these assignments you need:
-```{r}
+```{r, message=FALSE, warning=FALSE}
 library(igraph)
 library(qgraph)
 library(devtools)
 source_url("https://raw.githubusercontent.com/FredHasselman/DCS/master/functionLib/nlRtsa_SOURCE.R")
-
 ```
 
 ## Basic graphs
@@ -1235,16 +1231,29 @@ par(mfrow=c(1,1))
 ```
 
 
+[| Jump to solutions |](#netssol)
+
+
 ## Package `qgraph`
 
-Learn about the functionality of the `qgraph` package by running the examples, e.g. the `Big 5`: 
+Learn about the functionality of the `qgraph` frm its author Sacha Epskamp.
+
+Try running the examples, e.g. of the `Big 5`: 
 
 [http://sachaepskamp.com/qgraph/examples](http://sachaepskamp.com/qgraph/examples)
+
+
+## `qgraph` tutorials / blog
+
+Great site by Eiko Fried:
+[http://psych-networks.com ](http://psych-networks.com )
 
 
 ## EXTRA - early warnings
 
 Have a look at the site [Early Warning Systems](http://www.early-warning-signals.org/home/)
+
+There is an accompanying [`R` package `earlywarnings`](https://cran.r-project.org/web/packages/earlywarnings/index.html)
 
 
 

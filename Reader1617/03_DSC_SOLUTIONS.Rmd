@@ -1410,14 +1410,98 @@ The solutions are basically in the paper by [Coco & Dale](), the purpose here is
 # **The Cusp Catasrophe  Model & Warning Signs** {#cuspsol}
 
 
+## Cusp in SPSS
+
+The `SPSS` syntax (also available [on Github](https://raw.githubusercontent.com/FredHasselman/DCS/master/assignmentData/Potential_Catastrophe/Cusp%20attitude%20solution.SPS)):
+```
+GRAPH
+  /HISTOGRAM=dZY .
+
+*Linear regression.
+
+REGRESSION
+  /MISSING LISTWISE
+  /STATISTICS COEFF OUTS R ANOVA
+  /CRITERIA=PIN(.05) POUT(.10)
+  /NOORIGIN
+  /DEPENDENT dZY
+  /METHOD=ENTER Alpha.
+
+*Flags 1.
+
+SORT CASES BY Beta .
+SPLIT FILE
+  SEPARATE BY Beta .
+
+GRAPH
+  /HISTOGRAM=dZY .
+
+SPLIT FILE
+  OFF.
+
+*Flags 2.
+
+GRAPH
+  /SCATTERPLOT(BIVAR)=dZY WITH Alpha
+  /MISSING=LISTWISE .
+
+*Cusp with nonlinear regression.
+
+MODEL PROGRAM Intercept=0.01 B1=0.01 B2=0.01 B3=0.01 B4=0.01 .
+COMPUTE PRED_ = Intercept + B1 * Beta * ZY1 + B2 * Alpha + B3 * ZY1 ** 2 + B4 * ZY1 ** 3.
+NLR dZY
+  /PRED PRED_
+  /CRITERIA SSCONVERGENCE 1E-8 PCON 1E-8 .
+
+*Cusp with linear regression.
+
+COMPUTE BetaZY1 = Beta*ZY1 .
+COMPUTE ZY1_2 = ZY1 ** 2 .
+COMPUTE ZY1_3 = ZY1 ** 3 .
+EXECUTE .
+
+REGRESSION
+  /MISSING LISTWISE
+  /STATISTICS COEFF OUTS R ANOVA
+  /CRITERIA=PIN(.05) POUT(.10)
+  /NOORIGIN
+  /DEPENDENT dZY
+  /METHOD=ENTER Alpha BetaZY1 ZY1_2 ZY1_3  .
+
+*3-D scatter.
+
+IGRAPH /VIEWNAME='Scatterplot' /X1 = VAR(Beta) TYPE = SCALE /Y = VAR(dZY) TYPE = SCALE /X2 = VAR(Alpha) TYPE = SCALE
+ /COORDINATE = THREE  /FITLINE METHOD = LLR NORMAL BANDWIDTH = FAST X1MULTIPLIER = 1.00  X2MULTIPLIER = 1.00 LINE = TOTAL
+  SPIKE=OFF /X1LENGTH=3.0 /YLENGTH=3.0 /X2LENGTH=3.0 /CHARTLOOK='D:\Program Files\SPSS\Looks\dots.clo' /SCATTER COINCIDENT =
+  NONE.
+EXE.
+
+```
+
+## Solution in `R`
+
+
+
 
 # **Complex Networks** {#netssol}
 
+[| Jump to assignment |](#nets)
+
 To complete these assignments you need:
-```{r}
+```{r,message=FALSE, warning=FALSE}
 library(igraph)
 library(qgraph)
+library(devtools)
+source_url("https://raw.githubusercontent.com/FredHasselman/DCS/master/functionLib/nlRtsa_SOURCE.R")
 ```
+
+Great resources for learning about the different measures:
+
+* [Strogatz, S. H. (2001). Exploring complex networks. Nature, 410(6825), 268-276.](http://www.math.wsu.edu/math/faculty/schumaker/Math415/Strogatz01.pdf)
+
+* [Bullmore, E., & Sporns, O. (2009). Complex brain networks: graph theoretical analysis of structural and functional systems. Nature reviews. Neuroscience, 10(3), 186-98. doi:10.1038/nrn2575 ](https://www.researchgate.net/profile/Olaf_Sporns/publication/222712673_Complex_brain_networks_Graph_theoretical_analysis_of_structural_and_functional_systems_Nature_Reviews_Neuroscience_2009_10_186-198/)
+
+
 
 ## Basic graphs
 
@@ -1513,7 +1597,7 @@ This will compute the *Small World Index* and compute the *Power Law slope Fit* 
 
 Compare the measures!
 
-```{r}
+```{r, message=FALSE, warning=FALSE, collapse=TRUE, cache=FALSE}
 # Initialize
 set.seed(660)
 layout1=layout.kamada.kawai
@@ -1526,34 +1610,42 @@ par(mfrow=c(2,3))
 p   <- 0.00001
 p1  <- plotSW(n=n,k=k,p=p)
 PLF1<- PLFsmall(p1)
-p11 <- plot(p1,main="p = 0.00001",layout=layout1,xlab=paste("FON = ",round(mean(neighborhood.size(p1,order=1)),digits=1),"\nSWI = ", round(SWtestE(p1,N=100)$valuesAV$SWI,digits=2),"\nPLF = NA",sep=""))
+p11 <- plot(p1,main="p = 0.00001",
+            layout = layout1,
+            xlab=paste("FON = ",round(mean(neighborhood.size(p1,order=1)), digits=1), "\nSWI = ", round(SWtestE(p1,N=100)$valuesAV$SWI,digits=2), "\nPLF = NA", sep=""))
 
 # Strogatz rewiring probability = .01
 p   <- 0.01
 p2  <- plotSW(n=n,k=k,p=p)
 PLF2<- PLFsmall(p2)
-p22 <- plot(p2,main="p = 0.01",layout=layout1,xlab=paste("FON = ",round(mean(neighborhood.size(p2,order=1)),digits=1),"\nSWI = ", round(SWtestE(p2,N=100)$valuesAV$SWI,digits=2),"\nPLF = ",round(PLF2,digits=2),sep=""))
+p22 <- plot(p2,main="p = 0.01",
+            layout = layout1,
+            xlab = paste("FON = ",round(mean(neighborhood.size(p2,order=1)),digits=1),"\nSWI = ", round(SWtestE(p2,N=100)$valuesAV$SWI, digits=2),"\nPLF = ",round(PLF2,digits=2),sep=""))
+
 # Strogatz rewiring probability = 1
 p   <- 1
 p3  <- plotSW(n=n,k=k,p=p)
 PLF3<- PLFsmall(p3)
-p33 <- plot(p3,main="p = 1",layout=layout1,xlab=paste("FON = ",round(mean(neighborhood.size(p3,order=1)),digits=1),"\nSWI = ", round(SWtestE(p3,N=100)$valuesAV$SWI,digits=2),"\nPLF = ",round(PLF3,digits=2),sep=""))
+p33 <- plot(p3,main="p = 1",
+            layout = layout1, 
+            xlab = paste("FON = ", round(mean(neighborhood.size(p3,order=1)), digits=1), "\nSWI = ", round(SWtestE(p3,N=100)$valuesAV$SWI, digits=2), "\nPLF = ", round(PLF3,digits=2), sep=""))
 
 set.seed(200)
 # Barabasi power = 0
-p4  <- plotBA(n=n,pwr=0,out.dist=hist(degree(p1,mode="all"),breaks=(0:n),plot=F)$density)
+p4  <- plotBA(n=n,pwr=0,out.dist=hist(degree(p1,mode="all"),breaks=(0:n),plot=FALSE)$density)
 PLF4<- PLFsmall(p4)
-p44 <- plot(p4,main="power = 0",layout=layout1,xlab=paste("FON = ",round(mean(neighborhood.size(p4,order=1)),digits=1),"\nSWI = ", round(SWtestE(p4,N=100)$valuesAV$SWI,digits=2),"\nPLF = ",round(PLF4,digits=2),sep=""))
+p44 <- plot(p4,main="power = 0",layout = layout1, xlab = paste("FON = ", round(mean(neighborhood.size(p4, order=1)), digits=1),"\nSWI = ", round(SWtestE(p4, N=100)$valuesAV$SWI, digits=2), "\nPLF = ", round(PLF4, digits=2),sep=""))
 
 # Barabasi power = 2
-p5  <- plotBA(n=n,pwr=2,out.dist=hist(degree(p2,mode="all"),breaks=(0:n),plot=F)$density)
+p5  <- plotBA(n=n,pwr=2,out.dist = hist(degree(p2,mode="all"),breaks=(0:n),plot=FALSE)$density)
 PLF5<- PLFsmall(p5)
-p55 <- plot(p5,main="power = 2",layout=layout1,xlab=paste("FON = ",round(mean(neighborhood.size(p5,order=1)),digits=1),"\nSWI = ", round(SWtestE(p5,N=100)$valuesAV$SWI,digits=2),"\nPLF = ",round(PLF5,digits=2),sep=""))
+p55 <- plot(p5,main="power = 2", layout = layout1, xlab=paste("FON = ", round(mean(neighborhood.size(p5, order=1)), digits=1), "\nSWI = ", round(SWtestE(p5, N=100)$valuesAV$SWI, digits=2), "\nPLF = ", round(PLF5, digits=2), sep=""))
 
 # Barabasi power = 4
-p6  <- plotBA(n=n,pwr=4,out.dist=hist(degree(p3,mode="all"),breaks=(0:n),plot=F)$density)
+p6  <- plotBA(n=n,pwr=4, out.dist = hist(degree(p3,mode="all"), breaks=(0:n),plot=FALSE)$density)
 PLF6<- PLFsmall(p6)
-p66 <- plot(p6,main="power = 4",layout=layout1,xlab=paste("FON = ",round(mean(neighborhood.size(p6,order=1)),digits=1),"\nSWI = ", round(SWtestE(p6,N=100)$valuesAV$SWI,digits=2),"\nPLF = ",round(PLF6,digits=2),sep=""))
+p66 <- plot(p6,main="power = 4",layout = layout1, xlab = paste("FON = ", round(mean(neighborhood.size(p6, order=1)), digits=1), "\nSWI = ", round(SWtestE(p6,N=100)$valuesAV$SWI, digits = 2),"\nPLF = ",round(PLF6, digits=2), sep=""))
+
 par(mfrow=c(1,1))
 ```
 

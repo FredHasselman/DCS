@@ -445,17 +445,12 @@ SWtestE <- function(g,p=1,N=20){
 }
 
 PLFsmall <- function(g){
-  reload <- FALSE
-  if("signal" %in% .packages()){
-    warning("signal:poly is loaded and stats:poly is needed... will unload package:signal, compute slope, and reload...")
-    reload <- TRUE
-    detach("package:signal", unload=TRUE)}
 
-  if(length(V(g))>100){warning("Vertices > 100, no need to use PLFsmall, use a binning procedure");break}
-  d <- degree(g,mode="all")
+  if(length(V(g))>100){stop("Vertices > 100, no need to use PLFsmall, use a binning procedure")}
+
+  d <- degree(g)
 
   y <- hist(d,breaks=0.5:(max(d)+0.5),plot=FALSE)$counts
-  #y<-y[y>0]
   if(length(y)<2){
     warning("Less than 2 points in Log-Log regression... alpha=0")
     alpha <- 0
@@ -468,7 +463,6 @@ PLFsmall <- function(g){
     }
     alpha <- coef(lm(rev(log1p(y)[1:(length(y)-chop)]) ~ log1p(1:(length(y)-chop))))[2]
   }
-  if(reload==TRUE){library(signal,verbose=FALSE,quietly=TRUE)}
 
   return(alpha)
 }
@@ -500,7 +494,7 @@ plotSW <- function(n,k,p){
 plotBA <- function(n,pwr,out.dist){
   #require("Cairo")
 
-  g <- barabasi.game(n,pwr,out.dist=out.dist,directed=F)
+  g <- barabasi.game(n,pwr,out.dist=out.dist,directed=FALSE)
   V(g)$degree <- degree(g)
 
   # set colors and sizes for vertices

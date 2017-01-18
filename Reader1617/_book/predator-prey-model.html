@@ -49,6 +49,12 @@
 
 
 
+<script src="libs/htmlwidgets-0.8/htmlwidgets.js"></script>
+<link href="libs/dygraphs-1.1.1/dygraph.css" rel="stylesheet" />
+<script src="libs/dygraphs-1.1.1/dygraph-combined.js"></script>
+<script src="libs/moment-2.8.4/moment.js"></script>
+<script src="libs/moment-timezone-0.2.5/moment-timezone-with-data.js"></script>
+<script src="libs/dygraphs-binding-1.1.1.3/dygraphs.js"></script>
 
 
 <style type="text/css">
@@ -104,7 +110,21 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><strong><a href="./">Dynamics of Complex Systems</a></strong></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> documentclass: book</a></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> <strong>Course guide</strong></a><ul>
+<li class="chapter" data-level="1.1" data-path="learning-objectives.html"><a href="learning-objectives.html"><i class="fa fa-check"></i><b>1.1</b> Learning objectives</a><ul>
+<li class="chapter" data-level="" data-path="learning-objectives.html"><a href="learning-objectives.html#goals-summary"><i class="fa fa-check"></i>Goals Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="teaching-methods.html"><a href="teaching-methods.html"><i class="fa fa-check"></i><b>1.2</b> Teaching methods</a><ul>
+<li class="chapter" data-level="" data-path="teaching-methods.html"><a href="teaching-methods.html#preparation"><i class="fa fa-check"></i>Preparation</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="literature.html"><a href="literature.html"><i class="fa fa-check"></i><b>1.3</b> Literature</a></li>
+<li class="chapter" data-level="1.4" data-path="schedule.html"><a href="schedule.html"><i class="fa fa-check"></i><b>1.4</b> Schedule</a></li>
+<li class="chapter" data-level="1.5" data-path="examination.html"><a href="examination.html"><i class="fa fa-check"></i><b>1.5</b> Examination</a><ul>
+<li class="chapter" data-level="" data-path="examination.html"><a href="examination.html#grading"><i class="fa fa-check"></i>Grading</a></li>
+<li class="chapter" data-level="" data-path="examination.html"><a href="examination.html#submitting-the-assignment"><i class="fa fa-check"></i>Submitting the assignment</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="we-use-r.html"><a href="we-use-r.html"><i class="fa fa-check"></i><b>1.6</b> We use <code>R</code>!</a></li>
+</ul></li>
 <li class="part"><span><b>I Assignments</b></span></li>
 <li><a href="how-to.html#how-to"><strong>How to … </strong></a><ul>
 <li class="chapter" data-level="" data-path="how-to.html"><a href="how-to.html"><i class="fa fa-check"></i>General Guidelines</a></li>
@@ -180,15 +200,111 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="9.1" data-path="fitting-the-cusp-catastrophe-in-spss.html"><a href="fitting-the-cusp-catastrophe-in-spss.html"><i class="fa fa-check"></i><b>9.1</b> Fitting the cusp catastrophe in <code>SPSS</code></a></li>
 <li class="chapter" data-level="9.2" data-path="the-cusp-package-in-r.html"><a href="the-cusp-package-in-r.html"><i class="fa fa-check"></i><b>9.2</b> The <code>cusp</code> package in <code>R</code></a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="nets.html"><a href="nets.html"><i class="fa fa-check"></i><b>10</b> Complex Networks</a><ul>
+<li class="chapter" data-level="10" data-path="nets.html"><a href="nets.html"><i class="fa fa-check"></i><b>10</b> <strong>Complex Networks</strong></a><ul>
 <li class="chapter" data-level="10.1" data-path="basic-graphs.html"><a href="basic-graphs.html"><i class="fa fa-check"></i><b>10.1</b> Basic graphs</a></li>
 <li class="chapter" data-level="10.2" data-path="social-networks.html"><a href="social-networks.html"><i class="fa fa-check"></i><b>10.2</b> Social Networks</a></li>
 <li class="chapter" data-level="10.3" data-path="small-world-index-and-degree-distribution.html"><a href="small-world-index-and-degree-distribution.html"><i class="fa fa-check"></i><b>10.3</b> Small World Index and Degree Distribution</a></li>
 <li class="chapter" data-level="10.4" data-path="package-qgraph.html"><a href="package-qgraph.html"><i class="fa fa-check"></i><b>10.4</b> Package <code>qgraph</code></a></li>
-<li class="chapter" data-level="10.5" data-path="extra-early-warnings.html"><a href="extra-early-warnings.html"><i class="fa fa-check"></i><b>10.5</b> EXTRA - early warnings</a></li>
+<li class="chapter" data-level="10.5" data-path="qgraph-tutorials-blog.html"><a href="qgraph-tutorials-blog.html"><i class="fa fa-check"></i><b>10.5</b> <code>qgraph</code> tutorials / blog</a></li>
+<li class="chapter" data-level="10.6" data-path="extra-early-warnings.html"><a href="extra-early-warnings.html"><i class="fa fa-check"></i><b>10.6</b> EXTRA - early warnings</a></li>
 </ul></li>
 <li class="part"><span><b>II Lecture Notes</b></span></li>
+<li class="chapter" data-level="" data-path="lecture-1.html"><a href="lecture-1.html"><i class="fa fa-check"></i>Lecture 1</a><ul>
+<li class="chapter" data-level="" data-path="modeling-change-processes-in-1d.html"><a href="modeling-change-processes-in-1d.html"><i class="fa fa-check"></i>Modeling change processes in 1D</a><ul>
+<li><a href="modeling-change-processes-in-1d.html#its-a-line-its-a-plane"><strong>It’s a line! It’s a plane!</strong></a></li>
+<li><a href="modeling-change-processes-in-1d.html#no-its-a-time-series"><strong>No! … It’s a time series!</strong></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="lecture-2.html"><a href="lecture-2.html"><i class="fa fa-check"></i>Lecture 2</a><ul>
+<li class="chapter" data-level="" data-path="numerical-integration.html"><a href="numerical-integration.html"><i class="fa fa-check"></i>Numerical integration</a><ul>
+<li class="chapter" data-level="" data-path="numerical-integration.html"><a href="numerical-integration.html#eulers-method-and-more"><i class="fa fa-check"></i>Euler’s method and more…</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="lecture-3.html"><a href="lecture-3.html"><i class="fa fa-check"></i>Lecture 3</a><ul>
+<li><a href="lecture-3.html#new-to-r">New to <code>R</code>?</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="lecture-4.html"><a href="lecture-4.html"><i class="fa fa-check"></i>Lecture 4</a><ul>
+<li class="chapter" data-level="" data-path="lecture-4.html"><a href="lecture-4.html#using-r-install-functions-in-nlrtsa_source.r"><i class="fa fa-check"></i>Using R: Install functions in nlRtsa_SOURCE.R</a></li>
+<li class="chapter" data-level="" data-path="examples-fast-fourier-transform-and-power-spectrum.html"><a href="examples-fast-fourier-transform-and-power-spectrum.html"><i class="fa fa-check"></i>Examples: Fast Fourier transform and Power Spectrum</a></li>
+<li class="chapter" data-level="" data-path="data-considerations.html"><a href="data-considerations.html"><i class="fa fa-check"></i>Data considerations</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="lecture-5.html"><a href="lecture-5.html"><i class="fa fa-check"></i>Lecture 5</a></li>
+<li class="chapter" data-level="" data-path="lecture-6.html"><a href="lecture-6.html"><i class="fa fa-check"></i>Lecture 6</a></li>
+<li class="chapter" data-level="" data-path="lecture-7.html"><a href="lecture-7.html"><i class="fa fa-check"></i>Lecture 7</a></li>
+<li class="chapter" data-level="" data-path="lecture-8.html"><a href="lecture-8.html"><i class="fa fa-check"></i>Lecture 8</a></li>
+<li class="chapter" data-level="" data-path="lecture-9.html"><a href="lecture-9.html"><i class="fa fa-check"></i>Lecture 9</a></li>
 <li class="appendix"><span><b>Solutions</b></span></li>
+<li class="chapter" data-level="A" data-path="mathematics-of-change-i.html"><a href="mathematics-of-change-i.html"><i class="fa fa-check"></i><b>A</b> <strong>Mathematics of change I</strong></a><ul>
+<li class="chapter" data-level="A.1" data-path="linear-and-logistic-growth.html"><a href="linear-and-logistic-growth.html"><i class="fa fa-check"></i><b>A.1</b> Linear and logistic growth</a><ul>
+<li class="chapter" data-level="" data-path="linear-and-logistic-growth.html"><a href="linear-and-logistic-growth.html#solutions-in-a-spreadsheet"><i class="fa fa-check"></i>Solutions in a spreadsheet</a></li>
+<li><a href="linear-and-logistic-growth.html#solutions-in-r">Solutions in <code id="moc1Rsol">R</code></a></li>
+<li><a href="linear-and-logistic-growth.html#solutions-in-matlab.">Solutions in <code>Matlab</code>.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="mathematics-of-change-ii.html"><a href="mathematics-of-change-ii.html"><i class="fa fa-check"></i><b>B</b> <strong>Mathematics of Change II</strong></a><ul>
+<li class="chapter" data-level="B.1" data-path="time-varying-parameters.html"><a href="time-varying-parameters.html"><i class="fa fa-check"></i><b>B.1</b> Time-varying parameters</a><ul>
+<li class="chapter" data-level="" data-path="time-varying-parameters.html"><a href="time-varying-parameters.html#solutions-in-a-spreadsheet-1"><i class="fa fa-check"></i>Solutions in a spreadsheet</a></li>
+<li class="chapter" data-level="B.1.1" data-path="time-varying-parameters.html"><a href="time-varying-parameters.html#solutions-in-r-1"><i class="fa fa-check"></i><b>B.1.1</b> Solutions in <code class="unnumbered">R</code></a></li>
+</ul></li>
+<li class="chapter" data-level="B.2" data-path="ppdsol.html"><a href="ppdsol.html"><i class="fa fa-check"></i><b>B.2</b> Predator-prey dynamics</a><ul>
+<li class="chapter" data-level="" data-path="ppdsol.html"><a href="ppdsol.html#iterating-2d-maps-and-flows-1"><i class="fa fa-check"></i>Iterating 2D Maps and Flows</a></li>
+<li class="chapter" data-level="" data-path="ppdsol.html"><a href="ppdsol.html#solutions-in-a-spreadsheet-2"><i class="fa fa-check"></i>Solutions in a spreadsheet</a></li>
+<li class="chapter" data-level="B.2.1" data-path="ppdsol.html"><a href="ppdsol.html#solutions-in-r-2"><i class="fa fa-check"></i><b>B.2.1</b> Solutions in <code class="unnumbered">R</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="C" data-path="btasol.html"><a href="btasol.html"><i class="fa fa-check"></i><b>C</b> <strong>Basic Timeseries Analysis</strong></a><ul>
+<li class="chapter" data-level="C.1" data-path="nonlinear-growth-curves-in-spss.html"><a href="nonlinear-growth-curves-in-spss.html"><i class="fa fa-check"></i><b>C.1</b> Nonlinear Growth curves in SPSS</a></li>
+<li class="chapter" data-level="C.2" data-path="pacfsol.html"><a href="pacfsol.html"><i class="fa fa-check"></i><b>C.2</b> Correlation functions and AR-MA models</a></li>
+<li class="chapter" data-level="C.3" data-path="using-r-to-fit-the-solutions.html"><a href="using-r-to-fit-the-solutions.html"><i class="fa fa-check"></i><b>C.3</b> Using <code>R</code> to fit the solutions</a></li>
+<li class="chapter" data-level="C.4" data-path="hrvsol.html"><a href="hrvsol.html"><i class="fa fa-check"></i><b>C.4</b> Heartbeat dynamics</a><ul>
+<li class="chapter" data-level="C.4.1" data-path="hrvsol.html"><a href="hrvsol.html#randomise"><i class="fa fa-check"></i><b>C.4.1</b> Randomise</a></li>
+<li class="chapter" data-level="C.4.2" data-path="hrvsol.html"><a href="hrvsol.html#integrate"><i class="fa fa-check"></i><b>C.4.2</b> Integrate</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="D" data-path="fda1sol.html"><a href="fda1sol.html"><i class="fa fa-check"></i><b>D</b> <strong>Fluctuation and Disperion analyses I</strong></a><ul>
+<li class="chapter" data-level="D.1" data-path="psdsol.html"><a href="psdsol.html"><i class="fa fa-check"></i><b>D.1</b> Assignment: The Spectral Slope</a><ul>
+<li><a href="psdsol.html#example-of-using---ply-functions">Example of using <code>--ply</code> functions</a></li>
+<li class="chapter" data-level="" data-path="psdsol.html"><a href="psdsol.html#data-preparation"><i class="fa fa-check"></i>Data preparation</a></li>
+<li class="chapter" data-level="" data-path="psdsol.html"><a href="psdsol.html#time-series-length"><i class="fa fa-check"></i>Time-series length</a></li>
+<li><a href="psdsol.html#the-fd.psd-function">The <code>fd.psd</code> function</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="E" data-path="fda1so2.html"><a href="fda1so2.html"><i class="fa fa-check"></i><b>E</b> <strong>Fluctuation and Disperion analyses II</strong></a></li>
+<li class="chapter" data-level="F" data-path="phase-space-reconstruction-and-recurrence-quantification-analysis-rqa.html"><a href="phase-space-reconstruction-and-recurrence-quantification-analysis-rqa.html"><i class="fa fa-check"></i><b>F</b> <strong>Phase Space Reconstruction and Recurrence Quantification Analysis (RQA)</strong></a><ul>
+<li class="chapter" data-level="F.1" data-path="PSRsol.html"><a href="PSRsol.html"><i class="fa fa-check"></i><b>F.1</b> Phase Space Reconstruction of the Lorenz Attractor</a><ul>
+<li class="chapter" data-level="" data-path="PSRsol.html"><a href="PSRsol.html#embedding-lag"><i class="fa fa-check"></i>Embedding Lag</a></li>
+<li class="chapter" data-level="" data-path="PSRsol.html"><a href="PSRsol.html#false-nearest-neighbours"><i class="fa fa-check"></i>False Nearest Neighbours</a></li>
+<li class="chapter" data-level="" data-path="PSRsol.html"><a href="PSRsol.html#plot-the-reconstructed-phase-space"><i class="fa fa-check"></i>Plot the reconstructed phase space</a></li>
+</ul></li>
+<li class="chapter" data-level="F.2" data-path="phase-space-reconstruction-of-the-predator-prey-system.html"><a href="phase-space-reconstruction-of-the-predator-prey-system.html"><i class="fa fa-check"></i><b>F.2</b> Phase Space Reconstruction of the Predator-Prey system</a><ul>
+<li class="chapter" data-level="" data-path="phase-space-reconstruction-of-the-predator-prey-system.html"><a href="phase-space-reconstruction-of-the-predator-prey-system.html#embedding-lag-1"><i class="fa fa-check"></i>Embedding Lag</a></li>
+<li class="chapter" data-level="" data-path="phase-space-reconstruction-of-the-predator-prey-system.html"><a href="phase-space-reconstruction-of-the-predator-prey-system.html#false-nearest-neighbours-1"><i class="fa fa-check"></i>False Nearest Neighbours</a></li>
+<li class="chapter" data-level="" data-path="phase-space-reconstruction-of-the-predator-prey-system.html"><a href="phase-space-reconstruction-of-the-predator-prey-system.html#plot-the-reconstructed-phase-space-1"><i class="fa fa-check"></i>Plot the reconstructed phase space</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="G" data-path="recurrence-quantification-analysis.html"><a href="recurrence-quantification-analysis.html"><i class="fa fa-check"></i><b>G</b> <strong>Recurrence Quantification Analysis</strong></a><ul>
+<li class="chapter" data-level="G.1" data-path="RQAsol.html"><a href="RQAsol.html"><i class="fa fa-check"></i><b>G.1</b> RQA of the Lorenz system</a></li>
+<li class="chapter" data-level="G.2" data-path="rqa-of-the-circle-tracing-task.html"><a href="rqa-of-the-circle-tracing-task.html"><i class="fa fa-check"></i><b>G.2</b> RQA of the Circle Tracing Task</a><ul>
+<li class="chapter" data-level="" data-path="rqa-of-the-circle-tracing-task.html"><a href="rqa-of-the-circle-tracing-task.html#embedding-lag-2"><i class="fa fa-check"></i>Embedding lag</a></li>
+<li class="chapter" data-level="" data-path="rqa-of-the-circle-tracing-task.html"><a href="rqa-of-the-circle-tracing-task.html#false-nearest-neighbours-2"><i class="fa fa-check"></i>False Nearest Neighbours</a></li>
+<li class="chapter" data-level="" data-path="rqa-of-the-circle-tracing-task.html"><a href="rqa-of-the-circle-tracing-task.html#run-the-rqa"><i class="fa fa-check"></i>Run the RQA</a></li>
+<li class="chapter" data-level="" data-path="rqa-of-the-circle-tracing-task.html"><a href="rqa-of-the-circle-tracing-task.html#surrogate-analysis"><i class="fa fa-check"></i>Surrogate analysis</a></li>
+<li class="chapter" data-level="" data-path="rqa-of-the-circle-tracing-task.html"><a href="rqa-of-the-circle-tracing-task.html#a-statistical-test-of-the-surrogate-hypotheses"><i class="fa fa-check"></i>A statistical test of the surrogate hypotheses</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="H" data-path="categorical-and-cross-rqa-crqa-1.html"><a href="categorical-and-cross-rqa-crqa-1.html"><i class="fa fa-check"></i><b>H</b> <strong>Categorical and Cross-RQA (CRQA)</strong></a><ul>
+<li class="chapter" data-level="H.1" data-path="CRQAsol.html"><a href="CRQAsol.html"><i class="fa fa-check"></i><b>H.1</b> Assignment: Cross Recurrence Quantification Analysis</a></li>
+<li class="chapter" data-level="H.2" data-path="catCRQAsol.html"><a href="catCRQAsol.html"><i class="fa fa-check"></i><b>H.2</b> Assignment: Categorical CRQA</a></li>
+</ul></li>
+<li class="chapter" data-level="I" data-path="cuspsol.html"><a href="cuspsol.html"><i class="fa fa-check"></i><b>I</b> <strong>The Cusp Catasrophe Model &amp; Warning Signs</strong></a><ul>
+<li class="chapter" data-level="I.1" data-path="cusp-in-spss.html"><a href="cusp-in-spss.html"><i class="fa fa-check"></i><b>I.1</b> Cusp in SPSS</a></li>
+<li class="chapter" data-level="I.2" data-path="solution-in-r.html"><a href="solution-in-r.html"><i class="fa fa-check"></i><b>I.2</b> Solution in <code>R</code></a></li>
+</ul></li>
+<li class="chapter" data-level="J" data-path="netssol.html"><a href="netssol.html"><i class="fa fa-check"></i><b>J</b> <strong>Complex Networks</strong></a><ul>
+<li class="chapter" data-level="J.1" data-path="basic-graphs-1.html"><a href="basic-graphs-1.html"><i class="fa fa-check"></i><b>J.1</b> Basic graphs</a></li>
+<li class="chapter" data-level="J.2" data-path="social-networks-1.html"><a href="social-networks-1.html"><i class="fa fa-check"></i><b>J.2</b> Social Networks</a></li>
+<li class="chapter" data-level="J.3" data-path="small-world-index-and-degree-distribution-1.html"><a href="small-world-index-and-degree-distribution-1.html"><i class="fa fa-check"></i><b>J.3</b> Small World Index and Degree Distribution</a></li>
+</ul></li>
 <li><a href="bibliography.html#bibliography"><strong>Bibliography</strong></a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="blank">Published with bookdown</a></li>
@@ -261,7 +377,7 @@ F_{t+1} &amp;= f_F(R_t,F_t) * \Delta + F_t
 <li>Hint: Remember that <span class="math inline">\(\Delta\)</span> is not a fundamental part of the dynamics, but that it is only introduced by the numerical integration (i.e., the approximation) of the differential equation. It should not change the dynamics of the system, but it has an effect nonetheless.</li>
 </ul></li>
 </ul>
-<p><a href="#ppdsol">| jump to solution |</a></p>
+<p><a href="ppdsol.html#ppdsol">| jump to solution |</a></p>
 </div>
 </div>
             </section>
