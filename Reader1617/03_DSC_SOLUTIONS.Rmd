@@ -48,7 +48,7 @@ growth.ac <- function(Y0 = 0.01, r = 1, k = 1, N = 100, type = c("driving", "dam
 Y <- growth.ac(r = 1.1)
 ```
 
-Some notes about this function:
+**Some notes about this function:**
 
 * To select which growth process to simulate, the argument `type` is defined which takes the values `driving` (default), `damping`, `logistic` and `vanGeert`. 
     + The statement `switch(type, ...)` will iterate an equation based on the value of `type`.
@@ -131,7 +131,6 @@ ts.plot(growth.ac(r = 0.9),
 legend(70, -0.015, c("r = 0.9","r = 1.0", "r = -0.8"), lwd = rep(2,3), lty = c(1:3), col = c("darkred","darkblue","darkgreen"), merge = TRUE)
 ```
 
-
 Use `xyplot()` in `package::lattice` to create a plot with panels. The easiest way to do this is to create a dataset in so-called "long" format. This means the variable to plot is in 1 column and other variables indicate different levels, or conditions under which the variable was observed or simulated.
 
 Function `ldply()` is used to generate $Y$ for three different settings of $r$. The values of $r$ are passed as a **l**ist and after a function is applied the result is returned as a **d**ataframe. 
@@ -193,7 +192,7 @@ l_ply(1:4, function(l) plot(lag(Y2, n = l), Y2, xy.labels = FALSE, pch = ".", xl
 par(op)
 ```
 
-### Solutions in `Matlab` {-}
+### Solutions in `Matlab`. {-}
 
 For `Matlab` we provide an example of a simple `for ... next` loop, which should be easy to translate to `R` if you want to.
 
@@ -1211,14 +1210,14 @@ Create constrained realisations of the data:
 * phase - $H_0$: the original data come from a linear Gaussian process.
 * AAFT -  $H_0$: the observed time series is a monotonic nonlinear transformation of a Gaussian process.
 
-```{r}
+```{r, cache=TRUE}
 rand.sur  <- xy$x[sample(length(xy$x))]
 phase.sur <- surrogate(xy$x, method = "phase") 
 aaft.sur  <- surrogate(xy$x, method = "aaft") 
 ```
 
 Let's plot the different realisations of the data.
-```{r}
+```{r, cache=TRUE}
 surplots <- data.frame(X=c(xy$x,rand.sur,phase.sur,aaft.sur),
                        t = rep(1:3500,4),
            type=factor(c(rep("Original",length(xy$x)),
@@ -1457,8 +1456,30 @@ degree(g)
 average.path.length(g)
 # Get the transitivity
 transitivity(g)
-# Power law?
+```
+
+To check for a power-law, remember what the scaling relation is supposed to represent: *A relation between number of nodes of a particular size, with the size of those nodes.*
+
+The following produces an unsorted graph:
+```{r}
 plot(log(1:20),log(degree(g)))
+```
+
+So, we need to sort:
+```{r}
+plot(log(1:20),sort(log(degree(g)), decreasing = TRUE))
+```
+
+Or even better, sort and bin it:
+```{r}
+d <- degree(g)
+y <- hist(d,breaks=0.5:(max(d)+0.5),plot=TRUE, xlab = "Node degree")$counts
+op <-par("xlog","ylog")
+plot(1:length(y),rev(y), xlim = c(length(y),1), xlab = "Node degree (log)", ylab = "Frequency of Node degree (log)", log= c("xy"))
+par(op)
+
+(alpha=coef(lm(rev(log1p(y)) ~ log1p(1:length(y)))))
+
 ```
 
 ## Social Networks 
@@ -1479,14 +1500,16 @@ membership(wc)
 ```{r}
 # What does this matrix look like?
 get.adjacency(karate)
-# 34 people in the karate class, a 1 if they know each other
-# You can do this for any 0-1 matrix!
 ```
+
+34 people sre in the karate class, a 1 is printed if they know each other.
+You can do a clustering analysis for any 0-1 matrix!
+
 
 ## Small World Index and Degree Distribution 
 
 Select and run all the code below
-This will compute the *Small World Index* and compute the Power Law slope of Small world networks and Scale-free networks
+This will compute the *Small World Index* and compute the *Power Law slope Fit* of Small world networks and Scale-free networks
 
 Compare the measures!
 
@@ -1535,3 +1558,5 @@ par(mfrow=c(1,1))
 ```
 
 
+The PLF fit is unreliable, there are not enough nodes and different values for degree.
+the SWI does seem to follow the small-wordledness / scale-free topology quite closely.
