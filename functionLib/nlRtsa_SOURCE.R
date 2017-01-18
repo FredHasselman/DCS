@@ -435,7 +435,7 @@ SWtestE <- function(g,p=1,N=20){
 
   for(n in 1:N) {
     gt<-SWtest0(g)
-    values[n,] <- c(transitivity(g,type="localaverage"),transitivity(rewire.edges(g,prob=p),type="localaverage"),transitivity(gt,type="localaverage"),average.path.length(g),average.path.length(rewire.edges(g,prob=p)),average.path.length(gt))}
+    values[n,] <- c(transitivity(g,type="localaverage"),transitivity(rewire(g,each_edge(p=p)),type="localaverage"),transitivity(gt,type="localaverage"),average.path.length(g),average.path.length(rewire(g,each_edge(p=p))),average.path.length(gt))}
   values[n,values[n,]==0] <- NA #values[n,values[n,]==0]+1e-8}
 
   values   <- cbind(values,(values[,1]/values[,2])/(values[,4]/values[,5]),(values[,1]/values[,3]),(values[,4]/values[,6]),((values[,1]/values[,3])/values[,2])/((values[,4]/values[,6])/values[,5]))
@@ -456,13 +456,66 @@ PLFsmall <- function(g){
   y<-hist(d,breaks=0:length(V(g)),plot=F)$density
   y<-y[y>0]
   if(length(y)==2){warning("Caution... Log-Log slope is a bridge (2 points)")}
-  if(length(y)<2){warning("Less than 2 points in Log-Log regression... aborting");break}
-  alpha=coef(lm(log(y) ~ stats::poly(log(1:length(y)), degree=1), na.action="na.exclude") )[2]
+  if(length(y)<2){
+    warning("Less than 2 points in Log-Log regression... alpha=0")
+    alpha <- 0
+  } else {
+  alpha=coef(lm(log(y) ~ stats::poly(log(1:length(y)), degree=1), na.action="na.exclude") )[2]}
 
   if(reload==TRUE){library(signal,verbose=FALSE,quietly=TRUE)}
 
   return(alpha)
 }
+
+plotSW <- function(n,k,p){
+
+  g <- watts.strogatz.game(1, n, k, p)
+
+  V(g)$degree <- degree(g)
+
+  # set colors and sizes for vertices
+  rev<-scale.R(log1p(V(g)$degree))
+  rev[rev<=0.2]<-0.2
+  rev[rev>=0.9]<-0.9
+  V(g)$rev <- rev$x
+
+  V(g)$color       <- rgb(V(g)$rev, 1-V(g)$rev,  0, 1)
+  V(g)$size        <- 25*V(g)$rev
+
+  # set vertex labels and their colors and sizes
+  V(g)$label       <- ""
+
+  E(g)$width <- 1
+  E(g)$color <- rgb(0.5, 0.5, 0.5, 1)
+
+  return(g)
+}
+
+plotBA <- function(n,pwr,out.dist){
+  #require("Cairo")
+
+  g <- barabasi.game(n,pwr,out.dist=out.dist,directed=F)
+  V(g)$degree <- degree(g)
+
+  # set colors and sizes for vertices
+  rev<-scale.R(log1p(V(g)$degree))
+  rev[rev<=0.2] <- 0.2
+  rev[rev>=0.9] <- 0.9
+  V(g)$rev <- rev$x
+
+  V(g)$color    <- rgb(V(g)$rev, 1-V(g)$rev,  0, 1)
+  V(g)$size     <- 25*V(g)$rev
+  # V(g)$frame.color <- rgb(.5, .5,  0, .4)
+
+  # set vertex labels and their colors and sizes
+  V(g)$label <- ""
+
+  E(g)$width <- 1
+  E(g)$color <- rgb(0.5, 0.5, 0.5, 1)
+
+  return(g)
+}
+
 
 FDrel <- function(g){
   d<-degree(g,mode="all")
@@ -1245,8 +1298,8 @@ scale.R <- function(x,mn=min(x,na.rm=T),mx=max(x,na.rm=T),lo=0,hi=1){
   for(i in 1:dim(x)[2]){
     mn=min(x[,i],na.rm=T)
     mx=max(x[,i],na.rm=T)
-    if(mn>=mx){warning("Minimum (mn) >= maximum (mx).")}
-    if(lo>=hi){warning("Lowest scale value (lo) >= highest scale value (hi).")}
+    if(mn>mx){warning("Minimum (mn) >= maximum (mx).")}
+    if(lo>hi){warning("Lowest scale value (lo) >= highest scale value (hi).")}
     ifelse(mn==mx,{u[,i]<-rep(mx,length(x[,i]))},{
       u[,i]<-(((x[i]-mn)*(hi-lo))/(mx-mn))+lo
       id<-complete.cases(u[,i])

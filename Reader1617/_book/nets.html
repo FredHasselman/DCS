@@ -26,7 +26,7 @@
 <meta name="author" content="Fred Hasselman &amp; Maarten Wijnants">
 
 
-<meta name="date" content="2017-01-11">
+<meta name="date" content="2017-01-18">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -34,7 +34,7 @@
   
   
 <link rel="prev" href="the-cusp-package-in-r.html">
-<link rel="next" href="using-the-ealy-warnings-r-package-in-r.html">
+<link rel="next" href="basic-graphs.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -181,7 +181,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="9.2" data-path="the-cusp-package-in-r.html"><a href="the-cusp-package-in-r.html"><i class="fa fa-check"></i><b>9.2</b> The <code>cusp</code> package in <code>R</code></a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="nets.html"><a href="nets.html"><i class="fa fa-check"></i><b>10</b> Complex Networks</a><ul>
-<li class="chapter" data-level="10.1" data-path="using-the-ealy-warnings-r-package-in-r.html"><a href="using-the-ealy-warnings-r-package-in-r.html"><i class="fa fa-check"></i><b>10.1</b> Using the <code>ealy-warnings-r</code> package in <code>R</code></a></li>
+<li class="chapter" data-level="10.1" data-path="basic-graphs.html"><a href="basic-graphs.html"><i class="fa fa-check"></i><b>10.1</b> Basic graphs</a></li>
+<li class="chapter" data-level="10.2" data-path="social-networks.html"><a href="social-networks.html"><i class="fa fa-check"></i><b>10.2</b> Social Networks</a></li>
+<li class="chapter" data-level="10.3" data-path="small-world-index-and-degree-distribution.html"><a href="small-world-index-and-degree-distribution.html"><i class="fa fa-check"></i><b>10.3</b> Small World Index and Degree Distribution</a></li>
+<li class="chapter" data-level="10.4" data-path="package-qgraph.html"><a href="package-qgraph.html"><i class="fa fa-check"></i><b>10.4</b> Package <code>qgraph</code></a></li>
+<li class="chapter" data-level="10.5" data-path="extra-early-warnings.html"><a href="extra-early-warnings.html"><i class="fa fa-check"></i><b>10.5</b> EXTRA - early warnings</a></li>
 </ul></li>
 <li class="part"><span><b>II Lecture Notes</b></span></li>
 <li class="appendix"><span><b>Solutions</b></span></li>
@@ -208,7 +212,23 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="nets" class="section level1">
 <h1><span class="header-section-number">10</span> Complex Networks</h1>
-<p>Have a look at the site <a href="http://www.early-warning-signals.org/home/">Early Warning Systems</a></p> 
+<p>To complete these assignments you need:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(igraph)</code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;igraph&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:dplyr&#39;:
+## 
+##     %&gt;%, as_data_frame, groups, union</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     decompose, spectrum</code></pre>
+<pre><code>## The following object is masked from &#39;package:base&#39;:
+## 
+##     union</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(qgraph)
+<span class="kw">library</span>(devtools)
+<span class="kw">source_url</span>(<span class="st">&quot;https://raw.githubusercontent.com/FredHasselman/DCS/master/functionLib/nlRtsa_SOURCE.R&quot;</span>)</code></pre></div>
+<pre><code>## SHA-1 hash of file is d5ddc9d83e98c51225244fe6634def33eaaba59e</code></pre> 
 </div>
             </section>
 
@@ -216,7 +236,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
         </div>
       </div>
 <a href="the-cusp-package-in-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="using-the-ealy-warnings-r-package-in-r.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="basic-graphs.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
