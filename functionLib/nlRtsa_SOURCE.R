@@ -234,7 +234,7 @@ plotRP.crqa <- function(crqaOutput){
       AUTO <- TRUE
     }
     if(isSymmetric(RP)){
-      message("\nRP in crqa output is a Symmetric Sparse Matrix, this implies auto-recurrence: \n >> RP Measures will include the Line of Identity\n >> Use crqa() with side = 'upper' or 'lower' to get correct measures.\n")
+      message("\nRP in crqa output is a Symmetric Sparse Matrix, this implies auto-recurrence: \n >> RP Measures will include the Line of Identity, unless:\n >> crqa() with side = 'upper' or 'lower' was used.\n >> crqa() with Theiler window (tw) of 1 was used.")
       AUTO <- TRUE}
 
     if(nc*nr>10^6){
@@ -243,19 +243,21 @@ plotRP.crqa <- function(crqaOutput){
 
     ifelse(AUTO,
            Titles <- list(main="Auto Recurrence Plot", X = expression(Y[t]), Y = expression(Y[t])),
-           Titles <- list(main="Auto Recurrence Plot", X = expression(X[t]), Y = expression(Y[t]))
+           Titles <- list(main="Cross Recurrence Plot", X = expression(X[t]), Y = expression(Y[t]))
     )
 
-    # # Thresholded or Distance matrix?
-    # ifelse(length(unique(Matrix:::as.vector(RP)))>2,
-    #        distPallette <- colorRampPalette(c("red", "white", "blue"))( length(unique(as.vector(RP)))),
-    #        distPallette <- colorRampPalette(c("white", "black"))(2)
-    # )
 
-    distPallette <- colorRampPalette(c("white", "black"))(2)
+    # Thresholded or Distance matrix?
+    ifelse(is.logical(as.array(RP)),
+           distPallette <- colorRampPalette(c("white", "black"))(2),
+           distPallette <- colorRampPalette(c("red", "white", "blue")) #( length(unique(as.vector(RP))))
+    )
+
+    #distPallette <- colorRampPalette(c("white", "black"))(2)
 
     lp <- levelplot(Matrix::as.matrix(RP),
-                    colorkey = FALSE, region = TRUE, col.regions = distPallette, useRaster = TRUE, aspect = nc/nr,
+                    #colorkey = TRUE,
+                    region = TRUE, col.regions = distPallette, useRaster = TRUE, aspect = nc/nr,
                     main = Titles$main,
                     xlab = Titles$X,
                     ylab = Titles$Y)
