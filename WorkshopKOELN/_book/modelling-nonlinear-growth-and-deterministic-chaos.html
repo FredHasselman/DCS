@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>A Complex Systems Approach to Study Human Nature</title>
+  <meta name="description" content="Complexity Workshop Köln: 12-05-2017">
+  <meta name="generator" content="bookdown 0.3.9 and GitBook 2.6.7">
+
+  <meta property="og:title" content="A Complex Systems Approach to Study Human Nature" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="http://fredhasselman.com/htmlHost/DCSKOELN/" />
+  <meta property="og:image" content="http://fredhasselman.com/htmlHost/DCSKOELN/images/foundations.png" />
+  <meta property="og:description" content="Complexity Workshop Köln: 12-05-2017" />
+  <meta name="github-repo" content="FredHasselman/DCS/Reader1617" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="A Complex Systems Approach to Study Human Nature" />
+  
+  <meta name="twitter:description" content="Complexity Workshop Köln: 12-05-2017" />
+  <meta name="twitter:image" content="http://fredhasselman.com/htmlHost/DCSKOELN/images/foundations.png" />
+
+<meta name="author" content="Fred Hasselman">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="part-i.html">
+<link rel="next" href="numerical-integration-to-simulate-continuous-time.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-0.8/htmlwidgets.js"></script>
+<link href="libs/dygraphs-1.1.1/dygraph.css" rel="stylesheet" />
+<script src="libs/dygraphs-1.1.1/dygraph-combined.js"></script>
+<script src="libs/moment-2.8.4/moment.js"></script>
+<script src="libs/moment-timezone-0.2.5/moment-timezone-with-data.js"></script>
+<script src="libs/moment-fquarter-1.0.0/moment-fquarter.min.js"></script>
+<script src="libs/dygraphs-binding-1.1.1.4/dygraphs.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><strong><a href="./">Dynamics of Complex Systems</a></strong></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> <strong>An introduction to the analytical toolbox of Complexity Science</strong></a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#tentative-program"><i class="fa fa-check"></i>Tentative program</a></li>
+<li class="chapter" data-level="1.1" data-path="using-r.html"><a href="using-r.html"><i class="fa fa-check"></i><b>1.1</b> Using <code>R</code>!</a><ul>
+<li class="chapter" data-level="" data-path="using-r.html"><a href="using-r.html#packages-needed-for-the-assignments"><i class="fa fa-check"></i>Packages needed for the assignments</a></li>
+<li class="chapter" data-level="" data-path="using-r.html"><a href="using-r.html#files-on-github"><i class="fa fa-check"></i>Files on GitHub</a></li>
+<li class="chapter" data-level="1.1.1" data-path="using-r.html"><a href="using-r.html#timeseries-in-r"><i class="fa fa-check"></i><b>1.1.1</b> Timeseries in <code class="unnumbered">R</code></a></li>
+<li class="chapter" data-level="" data-path="using-r.html"><a href="using-r.html#this-document"><i class="fa fa-check"></i>This document</a></li>
+</ul></li>
+</ul></li>
+<li><a href="assignments-how-to.html#assignments-how-to"><strong>Assignments: How to … </strong></a><ul>
+<li class="chapter" data-level="" data-path="assignments-how-to.html"><a href="assignments-how-to.html"><i class="fa fa-check"></i>General Guidelines</a></li>
+</ul></li>
+<li class="part"><span><b>I Introduction to the mathematics of change</b></span></li>
+<li class="chapter" data-level="2" data-path="moc1ass.html"><a href="moc1ass.html"><i class="fa fa-check"></i><b>2</b> <strong>Modelling (nonlinear) growth</strong></a><ul>
+<li class="chapter" data-level="2.1" data-path="the-linear-map-in-a-spreadsheet.html"><a href="the-linear-map-in-a-spreadsheet.html"><i class="fa fa-check"></i><b>2.1</b> The Linear Map in a Spreadsheet</a><ul>
+<li class="chapter" data-level="" data-path="the-linear-map-in-a-spreadsheet.html"><a href="the-linear-map-in-a-spreadsheet.html#the-control-parameter"><i class="fa fa-check"></i>The control parameter</a></li>
+<li class="chapter" data-level="" data-path="the-linear-map-in-a-spreadsheet.html"><a href="the-linear-map-in-a-spreadsheet.html#dependence-on-initial-conditions"><i class="fa fa-check"></i>Dependence on initial conditions?</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="the-logistic-map-in-a-spreadsheet.html"><a href="the-logistic-map-in-a-spreadsheet.html"><i class="fa fa-check"></i><b>2.2</b> The Logistic Map in a spreadsheet</a><ul>
+<li class="chapter" data-level="" data-path="the-logistic-map-in-a-spreadsheet.html"><a href="the-logistic-map-in-a-spreadsheet.html#the-control-parameter-1"><i class="fa fa-check"></i>The control parameter</a></li>
+<li class="chapter" data-level="" data-path="the-logistic-map-in-a-spreadsheet.html"><a href="the-logistic-map-in-a-spreadsheet.html#the-return-plot"><i class="fa fa-check"></i>The return plot</a></li>
+<li class="chapter" data-level="2.2.1" data-path="the-logistic-map-in-a-spreadsheet.html"><a href="the-logistic-map-in-a-spreadsheet.html#sensitive-dependence-on-initial-conditions"><i class="fa fa-check"></i><b>2.2.1</b> Sensitive dependence on initial conditions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="moc1R.html"><a href="moc1R.html"><i class="fa fa-check"></i><b>2.3</b> Using <code>R</code> or <code>Matlab</code> to simulate these maps.</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="moc1R.html"><a href="moc1R.html#plot-the-timeseries"><i class="fa fa-check"></i><b>2.3.1</b> Plot the timeseries</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="moc2ass.html"><a href="moc2ass.html"><i class="fa fa-check"></i><b>3</b> <strong>EXTRA</strong></a><ul>
+<li class="chapter" data-level="" data-path="the-growth-model-by-van-geert-1991.html"><a href="the-growth-model-by-van-geert-1991.html"><i class="fa fa-check"></i>The growth model by Van Geert (1991)</a><ul>
+<li class="chapter" data-level="3.0.1" data-path="the-growth-model-by-van-geert-1991.html"><a href="the-growth-model-by-van-geert-1991.html#the-growth-model-in-a-spreadsheet"><i class="fa fa-check"></i><b>3.0.1</b> The growth model in a spreadsheet</a></li>
+</ul></li>
+<li class="chapter" data-level="3.1" data-path="conditional-growth-jumps-and-stages.html"><a href="conditional-growth-jumps-and-stages.html"><i class="fa fa-check"></i><b>3.1</b> Conditional growth: Jumps and Stages</a><ul>
+<li class="chapter" data-level="" data-path="conditional-growth-jumps-and-stages.html"><a href="conditional-growth-jumps-and-stages.html#auto-conditional-jumps"><i class="fa fa-check"></i>Auto-conditional jumps</a></li>
+<li class="chapter" data-level="" data-path="conditional-growth-jumps-and-stages.html"><a href="conditional-growth-jumps-and-stages.html#auto-conditional-stages"><i class="fa fa-check"></i>Auto-conditional stages</a></li>
+<li class="chapter" data-level="" data-path="conditional-growth-jumps-and-stages.html"><a href="conditional-growth-jumps-and-stages.html#connected-growers"><i class="fa fa-check"></i>Connected growers</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="predator-prey-dynamics.html"><a href="predator-prey-dynamics.html"><i class="fa fa-check"></i><b>4</b> <strong>Predator-Prey dynamics</strong></a><ul>
+<li class="chapter" data-level="4.1" data-path="predator-prey-model.html"><a href="predator-prey-model.html"><i class="fa fa-check"></i><b>4.1</b> Predator-prey model</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="predator-prey-model.html"><a href="predator-prey-model.html#euler-method"><i class="fa fa-check"></i><b>4.1.1</b> Euler Method</a></li>
+<li class="chapter" data-level="4.1.2" data-path="predator-prey-model.html"><a href="predator-prey-model.html#coupled-system-in-a-spreadsheet"><i class="fa fa-check"></i><b>4.1.2</b> Coupled System in a spreadsheet</a></li>
+<li class="chapter" data-level="4.1.3" data-path="predator-prey-model.html"><a href="predator-prey-model.html#tip-of-the-iceberg"><i class="fa fa-check"></i><b>4.1.3</b> Tip of the iceberg</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="basic-timeseries-analysis.html"><a href="basic-timeseries-analysis.html"><i class="fa fa-check"></i><b>5</b> <strong>Basic Timeseries Analysis</strong></a><ul>
+<li class="chapter" data-level="5.1" data-path="time-series-analysis-in-spss-17-and-higher.html"><a href="time-series-analysis-in-spss-17-and-higher.html"><i class="fa fa-check"></i><b>5.1</b> Time series analysis in SPSS (17 and higher)</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="time-series-analysis-in-spss-17-and-higher.html"><a href="time-series-analysis-in-spss-17-and-higher.html#bta"><i class="fa fa-check"></i><b>5.1.1</b> Nonlinear Growth curves in SPSS</a></li>
+<li class="chapter" data-level="5.1.2" data-path="time-series-analysis-in-spss-17-and-higher.html"><a href="time-series-analysis-in-spss-17-and-higher.html#pacf"><i class="fa fa-check"></i><b>5.1.2</b> Correlation functions and AR-MA models</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="notes-on-tsa-in-r.html"><a href="notes-on-tsa-in-r.html"><i class="fa fa-check"></i><b>5.2</b> Notes on TSA in <code id="bTSAinR">R</code></a><ul>
+<li class="chapter" data-level="5.2.1" data-path="notes-on-tsa-in-r.html"><a href="notes-on-tsa-in-r.html#importing-data-in-r"><i class="fa fa-check"></i><b>5.2.1</b> Importing data in <code>R</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="part-ii-quantifying-recurrences-in-state-space.html"><a href="part-ii-quantifying-recurrences-in-state-space.html"><i class="fa fa-check"></i><b>6</b> (PART) II. Quantifying Recurrences in State Space</a></li>
+<li class="chapter" data-level="7" data-path="phase-space-reconstruction-and-rqa.html"><a href="phase-space-reconstruction-and-rqa.html"><i class="fa fa-check"></i><b>7</b> <strong>Phase Space Reconstruction and RQA</strong></a><ul>
+<li class="chapter" data-level="7.1" data-path="RQA.html"><a href="RQA.html"><i class="fa fa-check"></i><b>7.1</b> Reconstruct the Lorenz attractor</a></li>
+<li class="chapter" data-level="7.2" data-path="reconstruct-the-predator-prey-model.html"><a href="reconstruct-the-predator-prey-model.html"><i class="fa fa-check"></i><b>7.2</b> Reconstruct the Predator-Prey model</a></li>
+<li class="chapter" data-level="7.3" data-path="auto-recurrence-quantification-analysis.html"><a href="auto-recurrence-quantification-analysis.html"><i class="fa fa-check"></i><b>7.3</b> (auto-) Recurrence Quantification Analysis</a></li>
+<li class="chapter" data-level="7.4" data-path="rqa-of-circle-tracing-data.html"><a href="rqa-of-circle-tracing-data.html"><i class="fa fa-check"></i><b>7.4</b> RQA of circle-tracing data</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="categorical-and-cross-rqa-crqa.html"><a href="categorical-and-cross-rqa-crqa.html"><i class="fa fa-check"></i><b>8</b> <strong>Categorical and Cross-RQA (CRQA)</strong></a><ul>
+<li class="chapter" data-level="8.1" data-path="CRQA.html"><a href="CRQA.html"><i class="fa fa-check"></i><b>8.1</b> Assignment: CRQA and Diagonal Profile</a></li>
+<li class="chapter" data-level="8.2" data-path="catCRQA.html"><a href="catCRQA.html"><i class="fa fa-check"></i><b>8.2</b> Categorical CRQA</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="cusp.html"><a href="cusp.html"><i class="fa fa-check"></i><b>9</b> Potential and Catastrophe Models</a><ul>
+<li class="chapter" data-level="9.1" data-path="fitting-the-cusp-catastrophe-in-spss.html"><a href="fitting-the-cusp-catastrophe-in-spss.html"><i class="fa fa-check"></i><b>9.1</b> Fitting the cusp catastrophe in <code>SPSS</code></a></li>
+<li class="chapter" data-level="9.2" data-path="the-cusp-package-in-r.html"><a href="the-cusp-package-in-r.html"><i class="fa fa-check"></i><b>9.2</b> The <code>cusp</code> package in <code>R</code></a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="nets.html"><a href="nets.html"><i class="fa fa-check"></i><b>10</b> <strong>Complex Networks</strong></a><ul>
+<li class="chapter" data-level="10.1" data-path="basic-graphs.html"><a href="basic-graphs.html"><i class="fa fa-check"></i><b>10.1</b> Basic graphs</a></li>
+<li class="chapter" data-level="10.2" data-path="social-networks.html"><a href="social-networks.html"><i class="fa fa-check"></i><b>10.2</b> Social Networks</a></li>
+<li class="chapter" data-level="10.3" data-path="small-world-index-and-degree-distribution.html"><a href="small-world-index-and-degree-distribution.html"><i class="fa fa-check"></i><b>10.3</b> Small World Index and Degree Distribution</a></li>
+<li class="chapter" data-level="10.4" data-path="package-qgraph.html"><a href="package-qgraph.html"><i class="fa fa-check"></i><b>10.4</b> Package <code>qgraph</code></a></li>
+<li class="chapter" data-level="10.5" data-path="qgraph-tutorials-blog.html"><a href="qgraph-tutorials-blog.html"><i class="fa fa-check"></i><b>10.5</b> <code>qgraph</code> tutorials / blog</a></li>
+<li class="chapter" data-level="10.6" data-path="extra-early-warnings.html"><a href="extra-early-warnings.html"><i class="fa fa-check"></i><b>10.6</b> EXTRA - early warnings</a></li>
+</ul></li>
+<li class="part"><span><b>II Notes</b></span></li>
+<li class="chapter" data-level="" data-path="preparation-prep.html"><a href="preparation-prep.html"><i class="fa fa-check"></i>PREPARATION {#prep}</a><ul>
+<li><a href="new-to-r.html#new-to-r">New to <code>R</code>?</a></li>
+<li><a href="not-new-to-r.html#not-new-to-r">Not new to <code>R</code>?</a></li>
+<li><a href="the-time-series-object-tsplot.html#the-time-series-object-tsplot">The <code>time series</code> object {#tsPlot}</a><ul>
+<li><a href="the-time-series-object-tsplot.html#plotting-a-ts-object-as-a-time-series">Plotting a <code>ts</code> object as a time series</a></li>
+<li class="chapter" data-level="" data-path="the-time-series-object-tsplot.html"><a href="the-time-series-object-tsplot.html"><i class="fa fa-check"></i>Plotting multiple time series in one figure</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="part-i.html"><a href="part-i.html"><i class="fa fa-check"></i>PART I</a><ul>
+<li class="chapter" data-level="" data-path="modelling-nonlinear-growth-and-deterministic-chaos.html"><a href="modelling-nonlinear-growth-and-deterministic-chaos.html"><i class="fa fa-check"></i>Modelling (nonlinear) growth and Deterministic Chaos</a><ul>
+<li><a href="modelling-nonlinear-growth-and-deterministic-chaos.html#its-a-line-its-a-plane"><strong>It’s a line! It’s a plane!</strong></a></li>
+<li><a href="modelling-nonlinear-growth-and-deterministic-chaos.html#no-its-a-time-series"><strong>No! … It’s a time series!</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="numerical-integration-to-simulate-continuous-time.html"><a href="numerical-integration-to-simulate-continuous-time.html"><i class="fa fa-check"></i>Numerical integration to simulate continuous time</a><ul>
+<li class="chapter" data-level="" data-path="numerical-integration-to-simulate-continuous-time.html"><a href="numerical-integration-to-simulate-continuous-time.html#eulers-method-and-more"><i class="fa fa-check"></i>Euler’s method and more…</a></li>
+<li class="chapter" data-level="" data-path="numerical-integration-to-simulate-continuous-time.html"><a href="numerical-integration-to-simulate-continuous-time.html#analytical-solution"><i class="fa fa-check"></i>Analytical solution</a></li>
+<li class="chapter" data-level="" data-path="numerical-integration-to-simulate-continuous-time.html"><a href="numerical-integration-to-simulate-continuous-time.html#numerical-solution-discrete"><i class="fa fa-check"></i>Numerical solution (discrete)</a></li>
+</ul></li>
+<li class="chapter" data-level="10.7" data-path="advmodels.html"><a href="advmodels.html"><i class="fa fa-check"></i><b>10.7</b> Modeling interactions between processes and agents</a><ul>
+<li class="chapter" data-level="" data-path="advmodels.html"><a href="advmodels.html#the-competetive-lottka-volterra-equations"><i class="fa fa-check"></i>The Competetive Lottka-Volterra Equations</a></li>
+<li class="chapter" data-level="" data-path="advmodels.html"><a href="advmodels.html#predator-prey-and-other-dynamics-as-agent-based-models"><i class="fa fa-check"></i>Predator-Prey (and other) dynamics as Agent Based Models</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="part-ii.html"><a href="part-ii.html"><i class="fa fa-check"></i>PART II</a><ul>
+<li class="chapter" data-level="" data-path="part-ii.html"><a href="part-ii.html#using-r-install-functions-in-nlrtsa_source.r"><i class="fa fa-check"></i>Using R: Install functions in nlRtsa_SOURCE.R</a></li>
+<li class="chapter" data-level="" data-path="examples-fast-fourier-transform-and-power-spectrum.html"><a href="examples-fast-fourier-transform-and-power-spectrum.html"><i class="fa fa-check"></i>Examples: Fast Fourier transform and Power Spectrum</a></li>
+<li class="chapter" data-level="" data-path="data-considerations.html"><a href="data-considerations.html"><i class="fa fa-check"></i>Data considerations</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="part-iii.html"><a href="part-iii.html"><i class="fa fa-check"></i>PART III</a><ul>
+<li class="chapter" data-level="10.8" data-path="creating-fractals-from-random-processes.html"><a href="creating-fractals-from-random-processes.html"><i class="fa fa-check"></i><b>10.8</b> Creating fractals from random processes</a><ul>
+<li class="chapter" data-level="" data-path="creating-fractals-from-random-processes.html"><a href="creating-fractals-from-random-processes.html#a-triangle"><i class="fa fa-check"></i>A Triangle</a></li>
+<li class="chapter" data-level="" data-path="creating-fractals-from-random-processes.html"><a href="creating-fractals-from-random-processes.html#a-fern"><i class="fa fa-check"></i>A Fern</a></li>
+<li class="chapter" data-level="" data-path="creating-fractals-from-random-processes.html"><a href="creating-fractals-from-random-processes.html#the-fractal-chaos-game"><i class="fa fa-check"></i>The fractal / chaos game</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="lecture-6.html"><a href="lecture-6.html"><i class="fa fa-check"></i>Lecture 6</a></li>
+<li class="chapter" data-level="" data-path="lecture-7.html"><a href="lecture-7.html"><i class="fa fa-check"></i>Lecture 7</a></li>
+<li class="chapter" data-level="" data-path="lecture-8.html"><a href="lecture-8.html"><i class="fa fa-check"></i>Lecture 8</a></li>
+<li class="chapter" data-level="" data-path="lecture-9.html"><a href="lecture-9.html"><i class="fa fa-check"></i>Lecture 9</a></li>
+<li class="appendix"><span><b>Solutions</b></span></li>
+<li class="chapter" data-level="A" data-path="mathematics-of-change-i.html"><a href="mathematics-of-change-i.html"><i class="fa fa-check"></i><b>A</b> <strong>Mathematics of change I</strong></a><ul>
+<li class="chapter" data-level="A.1" data-path="linear-and-logistic-growth.html"><a href="linear-and-logistic-growth.html"><i class="fa fa-check"></i><b>A.1</b> Linear and logistic growth</a><ul>
+<li class="chapter" data-level="" data-path="linear-and-logistic-growth.html"><a href="linear-and-logistic-growth.html#solutions-in-a-spreadsheet"><i class="fa fa-check"></i>Solutions in a spreadsheet</a></li>
+<li><a href="linear-and-logistic-growth.html#solutions-in-r">Solutions in <code id="moc1Rsol">R</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="extra.html"><a href="extra.html"><i class="fa fa-check"></i><b>B</b> <strong>EXTRA</strong></a><ul>
+<li class="chapter" data-level="B.1" data-path="tvpar.html"><a href="tvpar.html"><i class="fa fa-check"></i><b>B.1</b> Time-varying parameters</a><ul>
+<li class="chapter" data-level="" data-path="tvpar.html"><a href="tvpar.html#solutions-in-a-spreadsheet-1"><i class="fa fa-check"></i>Solutions in a spreadsheet</a></li>
+<li class="chapter" data-level="B.1.1" data-path="tvpar.html"><a href="tvpar.html#solutions-in-r-1"><i class="fa fa-check"></i><b>B.1.1</b> Solutions in <code class="unnumbered">R</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="C" data-path="ppdsol.html"><a href="ppdsol.html"><i class="fa fa-check"></i><b>C</b> Predator-prey dynamics</a><ul>
+<li class="chapter" data-level="" data-path="ppdsol.html"><a href="ppdsol.html#iterating-2d-maps-and-flows"><i class="fa fa-check"></i>Iterating 2D Maps and Flows</a></li>
+<li class="chapter" data-level="" data-path="solutions-in-a-spreadsheet-2.html"><a href="solutions-in-a-spreadsheet-2.html"><i class="fa fa-check"></i>Solutions in a spreadsheet</a></li>
+<li class="chapter" data-level="C.1" data-path="solutions-in-r-2.html"><a href="solutions-in-r-2.html"><i class="fa fa-check"></i><b>C.1</b> Solutions in <code class="unnumbered">R</code></a><ul>
+<li class="chapter" data-level="" data-path="solutions-in-r-2.html"><a href="solutions-in-r-2.html#eulers-method-and-more-1"><i class="fa fa-check"></i>Euler’s method and more…</a></li>
+<li class="chapter" data-level="" data-path="solutions-in-r-2.html"><a href="solutions-in-r-2.html#numerical-integration"><i class="fa fa-check"></i>Numerical integration</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="D" data-path="btasol.html"><a href="btasol.html"><i class="fa fa-check"></i><b>D</b> <strong>Basic Timeseries Analysis</strong></a><ul>
+<li class="chapter" data-level="D.1" data-path="nonlinear-growth-curves-in-spss.html"><a href="nonlinear-growth-curves-in-spss.html"><i class="fa fa-check"></i><b>D.1</b> Nonlinear Growth curves in SPSS</a></li>
+<li class="chapter" data-level="D.2" data-path="pacfsol.html"><a href="pacfsol.html"><i class="fa fa-check"></i><b>D.2</b> Correlation functions and AR-MA models</a></li>
+<li class="chapter" data-level="D.3" data-path="using-r-to-fit-the-solutions.html"><a href="using-r-to-fit-the-solutions.html"><i class="fa fa-check"></i><b>D.3</b> Using <code>R</code> to fit the solutions</a></li>
+</ul></li>
+<li class="chapter" data-level="E" data-path="phase-space-reconstruction-and-recurrence-quantification-analysis-rqa.html"><a href="phase-space-reconstruction-and-recurrence-quantification-analysis-rqa.html"><i class="fa fa-check"></i><b>E</b> <strong>Phase Space Reconstruction and Recurrence Quantification Analysis (RQA)</strong></a><ul>
+<li class="chapter" data-level="E.1" data-path="PSRsol.html"><a href="PSRsol.html"><i class="fa fa-check"></i><b>E.1</b> Phase Space Reconstruction of the Lorenz Attractor</a><ul>
+<li class="chapter" data-level="" data-path="PSRsol.html"><a href="PSRsol.html#embedding-lag"><i class="fa fa-check"></i>Embedding Lag</a></li>
+<li class="chapter" data-level="" data-path="PSRsol.html"><a href="PSRsol.html#false-nearest-neighbours"><i class="fa fa-check"></i>False Nearest Neighbours</a></li>
+<li class="chapter" data-level="" data-path="PSRsol.html"><a href="PSRsol.html#plot-the-reconstructed-phase-space"><i class="fa fa-check"></i>Plot the reconstructed phase space</a></li>
+</ul></li>
+<li class="chapter" data-level="E.2" data-path="phase-space-reconstruction-of-the-predator-prey-system.html"><a href="phase-space-reconstruction-of-the-predator-prey-system.html"><i class="fa fa-check"></i><b>E.2</b> Phase Space Reconstruction of the Predator-Prey system</a><ul>
+<li class="chapter" data-level="" data-path="phase-space-reconstruction-of-the-predator-prey-system.html"><a href="phase-space-reconstruction-of-the-predator-prey-system.html#embedding-lag-1"><i class="fa fa-check"></i>Embedding Lag</a></li>
+<li class="chapter" data-level="" data-path="phase-space-reconstruction-of-the-predator-prey-system.html"><a href="phase-space-reconstruction-of-the-predator-prey-system.html#false-nearest-neighbours-1"><i class="fa fa-check"></i>False Nearest Neighbours</a></li>
+<li class="chapter" data-level="" data-path="phase-space-reconstruction-of-the-predator-prey-system.html"><a href="phase-space-reconstruction-of-the-predator-prey-system.html#plot-the-reconstructed-phase-space-1"><i class="fa fa-check"></i>Plot the reconstructed phase space</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="F" data-path="recurrence-quantification-analysis.html"><a href="recurrence-quantification-analysis.html"><i class="fa fa-check"></i><b>F</b> <strong>Recurrence Quantification Analysis</strong></a><ul>
+<li class="chapter" data-level="F.1" data-path="RQAsol.html"><a href="RQAsol.html"><i class="fa fa-check"></i><b>F.1</b> RQA of the Lorenz system</a></li>
+<li class="chapter" data-level="F.2" data-path="rqa-of-the-circle-tracing-task.html"><a href="rqa-of-the-circle-tracing-task.html"><i class="fa fa-check"></i><b>F.2</b> RQA of the Circle Tracing Task</a><ul>
+<li class="chapter" data-level="" data-path="rqa-of-the-circle-tracing-task.html"><a href="rqa-of-the-circle-tracing-task.html#embedding-lag-2"><i class="fa fa-check"></i>Embedding lag</a></li>
+<li class="chapter" data-level="" data-path="rqa-of-the-circle-tracing-task.html"><a href="rqa-of-the-circle-tracing-task.html#false-nearest-neighbours-2"><i class="fa fa-check"></i>False Nearest Neighbours</a></li>
+<li class="chapter" data-level="" data-path="rqa-of-the-circle-tracing-task.html"><a href="rqa-of-the-circle-tracing-task.html#run-the-rqa"><i class="fa fa-check"></i>Run the RQA</a></li>
+</ul></li>
+<li class="chapter" data-level="F.3" data-path="CRQAsol.html"><a href="CRQAsol.html"><i class="fa fa-check"></i><b>F.3</b> Assignment: Cross Recurrence Quantification Analysis</a></li>
+<li class="chapter" data-level="F.4" data-path="catCRQAsol.html"><a href="catCRQAsol.html"><i class="fa fa-check"></i><b>F.4</b> Assignment: Categorical CRQA</a></li>
+</ul></li>
+<li class="chapter" data-level="G" data-path="netssol.html"><a href="netssol.html"><i class="fa fa-check"></i><b>G</b> <strong>Complex Networks</strong></a><ul>
+<li class="chapter" data-level="G.1" data-path="basic-graphs-1.html"><a href="basic-graphs-1.html"><i class="fa fa-check"></i><b>G.1</b> Basic graphs</a></li>
+<li class="chapter" data-level="G.2" data-path="social-networks-1.html"><a href="social-networks-1.html"><i class="fa fa-check"></i><b>G.2</b> Social Networks</a></li>
+<li class="chapter" data-level="G.3" data-path="small-world-index-and-degree-distribution-1.html"><a href="small-world-index-and-degree-distribution-1.html"><i class="fa fa-check"></i><b>G.3</b> Small World Index and Degree Distribution</a></li>
+</ul></li>
+<li><a href="bibliography.html#bibliography"><strong>Bibliography</strong></a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Complex Systems Approach to Study Human Nature</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="modelling-nonlinear-growth-and-deterministic-chaos" class="section level2 unnumbered">
+<h2>Modelling (nonlinear) growth and Deterministic Chaos</h2>
+<p>The simplest non-trivial <em>iterative change process</em> can be described by the following <em>difference equation</em>:</p>
+<span class="math display" id="eq:lin">\[\begin{equation}
+Y_{t+1} = Y_{t=0} + a*Y_t
+\tag{10.1}
+\end{equation}\]</span>
+<p>Equation <a href="modelling-nonlinear-growth-and-deterministic-chaos.html#eq:lin">(10.1)</a> describes the way in which the value of <span class="math inline">\(Y\)</span> changes <a href="https://en.wikipedia.org/wiki/Discrete_time_and_continuous_time">between two adjacent, discrete moments in time</a> (hence the term <a href="https://en.wikipedia.org/wiki/Recurrence_relation">difference equation, or recurrence relation</a>). There are two parameters resembling an intercept and a slope:</p>
+<ol style="list-style-type: decimal">
+<li>The starting value <span class="math inline">\(Y_0\)</span> at <span class="math inline">\(t=0\)</span>, also called the <em>starting value</em>, or the <em>initial conditions</em>.</li>
+<li>A rule for incrementing time, here the change in <span class="math inline">\(Y\)</span> takes place over a discrete time step of 1: <span class="math inline">\(t+1\)</span>.</li>
+</ol>
+<p>The values taken on by variable <span class="math inline">\(Y\)</span> are considered to represent the states quantifiable observable leAlternative ways to describe the change of states :</p>
+<ul>
+<li>A dynamical rule describing the propagation of the states of a system observable measured by the values of variable <code>Y</code> through discrete time.</li>
+<li>A dynamic law describing the time-evolution of the states of a system observable measured by the variable <code>Y</code>.</li>
+</ul>
+<p>These descriptions all refer to the change processes that govern system observables (properties of dynamical systems that can be observed through measurement).</p>
+<div id="its-a-line-its-a-plane" class="section level3 unnumbered">
+<h3><strong>It’s a line! It’s a plane!</strong></h3>
+<p>The formula resembles the equation of a line. There is a constant value <span class="math inline">\(Y_{0}\)</span> which is added to a proportion of the value of <span class="math inline">\(Y\)</span> at time <span class="math inline">\(t\)</span>, given by parameter <span class="math inline">\(a\)</span>. This is equivalent to the slope of a line. However, in a <span class="math inline">\((X,Y)\)</span> plane there are two ‘spatial’ (metric) dimensions representing the values two variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> can take on (see figure).</p>
+<p><img src="DCS1617_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
+<p>The best fitting straight line would be called a statistical model of the linear relationship between the observed values of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. It can be obtained by fitting a General Linear Model (GLM) to the data. If <span class="math inline">\(X\)</span> were to represent repeated measurements the multivariate GLM for repeated measures would have to be fitted to the data. This can be very problematic, because statistical models rely on <a href="https://en.wikipedia.org/wiki/Ergodic_theory">Ergodic theory</a>:</p>
+<blockquote>
+<p>“… it is the study of the long term average behavior of systems evolving in time.”<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a></p>
+</blockquote>
+<p>need to assume independence of measurements within and between subjects. These assumptions can be translated to certain conditions that must hold for the model to be valid, known as <em>Compound Symmetry</em> and <em>Sphericity</em>:</p>
+<blockquote>
+<p>The compound symmetry assumption requires that the variances (pooled within-group) and covariances (across subjects) of the different repeated measures are homogeneous (identical). This is a sufficient condition for the univariate F test for repeated measures to be valid (i.e., for the reported F values to actually follow the F distribution). However, it is not a necessary condition. The sphericity assumption is a necessary and sufficient condition for the F test to be valid; it states that the within-subject “model” consists of independent (orthogonal) components. The nature of these assumptions, and the effects of violations are usually not well-described in ANOVA textbooks;<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a></p>
+</blockquote>
+<p>As you can read in the quoted text above, these conditions must hold in order to be able to identify unique independent components as the sources of variation of <span class="math inline">\(Y\)</span> over time within a subject. This is the a clear example of:</p>
+<blockquote>
+<p>It is the theory that decides what we may observe<a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a></p>
+</blockquote>
+<p>If you choose to use GLM repeated measures to model change over time, you will only be able to infer independent components that are responsible for the time-evolution of <span class="math inline">\(Y\)</span>. As is hinted in the last sentence of the quote, the validity of such inferences is not a common topic of discussion statistics textbooks.</p>
+</div>
+<div id="no-its-a-time-series" class="section level3 unnumbered">
+<h3><strong>No! … It’s a time series!</strong></h3>
+<p>The important difference between a regular 2-dimensional Euclidean plane and the space in which we model change processes is that the <span class="math inline">\(X\)</span>-axis represents the physical dimension <strong>time</strong>. In the case of the Linear Map we have a 1D space with one ‘spatial’ dimension <span class="math inline">\(Y\)</span> and a time dimension <span class="math inline">\(t\)</span>. This is called <a href="https://en.wikipedia.org/wiki/Time_series">time series</a> if <span class="math inline">\(Y\)</span> is sampled as a continuous process, or a trial series if the time between subsequent observations is not relevant, just the fact that there was a temporal order (for example, a series of response latencies to trials in a psychological experiment in the order in which they were presented to the subject).</p>
+<p><img src="DCS1617_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+<p>Time behaves different from a spatial dimension in that it is directional (time cannot be reversed), it cannot take on negative values, and, unless one is dealing with a truly random process, there will be a temporal correlation across one or more values of <span class="math inline">\(Y\)</span> seperated by an amount of time. In the linear difference equation this occurs because each value one step in the future is calculated based on the current value. If the values of <span class="math inline">\(Y\)</span> represent an observable of a dynamical system, the system can be said to have a history, or a memory. Ergodic systems do not have a history or a memory that extends across more than one time step. This is very convenient, because one can calculate the expected value of a system observable given infinite time, by making use of of the laws of probabilities of random events (or random fields). This means: The average of an observable of an Ergodic system measured across infinite time (its entire history, the <strong>time-average</strong>), will be the be the same value as the average of this observable measured at one instance in time, but in an infinite amount of systems of the same kind (the population, the <strong>spatial average</strong>).<a href="#fn5" class="footnoteRef" id="fnref5"><sup>5</sup></a></p>
+<p>The simple linear difference equation will have a form of *perfect memory’ across the smallest time scale (i.e., the increment of 1, <span class="math inline">\(t+1\)</span>). This ‘memory’ concerns a correlation of 1 between values at adjacent time points (a short range temporal correlation, SRC), because the change from <span class="math inline">\(Y_t\)</span> to <span class="math inline">\(Y_{t+1}\)</span> is exactly equal to <span class="math inline">\(a * Y_t\)</span> at each iteration step. This is the meaning of deterministic, not that each value of <span class="math inline">\(Y\)</span> is the same, but that the value of <span class="math inline">\(Y\)</span> now can be perfectly explained form the value of <span class="math inline">\(Y\)</span> one moment in the past.</p>
+<p>Summarising, the most profound difference is not the fact that the equation of linear change is a deterministic model and the GLM is a probabilistic model with parameters fitted from data, this is something we can (and will) do for <span class="math inline">\(a\)</span> as well. The profound difference between the models is the role given to the passage of time:</p>
+<ul>
+<li>The linear difference equation represents changes in <span class="math inline">\(Y\)</span> as a function of the physical dimension <em>time</em> and <span class="math inline">\(Y\)</span> itself.</li>
+<li>The GLM represents changes in <span class="math inline">\(Y\)</span> as a function of a <a href="https://en.wikipedia.org/wiki/Linear_predictor_function">linear predictor</a> composed of additive components that can be regarded as independent sources of variation that sum up to the observed values of <span class="math inline">\(Y\)</span>.</li>
+</ul>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="2">
+<li id="fn2"><p>See Dajani &amp; Dirksin (2008, p. 5, <a href="http://www.staff.science.uu.nl/~kraai101/lecturenotes2009.pdf">“A simple introduction to Ergodic Theory”</a>)<a href="modelling-nonlinear-growth-and-deterministic-chaos.html#fnref2">↩</a></p></li>
+<li id="fn3"><p><a href="https://www.statsoft.com/Textbook/ANOVA-MANOVA#sphericity">Retreived from www.statsoft.com</a><a href="modelling-nonlinear-growth-and-deterministic-chaos.html#fnref3">↩</a></p></li>
+<li id="fn4"><p>Einstein as quoted by Heisenberg.<a href="modelling-nonlinear-growth-and-deterministic-chaos.html#fnref4">↩</a></p></li>
+<li id="fn5"><p>In other words: If you throw 1 die 100 times in a row, the average of the 100 numbers is the <strong>time-average</strong> of one of the observables of die-throwing systems. If this system is ergodic, then its <strong>time-average</strong> is expected to be similar to the average of the numbers that turn up if you throw 100 dice all at the same instance of time. The dice layed out on the table represent a spatial sample, a snapshot frozen in time, of the possible states the system can be in. Taking the average would be the <strong>spatial average</strong> this observable of die-throwing systems. This ergodic condiciotn is often implicitly assumed in Behavioural Science when studies claim to study change by taking different samples of individuals (snapshots of system states) and comparing if they are the same.<a href="modelling-nonlinear-growth-and-deterministic-chaos.html#fnref5">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="part-i.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="numerical-integration-to-simulate-continuous-time.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true,
+"toc": null
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -26,7 +26,7 @@
 <meta name="author" content="Fred Hasselman &amp; Maarten Wijnants">
 
 
-<meta name="date" content="2017-01-18">
+<meta name="date" content="2017-02-08">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -54,7 +54,8 @@
 <script src="libs/dygraphs-1.1.1/dygraph-combined.js"></script>
 <script src="libs/moment-2.8.4/moment.js"></script>
 <script src="libs/moment-timezone-0.2.5/moment-timezone-with-data.js"></script>
-<script src="libs/dygraphs-binding-1.1.1.3/dygraphs.js"></script>
+<script src="libs/moment-fquarter-1.0.0/moment-fquarter.min.js"></script>
+<script src="libs/dygraphs-binding-1.1.1.4/dygraphs.js"></script>
 
 
 <style type="text/css">
@@ -329,8 +330,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="we-use-r" class="section level2">
 <h2><span class="header-section-number">1.6</span> We use <code>R</code>!</h2>
 <p>This text was transformed to <code>HTML</code>, <code>PDF</code> en <code>ePUB</code> using <code>bookdown</code><span class="citation">(Xie <a href="#ref-R-bookdown">2016</a><a href="#ref-R-bookdown">a</a>)</span> in <a href="https://www.rstudio.com"><strong>RStudio</strong></a>, the graphical user interface of the statistical language <a href="https://www.r-project.org"><strong>R</strong></a> <span class="citation">(R Core Team <a href="#ref-R-base">2016</a>)</span>. <code>bookdown</code> makes use of the <code>R</code> version of <a href="https://en.wikipedia.org/wiki/Markdown">markdown</a> called <a href="http://rmarkdown.rstudio.com">Rmarkdown</a> <span class="citation">(Allaire et al. <a href="#ref-R-rmarkdown">2016</a>)</span>, together with <a href="http://yihui.name/knitr/">knitr</a> <span class="citation">(Xie <a href="#ref-R-knitr">2016</a><a href="#ref-R-knitr">c</a>)</span> and <a href="http://pandoc.org">pandoc</a>.</p>
-<p>We’ll use some web applications made in <a href="http://shiny.rstudio.com">Shiny</a> <span class="citation">(Chang et al. <a href="#ref-R-shiny">2016</a>)</span></p>
-<p>Other <code>R</code> packages used are: <code>DT</code> <span class="citation">(Xie <a href="#ref-R-DT">2016</a><a href="#ref-R-DT">b</a>)</span>, <code>htmlTable</code> <span class="citation">(Gordon <a href="#ref-R-htmlTable">2016</a>)</span>, <code>plyr</code> <span class="citation">(Wickham <a href="#ref-R-plyr">2016</a><a href="#ref-R-plyr">a</a>)</span>, <code>dplyr</code> <span class="citation">(Wickham and Francois <a href="#ref-R-dplyr">2016</a>)</span>,<code>tidyr</code> <span class="citation">(Wickham <a href="#ref-R-tidyr">2016</a><a href="#ref-R-tidyr">b</a>)</span>, <code>png</code> <span class="citation">(Urbanek <a href="#ref-R-png">2013</a>)</span>, <code>rio</code> <span class="citation">(Chan and Leeper <a href="#ref-R-rio">2016</a>)</span>.</p>
+<p>We’ll use some web applications made in <a href="http://shiny.rstudio.com">Shiny</a> <span class="citation">(Chang et al. <a href="#ref-R-shiny">2017</a>)</span></p>
+<p>Other <code>R</code> packages used are: <code>DT</code> <span class="citation">(Xie <a href="#ref-R-DT">2016</a><a href="#ref-R-DT">b</a>)</span>, <code>htmlTable</code> <span class="citation">(Gordon <a href="#ref-R-htmlTable">2017</a>)</span>, <code>plyr</code> <span class="citation">(Wickham <a href="#ref-R-plyr">2016</a>)</span>, <code>dplyr</code> <span class="citation">(Wickham and Francois <a href="#ref-R-dplyr">2016</a>)</span>,<code>tidyr</code> <span class="citation">(Wickham <a href="#ref-R-tidyr">2017</a>)</span>, <code>png</code> <span class="citation">(Urbanek <a href="#ref-R-png">2013</a>)</span>, <code>rio</code> <span class="citation">(Chan and Leeper <a href="#ref-R-rio">2016</a>)</span>.</p>
 
 </div>
 </div>
@@ -352,22 +353,22 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Xie, Yihui. 2016c. <em>Knitr: A General-Purpose Package for Dynamic Report Generation in R</em>. <a href="https://CRAN.R-project.org/package=knitr" class="uri">https://CRAN.R-project.org/package=knitr</a>.</p>
 </div>
 <div id="ref-R-shiny">
-<p>Chang, Winston, Joe Cheng, JJ Allaire, Yihui Xie, and Jonathan McPherson. 2016. <em>Shiny: Web Application Framework for R</em>. <a href="https://CRAN.R-project.org/package=shiny" class="uri">https://CRAN.R-project.org/package=shiny</a>.</p>
+<p>Chang, Winston, Joe Cheng, JJ Allaire, Yihui Xie, and Jonathan McPherson. 2017. <em>Shiny: Web Application Framework for R</em>. <a href="https://CRAN.R-project.org/package=shiny" class="uri">https://CRAN.R-project.org/package=shiny</a>.</p>
 </div>
 <div id="ref-R-DT">
 <p>Xie, Yihui. 2016b. <em>DT: A Wrapper of the Javascript Library ’Datatables’</em>. <a href="https://CRAN.R-project.org/package=DT" class="uri">https://CRAN.R-project.org/package=DT</a>.</p>
 </div>
 <div id="ref-R-htmlTable">
-<p>Gordon, Max. 2016. <em>HtmlTable: Advanced Tables for Markdown/Html</em>. <a href="https://CRAN.R-project.org/package=htmlTable" class="uri">https://CRAN.R-project.org/package=htmlTable</a>.</p>
+<p>Gordon, Max. 2017. <em>HtmlTable: Advanced Tables for Markdown/Html</em>. <a href="https://CRAN.R-project.org/package=htmlTable" class="uri">https://CRAN.R-project.org/package=htmlTable</a>.</p>
 </div>
 <div id="ref-R-plyr">
-<p>Wickham, Hadley. 2016a. <em>Plyr: Tools for Splitting, Applying and Combining Data</em>. <a href="https://CRAN.R-project.org/package=plyr" class="uri">https://CRAN.R-project.org/package=plyr</a>.</p>
+<p>Wickham, Hadley. 2016. <em>Plyr: Tools for Splitting, Applying and Combining Data</em>. <a href="https://CRAN.R-project.org/package=plyr" class="uri">https://CRAN.R-project.org/package=plyr</a>.</p>
 </div>
 <div id="ref-R-dplyr">
 <p>Wickham, Hadley, and Romain Francois. 2016. <em>Dplyr: A Grammar of Data Manipulation</em>. <a href="https://CRAN.R-project.org/package=dplyr" class="uri">https://CRAN.R-project.org/package=dplyr</a>.</p>
 </div>
 <div id="ref-R-tidyr">
-<p>Wickham, Hadley. 2016b. <em>Tidyr: Easily Tidy Data with ‘Spread()‘ and ‘Gather()‘ Functions</em>. <a href="https://CRAN.R-project.org/package=tidyr" class="uri">https://CRAN.R-project.org/package=tidyr</a>.</p>
+<p>Wickham, Hadley. 2017. <em>Tidyr: Easily Tidy Data with ’Spread()’ and ’Gather()’ Functions</em>. <a href="https://CRAN.R-project.org/package=tidyr" class="uri">https://CRAN.R-project.org/package=tidyr</a>.</p>
 </div>
 <div id="ref-R-png">
 <p>Urbanek, Simon. 2013. <em>Png: Read and Write Png Images</em>. <a href="https://CRAN.R-project.org/package=png" class="uri">https://CRAN.R-project.org/package=png</a>.</p>
@@ -413,7 +414,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": null,
+"download": ["DCS1617.pdf"],
 "toc": {
 "collapse": "subsection",
 "scroll_highlight": true,
