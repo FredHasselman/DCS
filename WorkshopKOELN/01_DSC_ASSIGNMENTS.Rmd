@@ -22,7 +22,7 @@ These assignments were designed to prepare you for "real world" modelling and da
 
 # (PART) Introduction to the mathematics of change {-}
 
-# **Modelling (nonlinear) growth**  {#moc1ass}
+# **Modelling (nonlinear) growth**  {#moc1ass} 
 
 In this assignment you will build two (relatively) simple one-dimensional maps in `R`, based on an example in a spreadsheet. 
 Go to the followin [GoogleSheet](https://docs.google.com/spreadsheets/d/10PpXKHHcbuwtWsTWvBKPFj2TqwpCH_BGxtRZhtMo71E/edit#gid=1744375290) and save a copy on your computer, you can use your favourite spreadsheet software (e.g., Excel, Numbers), or, copy it to a new GoogleSheet if you prefer Google.  

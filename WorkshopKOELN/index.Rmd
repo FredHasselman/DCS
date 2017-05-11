@@ -21,7 +21,7 @@ link-citations: yes
 # monofontoptions: "Scale=0.7"
 # site: bookdown::bookdown_site
 # output: bookdown::gitbook
-description: "Complexity Workshop Köln: 12-05-2017 "
+description: "Complexity Workshop Köln: 12-05-2017"
 url: 'http\://fredhasselman.com/htmlHost/DCSKOELN/'
 github-repo: FredHasselman/DCS/Reader1617
 cover-image: images/foundations.png
@@ -86,7 +86,7 @@ library(DT)
  * Early Warning Signals in clinical interventions
 
 
-## Using `R`! 
+## Using `R`! {-}
 
 I recommend installing the latest version of [**R**](https://www.r-project.org) and [**RStudio**](https://www.rstudio.com). Rstudio is not strictly necessary, but especially new users will have a somewhat more comfortable expe**R**ience. If you are completeley new to `R` you might want to [check these notes](#prep)
 
@@ -134,8 +134,4 @@ This text was transformed to `HTML`, `PDF` en `ePUB` using `bookdown`[@R-bookdow
 We'll use some web applications made in [Shiny](http://shiny.rstudio.com) [@R-shiny] 
 
 Other `R` packages used are: `DT` [@R-DT], `htmlTable` [@R-htmlTable], `plyr` [@R-plyr], `dplyr` [@R-dplyr],`tidyr` [@R-tidyr], `png` [@R-png], `rio` [@R-rio].
-
-
-
-
 
