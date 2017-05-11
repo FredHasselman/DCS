@@ -1,0 +1,53 @@
+.rmdselfThink, .rmdimportant, .rmdnote, .rmdkennen, .rmdentertain, .rmdfilo, .rmdempi, .rmdscip {
+  font-size: 85%;
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  background: #f5f5f5 5px center/3em no-repeat;
+}
+.rmdselfThink {
+  background-image: url("../images/selfThink.png");
+}
+.rmdimportant {
+  background-image: url("../images/important.png");
+}
+.rmdnote {
+  background-image: url("../images/note.png");
+}
+.rmdkennen {
+  background-image: url("../images/kennen.png");
+}
+.rmdentertain {
+  background-image: url("../images/entertain.png");
+}
+.rmdfilo {
+  background-image: url("../images/Filosoof_150px.png");
+}
+.rmdempi {
+  background-image: url("../images/Empirist_150px.png");
+}
+.rmdscip {
+  background-image: url("../images/Sci-Pract_150px.png");
+}
+.kable_wrapper {
+  border-spacing: 20px 0;
+  border-collapse: separate;
+  border: none;
+  margin: auto;
+}
+.kable_wrapper > tbody > tr > td {
+  vertical-align: top;
+}
+p.caption {
+  color: #777;
+  margin-top: 10px;
+}
+p code {
+  white-space: inherit;
+}
+pre {
+  word-break: normal;
+  word-wrap: normal;
+}
+pre code {
+  white-space: inherit;
+}

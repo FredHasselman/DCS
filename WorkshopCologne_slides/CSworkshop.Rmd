@@ -1,0 +1,90 @@
+---
+title: "A Complex Systems Approach to Study Human Nature: An introduction to the analytical toolbox of Complexity Science"
+author: "Fred Hasselman - Behavioural Science Institute - Radboud University Nijmegen"
+date: "12/05/2017"
+output:
+  word_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This workshop will provide an introduction to some of the formal models, research methods and analytical techniques that allow for the study of human behaviour from a complex systems perspective. Complexity research transcends the boundaries between the classical scientific disciplines and is a hot topic in physics, mathematics, biology, economy and psychology. Its focus is a description and explanation of behaviour based on *interaction dominant dynamics*: Many processes interact on different temporal and spatial scales and behaviour emerges out of those interactions through physical processes such as self-organization or soft-assembly. 
+
+Contrary to what the name might suggest, complexity research is often about finding simple models or collective variables with which a wide range of different behavioural modes can be described. This approach differs fundamentally from the more classical approaches in which behaviour is considered the additive result of many independent, component processes (*component dominant dynamics*) and the goal of research is to identify efficient causes of behaviour. 
+
+The main focus of the workshop will be hands-on experience with data-analysis using the R statistical computing environment. No special background knowledge is required to participate.
+
+Program:
+
+**I. Introduction to the mathematics of change**
+
+* Modelling (nonlinear) growth
+* Predator-Prey dynamics and Deterministic Chaos
+* Basic timeseries analysis
+
+**II. Quantifying Recurrences in State Space**
+
+* Takens' Theorem and State-Space reconstruction
+* Recurrence Quantification Analysis of continuous and categorical data
+* Cross-Recurrence Quantification Analysis of dyadic interaction
+
+**III. Complex Structure: Fractal Scaling and Network Topology**
+
+* Scaling phenomena in time and trial series of human behaviour and phyisology
+* Small-world and Scale-free networks
+* Advanced topics: Multi-fractals, Complexity Matching, Networks of networks
+
+
+
+
+
+
+<!-- -	Highly context sensitive (i.e. sensitive dependence on initial conditions),  -->
+<!-- -	Observables of systems composed of many different subsystems and subcomponents (i.e. a complex, not a simplex internal structure), -->
+<!-- -	Observables of systems that systematically adapt their internal structure to interactions with the environment (i.e. systems that possess a "memory" of sorts), -->
+<!-- -	The result of (bi-directional) interactions between the behaviour of many components on many different spatial scales (i.e. from the behaviour of amino acids to networks of neurons, individual humans, societies of individuals and back) -->
+<!-- -	The result of (bi-directional) interactions between processes that operate across many different temporal scales (e.g. from the temporal evolution of chemical reactions to biological computation,  learning and development of an individual human, adaptation of groups of individuals to an ecological niche and adaptation at the level of the genome and back). -->
+
+<!-- An analytical toolbox suited to study phenomena that meet the descriptions above has been developed in what may be called the Complexity Sciences. Participants who take part in the workshop will take a first peek inside and gain hands-on experience with a selection of methods and analyses. Nor special knowledge is required to participate. -->
+
+
+<!-- Irrespective of the position one might take in the debate about the current state of the Social and Life Sciences in terms of producing valid inferences from reliably measured data (cf. "the reproducibility crisis"), both sides would agree that the science studying human nature must be "the hardest science". -->
+
+<!-- This claim that would not be disputed by any pshycist, chemist or biologist and the main reason is that the behavioural phenomena under scrutiny can be described as: -->
+<!-- - Highly context sensitive (i.e. sensitive dependence on intitial conditions),  -->
+<!-- - Observables of systems composed of many different subsystems and subcomponents (i.e. a complex, not a simplex internal structure like an elementary particle), -->
+<!-- - Observables of systems that systematically adapt their internal structure to interactions with the environment (i.e. systems that posess a "memory" of sorts), -->
+<!-- - The result of (bi-directional) interactions between the behaviour of many components on many different spatial scales (i.e. behaviour of: amino acids <-> neurotransmitters neurons <-> networks of neurons <->  an individual <-> groups of individuals <-> societies <-> cultures, etc.) -->
+<!-- - The result of (bi-directional) interactions between processes that operate across many different temporal scales (i.e. temporal evolution of: chemical reactions <-> neuronal signal transmission <-> biological computation <-> adaptive behaviour of an individual <-> biological development of an individual <-> adaptive behaviour of group of individuals <-> adaptive behaviour of a genome) -->
+
+
+
+
+
+
+
+
+<!-- # It's about time! -->
+
+
+
+<!-- This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>. -->
+
+<!-- When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this: -->
+
+<!-- ```{r cars} -->
+<!-- summary(cars) -->
+<!-- ``` -->
+
+<!-- ## Including Plots -->
+
+<!-- You can also embed plots, for example: -->
+
+<!-- ```{r pressure, echo=FALSE} -->
+<!-- plot(pressure) -->
+<!-- ``` -->
+
+<!-- Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot. -->

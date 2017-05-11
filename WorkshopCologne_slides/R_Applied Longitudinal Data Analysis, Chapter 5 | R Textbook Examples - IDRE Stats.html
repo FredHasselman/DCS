@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="en-US" prefix="og: http://ogp.me/ns#">
+<head >
+<meta charset="UTF-8" />
+<title>Applied Longitudinal Data Analysis, Chapter 5 | R Textbook Examples - IDRE Stats</title><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<!-- This site is optimized with the Yoast SEO plugin v4.5 - https://yoast.com/wordpress/plugins/seo/ -->
+<link rel="canonical" href="http://stats.idre.ucla.edu/r/examples/alda/r-applied-longitudinal-data-analysis-ch-5/" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Applied Longitudinal Data Analysis, Chapter 5 | R Textbook Examples - IDRE Stats" />
+<meta property="og:description" content="R Textbook Examples Applied Longitudinal Data Analysis: Modeling Change and Event Occurrence by Judith D. Singer and John B. Willett Chapter 5: Treating TIME More Flexibly Inputting the reading data set. reading &lt;- read.table(&quot;http://www.ats.ucla.edu/stat/r/examples/alda/data/reading_pp.txt&quot;, header=T, sep=&quot;,&quot;) Table 5.1, p. 141. reading[reading$id %in% c(4, 27, 31, 33, 41, 49, 69, 77, 87), ] id wave agegrp... Read More" />
+<meta property="og:url" content="http://stats.idre.ucla.edu/r/examples/alda/r-applied-longitudinal-data-analysis-ch-5/" />
+<meta property="og:site_name" content="IDRE Stats" />
+<meta property="og:image" content="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig5_1.png" />
+<meta property="og:image" content="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig5_2.png" />
+<meta property="og:image" content="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig5_4b.png" />
+<meta property="og:image" content="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig5_4c.png" />
+<meta property="og:image" content="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig5_4d.png" />
+<meta property="og:image" content="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig5_5.png" />
+<!-- / Yoast SEO plugin. -->
+
+<link rel='dns-prefetch' href='//s0.wp.com' />
+<link rel='dns-prefetch' href='//s.gravatar.com' />
+<link rel='dns-prefetch' href='//cdn.jsdelivr.net' />
+<link rel='dns-prefetch' href='//platform-api.sharethis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="IDRE Stats &raquo; Feed" href="http://stats.idre.ucla.edu/feed/" />
+<link rel="alternate" type="application/rss+xml" title="IDRE Stats &raquo; Comments Feed" href="http://stats.idre.ucla.edu/comments/feed/" />
+<link rel="alternate" type="text/calendar" title="IDRE Stats &raquo; iCal Feed" href="http://stats.idre.ucla.edu/calendar/?ical=1" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/stats.idre.ucla.edu\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.7.3"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='joe-responsive-css'  href='http://stats.idre.ucla.edu/wp-content/themes/genesis-child/style.css?ver=1.0.1' type='text/css' media='all' />
+<link rel='stylesheet' id='contact-form-7-css'  href='http://stats.idre.ucla.edu/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=4.7' type='text/css' media='all' />
+<link rel='stylesheet' id='collapseomatic-css-css'  href='http://stats.idre.ucla.edu/wp-content/plugins/jquery-collapse-o-matic/light_style.css?ver=1.6' type='text/css' media='all' />
+<link rel='stylesheet' id='tribe-events-full-calendar-style-css'  href='http://stats.idre.ucla.edu/wp-content/plugins/the-events-calendar/src/resources/css/tribe-events-full.min.css?ver=4.4.5' type='text/css' media='all' />
+<link rel='stylesheet' id='tribe-events-calendar-style-css'  href='http://stats.idre.ucla.edu/wp-content/plugins/the-events-calendar/src/resources/css/tribe-events-theme.min.css?ver=4.4.5' type='text/css' media='all' />
+<link rel='stylesheet' id='tribe-events-calendar-full-mobile-style-css'  href='http://stats.idre.ucla.edu/wp-content/plugins/the-events-calendar/src/resources/css/tribe-events-full-mobile.min.css?ver=4.4.5' type='text/css' media='only screen and (max-width: 768px)' />
+<link rel='stylesheet' id='tribe-events-calendar-mobile-style-css'  href='http://stats.idre.ucla.edu/wp-content/plugins/the-events-calendar/src/resources/css/tribe-events-theme-mobile.min.css?ver=4.4.5' type='text/css' media='only screen and (max-width: 768px)' />
+<link rel='stylesheet' id='genwpacc-srt-css-css'  href='http://stats.idre.ucla.edu/wp-content/plugins/genesis-accessible/css/genwpacc-skiplinks.css?ver=4.7.3' type='text/css' media='all' />
+<link rel='stylesheet' id='slicknavcss-css'  href='//cdn.jsdelivr.net/jquery.slicknav/0.1/slicknav.css?ver=1' type='text/css' media='all' />
+<link rel='stylesheet' id='sccss_style-css'  href='http://stats.idre.ucla.edu?sccss=1&#038;ver=4.7.3' type='text/css' media='all' />
+<link rel='stylesheet' id='jetpack_css-css'  href='http://stats.idre.ucla.edu/wp-content/plugins/jetpack/css/jetpack.css?ver=4.8.1' type='text/css' media='all' />
+<script type='text/javascript' src='http://stats.idre.ucla.edu/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='http://stats.idre.ucla.edu/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript' src='http://stats.idre.ucla.edu/wp-content/themes/genesis/lib/js/skip-links.js?ver=4.7.3'></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='http://stats.idre.ucla.edu/wp-content/themes/genesis/lib/js/html5shiv.min.js?ver=3.7.3'></script>
+<![endif]-->
+<script type='text/javascript' src='//cdn.jsdelivr.net/jquery.slicknav/0.1/jquery.slicknav.min.js?ver=1'></script>
+<script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#product=ga'></script>
+<link rel='https://api.w.org/' href='http://stats.idre.ucla.edu/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://stats.idre.ucla.edu/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://stats.idre.ucla.edu/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 4.7.3" />
+<link rel='shortlink' href='http://wp.me/P8r5oV-fm' />
+<link rel="alternate" type="application/json+oembed" href="http://stats.idre.ucla.edu/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fstats.idre.ucla.edu%2Fr%2Fexamples%2Falda%2Fr-applied-longitudinal-data-analysis-ch-5%2F" />
+<link rel="alternate" type="text/xml+oembed" href="http://stats.idre.ucla.edu/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fstats.idre.ucla.edu%2Fr%2Fexamples%2Falda%2Fr-applied-longitudinal-data-analysis-ch-5%2F&#038;format=xml" />
+
+<link rel='dns-prefetch' href='//v0.wordpress.com'>
+<style type='text/css'>img#wpstats{display:none}</style><link rel="pingback" href="http://stats.idre.ucla.edu/xmlrpc.php" />
+<style type="text/css">.broken_link, a.broken_link {
+	text-decoration: line-through;
+}</style><link rel="icon" href="http://stats.idre.ucla.edu/wp-content/uploads/2016/12/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="http://stats.idre.ucla.edu/wp-content/uploads/2016/12/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="http://stats.idre.ucla.edu/wp-content/uploads/2016/12/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="http://stats.idre.ucla.edu/wp-content/uploads/2016/12/cropped-logo-270x270.png" />
+
+<link rel="icon" href="
+Notice: get_bloginfo was called with an argument that is <strong>deprecated</strong> since version 2.2.0! The <code>siteurl</code> option is deprecated for the family of <code>bloginfo()</code> functions. Use the <code>url</code> option instead. in /var/www/html/statsidre/wp-includes/functions.php on line 4021
+http://stats.idre.ucla.edu/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="
+Notice: get_bloginfo was called with an argument that is <strong>deprecated</strong> since version 2.2.0! The <code>siteurl</code> option is deprecated for the family of <code>bloginfo()</code> functions. Use the <code>url</code> option instead. in /var/www/html/statsidre/wp-includes/functions.php on line 4021
+http://stats.idre.ucla.edu/favicon.ico" type="image/x-icon" />
+
+</head>
+
+
+<body class="page-template-default page page-id-952 page-child parent-pageid-942 tribe-no-js header-image full-width-content" itemscope itemtype="http://schema.org/WebPage"><div class="site-container"><section><h2 class="screen-reader-text">Skip links</h2><ul class="genesis-skip-link"><li><a href="#genesis-nav-primary" class="screen-reader-shortcut"> Skip to primary navigation</a></li><li><a href="#genesis-content" class="screen-reader-shortcut"> Skip to content</a></li></ul></section>
+<header class="site-header" itemscope itemtype="http://schema.org/WPHeader"><div class="wrap"><div class="title-area">	<div class="title-area">
+	
+	<h1 class="site-title" itemprop="headline"><a href="http://idre.ucla.edu/">IDRE</a></h1>
+
+	<p class="site-description" itemprop="description">Institute for Digital Research and Education</p></div>
+</div><div class="widget-area header-widget-area"><h2 class="genesis-sidebar-title screen-reader-text">Header Right</h2><section id="text-4" class="widget widget_text"><div class="widget-wrap">			<div class="textwidget"><h1><div class = "top-wrap"><div class = "ucla-logo"><img alt="Image " src = "/wp-content/themes/genesis-child/images/UCLA.png" alt = "UCLA Logo"></div>
+<div class  = "top-txt">Institute for Digital Research and Education</div></div></h1></div>
+		</div></section>
+<section id="search-5" class="widget widget_search"><div class="widget-wrap"><form class="search-form" itemprop="potentialAction" itemscope itemtype="http://schema.org/SearchAction" method="get" action="http://stats.idre.ucla.edu/" role="search"><meta itemprop="target" content="http://stats.idre.ucla.edu/?s={s}"/><label class="search-form-label screen-reader-text" for="searchform-58e68b7a96ca8">Search this website</label><input itemprop="query-input" type="search" name="s" id="searchform-58e68b7a96ca8" placeholder="Search this website &#x2026;" /><input type="submit" value="Search" /></form></div></section>
+</div></div></header><h2 class="screen-reader-text">Main navigation</h2><nav class="nav-primary" itemscope itemtype="http://schema.org/SiteNavigationElement" id="genesis-nav-primary" aria-label="Main navigation"><div class="wrap"><ul id="menu-idre-stats-navigation-menu" class="menu genesis-nav-menu menu-primary js-superfish"><li id="menu-item-22640" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-22640"><a href="http://stats.idre.ucla.edu" itemprop="url"><span itemprop="name">HOME</span></a></li>
+<li id="menu-item-22662" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-22662"><a href="#" itemprop="url"><span itemprop="name">SOFTWARE</span></a>
+<ul class="sub-menu">
+	<li id="menu-item-22646" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22646"><a href="http://stats.idre.ucla.edu/r/" itemprop="url"><span itemprop="name">R</span></a></li>
+	<li id="menu-item-22649" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22649"><a href="http://stats.idre.ucla.edu/stata/" itemprop="url"><span itemprop="name">Stata</span></a></li>
+	<li id="menu-item-22647" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22647"><a href="http://stats.idre.ucla.edu/sas/" itemprop="url"><span itemprop="name">SAS</span></a></li>
+	<li id="menu-item-22648" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22648"><a href="http://stats.idre.ucla.edu/spss/" itemprop="url"><span itemprop="name">SPSS</span></a></li>
+	<li id="menu-item-22659" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22659"><a href="http://stats.idre.ucla.edu/mplus/" itemprop="url"><span itemprop="name">Mplus</span></a></li>
+	<li id="menu-item-22657" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-22657"><a href="http://stats.idre.ucla.edu/other/" itemprop="url"><span itemprop="name">Other Packages</span></a>
+	<ul class="sub-menu">
+		<li id="menu-item-22658" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22658"><a href="http://stats.idre.ucla.edu/other/gpower/" itemprop="url"><span itemprop="name">G*Power</span></a></li>
+		<li id="menu-item-22684" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22684"><a href="http://stats.idre.ucla.edu/other/sudaan/" itemprop="url"><span itemprop="name">SUDAAN</span></a></li>
+		<li id="menu-item-22696" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-22696"><a href="http://stats.idre.ucla.edu/spss/spss-user/sample-power/" itemprop="url"><span itemprop="name">Sample Power</span></a></li>
+	</ul>
+</li>
+</ul>
+</li>
+<li id="menu-item-22661" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-has-children menu-item-22661"><a href="http://stats.idre.ucla.edu" itemprop="url"><span itemprop="name">RESOURCES</span></a>
+<ul class="sub-menu">
+	<li id="menu-item-22656" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22656"><a href="http://stats.idre.ucla.edu/annotatedoutput" itemprop="url"><span itemprop="name">Annotated Output</span></a></li>
+	<li id="menu-item-22651" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22651"><a href="http://stats.idre.ucla.edu/other/dae/" itemprop="url"><span itemprop="name">Data Analysis Examples</span></a></li>
+	<li id="menu-item-22654" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22654"><a href="http://stats.idre.ucla.edu/other/mult-pkg/faq/" itemprop="url"><span itemprop="name">Frequently Asked Questions</span></a></li>
+	<li id="menu-item-22652" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22652"><a href="http://stats.idre.ucla.edu/other/mult-pkg/seminars/" itemprop="url"><span itemprop="name">Seminars</span></a></li>
+	<li id="menu-item-22653" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22653"><a href="http://stats.idre.ucla.edu/other/examples/" itemprop="url"><span itemprop="name">Textbook Examples</span></a></li>
+	<li id="menu-item-22692" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22692"><a href="http://stats.idre.ucla.edu/other/mult-pkg/whatstat/" itemprop="url"><span itemprop="name">Which Statistical Test?</span></a></li>
+</ul>
+</li>
+<li id="menu-item-22663" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-has-children menu-item-22663"><a href="http://stats.idre.ucla.edu" itemprop="url"><span itemprop="name">SERVICES</span></a>
+<ul class="sub-menu">
+	<li id="menu-item-22660" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22660"><a href="http://stats.idre.ucla.edu/books/" itemprop="url"><span itemprop="name">Books for Loan</span></a></li>
+	<li id="menu-item-22655" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-22655"><a href="http://stats.idre.ucla.edu/ucla/policies" itemprop="url"><span itemprop="name">Services and Policies</span></a>
+	<ul class="sub-menu">
+		<li id="menu-item-22885" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22885"><a href="http://stats.idre.ucla.edu/ucla/policies/#WalkIn" itemprop="url"><span itemprop="name">Walk-In Consulting</span></a></li>
+		<li id="menu-item-22882" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22882"><a href="http://stats.idre.ucla.edu/ucla/policies/#EmailConsult" itemprop="url"><span itemprop="name">Email Consulting</span></a></li>
+		<li id="menu-item-22880" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22880"><a href="http://stats.idre.ucla.edu/ucla/policies/#Fee" itemprop="url"><span itemprop="name">Fee for Service</span></a></li>
+	</ul>
+</li>
+	<li id="menu-item-22687" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22687"><a href="http://stats.idre.ucla.edu/purchasing-and-updatingstatistical-software-packages/" itemprop="url"><span itemprop="name">Software Purchasing and Updating</span></a></li>
+	<li id="menu-item-22688" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22688"><a href="http://stats.idre.ucla.edu/statistical-consultants-for-hire/" itemprop="url"><span itemprop="name">Consultants for Hire</span></a></li>
+	<li id="menu-item-23684" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-23684"><a itemprop="url"><span itemprop="name">Other Consulting Centers</span></a>
+	<ul class="sub-menu">
+		<li id="menu-item-23685" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-23685"><a href="http://scc.stat.ucla.edu/" itemprop="url"><span itemprop="name">Department of Statistics Consulting Center</span></a></li>
+		<li id="menu-item-23686" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-23686"><a href="http://biomath.ucla.edu/about/consulting" itemprop="url"><span itemprop="name">Department of Biomathematics Consulting Clinic</span></a></li>
+	</ul>
+</li>
+</ul>
+</li>
+<li id="menu-item-22664" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22664"><a href="http://stats.idre.ucla.edu/ucla/about" itemprop="url"><span itemprop="name">ABOUT US</span></a></li>
+<li id="menu-item-26836" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-26836"><a href="https://giving.ucla.edu/Standard/NetDonate.aspx?SiteNum=371" itemprop="url"><span itemprop="name">DONATE</span></a></li>
+</ul></div></nav><div class="site-inner"><div class="content-sidebar-wrap"><main class="content" id="genesis-content"><article class="post-952 page type-page status-publish entry" itemscope itemtype="http://schema.org/CreativeWork"><header class="entry-header"><h1 class="entry-title" itemprop="headline">Applied Longitudinal Data Analysis, Chapter 5 | R Textbook Examples</h1> 
+</header><div class="entry-content" itemprop="text"><p>R Textbook Examples</p>
+<h2>Applied Longitudinal Data Analysis: Modeling Change and Event Occurrence
+by Judith D. Singer and John B. Willett
+Chapter 5: Treating TIME More Flexibly</h2>
+<hr />
+<blockquote><p>Inputting the <b>reading</b> data set.</p></blockquote>
+<pre><b>reading &lt;- read.table("http://www.ats.ucla.edu/stat/r/examples/alda/data/reading_pp.txt", header=T, sep=",")</b></pre>
+<blockquote><p>Table 5.1, p. 141.</p></blockquote>
+<pre><b>reading[reading$id %in% c(4, 27, 31, 33, 41, 49, 69, 77, 87), ]</b>
+
+    id wave agegrp       age piat agegrp.c      age.c 
+ 10  4    1    6.5  6.000000   18        0 -0.5000000
+ 11  4    2    8.5  8.500000   31        2  2.0000000
+ 12  4    3   10.5 10.666667   50        4  4.1666667
+ 79 27    1    6.5  6.250000   19        0 -0.2500000
+ 80 27    2    8.5  9.166667   36        2  2.6666667
+ 81 27    3   10.5 10.916667   57        4  4.4166667
+ 91 31    1    6.5  6.333333   18        0 -0.1666667
+ 92 31    2    8.5  8.833333   31        2  2.3333333
+ 93 31    3   10.5 10.916667   51        4  4.4166667
+ 97 33    1    6.5  6.333333   18        0 -0.1666667
+ 98 33    2    8.5  8.916667   34        2  2.4166667
+ 99 33    3   10.5 10.750000   29        4  4.2500000
+121 41    1    6.5  6.333333   18        0 -0.1666667
+122 41    2    8.5  8.750000   28        2  2.2500000
+123 41    3   10.5 10.833333   36        4  4.3333333
+145 49    1    6.5  6.500000   19        0  0.0000000
+146 49    2    8.5  8.750000   32        2  2.2500000
+147 49    3   10.5 10.666667   48        4  4.1666667
+205 69    1    6.5  6.666667   26        0  0.1666667
+206 69    2    8.5  9.166667   47        2  2.6666667
+207 69    3   10.5 11.333333   45        4  4.8333333
+229 77    1    6.5  6.833333   17        0  0.3333333
+230 77    2    8.5  8.083333   19        2  1.5833333
+231 77    3   10.5 10.000000   28        4  3.5000000
+259 87    1    6.5  6.916667   22        0  0.4166667
+260 87    2    8.5  9.416667   49        2  2.9166667
+261 87    3   10.5 11.500000   64        4  5.0000000</pre>
+<hr />
+<blockquote><p>Fig. 5.1, p. 143.
+Empirical change plots with superimposed OLS trajectories. The +&#8217;s and solid
+lines correspond to time using the child&#8217;s target age at data collection, whereas the
+dots and dashed lines correspond to time using the child&#8217;s observed age.</p></blockquote>
+<pre><b>library(lattice)
+
+xyplot(piat~age | id, 
+   data=reading[reading$id %in% c(4, 27, 31, 33, 41, 49, 69, 77, 87), ],
+    panel=function(x,y, subscripts){panel.xyplot(x, y, pch=16)
+	panel.lmline(x,y, lty=4)
+    panel.xyplot(reading$agegrp[subscripts], y, pch=3)
+	panel.lmline(reading$agegrp[subscripts],y) }, 
+    ylim=c(0, 80), as.table=T, subscripts=T)</b></pre>
+<pre><img alt="Image fig5_1" src="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig5_1.png" width="432" height="360" border="0" /></pre>
+<hr />
+<blockquote><p>Creating the centered variables called <b>agegrp.c</b> and <b>age.c</b>, p. 144.</p></blockquote>
+<pre><b>mat2 &lt;- reading[ ,3:4]-6.5
+dimnames(mat2)[[2]] &lt;- c("agegrp.c", "age.c")  
+reading &lt;- cbind(reading, mat2)</b></pre>
+<blockquote><p>Table 5.2, p. 145.
+Note: The degres of freedom used to in the calculations of the intercept is different from the results in the book and this difference in partitioning results also in slight differences in the standard error of the estimates.</p></blockquote>
+<pre>#Using the agegrp variable.
+<b>library(nlme)
+
+lme.agegrp &lt;- lme(piat ~ agegrp.c, reading, random= ~ agegrp | id, method="ML")
+summary(lme.agegrp)</b>
+
+Linear mixed-effects model fit by maximum likelihood
+ Data: reading 
+       AIC      BIC    logLik
+  1831.949 1853.473 -909.9746
+
+Random effects:
+ Formula: ~agegrp | id
+ Structure: General positive-definite, Log-Cholesky parametrization
+            StdDev    Corr  
+(Intercept) 13.244933 (Intr)
+agegrp       2.096994 -0.97 
+Residual     5.200308       
+
+Fixed effects: piat ~ agegrp.c 
+                Value Std.Error  DF  t-value p-value
+(Intercept) 21.162921 0.6165805 177 34.32304       0
+agegrp.c     5.030899 0.2967329 177 16.95430       0
+ Correlation: 
+         (Intr)
+agegrp.c -0.316
+
+Standardized Within-Group Residuals:
+       Min         Q1        Med         Q3        Max 
+-2.6585175 -0.5418435 -0.1434177  0.3871955  3.3133003 
+
+Number of Observations: 267
+Number of Groups: 89
+
+#Using the age variable.
+<b>lme.age &lt;- lme(piat ~ age.c, reading, random= ~ age | id, method="ML")
+summary(lme.age)</b>
+
+Linear mixed-effects model fit by maximum likelihood
+ Data: reading 
+       AIC      BIC    logLik
+  1815.896 1837.419 -901.9478
+
+Random effects:
+ Formula: ~age | id
+ Structure: General positive-definite, Log-Cholesky parametrization
+            StdDev    Corr  
+(Intercept) 10.668937 (Intr)
+age          1.816985 -0.985
+Residual     5.238946       
+
+Fixed effects: piat ~ age.c 
+                Value Std.Error  DF  t-value p-value
+(Intercept) 21.060816 0.5614177 177 37.51363       0
+age.c        4.540021 0.2616162 177 17.35375       0
+ Correlation: 
+      (Intr)
+age.c -0.287
+
+Standardized Within-Group Residuals:
+       Min         Q1        Med         Q3        Max 
+-3.0068407 -0.4948682 -0.1369712  0.4095972  3.7274111 
+
+Number of Observations: 267
+Number of Groups: 89</pre>
+<hr />
+<blockquote><p>Inputting the <b>wages</b> data set.</p></blockquote>
+<pre><b>wages &lt;- read.table("http://www.ats.ucla.edu/stat/r/examples/alda/data/wages_pp.txt", header=T, sep=",")</b></pre>
+<hr />
+<blockquote><p>Table 5.3, p. 147.</p></blockquote>
+<pre><b>wages[wages$id %in% c(206, 332, 1028), c(1, 3, 2, 6, 8, 10)]</b>
+
+      id exper   lnw black hgc uerate 
+ 75  206 1.874 2.028     0  10  9.200
+ 76  206 2.814 2.297     0  10 11.000
+ 77  206 4.314 2.482     0  10  6.295
+197  332 0.125 1.630     0   8  7.100
+198  332 1.625 1.476     0   8  9.600
+199  332 2.413 1.804     0   8  7.200
+200  332 3.393 1.439     0   8  6.195
+201  332 4.470 1.748     0   8  5.595
+202  332 5.178 1.526     0   8  4.595
+203  332 6.082 2.044     0   8  4.295
+204  332 7.043 2.179     0   8  3.395
+205  332 8.197 2.186     0   8  4.395
+206  332 9.092 4.035     0   8  6.695
+466 1028 0.004 0.872     1   8  9.300
+467 1028 0.035 0.903     1   8  7.400
+468 1028 0.515 1.389     1   8  7.300
+469 1028 1.483 2.324     1   8  7.400
+470 1028 2.141 1.484     1   8  6.295
+471 1028 3.161 1.705     1   8  5.895
+472 1028 4.103 2.343     1   8  6.900</pre>
+<hr />
+<blockquote><p>Table 5.4, p. 149.</p></blockquote>
+<pre>#Model A
+<b>model.a &lt;- lme(lnw~exper, wages, random= ~exper | id, method="ML")
+summary(model.a)</b>
+
+Linear mixed-effects model fit by maximum likelihood
+ Data: wages 
+       AIC     BIC    logLik
+  4933.394 4973.98 -2460.697
+
+Random effects:
+ Formula: ~exper | id
+ Structure: General positive-definite, Log-Cholesky parametrization
+            StdDev     Corr  
+(Intercept) 0.23295542 (Intr)
+exper       0.04154474 -0.301
+Residual    0.30839044       
+
+Fixed effects: lnw ~ exper 
+                Value   Std.Error   DF   t-value p-value
+(Intercept) 1.7156039 0.010798215 5513 158.87848       0
+exper       0.0456807 0.002341936 5513  19.50555       0
+ Correlation: 
+      (Intr)
+exper -0.565
+
+Standardized Within-Group Residuals:
+        Min          Q1         Med          Q3         Max 
+-4.20113322 -0.52073077 -0.03159151  0.44063202  7.03696490 
+
+Number of Observations: 6402
+Number of Groups: 888 
+      
+#Model B
+<b>model.b &lt;- update(model.a, lnw~exper*hgc.9+exper*black)
+summary(model.b)</b>
+
+Linear mixed-effects model fit by maximum likelihood
+ Data: wages 
+       AIC      BIC    logLik
+  4893.751 4961.395 -2436.876
+
+Random effects:
+ Formula: ~exper | id
+ Structure: General positive-definite, Log-Cholesky parametrization
+            StdDev     Corr  
+(Intercept) 0.22748211 (Intr)
+exper       0.04044512 -0.31 
+Residual    0.30853484       
+
+Fixed effects: lnw ~ exper + hgc.9 + black + exper:hgc.9 + exper:black 
+                 Value   Std.Error   DF   t-value p-value
+(Intercept)  1.7171385 0.012548264 5511 136.84271  0.0000
+exper        0.0493428 0.002632917 5511  18.74074  0.0000
+hgc.9        0.0349201 0.007885174  885   4.42858  0.0000
+black        0.0153954 0.023937728  885   0.64315  0.5203
+exper:hgc.9  0.0012794 0.001723983 5511   0.74213  0.4580
+exper:black -0.0182129 0.005501727 5511  -3.31040  0.0009
+ Correlation: 
+            (Intr) exper  hgc.9  black  exp:.9
+exper       -0.575                            
+hgc.9        0.071 -0.020                     
+black       -0.523  0.301 -0.020              
+exper:hgc.9 -0.019 -0.003 -0.578  0.011       
+exper:black  0.275 -0.478  0.011 -0.573 -0.023
+
+Standardized Within-Group Residuals:
+        Min          Q1         Med          Q3         Max 
+-4.26907899 -0.51809173 -0.03347663  0.44516366  7.01940012 
+
+Number of Observations: 6402
+Number of Groups: 888 
+
+#Model C
+<b>model.c &lt;- update(model.b, lnw~exper+exper:black+hgc.9)
+summary(model.c)</b>
+
+Linear mixed-effects model fit by maximum likelihood
+ Data: wages 
+       AIC      BIC    logLik
+  4890.704 4944.818 -2437.352
+
+Random effects:
+ Formula: ~exper | id
+ Structure: General positive-definite, Log-Cholesky parametrization
+            StdDev     Corr  
+(Intercept) 0.22766404 (Intr)
+exper       0.04057939 -0.312
+Residual    0.30850207       
+
+Fixed effects: lnw ~ exper + hgc.9 + exper:black 
+                 Value   Std.Error   DF   t-value p-value
+(Intercept)  1.7214750 0.010700480 5512 160.87830   0e+00
+exper        0.0488470 0.002514196 5512  19.42849   0e+00
+hgc.9        0.0383608 0.006435380  886   5.96092   0e+00
+exper:black -0.0161150 0.004512766 5512  -3.57099   4e-04
+ Correlation: 
+            (Intr) exper  hgc.9 
+exper       -0.515              
+hgc.9        0.077 -0.023       
+exper:black -0.036 -0.391 -0.015
+
+Standardized Within-Group Residuals:
+        Min          Q1         Med          Q3         Max 
+-4.27879296 -0.51825126 -0.03471525  0.44262176  7.01696754 
+
+Number of Observations: 6402
+Number of Groups: 888</pre>
+<hr />
+<blockquote><p>Fig. 5.2, p. 150.
+Log wage trajectories for four prototypical dropouts from
+model C.</p></blockquote>
+<pre><b>exper.seq &lt;- seq(0, 12)
+fixef.c &lt;- fixef(model.c)
+x.w9 &lt;- fixef.c[[1]] + fixef.c[[2]]*exper.seq
+x.w12 &lt;-  fixef.c[[1]] + fixef.c[[2]]*exper.seq + fixef.c[[3]]*3
+x.b9 &lt;- fixef.c[[1]] + fixef.c[[2]]*exper.seq + fixef.c[[4]]*exper.seq
+x.b12 &lt;- fixef.c[[1]] + fixef.c[[2]]*exper.seq + fixef.c[[3]]*3 + 
+         fixef.c[[4]]*exper.seq
+plot(exper.seq, x.w9, ylim=c(1.6, 2.4), ylab="LNW.hat", xlab="EXPER", type="l", lwd=2)
+lines(exper.seq, x.w12, lty=3)
+lines(exper.seq, x.b9, lty=4, lwd=2)
+lines(exper.seq, x.b12, lty=5)
+legend(0, 2.4, c("9th grade, White/Latino", "9th grade, Black", 
+       "12th grade, White/Latino", "12th grade, Black"), lty=c(1, 4, 3, 5))</b></pre>
+<pre><img alt="Image fig5_2" src="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig5_2.png" width="432" height="360" border="0" /></pre>
+<hr />
+<blockquote><p>Inputting the <b>small wages</b> data set.</p></blockquote>
+<pre><b>wages.small &lt;- read.table("http://www.ats.ucla.edu/stat/r/examples/alda/data/wages_small_pp.txt", header=T, sep=",")</b></pre>
+<blockquote><p>Table 5.5, p. 154.</p></blockquote>
+<pre>#Model A
+<b>model.a &lt;- lme(lnw~exper+hcg.9+exper:black, wages.small, random= ~exper|id, method="ML")
+summary(model.a)</b>
+
+Linear mixed-effects model fit by maximum likelihood
+ Data: wages.small 
+       AIC      BIC    logLik
+  299.8772 328.2698 -141.9386
+
+Random effects:
+ Formula: ~exper | id
+ Structure: General positive-definite, Log-Cholesky parametrization
+            StdDev       Corr  
+(Intercept) 2.902591e-01 (Intr)
+exper       1.924436e-05 0     
+Residual    3.388214e-01       
+
+Fixed effects: lnw ~ exper + hcg.9 + exper:black 
+                 Value  Std.Error  DF  t-value p-value
+(Intercept)  1.7373442 0.04812692 131 36.09921  0.0000
+exper        0.0517798 0.02109799 131  2.45425  0.0154
+hcg.9        0.0457585 0.02468875 122  1.85342  0.0662
+exper:black -0.0600723 0.03485043 131 -1.72372  0.0871
+ Correlation: 
+            (Intr) exper  hcg.9 
+exper       -0.614              
+hcg.9        0.051 -0.135       
+exper:black -0.130 -0.294  0.024
+
+Standardized Within-Group Residuals:
+        Min          Q1         Med          Q3         Max 
+-2.42021834 -0.47223444 -0.02901367  0.41970660  4.24393911 
+
+Number of Observations: 257
+Number of Groups: 124</pre>
+<hr />
+<blockquote><p>Inputting the <b>unemployment</b> data set.</p></blockquote>
+<pre><b>unemployment &lt;- read.table("http://www.ats.ucla.edu/stat/r/examples/alda/data/unemployment_pp.txt", header=T, sep=","</b></pre>
+<blockquote><p>Table 5.6, p. 161.</p></blockquote>
+<pre><b>unemployment[unemployment$id %in% c(7589, 55697, 67641, 65441, 53782),]</b>
+
+       id     months cesd unemp 
+212  7589  1.3141684   36     1
+213  7589  5.0924025   40     1
+214  7589 11.7946612   39     1
+454 53782  0.4271047   22     1
+455 53782  4.2381930   15     0
+456 53782 11.0718686   21     1
+504 55697  1.3470226    7     1
+505 55697  5.7823409    4     1
+623 65441  1.0841889   27     1
+624 65441  4.6981520   15     1
+625 65441 11.2689938    7     0
+647 67641  0.3285421   32     1
+648 67641  4.1067762    9     0
+649 67641 10.9404517   10     0</pre>
+<hr />
+<blockquote><p>Table 5.7, p. 163.</p></blockquote>
+<pre>#Model A
+<b>model.a &lt;- lme(cesd ~ months, unemployment, random= ~months|id, method="ML")
+summary(model.a)</b>
+
+Linear mixed-effects model fit by maximum likelihood
+ Data: unemployment 
+       AIC      BIC    logLik
+  5145.137 5172.217 -2566.569
+
+Random effects:
+ Formula: ~months | id
+ Structure: General positive-definite, Log-Cholesky parametrization
+            StdDev    Corr  
+(Intercept) 9.3192519 (Intr)
+months      0.5958468 -0.551
+Residual    8.2975997       
+
+Fixed effects: cesd ~ months 
+                Value Std.Error  DF   t-value p-value
+(Intercept) 17.669363 0.7767173 419 22.748768       0
+months      -0.421994 0.0831023 419 -5.078006       0
+ Correlation: 
+       (Intr)
+months -0.632
+
+Standardized Within-Group Residuals:
+       Min         Q1        Med         Q3        Max 
+-1.9978128 -0.5415801 -0.1608097  0.4454676  3.5519839 
+
+Number of Observations: 674
+Number of Groups: 254 
+
+#Model B
+<b>model.b &lt;- update(model.a, cesd~months+unemp)
+summary(model.b)</b>
+
+Linear mixed-effects model fit by maximum likelihood
+ Data: unemployment 
+       AIC      BIC    logLik
+  5121.603 5153.196 -2553.802
+
+Random effects:
+ Formula: ~months | id
+ Structure: General positive-definite, Log-Cholesky parametrization
+            StdDev    Corr  
+(Intercept) 9.6705179 (Intr)
+months      0.6816912 -0.591
+Residual    7.8985868       
+
+Fixed effects: cesd ~ months + unemp 
+                Value Std.Error  DF   t-value p-value
+(Intercept) 12.665598 1.2448444 418 10.174443  0.0000
+months      -0.201984 0.0935246 418 -2.159683  0.0314
+unemp        5.111304 0.9910522 418  5.157451  0.0000
+ Correlation: 
+       (Intr) months
+months -0.715       
+unemp  -0.780  0.459
+
+Standardized Within-Group Residuals:
+       Min         Q1        Med         Q3        Max 
+-1.9609557 -0.5357110 -0.1191791  0.4303300  3.6857126 
+
+Number of Observations: 674
+Number of Groups: 254 
+      
+#Model C
+<b>model.c &lt;- update(model.b, cesd~months*unemp)
+summary(model.c)</b>
+
+Linear mixed-effects model fit by maximum likelihood
+ Data: unemployment 
+       AIC      BIC    logLik
+  5119.047 5155.153 -2551.523
+
+Random effects:
+ Formula: ~months | id
+ Structure: General positive-definite, Log-Cholesky parametrization
+            StdDev    Corr  
+(Intercept) 9.6805554 (Intr)
+months      0.6717203 -0.596
+Residual    7.8759886       
+
+Fixed effects: cesd ~ months + unemp + months:unemp 
+                 Value Std.Error  DF   t-value p-value
+(Intercept)   9.616744 1.8949397 417  5.074961  0.0000
+months        0.162036 0.1942395 417  0.834207  0.4046
+unemp         8.529059 1.8834713 417  4.528372  0.0000
+months:unemp -0.465222 0.2178620 417 -2.135398  0.0333
+ Correlation: 
+             (Intr) months unemp 
+months       -0.888              
+unemp        -0.911  0.863       
+months:unemp  0.755 -0.878 -0.852
+
+Standardized Within-Group Residuals:
+       Min         Q1        Med         Q3        Max 
+-2.0039251 -0.5237204 -0.1548188  0.4308929  3.6960920 
+
+Number of Observations: 674
+Number of Groups: 254 
+
+#Model D
+<b>model.d &lt;- lme(cesd~unemp+unemp:months, unemployment, random=~unemp+unemp:months|id, control = list(optimizer = "nlm", msMaxIter = 100))
+summary(model.d)</b>
+
+Linear mixed-effects model fit by REML
+ Data: unemployment 
+       AIC      BIC    logLik
+  5115.584 5160.672 -2547.792
+
+Random effects:
+ Formula: ~unemp + unempmonths | id
+ Structure: General positive-definite, Log-Cholesky parametrization
+            StdDev    Corr         
+(Intercept) 6.7650112 (Intr) unemp 
+unemp       6.7760936  0.133       
+unempmonths 0.8738672  0.120 -0.967
+Residual    7.6874318              
+
+Fixed effects: cesd ~ unemp + unempmonths 
+                Value Std.Error  DF   t-value p-value
+(Intercept) 11.197931 0.7925828 418 14.128405  0.0000
+unemp        6.924134 0.9332866 418  7.419086  0.0000
+unempmonths -0.303037 0.1124419 418 -2.695056  0.0073
+ Correlation: 
+            (Intr) unemp 
+unemp       -0.564       
+unempmonths -0.072 -0.444
+
+Standardized Within-Group Residuals:
+       Min         Q1        Med         Q3        Max 
+-2.1280241 -0.4893635 -0.1558296  0.4256349  3.7748883 
+
+Number of Observations: 674
+Number of Groups: 254</pre>
+<hr />
+<blockquote><p>Fig. 5.4, p. 167.</p></blockquote>
+<pre>#model B
+<b>fixef.b &lt;- fixef(model.b)
+months.seq &lt;- seq(0, 14)
+unemp.b1 &lt;- fixef.b[[1]] + fixef.b[[2]]*months.seq + fixef.b[[3]]
+unemp.b0 &lt;- fixef.b[[1]] + fixef.b[[2]]*months.seq
+
+plot(months.seq, unemp.b1, type="l", ylim=c(5, 20), ylab="CES-D.hat", 
+     xlab="Months since job loss")
+lines(months.seq, unemp.b0, lty=3)
+legend(10, 20, c("Unemp = 1", "Unemp = 0"), lty=c(1, 3))
+title("Main Effects of Unemp and Time")</b></pre>
+<pre><img alt="Image fig5_4b" src="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig5_4b.png" width="432" height="360" border="0" /></pre>
+<pre>#model C
+<b>fixef.c &lt;- fixef(model.c)
+unemp.c1 &lt;- fixef.c[[1]] + fixef.c[[2]]*months.seq + fixef.c[[3]] +
+            fixef.c[[4]]*months.seq
+unemp.c0 &lt;- fixef.c[[1]] + fixef.c[[2]]*months.seq
+
+plot(months.seq, unemp.c1, type="l", ylim=c(5, 20), ylab="CES-D.hat", 
+     xlab="Months since job loss")
+lines(months.seq, unemp.c0, lty=3)
+legend(10, 20, c("Unemp = 1", "Unemp = 0"), lty=c(1, 3))
+title("Interaction Between Unemp and Time"</b></pre>
+<pre><img alt="Image fig5_4c" src="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig5_4c.png" width="432" height="360" border="0" /></pre>
+<pre>#model D
+<b>fixef.d &lt;- fixef(model.d)
+unemp.d1 &lt;- fixef.d[[1]] + fixef.d[[3]]*months.seq + fixef.d[[2]] 
+unemp.d0 &lt;- rep(fixef.d[[1]], 15)
+
+plot(months.seq, unemp.d1, type="l", ylim=c(5, 20), ylab="CES-D.hat", 
+     xlab="Months since job loss")
+lines(months.seq, unemp.d0, lty=3)
+legend(10, 20, c("Unemp = 1", "Unemp = 0"), lty=c(1, 3))
+title("Constraining the Effect of Time Among the Re-employed")</b></pre>
+<pre><img alt="Image fig5_4d" src="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig5_4d.png" width="432" height="360" border="0" /></pre>
+<hr />
+<blockquote>
+<pre>#Model A
+<b>model.a &lt;- lme(lnw~hgc.9+ue.7+exper+exper:black, wages, 
+           random=~exper|id, method="ML")
+summary(model.a) </b>
+
+Linear mixed-effects model fit by maximum likelihood
+ Data: wages 
+       AIC      BIC    logLik
+  4848.519 4909.398 -2415.260
+
+Random effects:
+ Formula: ~exper | id
+ Structure: General positive-definite, Log-Cholesky parametrization
+            StdDev     Corr  
+(Intercept) 0.22502612 (Intr)
+exper       0.04039467 -0.32 
+Residual    0.30788820       
+
+Fixed effects: lnw ~ hgc.9 + ue.7 + exper + exper:black 
+                 Value   Std.Error   DF   t-value p-value
+(Intercept)  1.7489885 0.011403780 5511 153.36920   0e+00
+hgc.9        0.0400110 0.006365174  886   6.28592   0e+00
+ue.7        -0.0119504 0.001792332 5511  -6.66753   0e+00
+exper        0.0440539 0.002604399 5511  16.91517   0e+00
+exper:black -0.0181832 0.004485454 5511  -4.05382   1e-04
+ Correlation: 
+            (Intr) hgc.9  ue.7   exper 
+hgc.9        0.086                     
+ue.7        -0.363 -0.039              
+exper       -0.566 -0.033  0.277       
+exper:black -0.059 -0.018  0.070 -0.354
+
+Standardized Within-Group Residuals:
+        Min          Q1         Med          Q3         Max 
+-4.34080735 -0.51984995 -0.03652662  0.44253148  6.97854580 
+
+Number of Observations: 6402
+Number of Groups: 888 
+
+#Model B
+<b>model.b &lt;- update(model.a, lnw~hgc.9+ue.mean+ue.person.cen+exper+exper:black)
+summary(model.b)</b>
+
+Linear mixed-effects model fit by maximum likelihood
+ Data: wages 
+       AIC      BIC    logLik
+  4846.978 4914.622 -2413.489
+
+Random effects:
+ Formula: ~exper | id
+ Structure: General positive-definite, Log-Cholesky parametrization
+            StdDev     Corr  
+(Intercept) 0.22585733 (Intr)
+exper       0.04035594 -0.332
+Residual    0.30789898       
+
+Fixed effects: lnw ~ hgc.9 + ue.mean + ue.person.cen + exper + exper:black 
+                   Value   Std.Error   DF  t-value p-value
+(Intercept)    1.8742603 0.029537336 5511 63.45394       0
+hgc.9          0.0401695 0.006353674  885  6.32225       0
+ue.mean       -0.0177091 0.003521834  885 -5.02838       0
+ue.person.cen -0.0099015 0.002098270 5511 -4.71890       0
+exper          0.0450568 0.002651050 5511 16.99581       0
+exper:black   -0.0188696 0.004478998 5511 -4.21290       0
+ Correlation: 
+              (Intr) hgc.9  ue.men u.prs. exper 
+hgc.9          0.058                            
+ue.mean       -0.926 -0.029                     
+ue.person.cen -0.097 -0.027 -0.013              
+exper         -0.187 -0.031 -0.030  0.334       
+exper:black   -0.112 -0.019  0.105  0.018 -0.360
+
+Standardized Within-Group Residuals:
+        Min          Q1         Med          Q3         Max 
+-4.34617259 -0.51627687 -0.03591788  0.44100810  7.00029539 
+
+Number of Observations: 6402
+Number of Groups: 888 
+  
+#Model C
+<b>model.c &lt;- update(model.b, lnw~hgc.9+ue1+ue.centert1+exper+exper:black)
+summary(model.c)</b>
+
+Linear mixed-effects model fit by maximum likelihood
+ Data: wages 
+       AIC      BIC    logLik
+  4845.842 4913.485 -2412.921
+
+Random effects:
+ Formula: ~exper | id
+ Structure: General positive-definite, Log-Cholesky parametrization
+            StdDev     Corr  
+(Intercept) 0.22422643 (Intr)
+exper       0.04044107 -0.32 
+Residual    0.30784190       
+
+Fixed effects: lnw ~ hgc.9 + ue1 + ue.centert1 + exper + exper:black 
+                 Value   Std.Error   DF  t-value p-value
+(Intercept)  1.8693452 0.026043822 5511 71.77691       0
+hgc.9        0.0399276 0.006352135  885  6.28570       0
+ue1         -0.0161774 0.002649638  885 -6.10551       0
+ue.centert1 -0.0103090 0.001945368 5511 -5.29926       0
+exper        0.0447649 0.002626143 5511 17.04588       0
+exper:black -0.0183238 0.004486916 5511 -4.08383       0
+ Correlation: 
+            (Intr) hgc.9  ue1    u.cnt1 exper 
+hgc.9        0.053                            
+ue1         -0.913 -0.022                     
+ue.centert1 -0.335 -0.038  0.335              
+exper       -0.296 -0.033  0.093  0.302       
+exper:black -0.069 -0.018  0.058  0.059 -0.353
+
+Standardized Within-Group Residuals:
+        Min          Q1         Med          Q3         Max 
+-4.33611513 -0.51751018 -0.03512461  0.44130726  6.99734177 
+
+Number of Observations: 6402
+Number of Groups: 888</pre>
+</blockquote>
+<hr />
+<blockquote><p>Inputting the <b>medication</b> data set.</p></blockquote>
+<pre><b>medication &lt;- read.table("http://www.ats.ucla.edu/stat/r/examples/alda/data/medication_pp.txt", header=T, sep=",")</b></pre>
+<blockquote><p>Table 5.9, p. 182.</p></blockquote>
+<pre><b>medication[c(1:6, 11, 16:21), c(3:8)]</b>
+
+   wave day time.of.day      time   time333    time667 
+ 1    1   0   0.0000000 0.0000000 -3.333333 -6.6666667
+ 2    2   0   0.3333333 0.3333333 -3.000000 -6.3333333
+ 3    3   0   0.6666667 0.6666667 -2.666667 -6.0000000
+ 4    4   1   0.0000000 1.0000000 -2.333333 -5.6666667
+ 5    5   1   0.3333333 1.3333333 -2.000000 -5.3333333
+ 6    6   1   0.6666667 1.6666667 -1.666667 -5.0000000
+11   11   3   0.3333333 3.3333333  0.000000 -3.3333333
+16   16   5   0.0000000 5.0000000  1.666667 -1.6666667
+17   17   5   0.3333333 5.3333333  2.000000 -1.3333333
+18   19   6   0.0000000 6.0000000  2.666667 -0.6666667
+19   20   6   0.3333333 6.3333333  3.000000 -0.3333333
+20   21   6   0.6666667 6.6666667  3.333333  0.0000000
+21    1   0   0.0000000 0.0000000 -3.333333 -6.6666667</pre>
+<hr />
+<blockquote><p>Table 5.10, p. 184.</p></blockquote>
+<pre>#Using time (Model A)
+<b>model.a &lt;- lme(pos~treat*time, medication, random= ~time|id, method="ML")
+summary(model.a)</b>
+
+Linear mixed-effects model fit by maximum likelihood
+ Data: medication 
+       AIC      BIC    logLik
+  12696.45 12737.45 -6340.226
+
+Random effects:
+ Formula: ~time | id
+ Structure: General positive-definite, Log-Cholesky parametrization
+            StdDev    Corr  
+(Intercept) 45.949935 (Intr)
+time         7.983475 -0.332
+Residual    35.070353       
+
+Fixed effects: pos ~ treat * time 
+                Value Std.Error   DF   t-value p-value
+(Intercept) 167.46346  9.341307 1176 17.927198  0.0000
+treat        -3.10930 12.352456   62 -0.251715  0.8021
+time         -2.41813  1.733646 1176 -1.394822  0.1633
+treat:time    5.53681  2.281523 1176  2.426805  0.0154
+ Correlation: 
+           (Intr) treat  time  
+treat      -0.756              
+time       -0.404  0.305       
+treat:time  0.307 -0.408 -0.760
+
+Standardized Within-Group Residuals:
+       Min         Q1        Med         Q3        Max 
+-3.2708599 -0.4899446 -0.1174939  0.4240840  5.6180036 
+
+Number of Observations: 1242
+Number of Groups: 64 
+
+#Using time - 3.33 (Model B)
+<b>model.b &lt;- update(model.a, pos~treat*time333)
+summary(model.b)</b>
+
+Linear mixed-effects model fit by maximum likelihood
+ Data: medication 
+       AIC      BIC    logLik
+  12696.45 12737.45 -6340.226
+
+Random effects:
+ Formula: ~time | id
+ Structure: General positive-definite, Log-Cholesky parametrization
+            StdDev    Corr  
+(Intercept) 45.949935 (Intr)
+time         7.983475 -0.332
+Residual    35.070353       
+
+Fixed effects: pos ~ treat + time333 + treat:time333 
+                  Value Std.Error   DF   t-value p-value
+(Intercept)   159.40304  8.778656 1176 18.158023  0.0000
+treat          15.34674 11.563284   62  1.327196  0.1893
+time333        -2.41813  1.733646 1176 -1.394822  0.1633
+treat:time333   5.53681  2.281523 1176  2.426805  0.0154
+ Correlation: 
+              (Intr) treat  tim333
+treat         -0.759              
+time333        0.229 -0.174       
+treat:time333 -0.174  0.222 -0.760
+
+Standardized Within-Group Residuals:
+       Min         Q1        Med         Q3        Max 
+-3.2708599 -0.4899446 -0.1174939  0.4240840  5.6180036 
+
+Number of Observations: 1242
+Number of Groups: 64 
+
+#Using time - 6.67 (Model C)
+<b>model.c &lt;- update(model.b, pos~treat*time667)
+summary(model.c)</b>
+
+Linear mixed-effects model fit by maximum likelihood
+ Data: medication 
+       AIC      BIC    logLik
+  12696.45 12737.45 -6340.226
+
+Random effects:
+ Formula: ~time | id
+ Structure: General positive-definite, Log-Cholesky parametrization
+            StdDev    Corr  
+(Intercept) 45.949935 (Intr)
+time         7.983475 -0.332
+Residual    35.070353       
+
+Fixed effects: pos ~ treat + time667 + treat:time667 
+                  Value Std.Error   DF   t-value p-value
+(Intercept)   151.34261 11.561102 1176 13.090673  0.0000
+treat          33.80278 15.182565   62  2.226421  0.0296
+time667        -2.41813  1.733646 1176 -1.394822  0.1633
+treat:time667   5.53681  2.281523 1176  2.426805  0.0154
+ Correlation: 
+              (Intr) treat  tim667
+treat         -0.761              
+time667        0.673 -0.513       
+treat:time667 -0.512  0.670 -0.760
+
+Standardized Within-Group Residuals:
+       Min         Q1        Med         Q3        Max 
+-3.2708599 -0.4899446 -0.1174939  0.4240840  5.6180036 
+
+Number of Observations: 1242
+Number of Groups: 64</pre>
+<hr />
+<blockquote><p>Fig. 5.5, p. 185.
+Note: The vertical lines reflect the magnitude of the effect of
+<b>treatment</b> when <b>time</b> is centered at different values.</p></blockquote>
+<pre><b>days.seq &lt;- seq(0, 7)
+fixef.a &lt;- fixef(model.a)
+
+trt &lt;- fixef.a[[1]] + fixef.a[[2]] + (fixef.a[[3]]+fixef.a[[4]])*days.seq
+cnt &lt;- fixef.a[[1]] + fixef.a[[3]]*days.seq
+
+plot(days.seq, trt, ylim=c(140, 190), xlim=c(0, 7), type="l", 
+     xlab="Days", ylab="POS.hat")
+lines(days.seq, cnt, lty=4)
+legend(0, 190, c("treatment", "control"), lty=c(1, 4))
+segments(0, fixef.a[[1]] + fixef.a[[3]]*0, 0, 
+        fixef.a[[1]] + fixef.a[[2]] + (fixef.a[[3]]+fixef.a[[4]])*0)
+segments(3.33, fixef.a[[1]] + fixef.a[[3]]*3.33, 3.33, 
+        fixef.a[[1]] + fixef.a[[2]] + (fixef.a[[3]]+fixef.a[[4]])*3.33)
+segments(6.670, fixef.a[[1]] + fixef.a[[3]]*6.670, 6.670, 
+        fixef.a[[1]] + fixef.a[[2]] + (fixef.a[[3]]+fixef.a[[4]])*6.670)</b></pre>
+<pre><img alt="Image fig5_5" src="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig5_5.png" width="432" height="360" border="0" /></pre>
+<p><!--webbot bot='PurpleText' PREVIEW='Dont change anything below this line.' --></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</div></article></main><hr><div style="clear:both;">
+          <p style="float:left;"><span class="collapseomatic " id="id1282"  tabindex="" title="Click here to report an error on this page or leave a comment"    >Click here to report an error on this page or leave a comment</span><span id='swap-id1282' alt='' class='colomat-swap' style='display:none;'> </span><div id="target-id1282" class="collapseomatic_content "><div role="form" class="wpcf7" id="wpcf7-f22910-o1" lang="en-US" dir="ltr">
+<div class="screen-reader-response"></div>
+<form action="/r/examples/alda/r-applied-longitudinal-data-analysis-ch-5/#wpcf7-f22910-o1" method="post" class="wpcf7-form" novalidate="novalidate">
+<div style="display: none;">
+<input type="hidden" name="_wpcf7" value="22910" />
+<input type="hidden" name="_wpcf7_version" value="4.7" />
+<input type="hidden" name="_wpcf7_locale" value="en_US" />
+<input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f22910-o1" />
+<input type="hidden" name="_wpnonce" value="1e33220e30" />
+</div>
+<p><label for="namefield"> Your Name (required)<br />
+    <span class="wpcf7-form-control-wrap your-name"><input type="text" name="your-name" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" id="namefield" aria-required="true" aria-invalid="false" /></span><br />
+</label></p>
+<p><label for="emailfield"> Your Email (must be a valid email for us to receive the report!)<br />
+    <span class="wpcf7-form-control-wrap your-email"><input type="email" name="your-email" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email" id="emailfield" aria-required="true" aria-invalid="false" /></span><br />
+</label></p>
+<p><label for="commentfield"> Comment/Error Report (required)<br />
+    <span class="wpcf7-form-control-wrap your-message"><textarea name="your-message" cols="40" rows="10" class="wpcf7-form-control wpcf7-textarea wpcf7-validates-as-required" id="commentfield" aria-required="true" aria-invalid="false"></textarea></span><br />
+</label></p>
+<p><label for="captchacode"> Code: <input type="hidden" name="_wpcf7_captcha_challenge_captcha-170" value="2040591603" /><img class="wpcf7-form-control wpcf7-captchac wpcf7-captcha-captcha-170" id="captchacode" width="72" height="24" alt="captcha" src="http://stats.idre.ucla.edu/wp-content/uploads/wpcf7_captcha/2040591603.png" /><br />
+</label><br />
+<label for="captchainput"> Input the code above<br />
+<span class="wpcf7-form-control-wrap captcha-170"><input type="text" name="captcha-170" value="" size="4" maxlength="4" class="wpcf7-form-control wpcf7-captchar" id="captchainput" autocomplete="off" aria-invalid="false" /></span><br />
+</label></p>
+<p><input type="submit" value="Send" class="wpcf7-form-control wpcf7-submit" /></p>
+<div class="wpcf7-response-output wpcf7-display-none"></div></form></div></div></p><p style="float:right;">
+          <a href="http://stats.idre.ucla.edu/other/mult-pkg/faq/general/faq-how-do-i-cite-web-pages-and-programs-from-the-ucla-statistical-consulting-group/">How to cite this page</a>
+          </p></div></div></div>
+<div class="ftr-btm">
+<div class="wrapped">
+
+<a href="https://oit.ucla.edu/" title="OIT logo" id="footer-image">UCLA Office of Information and Technology</a>
+
+<p><a href="http://www.ucla.edu/terms-of-use/">© 2017 UC REGENTS TERMS OF USE & PRIVACY POLICY</a></p>
+<div class="footer-links">
+<ol>
+
+<li><a href="/">HOME</a></li>
+<li><a href="/contact">CONTACT</a></li>
+<li><a href="/wp-admin">LOGIN</a></li>
+</ol>
+</div>
+</div>
+</div>
+</div><script>
+			jQuery(function($) {
+			$('#menu-header-nav').slicknav();
+			});
+			</script><script type='text/javascript'>
+var colomatduration = 'fast';
+var colomatslideEffect = 'slideFade';
+</script>		<script>
+		( function ( body ) {
+			'use strict';
+			body.className = body.className.replace( /\btribe-no-js\b/, 'tribe-js' );
+		} )( document.body );
+		</script>
+			<div style="display:none">
+	</div>
+<script type='text/javascript'> /* <![CDATA[ */var tribe_l10n_datatables = {"aria":{"sort_ascending":": activate to sort column ascending","sort_descending":": activate to sort column descending"},"length_menu":"Show _MENU_ entries","empty_table":"No data available in table","info":"Showing _START_ to _END_ of _TOTAL_ entries","info_empty":"Showing 0 to 0 of 0 entries","info_filtered":"(filtered from _MAX_ total entries)","zero_records":"No matching records found","search":"Search:","pagination":{"all":"All","next":"Next","previous":"Previous"},"select":{"rows":{"0":"","_":": Selected %d rows","1":": Selected 1 row"}},"datepicker":{"dayNames":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"dayNamesShort":["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],"dayNamesMin":["S","M","T","W","T","F","S"],"monthNames":["January","February","March","April","May","June","July","August","September","October","November","December"],"monthNamesShort":["January","February","March","April","May","June","July","August","September","October","November","December"],"nextText":"Next","prevText":"Prev","currentText":"Today","closeText":"Done"}};/* ]]> */ </script><script>
+    jQuery(document).ready(function () {
+		jQuery.post('http://stats.idre.ucla.edu?ga_action=googleanalytics_get_script', {action: 'googleanalytics_get_script'}, function(response) {
+			var F = new Function ( response );
+			return( F() );
+		});
+    });
+</script><script type='text/javascript' src='http://stats.idre.ucla.edu/wp-content/plugins/contact-form-7/includes/js/jquery.form.min.js?ver=3.51.0-2014.06.20'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var _wpcf7 = {"recaptcha":{"messages":{"empty":"Please verify that you are not a robot."}},"cached":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='http://stats.idre.ucla.edu/wp-content/plugins/contact-form-7/includes/js/scripts.js?ver=4.7'></script>
+<script type='text/javascript' src='https://s0.wp.com/wp-content/js/devicepx-jetpack.js?ver=201714'></script>
+<script type='text/javascript' src='http://s.gravatar.com/js/gprofiles.js?ver=2017Apraa'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='http://stats.idre.ucla.edu/wp-content/plugins/jetpack/modules/wpgroho.js?ver=4.7.3'></script>
+<script type='text/javascript' src='http://stats.idre.ucla.edu/wp-includes/js/hoverIntent.min.js?ver=1.8.1'></script>
+<script type='text/javascript' src='http://stats.idre.ucla.edu/wp-content/themes/genesis/lib/js/menu/superfish.min.js?ver=1.7.5'></script>
+<script type='text/javascript' src='http://stats.idre.ucla.edu/wp-content/themes/genesis/lib/js/menu/superfish.args.min.js?ver=2.4.2'></script>
+<script type='text/javascript' src='http://stats.idre.ucla.edu/wp-includes/js/wp-embed.min.js?ver=4.7.3'></script>
+<script type='text/javascript' src='http://stats.idre.ucla.edu/wp-content/plugins/jquery-collapse-o-matic/js/collapse.js?ver=1.6.6'></script>
+<script type="text/css" id="tmpl-tribe_customizer_css">.tribe-events-list .tribe-events-loop .tribe-event-featured,
+				.tribe-events-list #tribe-events-day.tribe-events-loop .tribe-event-featured,
+				.type-tribe_events.tribe-events-photo-event.tribe-event-featured .tribe-events-photo-event-wrap,
+				.type-tribe_events.tribe-events-photo-event.tribe-event-featured .tribe-events-photo-event-wrap:hover {
+					background-color: #0ea0d7;
+				}
+
+				#tribe-events-content table.tribe-events-calendar .type-tribe_events.tribe-event-featured {
+					background-color: #0ea0d7;
+				}
+
+				.tribe-events-list-widget .tribe-event-featured,
+				.tribe-events-venue-widget .tribe-event-featured,
+				.tribe-mini-calendar-list-wrapper .tribe-event-featured,
+				.tribe-events-adv-list-widget .tribe-event-featured .tribe-mini-calendar-event {
+					background-color: #0ea0d7;
+				}
+
+				.tribe-grid-body .tribe-event-featured.tribe-events-week-hourly-single {
+					background-color: rgba(14,160,215, .7 );
+					border-color: #0ea0d7;
+				}
+
+				.tribe-grid-body .tribe-event-featured.tribe-events-week-hourly-single:hover {
+					background-color: #0ea0d7;
+				}</script><style type="text/css" id="tribe_customizer_css">.tribe-events-list .tribe-events-loop .tribe-event-featured,
+				.tribe-events-list #tribe-events-day.tribe-events-loop .tribe-event-featured,
+				.type-tribe_events.tribe-events-photo-event.tribe-event-featured .tribe-events-photo-event-wrap,
+				.type-tribe_events.tribe-events-photo-event.tribe-event-featured .tribe-events-photo-event-wrap:hover {
+					background-color: #0ea0d7;
+				}
+
+				#tribe-events-content table.tribe-events-calendar .type-tribe_events.tribe-event-featured {
+					background-color: #0ea0d7;
+				}
+
+				.tribe-events-list-widget .tribe-event-featured,
+				.tribe-events-venue-widget .tribe-event-featured,
+				.tribe-mini-calendar-list-wrapper .tribe-event-featured,
+				.tribe-events-adv-list-widget .tribe-event-featured .tribe-mini-calendar-event {
+					background-color: #0ea0d7;
+				}
+
+				.tribe-grid-body .tribe-event-featured.tribe-events-week-hourly-single {
+					background-color: rgba(14,160,215, .7 );
+					border-color: #0ea0d7;
+				}
+
+				.tribe-grid-body .tribe-event-featured.tribe-events-week-hourly-single:hover {
+					background-color: #0ea0d7;
+				}</style><script type='text/javascript' src='https://stats.wp.com/e-201714.js' async defer></script>
+<script type='text/javascript'>
+	_stq = window._stq || [];
+	_stq.push([ 'view', {v:'ext',j:'1:4.8.1',blog:'124666309',post:'952',tz:'-7',srv:'stats.idre.ucla.edu'} ]);
+	_stq.push([ 'clickTrackerInit', '124666309', '952' ]);
+</script>
+
+
+
+
+<!-- Performance optimized by W3 Total Cache. Learn more: https://www.w3-edge.com/products/
+
+Page Caching using disk
+Page cache debug info:
+Engine:             disk
+Cache key:          a6f8147955415a869223d8cbfe7fd40d
+Creation Time:      1491503994.000s
+Header info:
+X-Powered-By:        PHP/5.3.3
+Content-Type:        text/html; charset=UTF-8
+Expires:             Wed, 11 Jan 1984 05:00:00 GMT
+Cache-Control:       no-cache, must-revalidate, max-age=0
+Link:                <http://stats.idre.ucla.edu/wp-json/>; rel="https://api.w.org/"
+Link:                <http://wp.me/P8r5oV-fm>; rel=shortlink
+
+ Served from: stats.idre.ucla.edu @ 2017-04-06 11:39:54 by W3 Total Cache -->

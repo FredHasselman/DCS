@@ -1,0 +1,137 @@
+--- 
+title: "A Complex Systems Approach to Study Human Nature"
+author: "Fred Hasselman"
+date: "12-05-2017"
+knit: "bookdown::render_book"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+# documentclass: book
+# bibliography: [book.bib, packages.bib]
+# biblio-style: apalike
+# link-citations: yes
+# colorlinks: yes
+# lot: yes
+# lof: yes
+# fontsize: 12pt
+# monofont: "Source Code Pro"
+# monofontoptions: "Scale=0.7"
+# site: bookdown::bookdown_site
+# output: bookdown::gitbook
+description: "Complexity Workshop Köln: 12-05-2017"
+url: 'http\://fredhasselman.com/htmlHost/DCSKOELN/'
+github-repo: FredHasselman/DCS/Reader1617
+cover-image: images/foundations.png
+---
+
+
+# **An introduction to the analytical toolbox of Complexity Science**
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(include=TRUE)
+```
+
+
+```{r fig.align='center', fig.cap= 'From [Grip on Complexity](http://www.nwo.nl/en/about-nwo/media/publications/ew/paper-grip-on-complexity.html)', echo=FALSE, include=identical(knitr:::pandoc_to(), 'html')}
+knitr::include_graphics('images/foundations.png', dpi = NA)
+```
+
+
+This workshop will provide an introduction to some of the formal models, research methods and analytical techniques that allow for the study of human behaviour from a complex systems perspective. Complexity research transcends the boundaries between the classical scientific disciplines and is a hot topic in physics, mathematics, biology, economy and psychology. Its focus is a description and explanation of behaviour based on interaction dominant dynamics: Many processes interact on different temporal and spatial scales and behaviour emerges out of those interactions through physical processes such as self-organization or soft-assembly.
+
+Contrary to what the name might suggest, complexity research is often about finding simple models or collective variables with which a wide range of different behavioural modes can be described. This approach differs fundamentally from the more classical approaches in which behaviour is considered the additive result of many independent, component processes (component dominant dynamics) and the goal of research is to identify efficient causes of behaviour.
+
+The main focus of the workshop will be hands-on experience with data-analysis using the R statistical computing environment. No special background knowledge is required to participate.
+
+
+```{r setup2, message=FALSE, warning=FALSE, include=FALSE}
+knitr::opts_chunk$set(
+	message = FALSE,
+	warning = FALSE,
+	include = FALSE
+)
+require(devtools)
+source_url("https://raw.githubusercontent.com/FredHasselman/DCS/master/functionLib/nlRtsa_SOURCE.R")
+#source('nlRtsa_SOURCE.R')
+library(plyr)
+library(tidyverse)
+library(png)
+library(readxl)
+library(rio)
+library(lattice)
+library(htmlTable)
+library(htmlwidgets)
+library(lubridate)
+library(DT)
+```   
+
+### Tentative program {-}
+
+**I. Introduction to the mathematics of change**
+ *	Modelling (nonlinear) growth and Deterministic Chaos
+ *	Predator-Prey dynamics
+ *	Basic timeseries analysis
+
+**II. Quantifying Recurrences in State Space**
+ *	Takens' Theorem and State-Space reconstruction
+ *	Recurrence Quantification Analysis of continuous and categorical data
+ *	Cross-Recurrence Quantification Analysis of dyadic interaction
+ 
+**III. Fractal Scaling, Network Topology and Early Warning Signals**
+ * Scaling phenomena in time and trial series of human behaviour and physiology
+ * Small-world and Scale-free networks
+ * Early Warning Signals in clinical interventions
+
+
+## Using `R`! {-}
+
+I recommend installing the latest version of [**R**](https://www.r-project.org) and [**RStudio**](https://www.rstudio.com). Rstudio is not strictly necessary, but especially new users will have a somewhat more comfortable expe**R**ience. If you are completeley new to `R` you might want to [check these notes](#prep)
+
+### Packages needed for the assignments {-}
+
+You'll need to install the following packages, just copy and paste the command in `R`. Depending on your computer and internet connection, this might take a while to complete. If you run into any errors, skip the package and try the others, e.g. by adding them through the user interface of **Rstudio** (`Tools >> Installl Packages...`).
+
+```{r, eval=FALSE, include=TRUE}
+
+install.packages(c("devtools", "rio","plyr", "tidyverse","Matrix", 
+                   "ggplot2", "lattice", "latticeExtra", "grid", "gridExtra", "scales", "dygraphs","rgl", "plot3D",
+                   "fractal", "nonlinearTseries", "crqa","signal", "sapa", "ifultools", "pracma",
+                   "nlme", "lme4", "lmerTest", "minpack.lm", 
+                   "igraph","qgraph","graphicalVAR","bootGraph","IsingSampler","IsingFit"), 
+                 dependencies = TRUE)
+
+```
+
+
+
+> NOTE: Sometimes R will ask whether you want to install a newer version of a package which still has to be built from the source code. I would suggest to select NO, because this will take more time and might cause problems. 
+
+
+### Files on GitHub {-}
+
+All the files (data, scripts and files that generated this document) are in a repository on [Github](https://github.com/FredHasselman/DCS). Github keeps track of all the different versions of the files in a repository.
+
+* If you want to download a file that is basically a text file (e.g. an `R` script), find a button on the page named `raw`, press it and copy the text in your browser, or save it as a text file.
+* For non-text files, a `download` button will be present somewhere on the page.
+
+First, download from [Github](https://github.com/FredHasselman/DCS/functionlib) and type `source('nlRtsa_SOURCE.R')`, or, source it directly from Github if you have package `devtools` installed.
+```{r intro1, echo=TRUE, message=FALSE, warning=FALSE, include=TRUE}
+library(devtools)
+source_url("https://raw.githubusercontent.com/FredHasselman/DCS/master/functionLib/nlRtsa_SOURCE.R")
+```
+
+### Timeseries in `R` {-}
+
+There are many different ways to handle and plot timeseries data in `R`, I summarised some of them [in the notes](#tsPlot)
+
+### This document {-}
+
+This text was transformed to `HTML`, `PDF` en `ePUB` using `bookdown`[@R-bookdown] in [**RStudio**](https://www.rstudio.com), the graphical user interface of the statistical language [**R**](https://www.r-project.org) [@R-base]. `bookdown` makes use of the `R` version of [markdown](https://en.wikipedia.org/wiki/Markdown) called [Rmarkdown](http://rmarkdown.rstudio.com) [@R-rmarkdown], together with [knitr](http://yihui.name/knitr/) [@R-knitr] and [pandoc](http://pandoc.org). 
+
+We'll use some web applications made in [Shiny](http://shiny.rstudio.com) [@R-shiny] 
+
+Other `R` packages used are: `DT` [@R-DT], `htmlTable` [@R-htmlTable], `plyr` [@R-plyr], `dplyr` [@R-dplyr],`tidyr` [@R-tidyr], `png` [@R-png], `rio` [@R-rio].
+

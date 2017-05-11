@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en-US" prefix="og: http://ogp.me/ns#">
+<head >
+<meta charset="UTF-8" />
+<title>&#013; Applied Longitudinal Data Analysis: Modeling Change and Event Occurrence&#013; by Judith D. Singer and John B. Willett &#013; Chapter 2: Exploring Longitudinal Data on Change | SAS Textbook Examples - IDRE Stats</title><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<!-- This site is optimized with the Yoast SEO plugin v4.5 - https://yoast.com/wordpress/plugins/seo/ -->
+<link rel="canonical" href="http://stats.idre.ucla.edu/sas/examples/alda/chapter2/applied-longitudinal-data-analysis-modeling-change-and-event-occurrenceby-judith-d-singer-and-john-b-willett-chapter-2-exploring-longitudinal-data-on-change/" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="&#013; Applied Longitudinal Data Analysis: Modeling Change and Event Occurrence&#013; by Judith D. Singer and John B. Willett &#013; Chapter 2: Exploring Longitudinal Data on Change | SAS Textbook Examples - IDRE Stats" />
+<meta property="og:description" content="Note: This page is done using SAS 9.3 and is based on SAS code provided by&nbsp; Raymond R. Balise of Stanford University. We thank Raymond R. Balise for sharing his SAS 9.2 code with us. *Figure 2.1 on page 18.; title1 &quot;Figure 2.1a &#039;Person-level&#039; data set&quot;; proc print data=&#039;c:aldatolerance&#039;; run; Figure 2.1a Person-level data set... Read More" />
+<meta property="og:url" content="http://stats.idre.ucla.edu/sas/examples/alda/chapter2/applied-longitudinal-data-analysis-modeling-change-and-event-occurrenceby-judith-d-singer-and-john-b-willett-chapter-2-exploring-longitudinal-data-on-change/" />
+<meta property="og:site_name" content="IDRE Stats" />
+<meta property="og:image" content="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/SGPanel2.png" />
+<meta property="og:image" content="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/SGPanel4.png" />
+<meta property="og:image" content="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/SGPanel5.png" />
+<meta property="og:image" content="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/SGPlot11.png" />
+<meta property="og:image" content="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/SGPlot12.png" />
+<meta property="og:image" content="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig2_7_a_b.png" />
+<meta property="og:image" content="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig2_7_c_d.png" />
+<meta property="og:image" content="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/SGRender2.png" />
+<!-- / Yoast SEO plugin. -->
+
+<link rel='dns-prefetch' href='//s0.wp.com' />
+<link rel='dns-prefetch' href='//s.gravatar.com' />
+<link rel='dns-prefetch' href='//cdn.jsdelivr.net' />
+<link rel='dns-prefetch' href='//platform-api.sharethis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="IDRE Stats &raquo; Feed" href="http://stats.idre.ucla.edu/feed/" />
+<link rel="alternate" type="application/rss+xml" title="IDRE Stats &raquo; Comments Feed" href="http://stats.idre.ucla.edu/comments/feed/" />
+<link rel="alternate" type="text/calendar" title="IDRE Stats &raquo; iCal Feed" href="http://stats.idre.ucla.edu/calendar/?ical=1" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/stats.idre.ucla.edu\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.7.3"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='joe-responsive-css'  href='http://stats.idre.ucla.edu/wp-content/themes/genesis-child/style.css?ver=1.0.1' type='text/css' media='all' />
+<link rel='stylesheet' id='contact-form-7-css'  href='http://stats.idre.ucla.edu/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=4.7' type='text/css' media='all' />
+<link rel='stylesheet' id='collapseomatic-css-css'  href='http://stats.idre.ucla.edu/wp-content/plugins/jquery-collapse-o-matic/light_style.css?ver=1.6' type='text/css' media='all' />
+<link rel='stylesheet' id='tribe-events-full-calendar-style-css'  href='http://stats.idre.ucla.edu/wp-content/plugins/the-events-calendar/src/resources/css/tribe-events-full.min.css?ver=4.4.5' type='text/css' media='all' />
+<link rel='stylesheet' id='tribe-events-calendar-style-css'  href='http://stats.idre.ucla.edu/wp-content/plugins/the-events-calendar/src/resources/css/tribe-events-theme.min.css?ver=4.4.5' type='text/css' media='all' />
+<link rel='stylesheet' id='tribe-events-calendar-full-mobile-style-css'  href='http://stats.idre.ucla.edu/wp-content/plugins/the-events-calendar/src/resources/css/tribe-events-full-mobile.min.css?ver=4.4.5' type='text/css' media='only screen and (max-width: 768px)' />
+<link rel='stylesheet' id='tribe-events-calendar-mobile-style-css'  href='http://stats.idre.ucla.edu/wp-content/plugins/the-events-calendar/src/resources/css/tribe-events-theme-mobile.min.css?ver=4.4.5' type='text/css' media='only screen and (max-width: 768px)' />
+<link rel='stylesheet' id='genwpacc-srt-css-css'  href='http://stats.idre.ucla.edu/wp-content/plugins/genesis-accessible/css/genwpacc-skiplinks.css?ver=4.7.3' type='text/css' media='all' />
+<link rel='stylesheet' id='slicknavcss-css'  href='//cdn.jsdelivr.net/jquery.slicknav/0.1/slicknav.css?ver=1' type='text/css' media='all' />
+<link rel='stylesheet' id='sccss_style-css'  href='http://stats.idre.ucla.edu?sccss=1&#038;ver=4.7.3' type='text/css' media='all' />
+<link rel='stylesheet' id='jetpack_css-css'  href='http://stats.idre.ucla.edu/wp-content/plugins/jetpack/css/jetpack.css?ver=4.8.1' type='text/css' media='all' />
+<script type='text/javascript' src='http://stats.idre.ucla.edu/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='http://stats.idre.ucla.edu/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript' src='http://stats.idre.ucla.edu/wp-content/themes/genesis/lib/js/skip-links.js?ver=4.7.3'></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='http://stats.idre.ucla.edu/wp-content/themes/genesis/lib/js/html5shiv.min.js?ver=3.7.3'></script>
+<![endif]-->
+<script type='text/javascript' src='//cdn.jsdelivr.net/jquery.slicknav/0.1/jquery.slicknav.min.js?ver=1'></script>
+<script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#product=ga'></script>
+<link rel='https://api.w.org/' href='http://stats.idre.ucla.edu/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://stats.idre.ucla.edu/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://stats.idre.ucla.edu/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 4.7.3" />
+<link rel='shortlink' href='http://wp.me/P8r5oV-ln' />
+<link rel="alternate" type="application/json+oembed" href="http://stats.idre.ucla.edu/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fstats.idre.ucla.edu%2Fsas%2Fexamples%2Falda%2Fchapter2%2Fapplied-longitudinal-data-analysis-modeling-change-and-event-occurrenceby-judith-d-singer-and-john-b-willett-chapter-2-exploring-longitudinal-data-on-change%2F" />
+<link rel="alternate" type="text/xml+oembed" href="http://stats.idre.ucla.edu/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fstats.idre.ucla.edu%2Fsas%2Fexamples%2Falda%2Fchapter2%2Fapplied-longitudinal-data-analysis-modeling-change-and-event-occurrenceby-judith-d-singer-and-john-b-willett-chapter-2-exploring-longitudinal-data-on-change%2F&#038;format=xml" />
+
+<link rel='dns-prefetch' href='//v0.wordpress.com'>
+<style type='text/css'>img#wpstats{display:none}</style><link rel="pingback" href="http://stats.idre.ucla.edu/xmlrpc.php" />
+<style type="text/css">.broken_link, a.broken_link {
+	text-decoration: line-through;
+}</style><link rel="icon" href="http://stats.idre.ucla.edu/wp-content/uploads/2016/12/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="http://stats.idre.ucla.edu/wp-content/uploads/2016/12/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="http://stats.idre.ucla.edu/wp-content/uploads/2016/12/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="http://stats.idre.ucla.edu/wp-content/uploads/2016/12/cropped-logo-270x270.png" />
+
+<link rel="icon" href="
+Notice: get_bloginfo was called with an argument that is <strong>deprecated</strong> since version 2.2.0! The <code>siteurl</code> option is deprecated for the family of <code>bloginfo()</code> functions. Use the <code>url</code> option instead. in /var/www/html/statsidre/wp-includes/functions.php on line 4021
+http://stats.idre.ucla.edu/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="
+Notice: get_bloginfo was called with an argument that is <strong>deprecated</strong> since version 2.2.0! The <code>siteurl</code> option is deprecated for the family of <code>bloginfo()</code> functions. Use the <code>url</code> option instead. in /var/www/html/statsidre/wp-includes/functions.php on line 4021
+http://stats.idre.ucla.edu/favicon.ico" type="image/x-icon" />
+
+</head>
+
+
+<body class="page-template-default page page-id-1325 page-child parent-pageid-1324 tribe-no-js header-image full-width-content" itemscope itemtype="http://schema.org/WebPage"><div class="site-container"><section><h2 class="screen-reader-text">Skip links</h2><ul class="genesis-skip-link"><li><a href="#genesis-nav-primary" class="screen-reader-shortcut"> Skip to primary navigation</a></li><li><a href="#genesis-content" class="screen-reader-shortcut"> Skip to content</a></li></ul></section>
+<header class="site-header" itemscope itemtype="http://schema.org/WPHeader"><div class="wrap"><div class="title-area">	<div class="title-area">
+	
+	<h1 class="site-title" itemprop="headline"><a href="http://idre.ucla.edu/">IDRE</a></h1>
+
+	<p class="site-description" itemprop="description">Institute for Digital Research and Education</p></div>
+</div><div class="widget-area header-widget-area"><h2 class="genesis-sidebar-title screen-reader-text">Header Right</h2><section id="text-4" class="widget widget_text"><div class="widget-wrap">			<div class="textwidget"><h1><div class = "top-wrap"><div class = "ucla-logo"><img alt="Image " src = "/wp-content/themes/genesis-child/images/UCLA.png" alt = "UCLA Logo"></div>
+<div class  = "top-txt">Institute for Digital Research and Education</div></div></h1></div>
+		</div></section>
+<section id="search-5" class="widget widget_search"><div class="widget-wrap"><form class="search-form" itemprop="potentialAction" itemscope itemtype="http://schema.org/SearchAction" method="get" action="http://stats.idre.ucla.edu/" role="search"><meta itemprop="target" content="http://stats.idre.ucla.edu/?s={s}"/><label class="search-form-label screen-reader-text" for="searchform-58e68aa4e8a9e">Search this website</label><input itemprop="query-input" type="search" name="s" id="searchform-58e68aa4e8a9e" placeholder="Search this website &#x2026;" /><input type="submit" value="Search" /></form></div></section>
+</div></div></header><h2 class="screen-reader-text">Main navigation</h2><nav class="nav-primary" itemscope itemtype="http://schema.org/SiteNavigationElement" id="genesis-nav-primary" aria-label="Main navigation"><div class="wrap"><ul id="menu-idre-stats-navigation-menu" class="menu genesis-nav-menu menu-primary js-superfish"><li id="menu-item-22640" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-22640"><a href="http://stats.idre.ucla.edu" itemprop="url"><span itemprop="name">HOME</span></a></li>
+<li id="menu-item-22662" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-22662"><a href="#" itemprop="url"><span itemprop="name">SOFTWARE</span></a>
+<ul class="sub-menu">
+	<li id="menu-item-22646" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22646"><a href="http://stats.idre.ucla.edu/r/" itemprop="url"><span itemprop="name">R</span></a></li>
+	<li id="menu-item-22649" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22649"><a href="http://stats.idre.ucla.edu/stata/" itemprop="url"><span itemprop="name">Stata</span></a></li>
+	<li id="menu-item-22647" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22647"><a href="http://stats.idre.ucla.edu/sas/" itemprop="url"><span itemprop="name">SAS</span></a></li>
+	<li id="menu-item-22648" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22648"><a href="http://stats.idre.ucla.edu/spss/" itemprop="url"><span itemprop="name">SPSS</span></a></li>
+	<li id="menu-item-22659" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22659"><a href="http://stats.idre.ucla.edu/mplus/" itemprop="url"><span itemprop="name">Mplus</span></a></li>
+	<li id="menu-item-22657" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-22657"><a href="http://stats.idre.ucla.edu/other/" itemprop="url"><span itemprop="name">Other Packages</span></a>
+	<ul class="sub-menu">
+		<li id="menu-item-22658" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22658"><a href="http://stats.idre.ucla.edu/other/gpower/" itemprop="url"><span itemprop="name">G*Power</span></a></li>
+		<li id="menu-item-22684" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22684"><a href="http://stats.idre.ucla.edu/other/sudaan/" itemprop="url"><span itemprop="name">SUDAAN</span></a></li>
+		<li id="menu-item-22696" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-22696"><a href="http://stats.idre.ucla.edu/spss/spss-user/sample-power/" itemprop="url"><span itemprop="name">Sample Power</span></a></li>
+	</ul>
+</li>
+</ul>
+</li>
+<li id="menu-item-22661" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-has-children menu-item-22661"><a href="http://stats.idre.ucla.edu" itemprop="url"><span itemprop="name">RESOURCES</span></a>
+<ul class="sub-menu">
+	<li id="menu-item-22656" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22656"><a href="http://stats.idre.ucla.edu/annotatedoutput" itemprop="url"><span itemprop="name">Annotated Output</span></a></li>
+	<li id="menu-item-22651" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22651"><a href="http://stats.idre.ucla.edu/other/dae/" itemprop="url"><span itemprop="name">Data Analysis Examples</span></a></li>
+	<li id="menu-item-22654" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22654"><a href="http://stats.idre.ucla.edu/other/mult-pkg/faq/" itemprop="url"><span itemprop="name">Frequently Asked Questions</span></a></li>
+	<li id="menu-item-22652" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22652"><a href="http://stats.idre.ucla.edu/other/mult-pkg/seminars/" itemprop="url"><span itemprop="name">Seminars</span></a></li>
+	<li id="menu-item-22653" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22653"><a href="http://stats.idre.ucla.edu/other/examples/" itemprop="url"><span itemprop="name">Textbook Examples</span></a></li>
+	<li id="menu-item-22692" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22692"><a href="http://stats.idre.ucla.edu/other/mult-pkg/whatstat/" itemprop="url"><span itemprop="name">Which Statistical Test?</span></a></li>
+</ul>
+</li>
+<li id="menu-item-22663" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-has-children menu-item-22663"><a href="http://stats.idre.ucla.edu" itemprop="url"><span itemprop="name">SERVICES</span></a>
+<ul class="sub-menu">
+	<li id="menu-item-22660" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22660"><a href="http://stats.idre.ucla.edu/books/" itemprop="url"><span itemprop="name">Books for Loan</span></a></li>
+	<li id="menu-item-22655" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-22655"><a href="http://stats.idre.ucla.edu/ucla/policies" itemprop="url"><span itemprop="name">Services and Policies</span></a>
+	<ul class="sub-menu">
+		<li id="menu-item-22885" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22885"><a href="http://stats.idre.ucla.edu/ucla/policies/#WalkIn" itemprop="url"><span itemprop="name">Walk-In Consulting</span></a></li>
+		<li id="menu-item-22882" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22882"><a href="http://stats.idre.ucla.edu/ucla/policies/#EmailConsult" itemprop="url"><span itemprop="name">Email Consulting</span></a></li>
+		<li id="menu-item-22880" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22880"><a href="http://stats.idre.ucla.edu/ucla/policies/#Fee" itemprop="url"><span itemprop="name">Fee for Service</span></a></li>
+	</ul>
+</li>
+	<li id="menu-item-22687" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22687"><a href="http://stats.idre.ucla.edu/purchasing-and-updatingstatistical-software-packages/" itemprop="url"><span itemprop="name">Software Purchasing and Updating</span></a></li>
+	<li id="menu-item-22688" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22688"><a href="http://stats.idre.ucla.edu/statistical-consultants-for-hire/" itemprop="url"><span itemprop="name">Consultants for Hire</span></a></li>
+	<li id="menu-item-23684" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-23684"><a itemprop="url"><span itemprop="name">Other Consulting Centers</span></a>
+	<ul class="sub-menu">
+		<li id="menu-item-23685" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-23685"><a href="http://scc.stat.ucla.edu/" itemprop="url"><span itemprop="name">Department of Statistics Consulting Center</span></a></li>
+		<li id="menu-item-23686" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-23686"><a href="http://biomath.ucla.edu/about/consulting" itemprop="url"><span itemprop="name">Department of Biomathematics Consulting Clinic</span></a></li>
+	</ul>
+</li>
+</ul>
+</li>
+<li id="menu-item-22664" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22664"><a href="http://stats.idre.ucla.edu/ucla/about" itemprop="url"><span itemprop="name">ABOUT US</span></a></li>
+<li id="menu-item-26836" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-26836"><a href="https://giving.ucla.edu/Standard/NetDonate.aspx?SiteNum=371" itemprop="url"><span itemprop="name">DONATE</span></a></li>
+</ul></div></nav><div class="site-inner"><div class="content-sidebar-wrap"><main class="content" id="genesis-content"><article class="post-1325 page type-page status-publish entry" itemscope itemtype="http://schema.org/CreativeWork"><header class="entry-header"><h1 class="entry-title" itemprop="headline">&#13;
+Applied Longitudinal Data Analysis: Modeling Change and Event Occurrence&#13;
+by Judith D. Singer and John B. Willett &#13;
+Chapter 2: Exploring Longitudinal Data on Change | SAS Textbook Examples</h1> 
+</header><div class="entry-content" itemprop="text"><p>Note: This page is done using SAS 9.3 and is based on SAS code provided by&nbsp; 
+Raymond R. Balise of Stanford University. We thank Raymond R. Balise for sharing 
+his SAS 9.2 code with us. </p>
+<blockquote>
+<pre><strong>
+*Figure 2.1 on page 18.;
+title1 "Figure 2.1a 'Person-level' data set";
+proc print data='c:aldatolerance';
+run;</strong>
+
+Figure 2.1a Person-level data set
+
+Obs      ID    TOL11    TOL12    TOL13    TOL14    TOL15    MALE    EXPOSURE
+  1       9     2.23     1.79     1.90     2.12     2.66      0       1.54
+  2      45     1.12     1.45     1.45     1.45     1.99      1       1.16
+  3     268     1.45     1.34     1.99     1.79     1.34      1       0.90
+  4     314     1.22     1.22     1.55     1.12     1.12      0       0.81
+  5     442     1.45     1.99     1.45     1.67     1.90      0       1.13
+  6     514     1.34     1.67     2.23     2.12     2.44      1       0.90
+  7     569     1.79     1.90     1.90     1.99     1.99      0       1.99
+  8     624     1.12     1.12     1.22     1.12     1.22      1       0.98
+  9     723     1.22     1.34     1.12     1.00     1.12      0       0.81
+ 10     918     1.00     1.00     1.22     1.99     1.22      0       1.21
+ 11     949     1.99     1.55     1.12     1.45     1.55      1       0.93
+ 12     978     1.22     1.34     2.12     3.46     3.32      1       1.59
+ 13    1105     1.34     1.90     1.99     1.90     2.12      1       1.38
+ 14    1542     1.22     1.22     1.99     1.79     2.12      0       1.44
+ 15    1552     1.00     1.12     2.23     1.55     1.55      0       1.04
+ 16    1653     1.11     1.11     1.34     1.55     2.12      0       1.25
+<hr>
+
+<strong>
+*Creating a person-period data set from a balanced person-level data set;
+data tolerance_pp;
+  set 'c:aldatolerance';
+  array Atol [11:15] tol11-tol15;
+  do age=11 to 15;
+    tol = Atol[age];
+    time = age - 11;
+	output;
+  end;
+  keep id age time tol male exposure;
+run;
+ 
+title1 "Figure 2.1b 'Person-Period' data set";
+proc print data=tolerance_pp;
+  var id age tol male exposure;
+run;
+</strong>
+<strong>*Figure 2.1b Person-Period data set;</strong>
+
+Obs     ID    age     tol    MALE    EXPOSURE
+  1      9     11    2.23      0       1.54
+  2      9     12    1.79      0       1.54
+  3      9     13    1.90      0       1.54
+  4      9     14    2.12      0       1.54
+  5      9     15    2.66      0       1.54
+  6     45     11    1.12      1       1.16
+  7     45     12    1.45      1       1.16
+ ...........................................
+ 72   1552     12    1.12      0       1.04
+ 73   1552     13    2.23      0       1.04
+ 74   1552     14    1.55      0       1.04
+ 75   1552     15    1.55      0       1.04
+ 76   1653     11    1.11      0       1.25
+ 77   1653     12    1.11      0       1.25
+ 78   1653     13    1.34      0       1.25
+ 79   1653     14    1.55      0       1.25
+ 80   1653     15    2.12      0       1.25
+
+
+<strong>
+*Table 2.1, page 20;
+title1 'Table 2.1: Estimated bivariate correlations among tolerance scores';
+</strong><strong>options nocenter nodate nolabel;
+</strong><strong>proc corr data='c:aldatolerance' nosimple noprob;
+  var tol11-tol15;
+run;</strong>
+
+Table 2.1: Estimated bivariate correlations among tolerance scores
+The CORR Procedure
+   5  Variables:    TOL11    TOL12    TOL13    TOL14    TOL15
+
+                 Pearson Correlation Coefficients, N = 16
+              TOL11         TOL12         TOL13         TOL14         TOL15
+TOL11       1.00000       0.65729       0.06195       0.14076       0.26354
+TOL12       0.65729       1.00000       0.24755       0.20562       0.39228
+TOL13       0.06195       0.24755       1.00000       0.58717       0.56921
+TOL14       0.14076       0.20562       0.58717       1.00000       0.82546
+TOL15       0.26354       0.39228       0.56921       0.82546       1.00000
+<hr>
+
+<strong>
+*Figure 2.2 , page 25.;
+proc sgpanel data = tolerance_pp;
+  panelby id /columns=4 rows= 4;
+  scatter y = tol x = age;
+run;</strong>
+<img alt="Image SGPanel2" border="0" src="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/SGPanel2.png" width="640" height="640">
+&nbsp;
+<hr>
+
+
+<strong>
+*Figure 2.3, page 27.; 
+proc sgpanel data = tolerance_pp (rename=(tol=tolerance));
+  panelby id /columns=4 rows= 4;
+  pbspline y = tolerance x = age;
+run;
+</strong>
+<img alt="Image SGPanel4" border="0" src="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/SGPanel4.png" width="640" height="640">
+<hr>
+
+<strong>
+*Table 2.2, page 30.;
+proc sort data = tolerance_pp;
+  by male exposure id;
+run;
+proc reg data = tolerance_pp 
+     outest = expl (drop = _MODEL_ _in_ _p_ _edf_) outseb rsquare noprint;
+	 by  male exposure id;
+	model tol = time;
+run;
+
+proc sort data = expl;
+  by id _type_;
+run;
+data expl2 (rename = (a0=intercept a1 = time));
+  set expl;
+  by id;
+  r2 = lag(_rsq_);
+  retain a0 se_intercept a1 se_time res_var r2;
+  
+  if first.id then do;
+  a0 = intercept;
+  a1 = time;
+  end;
+
+  if _type_ =&quot;SEB&quot; then do;
+     se_intercept = intercept; 
+     se_time = time;
+	 res_var  = _rmse_**2;
+  end;
+  if last.id;
+  keep id a0 se_intercept a1 se_time res_var r2 male exposure;
+run;
+proc print data = expl2 noobs;
+  var id intercept se_intercept time se_time res_var r2 male exposure;
+  format _numeric_ 4.2;
+  format id 4.0;
+run;
+</strong>
+  ID    intercept    se_intercept    time    se_time    res_var      r2    MALE    EXPOSURE
+
+   9      1.90           0.25        0.12     0.10       0.11      0.31    0.00      1.54
+  45      1.14           0.13        0.17     0.05       0.03      0.77    1.00      1.16
+ 268      1.54           0.26        0.02     0.11       0.11      0.02    1.00      0.90
+ 314      1.31           0.15        -.03     0.06       0.04      0.07    0.00      0.81
+ 442      1.58           0.21        0.06     0.08       0.07      0.13    0.00      1.13
+ 514      1.43           0.14        0.26     0.06       0.03      0.88    1.00      0.90
+ 569      1.82           0.03        0.05     0.01       0.00      0.88    0.00      1.99
+ 624      1.12           0.04        0.02     0.02       0.00      0.33    1.00      0.98
+ 723      1.27           0.08        -.05     0.03       0.01      0.45    0.00      0.81
+ 918      1.00           0.30        0.14     0.12       0.15      0.31    0.00      1.21
+ 949      1.73           0.24        -.10     0.10       0.10      0.25    1.00      0.93
+ 978      1.03           0.32        0.63     0.13       0.17      0.89    1.00      1.59
+1105      1.54           0.15        0.16     0.06       0.04      0.68    1.00      1.38
+1542      1.19           0.18        0.24     0.07       0.05      0.78    0.00      1.44
+1552      1.18           0.37        0.15     0.15       0.23      0.25    0.00      1.04
+1653      0.95           0.14        0.25     0.06       0.03      0.86    0.00      1.25
+<hr>
+ 
+
+<strong>
+*Figure 2.4, page 31;
+proc univariate data=expl2 plot ;
+  var intercept time res_var r2;
+run;</strong>
+<strong style="font-weight: 400">&lt;output edited to show just stem and leaf plot&gt;</strong>
+Variable:  <strong>intercept</strong>
+ Stem Leaf
+   18 20
+   16 3
+   14 3448
+   12 71
+   10 032489
+    8 5
+      ----+----+----+----+
+  Multiply Stem.Leaf by 10**-1
+
+Variable:  <strong>time</strong>
+   Stem Leaf
+      6 3
+      5
+      4
+      3
+      2 456
+      1 24567
+      0 2256
+     -0 53
+     -1 0
+        ----+----+----+----+
+    Multiply Stem.Leaf by 10**-1
+
+Variable:  <strong>res_var</strong>
+  Stem Leaf
+     2 3
+     1 57
+     1 011
+     0 57
+     0 00133344
+       ----+----+----+----+
+   Multiply Stem.Leaf by 10**-1
+
+Variable:  <strong>r2</strong>
+   Stem Leaf
+      8 6889
+      7 78
+      6 8
+      5
+      4 5
+      3 113
+      2 55
+      1 3
+      0 27
+        ----+----+----+----+
+    Multiply Stem.Leaf by 10**-1
+ 
+<hr>
+ 
+<strong>
+*Figure 2.5, page 32.;
+proc sgpanel data = tolerance_pp (rename=(tol=tolerance));
+  panelby id /columns=4 rows= 4;
+  reg y = tolerance x = age;
+run;
+quit;
+</strong>
+
+<img alt="Image SGPanel5" border="0" src="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/SGPanel5.png" width="640" height="640">
+<hr>
+
+<strong>
+*Figure 2.6, page 34;
+proc sgplot data=tolerance_pp (rename=(tol=tolerance)) noautolegend ;
+	* spaghetti plot;
+	yaxis min = 0 max = 4;
+	pbspline x=age y=tolerance 
+    / group = id nomarkers LINEATTRS = (COLOR= gray PATTERN = 1 THICKNESS = 1) ;
+	* overall spline;
+	pbspline x=age y=tolerance
+    / nomarkers LINEATTRS = (COLOR= red PATTERN = 1 THICKNESS = 3) ;
+run;
+quit;</strong>
+<img alt="Image SGPlot11" border="0" src="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/SGPlot11.png" width="640" height="480">
+<strong>proc sgplot data=tolerance_pp (rename=(tol=tolerance)) noautolegend ;
+	* spaghetti plot;
+	yaxis min = 0 max = 4;
+	reg x=age y=tolerance 
+    / group = id nomarkers LINEATTRS = (COLOR= gray PATTERN = 1 THICKNESS = 1) ;
+	* overall spline;
+	reg x=age y=tolerance
+    / nomarkers LINEATTRS = (COLOR= red PATTERN = 1 THICKNESS = 3) ;
+run;
+quit;</strong>
+<img alt="Image SGPlot12" border="0" src="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/SGPlot12.png" width="640" height="480">
+<hr>
+
+<strong>
+*Table 2.3, page 37;
+proc corr data = expl2;
+  var intercept time;
+run;
+</strong>                                       Simple Statistics
+Variable          N        Mean     Std Dev         Sum     Minimum     Maximum  Label
+intercept        16     1.35775     0.29778    21.72400     0.95400     1.90200  Initial Status
+time             16     0.13081     0.17230     2.09300    -0.09800     0.63200  Rate of Change
+
+ Pearson Correlation Coefficients, N = 16
+        Prob &gt; |r| under H0: Rho=0
+                    intercept          time
+intercept             1.00000      -0.44811
+Initial Status                       0.0817
+time                 -0.44811       1.00000
+Rate of Change         0.0817
+<hr>
+ 
+<strong>
+*Figure 2.7, page 38.;
+proc sgpanel data=tolerance_pp (rename=(tol=tolerance))  noautolegend ;
+  panelby male;
+  reg x=age y=tolerance 
+    / group = id nomarkers LINEATTRS = (COLOR= gray PATTERN = 1 THICKNESS = 1) ;
+	* overall spline;
+	reg x=age y=tolerance
+    / nomarkers LINEATTRS = (COLOR= red PATTERN = 1 THICKNESS = 3) ;
+run;</strong>
+<p><img alt="Image fig2_7_a_b" border="0" src="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig2_7_a_b.png" width="640" height="480"></p>
+<strong>proc means data = tolerance_pp median;
+   var exposure;
+output out = t median = m;
+run;
+data _null_;
+  set t;
+  call symput('exp', m);
+run;
+proc format;
+ value exp 0 = &quot;Low exposure&quot;
+           1 = &quot;High exposure&quot;;
+run;
+data to_exp;
+  set tolerance_pp;
+  if exposure &lt; &amp;exp then exp_cat = 0;
+  else exp_cat = 1;
+  format exp_cat exp.;
+  rename tol = tolerance;
+run;
+
+proc sgpanel data=to_exp  noautolegend ;
+  panelby exp_cat;
+  reg x=age y=tolerance 
+    / group = id nomarkers LINEATTRS = (COLOR= gray PATTERN = 1 THICKNESS = 1) ;
+	* overall spline;
+	reg x=age y=tolerance
+    / nomarkers LINEATTRS = (COLOR= red PATTERN = 1 THICKNESS = 3) ;
+run;
+quit;</strong>
+<p><img alt="Image fig2_7_c_d" border="0" src="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig2_7_c_d.png" width="640" height="480"></p>
+<hr>
+
+
+<strong>
+*Figure 2.8, page 40;
+ods output PearsonCorr = pcorr;
+proc corr data = expl2 nosimple noprob;
+  var intercept time;
+  with male exposure;
+run;
+
+data _null_;
+  set pcorr;
+  if _n_ = 1 then do;
+  call symput('male_int', put(intercept, 4.2));
+  call symput('male_time', put(time, 4.2));
+  end;
+  if _n_ = 2 then do;
+  call symput('exp_int', put(intercept, 4.2));
+  call symput('exp_time', put(time, 4.2));
+  end;
+run;</strong>
+<strong>title &quot;Figure 2.8 'Examining relationship'&quot;;
+proc template;
+  define statgraph fourPlots;
+    begingraph;
+      layout gridded / columns=2 rows=2 ;
+
+	layout overlay / yaxisopts=(linearopts=(viewmin=.5 viewmax= 2.5))
+		    	 xaxisopts=(linearopts=(viewmin=-.5 viewmax= 1.5 
+                         tickvaluelist=(0 1))) autoalign=(topleft topright);
+	  scatterplot x=male y=intercept;			
+	    layout gridded / autoalign=(BottomRight) border = false	;
+	      entry halign=left &quot;r = &amp;male_int&quot; ;
+	    endlayout;
+	endlayout;
+
+        layout overlay / yaxisopts=(linearopts=(viewmin=.5 viewmax= 2.5))
+			 xaxisopts=(linearopts=(viewmin=0 viewmax= 2.5 
+                         tickvaluelist=(0 1 2)));
+	  scatterplot x=exposure y=intercept;
+            layout gridded / autoalign=(BottomRight) border = false	;
+	      entry halign=left &quot;r = &amp;exp_int&quot; ;
+	    endlayout;
+	endlayout;
+ 
+	layout overlay / yaxisopts=(linearopts=(viewmin=0 viewmax= .8))
+		    	 xaxisopts=(linearopts=(viewmin=-0.5 viewmax= 1.5 
+                         tickvaluelist=(0 1)));
+	  scatterplot x=male y=time;
+            layout gridded / autoalign=(BottomRight) border = false	;
+	      entry halign=left &quot;r = &amp;male_time&quot; ;
+	    endlayout;
+	endlayout; 
+
+        layout overlay / yaxisopts=(linearopts=(viewmin=0 viewmax= .8))
+			 xaxisopts=(linearopts=(viewmin=0 viewmax= 2.5 
+                         tickvaluelist=(0 1 2)));
+	  scatterplot x=exposure y=time;
+	    layout gridded / autoalign=(BottomRight) border = false	;
+	      entry halign=left &quot;r = &amp;exp_time&quot; ;
+	    endlayout;
+	endlayout;
+     endlayout;
+   endgraph;
+ end;
+run;
+
+proc sgrender data=expl2 template=fourPlots;
+run;</strong>
+</pre>
+</blockquote>
+<p><img alt="Image SGRender2" border="0" src="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/SGRender2.png" width="640" height="480"></p>
+<p><?php include "stat/footer.htm"; ?></p>
+<p><!--webbot bot='PurpleText' PREVIEW='Dont change anything below this line.' --> </p>
+<p></body>
+</html></p>
+</div></article></main><hr><div style="clear:both;">
+          <p style="float:left;"><span class="collapseomatic " id="id9084"  tabindex="" title="Click here to report an error on this page or leave a comment"    >Click here to report an error on this page or leave a comment</span><span id='swap-id9084' alt='' class='colomat-swap' style='display:none;'> </span><div id="target-id9084" class="collapseomatic_content "><div role="form" class="wpcf7" id="wpcf7-f22910-o1" lang="en-US" dir="ltr">
+<div class="screen-reader-response"></div>
+<form action="/sas/examples/alda/chapter2/applied-longitudinal-data-analysis-modeling-change-and-event-occurrenceby-judith-d-singer-and-john-b-willett-chapter-2-exploring-longitudinal-data-on-change/#wpcf7-f22910-o1" method="post" class="wpcf7-form" novalidate="novalidate">
+<div style="display: none;">
+<input type="hidden" name="_wpcf7" value="22910" />
+<input type="hidden" name="_wpcf7_version" value="4.7" />
+<input type="hidden" name="_wpcf7_locale" value="en_US" />
+<input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f22910-o1" />
+<input type="hidden" name="_wpnonce" value="1e33220e30" />
+</div>
+<p><label for="namefield"> Your Name (required)<br />
+    <span class="wpcf7-form-control-wrap your-name"><input type="text" name="your-name" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" id="namefield" aria-required="true" aria-invalid="false" /></span><br />
+</label></p>
+<p><label for="emailfield"> Your Email (must be a valid email for us to receive the report!)<br />
+    <span class="wpcf7-form-control-wrap your-email"><input type="email" name="your-email" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email" id="emailfield" aria-required="true" aria-invalid="false" /></span><br />
+</label></p>
+<p><label for="commentfield"> Comment/Error Report (required)<br />
+    <span class="wpcf7-form-control-wrap your-message"><textarea name="your-message" cols="40" rows="10" class="wpcf7-form-control wpcf7-textarea wpcf7-validates-as-required" id="commentfield" aria-required="true" aria-invalid="false"></textarea></span><br />
+</label></p>
+<p><label for="captchacode"> Code: <input type="hidden" name="_wpcf7_captcha_challenge_captcha-170" value="2065263464" /><img class="wpcf7-form-control wpcf7-captchac wpcf7-captcha-captcha-170" id="captchacode" width="72" height="24" alt="captcha" src="http://stats.idre.ucla.edu/wp-content/uploads/wpcf7_captcha/2065263464.png" /><br />
+</label><br />
+<label for="captchainput"> Input the code above<br />
+<span class="wpcf7-form-control-wrap captcha-170"><input type="text" name="captcha-170" value="" size="4" maxlength="4" class="wpcf7-form-control wpcf7-captchar" id="captchainput" autocomplete="off" aria-invalid="false" /></span><br />
+</label></p>
+<p><input type="submit" value="Send" class="wpcf7-form-control wpcf7-submit" /></p>
+<div class="wpcf7-response-output wpcf7-display-none"></div></form></div></div></p><p style="float:right;">
+          <a href="http://stats.idre.ucla.edu/other/mult-pkg/faq/general/faq-how-do-i-cite-web-pages-and-programs-from-the-ucla-statistical-consulting-group/">How to cite this page</a>
+          </p></div></div></div>
+<div class="ftr-btm">
+<div class="wrapped">
+
+<a href="https://oit.ucla.edu/" title="OIT logo" id="footer-image">UCLA Office of Information and Technology</a>
+
+<p><a href="http://www.ucla.edu/terms-of-use/">© 2017 UC REGENTS TERMS OF USE & PRIVACY POLICY</a></p>
+<div class="footer-links">
+<ol>
+
+<li><a href="/">HOME</a></li>
+<li><a href="/contact">CONTACT</a></li>
+<li><a href="/wp-admin">LOGIN</a></li>
+</ol>
+</div>
+</div>
+</div>
+</div><script>
+			jQuery(function($) {
+			$('#menu-header-nav').slicknav();
+			});
+			</script><script type='text/javascript'>
+var colomatduration = 'fast';
+var colomatslideEffect = 'slideFade';
+</script>		<script>
+		( function ( body ) {
+			'use strict';
+			body.className = body.className.replace( /\btribe-no-js\b/, 'tribe-js' );
+		} )( document.body );
+		</script>
+			<div style="display:none">
+	</div>
+<script type='text/javascript'> /* <![CDATA[ */var tribe_l10n_datatables = {"aria":{"sort_ascending":": activate to sort column ascending","sort_descending":": activate to sort column descending"},"length_menu":"Show _MENU_ entries","empty_table":"No data available in table","info":"Showing _START_ to _END_ of _TOTAL_ entries","info_empty":"Showing 0 to 0 of 0 entries","info_filtered":"(filtered from _MAX_ total entries)","zero_records":"No matching records found","search":"Search:","pagination":{"all":"All","next":"Next","previous":"Previous"},"select":{"rows":{"0":"","_":": Selected %d rows","1":": Selected 1 row"}},"datepicker":{"dayNames":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"dayNamesShort":["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],"dayNamesMin":["S","M","T","W","T","F","S"],"monthNames":["January","February","March","April","May","June","July","August","September","October","November","December"],"monthNamesShort":["January","February","March","April","May","June","July","August","September","October","November","December"],"nextText":"Next","prevText":"Prev","currentText":"Today","closeText":"Done"}};/* ]]> */ </script><script>
+    jQuery(document).ready(function () {
+		jQuery.post('http://stats.idre.ucla.edu?ga_action=googleanalytics_get_script', {action: 'googleanalytics_get_script'}, function(response) {
+			var F = new Function ( response );
+			return( F() );
+		});
+    });
+</script><script type='text/javascript' src='http://stats.idre.ucla.edu/wp-content/plugins/contact-form-7/includes/js/jquery.form.min.js?ver=3.51.0-2014.06.20'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var _wpcf7 = {"recaptcha":{"messages":{"empty":"Please verify that you are not a robot."}},"cached":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='http://stats.idre.ucla.edu/wp-content/plugins/contact-form-7/includes/js/scripts.js?ver=4.7'></script>
+<script type='text/javascript' src='https://s0.wp.com/wp-content/js/devicepx-jetpack.js?ver=201714'></script>
+<script type='text/javascript' src='http://s.gravatar.com/js/gprofiles.js?ver=2017Apraa'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='http://stats.idre.ucla.edu/wp-content/plugins/jetpack/modules/wpgroho.js?ver=4.7.3'></script>
+<script type='text/javascript' src='http://stats.idre.ucla.edu/wp-includes/js/hoverIntent.min.js?ver=1.8.1'></script>
+<script type='text/javascript' src='http://stats.idre.ucla.edu/wp-content/themes/genesis/lib/js/menu/superfish.min.js?ver=1.7.5'></script>
+<script type='text/javascript' src='http://stats.idre.ucla.edu/wp-content/themes/genesis/lib/js/menu/superfish.args.min.js?ver=2.4.2'></script>
+<script type='text/javascript' src='http://stats.idre.ucla.edu/wp-includes/js/wp-embed.min.js?ver=4.7.3'></script>
+<script type='text/javascript' src='http://stats.idre.ucla.edu/wp-content/plugins/jquery-collapse-o-matic/js/collapse.js?ver=1.6.6'></script>
+<script type="text/css" id="tmpl-tribe_customizer_css">.tribe-events-list .tribe-events-loop .tribe-event-featured,
+				.tribe-events-list #tribe-events-day.tribe-events-loop .tribe-event-featured,
+				.type-tribe_events.tribe-events-photo-event.tribe-event-featured .tribe-events-photo-event-wrap,
+				.type-tribe_events.tribe-events-photo-event.tribe-event-featured .tribe-events-photo-event-wrap:hover {
+					background-color: #0ea0d7;
+				}
+
+				#tribe-events-content table.tribe-events-calendar .type-tribe_events.tribe-event-featured {
+					background-color: #0ea0d7;
+				}
+
+				.tribe-events-list-widget .tribe-event-featured,
+				.tribe-events-venue-widget .tribe-event-featured,
+				.tribe-mini-calendar-list-wrapper .tribe-event-featured,
+				.tribe-events-adv-list-widget .tribe-event-featured .tribe-mini-calendar-event {
+					background-color: #0ea0d7;
+				}
+
+				.tribe-grid-body .tribe-event-featured.tribe-events-week-hourly-single {
+					background-color: rgba(14,160,215, .7 );
+					border-color: #0ea0d7;
+				}
+
+				.tribe-grid-body .tribe-event-featured.tribe-events-week-hourly-single:hover {
+					background-color: #0ea0d7;
+				}</script><style type="text/css" id="tribe_customizer_css">.tribe-events-list .tribe-events-loop .tribe-event-featured,
+				.tribe-events-list #tribe-events-day.tribe-events-loop .tribe-event-featured,
+				.type-tribe_events.tribe-events-photo-event.tribe-event-featured .tribe-events-photo-event-wrap,
+				.type-tribe_events.tribe-events-photo-event.tribe-event-featured .tribe-events-photo-event-wrap:hover {
+					background-color: #0ea0d7;
+				}
+
+				#tribe-events-content table.tribe-events-calendar .type-tribe_events.tribe-event-featured {
+					background-color: #0ea0d7;
+				}
+
+				.tribe-events-list-widget .tribe-event-featured,
+				.tribe-events-venue-widget .tribe-event-featured,
+				.tribe-mini-calendar-list-wrapper .tribe-event-featured,
+				.tribe-events-adv-list-widget .tribe-event-featured .tribe-mini-calendar-event {
+					background-color: #0ea0d7;
+				}
+
+				.tribe-grid-body .tribe-event-featured.tribe-events-week-hourly-single {
+					background-color: rgba(14,160,215, .7 );
+					border-color: #0ea0d7;
+				}
+
+				.tribe-grid-body .tribe-event-featured.tribe-events-week-hourly-single:hover {
+					background-color: #0ea0d7;
+				}</style><script type='text/javascript' src='https://stats.wp.com/e-201714.js' async defer></script>
+<script type='text/javascript'>
+	_stq = window._stq || [];
+	_stq.push([ 'view', {v:'ext',j:'1:4.8.1',blog:'124666309',post:'1325',tz:'-7',srv:'stats.idre.ucla.edu'} ]);
+	_stq.push([ 'clickTrackerInit', '124666309', '1325' ]);
+</script>
+
+
+
+
+<!-- Performance optimized by W3 Total Cache. Learn more: https://www.w3-edge.com/products/
+
+Page Caching using disk
+Page cache debug info:
+Engine:             disk
+Cache key:          fb449291f7216753907d73e627b6ffcc
+Creation Time:      1491503781.000s
+Header info:
+X-Powered-By:        PHP/5.3.3
+Content-Type:        text/html; charset=UTF-8
+Expires:             Wed, 11 Jan 1984 05:00:00 GMT
+Cache-Control:       no-cache, must-revalidate, max-age=0
+Link:                <http://stats.idre.ucla.edu/wp-json/>; rel="https://api.w.org/"
+Link:                <http://wp.me/P8r5oV-ln>; rel=shortlink
+
+ Served from: stats.idre.ucla.edu @ 2017-04-06 11:36:21 by W3 Total Cache -->

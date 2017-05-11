@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en-US" prefix="og: http://ogp.me/ns#">
+<head >
+<meta charset="UTF-8" />
+<title>Applied Longitudinal Data Analysis, Chapter 4 | R Textbook Examples - IDRE Stats</title><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<!-- This site is optimized with the Yoast SEO plugin v4.5 - https://yoast.com/wordpress/plugins/seo/ -->
+<link rel="canonical" href="http://stats.idre.ucla.edu/r/examples/alda/r-applied-longitudinal-data-analysis-ch-4/" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Applied Longitudinal Data Analysis, Chapter 4 | R Textbook Examples - IDRE Stats" />
+<meta property="og:description" content="R Textbook Examples Applied Longitudinal Data Analysis: Modeling Change and Event Occurrence by Judith D. Singer and John B. Willett Chapter 4: Doing Data Analysis with the Multilevel Model for Change #Read data and attach dataset alcohol1 &lt;- read.table(&quot;http://www.ats.ucla.edu/stat/r/examples/alda/data/alcohol1_pp.txt&quot;, header=T, sep=&quot;,&quot;) attach(alcohol1) Fig. 4.1, p. 77. Empirical growth plots with superimposed OLS trajectories. library(lattice) xyplot(alcuse~age... Read More" />
+<meta property="og:url" content="http://stats.idre.ucla.edu/r/examples/alda/r-applied-longitudinal-data-analysis-ch-4/" />
+<meta property="og:site_name" content="IDRE Stats" />
+<meta property="og:image" content="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig4_1-1.gif" />
+<meta property="og:image" content="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig4_2_coa0.png" />
+<meta property="og:image" content="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig4_2_coa1.png" />
+<meta property="og:image" content="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig4_2_lowpeer.png" />
+<meta property="og:image" content="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig4_2_hipeer.png" />
+<meta property="og:image" content="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig4_3b.png" />
+<meta property="og:image" content="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig4_3c.png" />
+<meta property="og:image" content="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig4_3e.png" />
+<meta property="og:image" content="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig4_5a.png" />
+<meta property="og:image" content="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig4_5b.png" />
+<meta property="og:image" content="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig4_5c.png" />
+<meta property="og:image" content="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig4_5d.png" />
+<meta property="og:image" content="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig4_5e.png" />
+<meta property="og:image" content="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig4_5f.png" />
+<meta property="og:image" content="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig4_6a.png" />
+<meta property="og:image" content="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig4_6b.png" />
+<meta property="og:image" content="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig4_6c.png" />
+<meta property="og:image" content="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig4_6d.png" />
+<meta property="og:image" content="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig4_6e.png" />
+<!-- / Yoast SEO plugin. -->
+
+<link rel='dns-prefetch' href='//s0.wp.com' />
+<link rel='dns-prefetch' href='//s.gravatar.com' />
+<link rel='dns-prefetch' href='//cdn.jsdelivr.net' />
+<link rel='dns-prefetch' href='//platform-api.sharethis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="IDRE Stats &raquo; Feed" href="http://stats.idre.ucla.edu/feed/" />
+<link rel="alternate" type="application/rss+xml" title="IDRE Stats &raquo; Comments Feed" href="http://stats.idre.ucla.edu/comments/feed/" />
+<link rel="alternate" type="text/calendar" title="IDRE Stats &raquo; iCal Feed" href="http://stats.idre.ucla.edu/calendar/?ical=1" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/stats.idre.ucla.edu\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.7.3"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='joe-responsive-css'  href='http://stats.idre.ucla.edu/wp-content/themes/genesis-child/style.css?ver=1.0.1' type='text/css' media='all' />
+<link rel='stylesheet' id='contact-form-7-css'  href='http://stats.idre.ucla.edu/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=4.7' type='text/css' media='all' />
+<link rel='stylesheet' id='collapseomatic-css-css'  href='http://stats.idre.ucla.edu/wp-content/plugins/jquery-collapse-o-matic/light_style.css?ver=1.6' type='text/css' media='all' />
+<link rel='stylesheet' id='tribe-events-full-calendar-style-css'  href='http://stats.idre.ucla.edu/wp-content/plugins/the-events-calendar/src/resources/css/tribe-events-full.min.css?ver=4.4.4' type='text/css' media='all' />
+<link rel='stylesheet' id='tribe-events-calendar-style-css'  href='http://stats.idre.ucla.edu/wp-content/plugins/the-events-calendar/src/resources/css/tribe-events-theme.min.css?ver=4.4.4' type='text/css' media='all' />
+<link rel='stylesheet' id='tribe-events-calendar-full-mobile-style-css'  href='http://stats.idre.ucla.edu/wp-content/plugins/the-events-calendar/src/resources/css/tribe-events-full-mobile.min.css?ver=4.4.4' type='text/css' media='only screen and (max-width: 768px)' />
+<link rel='stylesheet' id='tribe-events-calendar-mobile-style-css'  href='http://stats.idre.ucla.edu/wp-content/plugins/the-events-calendar/src/resources/css/tribe-events-theme-mobile.min.css?ver=4.4.4' type='text/css' media='only screen and (max-width: 768px)' />
+<link rel='stylesheet' id='genwpacc-srt-css-css'  href='http://stats.idre.ucla.edu/wp-content/plugins/genesis-accessible/css/genwpacc-skiplinks.css?ver=4.7.3' type='text/css' media='all' />
+<link rel='stylesheet' id='slicknavcss-css'  href='//cdn.jsdelivr.net/jquery.slicknav/0.1/slicknav.css?ver=1' type='text/css' media='all' />
+<link rel='stylesheet' id='sccss_style-css'  href='http://stats.idre.ucla.edu?sccss=1&#038;ver=4.7.3' type='text/css' media='all' />
+<link rel='stylesheet' id='jetpack_css-css'  href='http://stats.idre.ucla.edu/wp-content/plugins/jetpack/css/jetpack.css?ver=4.7.1' type='text/css' media='all' />
+<script type='text/javascript' src='http://stats.idre.ucla.edu/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='http://stats.idre.ucla.edu/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript' src='http://stats.idre.ucla.edu/wp-content/themes/genesis/lib/js/skip-links.js?ver=4.7.3'></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='http://stats.idre.ucla.edu/wp-content/themes/genesis/lib/js/html5shiv.min.js?ver=3.7.3'></script>
+<![endif]-->
+<script type='text/javascript' src='//cdn.jsdelivr.net/jquery.slicknav/0.1/jquery.slicknav.min.js?ver=1'></script>
+<script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#product=ga'></script>
+<link rel='https://api.w.org/' href='http://stats.idre.ucla.edu/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://stats.idre.ucla.edu/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://stats.idre.ucla.edu/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 4.7.3" />
+<link rel='shortlink' href='http://wp.me/P8r5oV-fl' />
+<link rel="alternate" type="application/json+oembed" href="http://stats.idre.ucla.edu/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fstats.idre.ucla.edu%2Fr%2Fexamples%2Falda%2Fr-applied-longitudinal-data-analysis-ch-4%2F" />
+<link rel="alternate" type="text/xml+oembed" href="http://stats.idre.ucla.edu/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fstats.idre.ucla.edu%2Fr%2Fexamples%2Falda%2Fr-applied-longitudinal-data-analysis-ch-4%2F&#038;format=xml" />
+
+<link rel='dns-prefetch' href='//v0.wordpress.com'>
+<style type='text/css'>img#wpstats{display:none}</style><link rel="pingback" href="http://stats.idre.ucla.edu/xmlrpc.php" />
+<style type="text/css">.broken_link, a.broken_link {
+	text-decoration: line-through;
+}</style><link rel="icon" href="http://stats.idre.ucla.edu/wp-content/uploads/2016/12/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="http://stats.idre.ucla.edu/wp-content/uploads/2016/12/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="http://stats.idre.ucla.edu/wp-content/uploads/2016/12/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="http://stats.idre.ucla.edu/wp-content/uploads/2016/12/cropped-logo-270x270.png" />
+
+<link rel="icon" href="
+Notice: get_bloginfo was called with an argument that is <strong>deprecated</strong> since version 2.2.0! The <code>siteurl</code> option is deprecated for the family of <code>bloginfo()</code> functions. Use the <code>url</code> option instead. in /var/www/html/statsidre/wp-includes/functions.php on line 4021
+http://stats.idre.ucla.edu/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="
+Notice: get_bloginfo was called with an argument that is <strong>deprecated</strong> since version 2.2.0! The <code>siteurl</code> option is deprecated for the family of <code>bloginfo()</code> functions. Use the <code>url</code> option instead. in /var/www/html/statsidre/wp-includes/functions.php on line 4021
+http://stats.idre.ucla.edu/favicon.ico" type="image/x-icon" />
+
+</head>
+
+
+<body class="page-template-default page page-id-951 page-child parent-pageid-942 tribe-no-js header-image full-width-content" itemscope itemtype="http://schema.org/WebPage"><div class="site-container"><section><h2 class="screen-reader-text">Skip links</h2><ul class="genesis-skip-link"><li><a href="#genesis-nav-primary" class="screen-reader-shortcut"> Skip to primary navigation</a></li><li><a href="#genesis-content" class="screen-reader-shortcut"> Skip to content</a></li></ul></section>
+<header class="site-header" itemscope itemtype="http://schema.org/WPHeader"><div class="wrap"><div class="title-area">	<div class="title-area">
+	
+	<h1 class="site-title" itemprop="headline"><a href="http://idre.ucla.edu/">IDRE</a></h1>
+
+	<p class="site-description" itemprop="description">Institute for Digital Research and Education</p></div>
+</div><div class="widget-area header-widget-area"><h2 class="genesis-sidebar-title screen-reader-text">Header Right</h2><section id="text-4" class="widget widget_text"><div class="widget-wrap">			<div class="textwidget"><h1><div class = "top-wrap"><div class = "ucla-logo"><img alt="Image " src = "/wp-content/themes/genesis-child/images/UCLA.png" alt = "UCLA Logo"></div>
+<div class  = "top-txt">Institute for Digital Research and Education</div></div></h1></div>
+		</div></section>
+<section id="search-5" class="widget widget_search"><div class="widget-wrap"><form class="search-form" itemprop="potentialAction" itemscope itemtype="http://schema.org/SearchAction" method="get" action="http://stats.idre.ucla.edu/" role="search"><meta itemprop="target" content="http://stats.idre.ucla.edu/?s={s}"/><label class="search-form-label screen-reader-text" for="searchform-58e682ae41fa8">Search this website</label><input itemprop="query-input" type="search" name="s" id="searchform-58e682ae41fa8" placeholder="Search this website &#x2026;" /><input type="submit" value="Search" /></form></div></section>
+</div></div></header><h2 class="screen-reader-text">Main navigation</h2><nav class="nav-primary" itemscope itemtype="http://schema.org/SiteNavigationElement" id="genesis-nav-primary" aria-label="Main navigation"><div class="wrap"><ul id="menu-idre-stats-navigation-menu" class="menu genesis-nav-menu menu-primary js-superfish"><li id="menu-item-22640" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-22640"><a href="http://stats.idre.ucla.edu" itemprop="url"><span itemprop="name">HOME</span></a></li>
+<li id="menu-item-22662" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-22662"><a href="#" itemprop="url"><span itemprop="name">SOFTWARE</span></a>
+<ul class="sub-menu">
+	<li id="menu-item-22646" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22646"><a href="http://stats.idre.ucla.edu/r/" itemprop="url"><span itemprop="name">R</span></a></li>
+	<li id="menu-item-22649" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22649"><a href="http://stats.idre.ucla.edu/stata/" itemprop="url"><span itemprop="name">Stata</span></a></li>
+	<li id="menu-item-22647" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22647"><a href="http://stats.idre.ucla.edu/sas/" itemprop="url"><span itemprop="name">SAS</span></a></li>
+	<li id="menu-item-22648" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22648"><a href="http://stats.idre.ucla.edu/spss/" itemprop="url"><span itemprop="name">SPSS</span></a></li>
+	<li id="menu-item-22659" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22659"><a href="http://stats.idre.ucla.edu/mplus/" itemprop="url"><span itemprop="name">Mplus</span></a></li>
+	<li id="menu-item-22657" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-22657"><a href="http://stats.idre.ucla.edu/other/" itemprop="url"><span itemprop="name">Other Packages</span></a>
+	<ul class="sub-menu">
+		<li id="menu-item-22658" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22658"><a href="http://stats.idre.ucla.edu/other/gpower/" itemprop="url"><span itemprop="name">G*Power</span></a></li>
+		<li id="menu-item-22684" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22684"><a href="http://stats.idre.ucla.edu/other/sudaan/" itemprop="url"><span itemprop="name">SUDAAN</span></a></li>
+		<li id="menu-item-22696" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-22696"><a href="http://stats.idre.ucla.edu/spss/spss-user/sample-power/" itemprop="url"><span itemprop="name">Sample Power</span></a></li>
+	</ul>
+</li>
+</ul>
+</li>
+<li id="menu-item-22661" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-has-children menu-item-22661"><a href="http://stats.idre.ucla.edu" itemprop="url"><span itemprop="name">RESOURCES</span></a>
+<ul class="sub-menu">
+	<li id="menu-item-22656" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22656"><a href="http://stats.idre.ucla.edu/annotatedoutput" itemprop="url"><span itemprop="name">Annotated Output</span></a></li>
+	<li id="menu-item-22651" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22651"><a href="http://stats.idre.ucla.edu/other/dae/" itemprop="url"><span itemprop="name">Data Analysis Examples</span></a></li>
+	<li id="menu-item-22654" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22654"><a href="http://stats.idre.ucla.edu/other/mult-pkg/faq/" itemprop="url"><span itemprop="name">Frequently Asked Questions</span></a></li>
+	<li id="menu-item-22652" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22652"><a href="http://stats.idre.ucla.edu/other/mult-pkg/seminars/" itemprop="url"><span itemprop="name">Seminars</span></a></li>
+	<li id="menu-item-22653" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22653"><a href="http://stats.idre.ucla.edu/other/examples/" itemprop="url"><span itemprop="name">Textbook Examples</span></a></li>
+	<li id="menu-item-22692" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22692"><a href="http://stats.idre.ucla.edu/other/mult-pkg/whatstat/" itemprop="url"><span itemprop="name">Which Statistical Test?</span></a></li>
+</ul>
+</li>
+<li id="menu-item-22663" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-has-children menu-item-22663"><a href="http://stats.idre.ucla.edu" itemprop="url"><span itemprop="name">SERVICES</span></a>
+<ul class="sub-menu">
+	<li id="menu-item-22660" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22660"><a href="http://stats.idre.ucla.edu/books/" itemprop="url"><span itemprop="name">Books for Loan</span></a></li>
+	<li id="menu-item-22655" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-22655"><a href="http://stats.idre.ucla.edu/ucla/policies" itemprop="url"><span itemprop="name">Services and Policies</span></a>
+	<ul class="sub-menu">
+		<li id="menu-item-22885" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22885"><a href="http://stats.idre.ucla.edu/ucla/policies/#WalkIn" itemprop="url"><span itemprop="name">Walk-In Consulting</span></a></li>
+		<li id="menu-item-22882" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22882"><a href="http://stats.idre.ucla.edu/ucla/policies/#EmailConsult" itemprop="url"><span itemprop="name">Email Consulting</span></a></li>
+		<li id="menu-item-22880" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22880"><a href="http://stats.idre.ucla.edu/ucla/policies/#Fee" itemprop="url"><span itemprop="name">Fee for Service</span></a></li>
+	</ul>
+</li>
+	<li id="menu-item-22687" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22687"><a href="http://stats.idre.ucla.edu/purchasing-and-updatingstatistical-software-packages/" itemprop="url"><span itemprop="name">Software Purchasing and Updating</span></a></li>
+	<li id="menu-item-22688" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22688"><a href="http://stats.idre.ucla.edu/statistical-consultants-for-hire/" itemprop="url"><span itemprop="name">Consultants for Hire</span></a></li>
+	<li id="menu-item-23684" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-23684"><a itemprop="url"><span itemprop="name">Other Consulting Centers</span></a>
+	<ul class="sub-menu">
+		<li id="menu-item-23685" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-23685"><a href="http://scc.stat.ucla.edu/" itemprop="url"><span itemprop="name">Department of Statistics Consulting Center</span></a></li>
+		<li id="menu-item-23686" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-23686"><a href="http://biomath.ucla.edu/about/consulting" itemprop="url"><span itemprop="name">Department of Biomathematics Consulting Clinic</span></a></li>
+	</ul>
+</li>
+</ul>
+</li>
+<li id="menu-item-22664" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22664"><a href="http://stats.idre.ucla.edu/ucla/about" itemprop="url"><span itemprop="name">ABOUT US</span></a></li>
+<li id="menu-item-26836" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-26836"><a href="https://giving.ucla.edu/Standard/NetDonate.aspx?SiteNum=371" itemprop="url"><span itemprop="name">DONATE</span></a></li>
+</ul></div></nav><div class="site-inner"><div class="content-sidebar-wrap"><main class="content" id="genesis-content"><article class="post-951 page type-page status-publish entry" itemscope itemtype="http://schema.org/CreativeWork"><header class="entry-header"><h1 class="entry-title" itemprop="headline">Applied Longitudinal Data Analysis, Chapter 4 | R Textbook Examples</h1> 
+</header><div class="entry-content" itemprop="text"><h2>R Textbook Examples
+Applied Longitudinal Data Analysis: Modeling Change and Event Occurrence
+by Judith D. Singer and John B. Willett
+Chapter 4: Doing Data Analysis with the Multilevel Model for Change</h2>
+<pre><b>
+#Read data and attach dataset
+alcohol1 &lt;- read.table("http://www.ats.ucla.edu/stat/r/examples/alda/data/alcohol1_pp.txt", header=T, sep=",")
+attach(alcohol1)</b></pre>
+<hr />
+<blockquote><p>Fig. 4.1, p. 77.
+Empirical growth plots with superimposed OLS trajectories.</p></blockquote>
+<pre><b>library(lattice)
+
+xyplot(alcuse~age | id, 
+   data=alcohol1[alcohol1$id %in% c(4, 14, 23, 32, 41, 56, 65, 82), ], 
+   panel=function(x,y){
+	panel.xyplot(x, y)
+	panel.lmline(x,y)
+}, ylim=c(-1, 4), as.table=T)</b></pre>
+<pre><img alt="Image fig4_1-1" src="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig4_1-1.gif" width="360" height="360" border="0" /></pre>
+<hr />
+<blockquote><p>Fig. 4.2, p.79.
+Fitted OLS trajectories displayed separately by <b>coa</b> status and <b>peer</b> levels.</p>
+<p>Upper left panel, <b>coa</b>=0.</p></blockquote>
+<pre><b>alcohol.coa0 &lt;- alcohol1[alcohol1$coa==0, ]</b>
+
+#fitting the linear model by id
+<b>f.coa0 &lt;- by(alcohol.coa0, alcohol.coa0$id, 
+                function(data) fitted(lm(alcuse~age, data=data)))</b>
+#transforming f.coa from a list to a vector and 
+#stripping of the names of the elements in the vector
+<b>f.coa0 &lt;- unlist(f.coa0)
+names(f.coa0) &lt;- NULL</b>
+
+#plotting the linear fit by id
+<b>interaction.plot(alcohol.coa0$age, alcohol.coa0$id, f.coa0, 
+                 xlab="AGE", ylab="ALCUSE", ylim=c(-1, 4), lwd=1)
+title("COA=0")</b></pre>
+<pre><b><b><b><b> </b></b></b></b></pre>
+<pre><img alt="Image fig4_2_coa0" src="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig4_2_coa0.png" width="432" height="360" border="0" /></pre>
+<blockquote><p>Upper right panel, <b>coa</b>=1.</p></blockquote>
+<pre><b>alcohol.coa1 &lt;- alcohol1[alcohol1$coa==1, ]</b>
+
+#fitting the linear model by id
+<b>f.coa1 &lt;- by(alcohol.coa1, alcohol.coa1$id, 
+             function(data) fitted(lm(alcuse~age, data=data)))</b>
+#transforming f.coa1 from a list to a vector and 
+#stripping of the names of the elements in the vector
+<b>f.coa1 &lt;- unlist(f.coa1)
+names(f.coa1) &lt;- NULL</b>
+
+#plotting the linear fit by id
+<b>interaction.plot(alcohol.coa1$age, alcohol.coa1$id, f.coa1, 
+                 xlab="AGE", ylab="ALCUSE", ylim=c(-1, 4), lwd=1)
+title("COA=1")</b></pre>
+<pre><img alt="Image fig4_2_coa1" src="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig4_2_coa1.png" width="432" height="360" border="0" /></pre>
+<blockquote><p>Obtaining the mean of <b>peer</b> and graphing the lower left panel, <b>peer</b>&lt;=1.01756.</p></blockquote>
+<pre><b>mean(alcohol1$peer)</b>
+[1] 1.01756
+
+<b>alcohol.lowpeer &lt;- alcohol1[alcohol1$peer&lt;=1.01756, ]</b>
+
+#fitting the linear model by id
+<b>f.lowpeer &lt;- by(alcohol.lowpeer, alcohol.lowpeer$id, 
+             function(data) fitted(lm(alcuse~age, data=data)))</b>
+#transforming f.lowpeer from a list to a vector and 
+#stripping of the names of the elements in the vector
+<b>f.lowpeer &lt;- unlist(f.lowpeer)
+names(f.lowpeer) &lt;- NULL</b>
+
+#plotting the linear fit by id
+<b>interaction.plot(alcohol.lowpeer$age, alcohol.lowpeer$id, f.lowpeer, 
+                 xlab="AGE", ylab="ALCUSE", ylim=c(-1, 4), lwd=1)
+title("Low Peer")</b></pre>
+<pre><img alt="Image fig4_2_lowpeer" src="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig4_2_lowpeer.png" width="432" height="360" border="0" /></pre>
+<blockquote><p>Lower right panel, <b>peer</b>&gt;1.01756.</p></blockquote>
+<pre><b>alcohol.hipeer &lt;- alcohol1[alcohol1$peer&gt;1.01756, ]</b>
+
+#fitting the linear model by id
+<b>f.hipeer &lt;- by(alcohol.hipeer, alcohol.hipeer$id, 
+               function(data) fitted(lm(alcuse~age, data=data)))</b>
+#transforming f.hipeer from a list to a vector and 
+#stripping of the names of the elements in the vector
+<b>f.hipeer &lt;- unlist(f.hipeer)
+names(f.hipeer) &lt;- NULL</b>
+
+#plotting the linear fit by id
+<b>interaction.plot(alcohol.hipeer$age, alcohol.hipeer$id, f.hipeer, 
+                 xlab="AGE", ylab="ALCUSE", ylim=c(-1, 4), lwd=1)
+title("High Peer")</b></pre>
+<pre><img alt="Image fig4_2_hipeer" src="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig4_2_hipeer.png" width="432" height="360" border="0" /></pre>
+<hr />
+<blockquote><p>Table 4.1, p. 94-95.</p></blockquote>
+<pre>#Model A
+<b>library(nlme)
+
+model.a &lt;- lme(alcuse~ 1, alcohol1, random= ~1 |id)
+summary(model.a)</b>
+
+Linear mixed-effects model fit by REML
+ Data: alcohol1 
+       AIC      BIC    logLik
+  679.0049 689.5087 -336.5025
+
+Random effects:
+ Formula: ~1 | id
+        (Intercept)  Residual
+StdDev:   0.7570578 0.7494974
+
+Fixed effects: alcuse ~ 1 
+                Value  Std.Error  DF  t-value p-value
+(Intercept) 0.9219549 0.09629638 164 9.574139       0
+
+Standardized Within-Group Residuals:
+       Min         Q1        Med         Q3        Max 
+-1.8892070 -0.3079143 -0.3029178  0.6110925  2.8562135 
+
+Number of Observations: 246
+Number of Groups: 82
+
+#Model B
+<b>model.b &lt;- lme(alcuse ~ age_14 , data=alcohol1, random= ~ age_14 | id, method="ML")
+summary(model.b)</b>
+
+Linear mixed-effects model fit by maximum likelihood
+ Data: alcohol1 
+       AIC     BIC    logLik
+  648.6111 669.643 -318.3055
+
+Random effects:
+ Formula: ~age_14 | id
+ Structure: General positive-definite, Log-Cholesky parametrization
+            StdDev    Corr  
+(Intercept) 0.7901617 (Intr)
+age_14      0.3888470 -0.223
+Residual    0.5807690       
+
+Fixed effects: alcuse ~ age_14 
+                Value  Std.Error  DF  t-value p-value
+(Intercept) 0.6513035 0.10551005 163 6.172905       0
+age_14      0.2706514 0.06271014 163 4.315912       0
+ Correlation: 
+       (Intr)
+age_14 -0.441
+
+Standardized Within-Group Residuals:
+        Min          Q1         Med          Q3         Max 
+-2.47998885 -0.38401088 -0.07553389  0.39001356  2.50684931 
+
+Number of Observations: 246
+Number of Groups: 82</pre>
+<pre>#Model C
+<b>model.c &lt;- lme(alcuse ~ coa*age_14 , data=alcohol1, random= ~ age_14 | id, method="ML")
+summary(model.c)</b>
+
+Linear mixed-effects model fit by maximum likelihood
+ Data: alcohol1 
+       AIC      BIC    logLik
+  637.2026 665.2453 -310.6013
+
+Random effects:
+ Formula: ~age_14 | id
+ Structure: General positive-definite, Log-Cholesky parametrization
+            StdDev    Corr  
+(Intercept) 0.6982690 (Intr)
+age_14      0.3880684 -0.219
+Residual    0.5807688       
+
+Fixed effects: alcuse ~ coa * age_14 
+                 Value  Std.Error  DF   t-value p-value
+(Intercept)  0.3159517 0.13177099 162  2.397734  0.0176
+coa          0.7432120 0.19616697  80  3.788671  0.0003
+age_14       0.2929552 0.08492089 162  3.449742  0.0007
+coa:age_14  -0.0494299 0.12642140 162 -0.390993  0.6963
+ Correlation: 
+           (Intr) coa    age_14
+coa        -0.672              
+age_14     -0.460  0.309       
+coa:age_14  0.309 -0.460 -0.672
+
+Standardized Within-Group Residuals:
+       Min         Q1        Med         Q3        Max 
+-2.5480533 -0.3879877 -0.1057547  0.3602391  2.3960739 
+
+Number of Observations: 246
+Number of Groups: 82</pre>
+<pre>#Model D
+<b>model.d &lt;- lme(alcuse ~ coa*age_14+peer*age_14 , data=alcohol1, random= ~ age_14 | id, method="ML")
+summary(model.d)</b>
+
+Linear mixed-effects model fit by maximum likelihood
+ Data: alcohol1 
+       AIC     BIC    logLik
+  608.6906 643.744 -294.3453
+
+Random effects:
+ Formula: ~age_14 | id
+ Structure: General positive-definite, Log-Cholesky parametrization
+            StdDev    Corr  
+(Intercept) 0.4908199 (Intr)
+age_14      0.3729821 -0.033
+Residual    0.5807668       
+
+Fixed effects: alcuse ~ coa * age_14 + peer * age_14 
+                 Value  Std.Error  DF   t-value p-value
+(Intercept) -0.3165142 0.14990058 161 -2.111494  0.0363
+coa          0.5791651 0.16450407  79  3.520673  0.0007
+age_14       0.4294286 0.11510211 161  3.730849  0.0003
+peer         0.6942956 0.11291811  79  6.148665  0.0000
+coa:age_14  -0.0140319 0.12631549 161 -0.111086  0.9117
+age_14:peer -0.1498150 0.08670489 161 -1.727873  0.0859
+ Correlation: 
+            (Intr) coa    age_14 peer   c:g_14
+coa         -0.371                            
+age_14      -0.436  0.162                     
+peer        -0.686 -0.162  0.299              
+coa:age_14   0.162 -0.436 -0.371  0.071       
+age_14:peer  0.299  0.071 -0.686 -0.436 -0.162
+
+Standardized Within-Group Residuals:
+        Min          Q1         Med          Q3         Max 
+-2.59555028 -0.40005029 -0.07769136  0.46002837  2.29373867 
+
+Number of Observations: 246
+Number of Groups: 82</pre>
+<pre>#Model E
+<b>model.e &lt;- lme(alcuse ~ coa+peer*age_14 , data=alcohol1, random= ~ age_14 | id, method="ML")
+summary(model.e)</b>
+
+Linear mixed-effects model fit by maximum likelihood
+ Data: alcohol1 
+       AIC      BIC    logLik
+  606.7033 638.2513 -294.3516
+
+Random effects:
+ Formula: ~age_14 | id
+ Structure: General positive-definite, Log-Cholesky parametrization
+            StdDev    Corr  
+(Intercept) 0.4908384 (Intr)
+age_14      0.3730386 -0.034
+Residual    0.5807689       
+
+Fixed effects: alcuse ~ coa + peer * age_14 
+                 Value  Std.Error  DF   t-value p-value
+(Intercept) -0.3138215 0.14762315 162 -2.125828  0.0350
+coa          0.5711970 0.14773604  79  3.866335  0.0002
+peer         0.6951827 0.11240363  79  6.184699  0.0000
+age_14       0.4246867 0.10667952 162  3.980958  0.0001
+peer:age_14 -0.1513771 0.08538528 162 -1.772872  0.0781
+ Correlation: 
+            (Intr) coa    peer   age_14
+coa         -0.338                     
+peer        -0.709 -0.146              
+age_14      -0.410  0.000  0.351       
+peer:age_14  0.334  0.000 -0.431 -0.814
+
+Standardized Within-Group Residuals:
+       Min         Q1        Med         Q3        Max 
+-2.5955443 -0.4041410 -0.0835195  0.4554950  2.2997515 
+
+Number of Observations: 246
+Number of Groups: 82</pre>
+<pre>#Model F
+<b>model.f &lt;- lme(alcuse ~ coa+cpeer*age_14 , data=alcohol1, random= ~ age_14 | id, method="ML")
+summary(model.f)</b>
+
+Linear mixed-effects model fit by maximum likelihood
+ Data: alcohol1 
+       AIC      BIC    logLik
+  606.7033 638.2513 -294.3516
+
+Random effects:
+ Formula: ~age_14 | id
+ Structure: General positive-definite, Log-Cholesky parametrization
+            StdDev    Corr  
+(Intercept) 0.4908389 (Intr)
+age_14      0.3730381 -0.034
+Residual    0.5807690       
+
+Fixed effects: alcuse ~ coa + cpeer * age_14 
+                  Value  Std.Error  DF   t-value p-value
+(Intercept)   0.3938745 0.10460706 162  3.765276  0.0002
+coa           0.5711970 0.14773612  79  3.866333  0.0002
+cpeer         0.6951827 0.11240368  79  6.184696  0.0000
+age_14        0.2705847 0.06189978 162  4.371336  0.0000
+cpeer:age_14 -0.1513771 0.08538523 162 -1.772873  0.0781
+ Correlation: 
+             (Intr) coa    cpeer  age_14
+coa          -0.637                     
+cpeer         0.094 -0.146              
+age_14       -0.336  0.000  0.000       
+cpeer:age_14  0.000  0.000 -0.431  0.001
+
+Standardized Within-Group Residuals:
+        Min          Q1         Med          Q3         Max 
+-2.59554441 -0.40414064 -0.08351877  0.45549526  2.29975184 
+
+Number of Observations: 246
+Number of Groups: 82</pre>
+<pre>#Model G
+<b>model.g &lt;- lme(alcuse ~ ccoa+cpeer*age_14 , data=alcohol1, random= ~ age_14 | id, method="ML")
+summary(model.g)</b>
+
+Linear mixed-effects model fit by maximum likelihood
+ Data: alcohol1 
+       AIC      BIC    logLik
+  606.7033 638.2513 -294.3516
+
+Random effects:
+ Formula: ~age_14 | id
+ Structure: General positive-definite, Log-Cholesky parametrization
+            StdDev    Corr  
+(Intercept) 0.4908386 (Intr)
+age_14      0.3730384 -0.034
+Residual    0.5807690       
+
+Fixed effects: alcuse ~ ccoa + cpeer * age_14 
+                  Value  Std.Error  DF   t-value p-value
+(Intercept)   0.6514843 0.08060971 162  8.081959  0.0000
+ccoa          0.5711970 0.14773606  79  3.866334  0.0002
+cpeer         0.6951827 0.11240365  79  6.184698  0.0000
+age_14        0.2705847 0.06189981 162  4.371334  0.0000
+cpeer:age_14 -0.1513771 0.08538526 162 -1.772872  0.0781
+ Correlation: 
+             (Intr) ccoa   cpeer  age_14
+ccoa          0.000                     
+cpeer         0.001 -0.146              
+age_14       -0.436  0.000  0.000       
+cpeer:age_14  0.000  0.000 -0.431  0.001
+
+Standardized Within-Group Residuals:
+        Min          Q1         Med          Q3         Max 
+-2.59554430 -0.40414090 -0.08351925  0.45549506  2.29975158 
+
+Number of Observations: 246
+Number of Groups: 82</pre>
+<hr />
+<blockquote><p>Fig. 4.3, p. 99.
+Model B</p></blockquote>
+<pre><b>fixef.b &lt;- fixef(model.b)
+fit.b &lt;- fixef.b[[1]] + alcohol1$age_14[1:3]*fixef.b[[2]]
+plot(alcohol1$age[1:3], fit.b, ylim=c(0, 2), type="b", 
+     ylab="predicted alcuse", xlab="age")   
+title("Model B \n Unconditional growth model")</b></pre>
+<pre><img alt="Image fig4_3b" src="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig4_3b.png" width="432" height="360" border="0" /></pre>
+<blockquote><p>Model C.</p></blockquote>
+<pre><b>fixef.c &lt;- fixef(model.c)
+fit.c0 &lt;- fixef.c[[1]] + alcohol1$age_14[1:3]*fixef.c[[3]]
+fit.c1 &lt;- fixef.c[[1]] + fixef.c[[2]] + 
+          alcohol1$age_14[1:3]*fixef.c[[3]] +
+          alcohol1$age_14[1:3]*fixef.c[[4]]
+plot(alcohol1$age[1:3], fit.c0, ylim=c(0, 2), type="b", 
+     ylab="predicted alcuse", xlab="age")
+lines(alcohol1$age[1:3], fit.c1, type="b", pch=17)   
+title("Model C \n Uncontrolled effects of COA") 
+legend(14, 2, c("COA=0", "COA=1"))</b></pre>
+<pre><img alt="Image fig4_3c" src="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig4_3c.png" width="432" height="360" border="0" /></pre>
+<blockquote><p>Model E.</p></blockquote>
+<pre><b>fixef.e &lt;- fixef(model.e)
+fit.ec0p0 &lt;- fixef.e[[1]] + .655*fixef.e[[3]] +
+             alcohol1$age_14[1:3]*fixef.e[[4]] +
+             .655*alcohol1$age_14[1:3]*fixef.e[[5]]   
+fit.ec0p1 &lt;- fixef.e[[1]] + 1.381*fixef.e[[3]] +
+             alcohol1$age_14[1:3]*fixef.e[[4]] +
+             1.381*alcohol1$age_14[1:3]*fixef.e[[5]] 
+fit.ec1p0 &lt;- fixef.e[[1]] + fixef.e[[2]] + .655*fixef.e[[3]] +
+             alcohol1$age_14[1:3]*fixef.e[[4]] +
+             .655*alcohol1$age_14[1:3]*fixef.e[[5]] 
+fit.ec1p1 &lt;- fixef.e[[1]] + fixef.e[[2]] + 1.381*fixef.e[[3]] +
+             alcohol1$age_14[1:3]*fixef.e[[4]] +
+             1.381*alcohol1$age_14[1:3]*fixef.e[[5]]
+plot(alcohol1$age[1:3], fit.ec0p0, ylim=c(0, 2), type="b", 
+     ylab="predicted alcuse", xlab="age", pch=2)
+lines(alcohol1$age[1:3], fit.ec0p1, type="b", pch=0)   
+lines(alcohol1$age[1:3], fit.ec1p0, type="b", pch=17)   
+lines(alcohol1$age[1:3], fit.ec1p1, type="b", pch=15)   
+title("Model E \n *Final* model for the controlled effects of COA") 
+legend(14, 2, c("COA=0, low peer", "COA=0, high peer", 
+       "COA=1, low peer", "COA=1, high peer"))</b></pre>
+<pre><img alt="Image fig4_3e" src="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig4_3e.png" width="432" height="360" border="0" /></pre>
+<hr />
+<blockquote><p>Fig. 4.4&#8211;skipped</p></blockquote>
+<hr />
+<blockquote><p>Fig. 4.5, p. 131.
+Normality assumption plots.</p>
+<p>Upper left panel</p></blockquote>
+<pre>#creating the residuals (epsilon.hat)
+<b>resid &lt;- residuals(model.f)
+qqnorm(resid)</b></pre>
+<pre><img alt="Image fig4_5a" src="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig4_5a.png" width="432" height="360" border="0" /></pre>
+<blockquote><p>Upper right panel</p></blockquote>
+<pre>#creating the standardized residual (std epsilon.hat)
+<b>resid.std &lt;- resid/sd(resid)
+plot(alcohol1$id, resid.std, ylim=c(-3, 3), ylab="std epsilon hat")
+abline(h=0)</b></pre>
+<pre><img alt="Image fig4_5b" src="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig4_5b.png" width="432" height="360" border="0" /></pre>
+<blockquote><p>Middle left panel</p></blockquote>
+<pre>#extracting the random effects of model f
+<b>ran &lt;- random.effects(model.f)
+qqnorm(ran[[1]])</b></pre>
+<pre><img alt="Image fig4_5c" src="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig4_5c.png" width="432" height="360" border="0" /></pre>
+<blockquote><p>Middle right panel</p></blockquote>
+<pre>#standardizing the ksi0i.hat
+<b>ran1.std &lt;- ran[[1]]/sd(ran[[1]])
+plot(alcohol1$id[alcohol1$age==14], ran1.std, ylim=c(-3, 3), ylab="std psi_0i hat")
+abline(h=0)</b></pre>
+<pre><img alt="Image fig4_5d" src="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig4_5d.png" width="432" height="360" border="0" /></pre>
+<blockquote><p>Lower left panel</p></blockquote>
+<pre><b>qqnorm(ran[[2]])</b></pre>
+<pre><img alt="Image fig4_5e" src="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig4_5e.png" width="432" height="360" border="0" /></pre>
+<blockquote><p>Lower right panel</p></blockquote>
+<pre>#standardizing the ksi1i.hat
+<b>ran2.std &lt;- ran[[2]]/sd(ran[[2]])
+plot(id[alcohol1$age==14], ran2.std, ylim=c(-3, 3), ylab="std psi_1i hat")
+abline(h=0)</b></pre>
+<pre><img alt="Image fig4_5f" src="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig4_5f.png" width="432" height="360" border="0" /></pre>
+<hr />
+<blockquote><p>Fig. 4.6, p. 133.
+Homoscedasticity plots.</p>
+<p>Upper panel</p></blockquote>
+<pre><b>plot(alcohol1$age, resid, ylim=c(-2, 2), ylab="epsilon.hat", 
+     xlab="AGE")
+abline(h=0)</b></pre>
+<pre><img alt="Image fig4_6a" src="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig4_6a.png" width="432" height="360" border="0" /></pre>
+<blockquote><p>Middle left panel</p></blockquote>
+<pre><b>plot(alcohol1$coa[alcohol1$age==14], ran[[1]], ylim=c(-1, 1), 
+     ylab="ksi0i.hat", xlab="COA")
+abline(h=0)</b></pre>
+<pre><img alt="Image fig4_6b" src="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig4_6b.png" width="432" height="360" border="0" /></pre>
+<blockquote><p>Middle right panel</p></blockquote>
+<pre><b>plot(alcohol1$peer[alcohol1$age==14], ran[[1]], ylim=c(-1, 1), 
+     xlim=c(0, 3), ylab="ksi0i.hat", xlab="PEER")
+abline(h=0)</b></pre>
+<pre><img alt="Image fig4_6c" src="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig4_6c.png" width="432" height="360" border="0" /></pre>
+<blockquote><p>Lower left panel</p></blockquote>
+<pre><b>plot(alcohol1$coa[alcohol1$age==14], ran[[2]], ylim=c(-1, 1), 
+     ylab="ksi1i.hat", xlab="COA")
+abline(h=0)</b></pre>
+<pre><img alt="Image fig4_6d" src="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig4_6d.png" width="432" height="360" border="0" /></pre>
+<blockquote><p>Lower right panel</p></blockquote>
+<pre><b>plot(alcohol1$peer[alcohol1$age==14], ran[[2]], ylim=c(-1, 1), 
+     xlim=c(0, 3), ylab="ksi1i.hat", xlab="PEER")
+abline(h=0)</b></pre>
+<pre><img alt="Image fig4_6e" src="http://stats.idre.ucla.edu/wp-content/uploads/2016/02/fig4_6e.png" width="432" height="360" border="0" /></pre>
+<p><!--webbot bot='PurpleText' PREVIEW='Dont change anything below this line.' --></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</div></article></main><hr><div style="clear:both;">
+          <p style="float:left;"><span class="collapseomatic " id="id1504"  tabindex="" title="Click here to report an error on this page or leave a comment"    >Click here to report an error on this page or leave a comment</span><span id='swap-id1504' alt='' class='colomat-swap' style='display:none;'> </span><div id="target-id1504" class="collapseomatic_content "><div role="form" class="wpcf7" id="wpcf7-f22910-o1" lang="en-US" dir="ltr">
+<div class="screen-reader-response"></div>
+<form action="/r/examples/alda/r-applied-longitudinal-data-analysis-ch-4/#wpcf7-f22910-o1" method="post" class="wpcf7-form" novalidate="novalidate">
+<div style="display: none;">
+<input type="hidden" name="_wpcf7" value="22910" />
+<input type="hidden" name="_wpcf7_version" value="4.7" />
+<input type="hidden" name="_wpcf7_locale" value="en_US" />
+<input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f22910-o1" />
+<input type="hidden" name="_wpnonce" value="1e33220e30" />
+</div>
+<p><label for="namefield"> Your Name (required)<br />
+    <span class="wpcf7-form-control-wrap your-name"><input type="text" name="your-name" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" id="namefield" aria-required="true" aria-invalid="false" /></span><br />
+</label></p>
+<p><label for="emailfield"> Your Email (must be a valid email for us to receive the report!)<br />
+    <span class="wpcf7-form-control-wrap your-email"><input type="email" name="your-email" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email" id="emailfield" aria-required="true" aria-invalid="false" /></span><br />
+</label></p>
+<p><label for="commentfield"> Comment/Error Report (required)<br />
+    <span class="wpcf7-form-control-wrap your-message"><textarea name="your-message" cols="40" rows="10" class="wpcf7-form-control wpcf7-textarea wpcf7-validates-as-required" id="commentfield" aria-required="true" aria-invalid="false"></textarea></span><br />
+</label></p>
+<p><label for="captchacode"> Code: <input type="hidden" name="_wpcf7_captcha_challenge_captcha-170" value="814528983" /><img class="wpcf7-form-control wpcf7-captchac wpcf7-captcha-captcha-170" id="captchacode" width="72" height="24" alt="captcha" src="http://stats.idre.ucla.edu/wp-content/uploads/wpcf7_captcha/814528983.png" /><br />
+</label><br />
+<label for="captchainput"> Input the code above<br />
+<span class="wpcf7-form-control-wrap captcha-170"><input type="text" name="captcha-170" value="" size="4" maxlength="4" class="wpcf7-form-control wpcf7-captchar" id="captchainput" autocomplete="off" aria-invalid="false" /></span><br />
+</label></p>
+<p><input type="submit" value="Send" class="wpcf7-form-control wpcf7-submit" /></p>
+<div class="wpcf7-response-output wpcf7-display-none"></div></form></div></div></p><p style="float:right;">
+          <a href="http://stats.idre.ucla.edu/other/mult-pkg/faq/general/faq-how-do-i-cite-web-pages-and-programs-from-the-ucla-statistical-consulting-group/">How to cite this page</a>
+          </p></div></div></div>
+<div class="ftr-btm">
+<div class="wrapped">
+
+<a href="https://oit.ucla.edu/" title="OIT logo" id="footer-image">UCLA Office of Information and Technology</a>
+
+<p><a href="http://www.ucla.edu/terms-of-use/">© 2017 UC REGENTS TERMS OF USE & PRIVACY POLICY</a></p>
+<div class="footer-links">
+<ol>
+
+<li><a href="/">HOME</a></li>
+<li><a href="/contact">CONTACT</a></li>
+<li><a href="/wp-admin">LOGIN</a></li>
+</ol>
+</div>
+</div>
+</div>
+</div><script>
+			jQuery(function($) {
+			$('#menu-header-nav').slicknav();
+			});
+			</script><script type='text/javascript'>
+var colomatduration = 'fast';
+var colomatslideEffect = 'slideFade';
+</script><!-- MathJax Latex Plugin installed: Disabled as no shortcodes on this page -->		<script>
+		( function ( body ) {
+			'use strict';
+			body.className = body.className.replace( /\btribe-no-js\b/, 'tribe-js' );
+		} )( document.body );
+		</script>
+			<div style="display:none">
+	</div>
+<script type='text/javascript'> /* <![CDATA[ */var tribe_l10n_datatables = {"aria":{"sort_ascending":": activate to sort column ascending","sort_descending":": activate to sort column descending"},"length_menu":"Show _MENU_ entries","empty_table":"No data available in table","info":"Showing _START_ to _END_ of _TOTAL_ entries","info_empty":"Showing 0 to 0 of 0 entries","info_filtered":"(filtered from _MAX_ total entries)","zero_records":"No matching records found","search":"Search:","pagination":{"all":"All","next":"Next","previous":"Previous"},"select":{"rows":{"0":"","_":": Selected %d rows","1":": Selected 1 row"}},"datepicker":{"dayNames":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"dayNamesShort":["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],"dayNamesMin":["S","M","T","W","T","F","S"],"monthNames":["January","February","March","April","May","June","July","August","September","October","November","December"],"monthNamesShort":["January","February","March","April","May","June","July","August","September","October","November","December"],"nextText":"Next","prevText":"Prev","currentText":"Today","closeText":"Done"}};/* ]]> */ </script><script>
+    jQuery(document).ready(function () {
+		jQuery.post('http://stats.idre.ucla.edu?ga_action=googleanalytics_get_script', {action: 'googleanalytics_get_script'}, function(response) {
+			var F = new Function ( response );
+			return( F() );
+		});
+    });
+</script><script type='text/javascript' src='http://stats.idre.ucla.edu/wp-content/plugins/contact-form-7/includes/js/jquery.form.min.js?ver=3.51.0-2014.06.20'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var _wpcf7 = {"recaptcha":{"messages":{"empty":"Please verify that you are not a robot."}},"cached":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='http://stats.idre.ucla.edu/wp-content/plugins/contact-form-7/includes/js/scripts.js?ver=4.7'></script>
+<script type='text/javascript' src='https://s0.wp.com/wp-content/js/devicepx-jetpack.js?ver=201714'></script>
+<script type='text/javascript' src='http://s.gravatar.com/js/gprofiles.js?ver=2017Apraa'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='http://stats.idre.ucla.edu/wp-content/plugins/jetpack/modules/wpgroho.js?ver=4.7.3'></script>
+<script type='text/javascript' src='http://stats.idre.ucla.edu/wp-includes/js/hoverIntent.min.js?ver=1.8.1'></script>
+<script type='text/javascript' src='http://stats.idre.ucla.edu/wp-content/themes/genesis/lib/js/menu/superfish.min.js?ver=1.7.5'></script>
+<script type='text/javascript' src='http://stats.idre.ucla.edu/wp-content/themes/genesis/lib/js/menu/superfish.args.min.js?ver=2.4.2'></script>
+<script type='text/javascript' src='http://stats.idre.ucla.edu/wp-includes/js/wp-embed.min.js?ver=4.7.3'></script>
+<script type='text/javascript' src='http://stats.idre.ucla.edu/wp-content/plugins/jquery-collapse-o-matic/js/collapse.js?ver=1.6.6'></script>
+<script type="text/css" id="tmpl-tribe_customizer_css">.tribe-events-list .tribe-events-loop .tribe-event-featured,
+				.tribe-events-list #tribe-events-day.tribe-events-loop .tribe-event-featured,
+				.type-tribe_events.tribe-events-photo-event.tribe-event-featured .tribe-events-photo-event-wrap,
+				.type-tribe_events.tribe-events-photo-event.tribe-event-featured .tribe-events-photo-event-wrap:hover {
+					background-color: #0ea0d7;
+				}
+
+				#tribe-events-content table.tribe-events-calendar .type-tribe_events.tribe-event-featured {
+					background-color: #0ea0d7;
+				}
+
+				.tribe-events-list-widget .tribe-event-featured,
+				.tribe-events-venue-widget .tribe-event-featured,
+				.tribe-mini-calendar-list-wrapper .tribe-event-featured,
+				.tribe-events-adv-list-widget .tribe-event-featured .tribe-mini-calendar-event {
+					background-color: #0ea0d7;
+				}
+
+				.tribe-grid-body .tribe-event-featured.tribe-events-week-hourly-single {
+					background-color: rgba(14,160,215, .7 );
+					border-color: #0ea0d7;
+				}
+
+				.tribe-grid-body .tribe-event-featured.tribe-events-week-hourly-single:hover {
+					background-color: #0ea0d7;
+				}</script><style type="text/css" id="tribe_customizer_css">.tribe-events-list .tribe-events-loop .tribe-event-featured,
+				.tribe-events-list #tribe-events-day.tribe-events-loop .tribe-event-featured,
+				.type-tribe_events.tribe-events-photo-event.tribe-event-featured .tribe-events-photo-event-wrap,
+				.type-tribe_events.tribe-events-photo-event.tribe-event-featured .tribe-events-photo-event-wrap:hover {
+					background-color: #0ea0d7;
+				}
+
+				#tribe-events-content table.tribe-events-calendar .type-tribe_events.tribe-event-featured {
+					background-color: #0ea0d7;
+				}
+
+				.tribe-events-list-widget .tribe-event-featured,
+				.tribe-events-venue-widget .tribe-event-featured,
+				.tribe-mini-calendar-list-wrapper .tribe-event-featured,
+				.tribe-events-adv-list-widget .tribe-event-featured .tribe-mini-calendar-event {
+					background-color: #0ea0d7;
+				}
+
+				.tribe-grid-body .tribe-event-featured.tribe-events-week-hourly-single {
+					background-color: rgba(14,160,215, .7 );
+					border-color: #0ea0d7;
+				}
+
+				.tribe-grid-body .tribe-event-featured.tribe-events-week-hourly-single:hover {
+					background-color: #0ea0d7;
+				}</style><script type='text/javascript' src='https://stats.wp.com/e-201714.js' async defer></script>
+<script type='text/javascript'>
+	_stq = window._stq || [];
+	_stq.push([ 'view', {v:'ext',j:'1:4.7.1',blog:'124666309',post:'951',tz:'-7',srv:'stats.idre.ucla.edu'} ]);
+	_stq.push([ 'clickTrackerInit', '124666309', '951' ]);
+</script>
+
+
+
+
+<!-- Performance optimized by W3 Total Cache. Learn more: https://www.w3-edge.com/products/
+
+Page Caching using disk
+Page cache debug info:
+Engine:             disk
+Cache key:          9dcd92211369a14db403a5e08b1d3e89
+Creation Time:      1491501742.000s
+Header info:
+X-Powered-By:        PHP/5.3.3
+Content-Type:        text/html; charset=UTF-8
+Expires:             Wed, 11 Jan 1984 05:00:00 GMT
+Cache-Control:       no-cache, must-revalidate, max-age=0
+Link:                <http://stats.idre.ucla.edu/wp-json/>; rel="https://api.w.org/"
+Link:                <http://wp.me/P8r5oV-fl>; rel=shortlink
+
+ Served from: stats.idre.ucla.edu @ 2017-04-06 11:02:22 by W3 Total Cache -->
