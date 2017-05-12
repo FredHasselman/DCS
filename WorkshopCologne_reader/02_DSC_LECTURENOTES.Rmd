@@ -159,9 +159,7 @@ ggplot(data, aes(x= time, y = Y)) +
 ```
 
 
-# PART I {-}
-
-## Modelling (nonlinear) growth and Deterministic Chaos {-}
+# Introduction to the mathematics of change {-}
 
 The simplest non-trivial *iterative change process* can be described by the following *difference equation*: 
 
@@ -337,9 +335,8 @@ source_url("https://raw.githubusercontent.com/FredHasselman/DCS/master/functionL
 ```
 
 We need packages `signal` and `pracma`
-Among `nlRtsa` functions is `in.IT()`, which will load a list of packages and install them, but only if they are not present on your system.
-```{r L4.2, echo=TRUE, message=FALSE, warning=FALSE, include=TRUE}
-in.IT(c("signal","pracma"))
+```{r L4.2, echo=TRUE, message=FALSE, warning=FALSE, include=TRUE, eval=FALSE}
+install.packages(c("signal","pracma"),dependencies = TRUE)
 ```
 You can of course also use `install.packages()` or the GUI.
 
@@ -541,12 +538,3 @@ EXTRA-EXTRA: This Wikipedia page on [Barnsley's fern](https://en.wikipedia.org/w
 
 
 You can by now probably guess that the these simple rules can be described as constraints on the degrees of freedom of the system. Like with the models of growth we simulated, the rules of the fractal game can be made dependent on other processes or events. A great example are the so-called [fractal flames](https://en.wikipedia.org/wiki/Fractal_flame) implemented in a screen-saver called [*electric sheep*](http://www.electricsheep.org), which combines genetic algorithms, distributed computind and user input ("likes") to create intruiging visual patterns on your computer screen.^[Use at your own risk! You will find yourself silently staring at the screen for longer periods of time.]
-
-
-# Lecture 6 {-}
-
-# Lecture 7 {-}
-
-# Lecture 8 {-}
-
-# Lecture 9 {-}

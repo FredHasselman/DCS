@@ -28,7 +28,7 @@ cover-image: images/foundations.png
 ---
 
 
-# **An introduction to the analytical toolbox of Complexity Science**
+# **An introduction to the analytical toolbox of Complexity Science** {-}
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(include=TRUE)
@@ -123,7 +123,7 @@ library(devtools)
 source_url("https://raw.githubusercontent.com/FredHasselman/DCS/master/functionLib/nlRtsa_SOURCE.R")
 ```
 
-### Timeseries in `R` {-}
+### Timeseries in R {-}
 
 There are many different ways to handle and plot timeseries data in `R`, I summarised some of them [in the notes](#tsPlot)
 
