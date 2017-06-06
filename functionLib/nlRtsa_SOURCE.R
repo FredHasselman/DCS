@@ -246,6 +246,7 @@ fastRQA <- function(y1,
                     path_out   = NULL,
                     file_ID    = NULL, ...){
 
+
 # pat_to_rp = location of rp binary
 
 # Catch parameters
@@ -283,7 +284,9 @@ fastRQA <- function(y1,
 
 
   #if((win==min(length(y1),length(y2), na.rm = TRUE))&(step== 1)){
-if(is.null(y2)){cat("\nPerforming auto-RQA\n")} else {cat("\nPerforming cross-RQA\n")}
+if(is.null(y2)){
+  cat("\nPerforming auto-RQA\n")
+  } else {cat("\nPerforming cross-RQA\n")}
   #}
   if((win<min(length(y1),length(y2), na.rm = TRUE))){
     cat(paste("Calculating recurrence measures in a window of size",win,"taking steps of",step,"data points.\n\n"))
@@ -946,8 +949,8 @@ recMat <- function(y1, y2,
 
   et1 <- lagEmbed(y1, emDim, emLag)
   et2 <- lagEmbed(y2, emDim, emLag)
-  colnames(et1) <- colnames(y1)
-  colnames(et2) <- colnames(y2)
+  # colnames(et1) <- colnames(y1)
+  # colnames(et2) <- colnames(y2)
 
   dmat <- proxy::dist(x = et1,
                       y = et2,
@@ -2186,7 +2189,8 @@ lagEmbed <- function (y, emDim, emLag){
     emTime <- emLag
   }
 
-  N  <- length(y)
+  y <- as.numeric(unlist(y))
+  N  <- NROW(y)
   if(emDim > 1){
     lag.id    <- seq(1, (emDim*emLag), emLag)
     maxN      <- N - max(lag.id)
